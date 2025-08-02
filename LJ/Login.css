@@ -1,0 +1,186 @@
+
+    :root {
+      --primary-color: #E67E22;
+      --secondary-color: #F5DEB3;
+      --accent-color: #8B4513;
+      --text-color: #333;
+      --muted-text-color: #666;
+      --background-color: #F8E7C9;
+      --card-background: #F8E7C9;
+    }
+
+    body {
+      font-family: 'Alegreya', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: var(--secondary-color);
+      margin: 0;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    
+    .page-wrapper{
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        gap: 20px;
+    }
+    .pizza {
+    position: absolute;
+    right: 0px; /* distance from the right edge */
+    bottom: 500px; /* adjust vertical position */
+    width: 500px;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+    }
+    .NasiLemak{
+    position: absolute;
+    left: 50px; /* distance from the right edge */
+    bottom: 0px; /* adjust vertical position */
+    width: 400px;
+    height: auto;
+    pointer-events: none;
+    z-index: 100px;
+    }
+
+    .Ramen{
+    position: absolute;
+    right: -40px; /* distance from the right edge */
+    bottom: -50px; /* adjust vertical position */
+    width: 500px;
+    height: auto;
+    pointer-events: none;
+    z-index: 0px;
+    }
+
+    .Burger{
+    position: absolute;
+    left:-50px; /* distance from the right edge */
+    bottom: 430px; /* adjust vertical position */
+    width: 650px;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+        
+    }
+    .login-container {
+      background-color: #F8E7C9;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      opacity: 0; /* Start invisible for animation */
+      animation: fadeInZoomIn 0.5s forwards ease-out;
+    }
+
+    @keyframes fadeInZoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .logo{
+        user-select: none;
+        -webkit-user-drag: none;
+
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+      font-family: 'Belleza', sans-serif;
+      font-size: 2.5rem;
+      
+    }
+
+    .description {
+        color: var(--muted-text-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+
+    .input-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+    }
+
+
+    .input {
+      width: 400px;
+      padding: 10px 10px 10px 40px; 
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-family: 'Alegreya', serif;
+      background-color:var(--secondary-color);
+      font-size: 1rem;
+    }
+    .input-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        pointer-events: none; 
+    }
+    .input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2); /* Primary color with alpha */
+    }
+
+    .button {
+      width: 100%;
+      padding: 10px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .button:hover {
+      background-color: var(--accent-color);
+      transform: scale(1.02);
+    }
+
+    .link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+      transition: text-decoration 0.2s ease-in-out;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    .text-muted {
+        color: var(--muted-text-color);
+    }
