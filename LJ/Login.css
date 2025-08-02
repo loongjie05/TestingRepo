@@ -60,25 +60,26 @@
 
     .Burger{
     position: absolute;
-    left:-50px; /* distance from the right edge */
-    bottom: 430px; /* adjust vertical position */
+    left:-105px; /* distance from the right edge */
+    bottom: 400px; /* adjust vertical position */
     width: 650px;
     height: auto;
     pointer-events: none;
     z-index: 0;
         
     }
-    .login-container {
-      background-color: #F8E7C9;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 100%;
-      max-width: 400px;
-      opacity: 0; /* Start invisible for animation */
-      animation: fadeInZoomIn 0.5s forwards ease-out;
-    }
+.login-container {
+  background-color: #F8E7C9;
+  padding: 2rem;
+  border: 2px solid var(--primary-color); /* Added border */
+  border-radius: 12px; /* Increased border-radius */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  opacity: 0; /* Start invisible for animation */
+  animation: fadeInZoomIn 0.5s forwards ease-out;
+}
 
     @keyframes fadeInZoomIn {
       from {
@@ -93,6 +94,7 @@
     .logo{
         user-select: none;
         -webkit-user-drag: none;
+        margin-bottom: -30px;
 
     }
 
