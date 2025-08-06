@@ -46,6 +46,16 @@
       transform-style: preserve-3d;
       transition: transform .8s;
       position: relative;
+      
+      
+    }
+    
+
+    .logo{
+        user-select: none;
+        -webkit-user-drag: none;
+        margin-bottom: -30px;
+
     }
 
     #flip-toggle:checked ~ .scene .card {
@@ -153,6 +163,7 @@
     cursor: pointer;
     transition: transform 0.3s ease;
     z-index: 0;
+    animation:bounce 1.3s;
     }
     .pasta:hover {
     transform: scale(1.1);
@@ -168,6 +179,7 @@
     cursor: pointer;
     transition: transform 0.3s ease;
     z-index: 100px;
+    animation:bounce 1.7s;
     }
     .NasiLemak:hover {
     transform: scale(1.1);
@@ -183,6 +195,7 @@
     cursor: pointer;
     transition: transform 0.3s ease;
     z-index: 0px;
+    animation:bounce 1.5s;
     }
     .Ramen:hover {
     transform: scale(1.1);
@@ -198,9 +211,57 @@
     cursor: pointer;
     transition: transform 0.3s ease;
     z-index: 0;
+    animation:bounce 2s;
         
     }    
     .Burger:hover {
     transform: scale(1.1);
     box-shadow:rgba(0, 0, 0, 0.3);
     } 
+  
+@keyframes bounce {
+  0% {
+    transform: translateY(-250px);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce1 {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce2 {
+  0% {
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .pasta,
+  .NasiLemak,
+  .Ramen,
+  .Burger {
+    display: none;
+  }
+
+  .card {
+    max-width: 100vw;
+    height: auto;
+    padding: 1.5rem;
+  }
+
+  body {
+    padding: 1rem;
+  }
+}
