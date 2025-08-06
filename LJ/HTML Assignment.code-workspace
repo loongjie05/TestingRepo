@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "HTML Assignment",
+			"path": ".."
+		},
+		{
+			"name": "Practical1",
+			"path": "../../../../Practical1"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "HTML Assignment"
+	}
+}
