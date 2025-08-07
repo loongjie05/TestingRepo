@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>map</title>
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .flag-icon {
+      width: 40px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // 1. 创建地图对象
+    const map = L.map("map", {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 4,
+    });
+
+    // 2. 地图图片的原始尺寸（替换为你自己的图尺寸）
+    const w = 2000;
+    const h = 1000;
+    const bounds = [[0, 0], [h, w]];
+
+    // 3. 添加地图图片
+    const image = L.imageOverlay("Picture/worldmap.png", bounds).addTo(map);
+
+    // 4. 适配窗口大小
+    map.fitBounds(bounds);
+
+    // 5. 限制边界拖动范围
+    map.setMaxBounds(bounds);
+
+    // 6. 防止缩放太小看到灰色区域
+    map.setMinZoom(map.getBoundsZoom(bounds));
+
+    // 7. 添加国旗图标（示例）
+    const usaIcon = L.icon({
+      iconUrl: "flags/usa.png",
+      iconSize: [40, 25],
+      className: "flag-icon"
+    });
+
+    const chinaIcon = L.icon({
+      iconUrl: "flags/china.png",
+      iconSize: [40, 25],
+      className: "flag-icon"
+    });
+
+    const japanIcon = L.icon({
+      iconUrl: "flags/japan.png",
+      iconSize: [40, 25],
+      className: "flag-icon"
+    });
+
+    // 8. 添加国旗链接（放在对应位置）
+    L.marker([180, 200], { icon: usaIcon })
+      .addTo(map)
+      .on("click", () => window.open("https://en.wikipedia.org/wiki/United_States"));
+
+    L.marker([260, 1300], { icon: chinaIcon })
+      .addTo(map)
+      .on("click", () => window.open("https://en.wikipedia.org/wiki/China"));
+
+    L.marker([300, 1450], { icon: japanIcon })
+      .addTo(map)
+      .on("click", () => window.open("https://en.wikipedia.org/wiki/Japan"));
+  </script>
+</body>
+</html>
+</html>

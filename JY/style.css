@@ -1,0 +1,32 @@
+body{
+    background-color: rgb(252, 255, 157);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* horizontal */
+    font-family: Arial, sans-serif;
+}
+
+.search-container {
+    margin-top: 10vh;
+    text-align: center;
+
+}
+
+.searchInput {
+    width: 500px;
+    height: 50px;
+    border-radius: 999px; /* 椭圆形 */
+    border: 2px solid #ccc;
+    padding: 0 70px 0 30px;
+    font-size: 18px;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.searchInput:focus {
+    border-color: #007BFF;
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
