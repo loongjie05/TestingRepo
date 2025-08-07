@@ -1,96 +1,56 @@
-
-    :root {
+:root {
       --primary-color: #E67E22;
       --secondary-color: #F5DEB3;
       --accent-color: #8B4513;
       --text-color: #333;
       --muted-text-color: #666;
       --background-color: #F8E7C9;
-      --card-background: #F8E7C9;
+      --card-bg: #F8E7C9;
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Alegreya', serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background-color: var(--secondary-color);
-      margin: 0;
-      padding: 1rem;
-      box-sizing: border-box;
+      background: var(--secondary-color);
+      font-family: 'Alegreya', serif;
+    }
+
+    /* HIDDEN CHECKBOX */
+    #flip-toggle {
+      display: none;
+    }
+
+    /* SLIDER SWITCH */
+    .switch {
+      position: relative;
+      width: 50px;
+      height: 24px;
+      margin-bottom: 20px;
+    }
+    .switch input { display: none; }
+
+   
+    .scene {
+      perspective: 1000px;
+    }
+    .card {
+      width: 100%;
+      width: 500px;
+      height:580px;
+      max-width: 360px;
+      background: transparent;
+      transform-style: preserve-3d;
+      transition: transform .8s;
+      position: relative;
+      
+      
     }
     
-    .page-wrapper{
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        gap: 20px;
-    }
-    .pizza {
-    position: absolute;
-    right: 0px; 
-    bottom: 500px;
-    width: 500px;
-    height: auto;
-    pointer-events: none;
-    z-index: 0;
-    }
-    .NasiLemak{
-    position: absolute;
-    left: 50px; 
-    bottom: 0px; 
-    width: 400px;
-    height: auto;
-    pointer-events: none;
-    z-index: 100px;
-    }
-
-    .Ramen{
-    position: absolute;
-    right: -40px; 
-    bottom: -50px; 
-    width: 500px;
-    height: auto;
-    pointer-events: none;
-    z-index: 0px;
-    }
-
-    .Burger{
-    position: absolute;
-    left:-105px; 
-    bottom: 400px; 
-    width: 650px;
-    height: auto;
-    pointer-events: none;
-    z-index: 0;
-        
-    }
-.login-container {
-  background-color: #F8E7C9;
-  padding: 2rem;
-  border: 2px solid var(--primary-color); 
-  border-radius: 12px; 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
-  opacity: 0; 
-  animation: fadeInZoomIn 0.5s forwards ease-out;
-}
-
-    @keyframes fadeInZoomIn {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
     .logo{
         user-select: none;
         -webkit-user-drag: none;
@@ -98,91 +58,210 @@
 
     }
 
-    h1 {
-      margin-bottom: 1.5rem;
-      color: var(--primary-color);
-      font-family: 'Belleza', sans-serif;
-      font-size: 2.5rem;
+    #flip-toggle:checked ~ .scene .card {
+      transform: rotateY(180deg);
+    }
+
+
+    .face {
+      position: absolute;
+      width: 100%; height: 100%;
+      background: var(--card-bg);
+      backface-visibility: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.1);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .front { z-index: 2; }
+    .back  { transform: rotateY(180deg); }
+
+    .logo {
       
+      margin-bottom: -10px;
+      user-select: none;
+      -webkit-user-drag: none;
     }
-
+    h1 {
+      font-family: 'Belleza', sans-serif;
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      margin: .5rem 0 1rem;
+    }
     .description {
-        color: var(--muted-text-color);
-        margin-bottom: 1.5rem;
+      color: var(--muted-text-color);
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
-
     .form-group {
+      width: 100%;
       margin-bottom: 1rem;
       text-align: left;
     }
-
     .form-group label {
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: .3rem;
       color: var(--text-color);
     }
-
     .input-wrapper {
-        position: relative;
-        width: 100%;
-        max-width: 300px;
+      position: relative;
     }
-
-
     .input {
-      width: 400px;
-      padding: 10px 10px 10px 40px; 
-      border: 1px solid #ccc;
+      width: 100%;
+      padding: 10px 10px 10px 36px;
       border-radius: 4px;
-      box-sizing: border-box;
-      font-family: 'Alegreya', serif;
-      background-color:var(--secondary-color);
+      border: 1px solid #ccc;
       font-size: 1rem;
+      background: var(--secondary-color);
     }
     .input-icon {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        pointer-events: none; 
+      position: absolute;
+      left: 8px; top: 50%;
+      width: 20px; height: 20px;
+      transform: translateY(-50%);
+      pointer-events: none;
     }
     .input:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2); 
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(230,126,34,.2);
     }
-
     .button {
       width: 100%;
-      padding: 10px;
-      background-color: var(--primary-color);
-      color: white;
+      padding: .8rem;
+      margin-top: 1rem;
       border: none;
       border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
+      background: var(--primary-color);
+      color: #fff;
       font-weight: bold;
-      transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
     }
-
     .button:hover {
-      background-color: var(--accent-color);
+      background: var(--accent-color);
       transform: scale(1.02);
     }
-
+    .text-muted { color: var(--muted-text-color); }
     .link {
       color: var(--primary-color);
       text-decoration: none;
       font-weight: bold;
-      transition: text-decoration 0.2s ease-in-out;
+      cursor: pointer;
+      margin-left: .3rem;
     }
+    .link:hover { text-decoration: underline; }
+    .pasta {
+    position: absolute;
+    right: -100px; 
+    bottom: 300px;
+    width: 500px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 0;
+    animation:bounce 1.3s;
+    }
+    .pasta:hover {
+    transform: scale(1.1);
+    box-shadow:rgba(0, 0, 0, 0.3);
+    } 
+    
+    .NasiLemak{
+    position: absolute;
+    left: 50px; 
+    bottom: -30px; 
+    width: 400px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 100px;
+    animation:bounce 1.7s;
+    }
+    .NasiLemak:hover {
+    transform: scale(1.1);
+    box-shadow:rgba(0, 0, 0, 0.3);
+    } 
 
-    .link:hover {
-      text-decoration: underline;
+    .Ramen{
+    position: absolute;
+    right: -40px; 
+    bottom: -90px; 
+    width: 500px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 0px;
+    animation:bounce 1.5s;
     }
+    .Ramen:hover {
+    transform: scale(1.1);
+    box-shadow:rgba(0, 0, 0, 0.3);
+    } 
 
-    .text-muted {
-        color: var(--muted-text-color);
-    }
+    .Burger{
+    position: absolute;
+    left:-105px; 
+    bottom: 350px; 
+    width: 650px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 0;
+    animation:bounce 2s;
+        
+    }    
+    .Burger:hover {
+    transform: scale(1.1);
+    box-shadow:rgba(0, 0, 0, 0.3);
+    } 
+  
+@keyframes bounce {
+  0% {
+    transform: translateY(-250px);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce1 {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce2 {
+  0% {
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .pasta,
+  .NasiLemak,
+  .Ramen,
+  .Burger {
+    display: none;
+  }
+
+  .card {
+    max-width: 100vw;
+    height: auto;
+    padding: 1.5rem;
+  }
+
+  body {
+    padding: 1rem;
+  }
+}
