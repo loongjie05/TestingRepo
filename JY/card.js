@@ -113,26 +113,32 @@ function populateCustomSelect(id, items, allLabel) {
 
 const countries = [...new Set(foods.map(f => f.country))].sort();
 const methods = [...new Set(foods.map(f => f.method))].sort();
+const flavors = [...new Set(foods.map(f => f.flavor))].sort();
+const types = [...new Set(foods.map(f => f.type))].sort();
 
 populateCustomSelect("filterCountry", countries, "All Countries");
 populateCustomSelect("filterMethod", methods, "All Methods");
+populateCustomSelect("filterFlavor", flavors, "All Flavors");
+populateCustomSelect("filterType", types, "All Types");
 
-document.querySelectorAll(".custom-select").forEach(select => {
-  const selected = select.querySelector(".select-selected");
-  const items = select.querySelector(".select-items");
+function bindSelectEvents() {
+  document.querySelectorAll(".custom-select").forEach(select => {
+    const selected = select.querySelector(".select-selected");
+    const items = select.querySelector(".select-items");
 
-  select.addEventListener("mouseenter", () => select.classList.add("open"));
-  select.addEventListener("mouseleave", () => select.classList.remove("open"));
+    select.addEventListener("mouseenter", () => select.classList.add("open"));
+    select.addEventListener("mouseleave", () => select.classList.remove("open"));
 
-  items.querySelectorAll("div").forEach(option => {
-    option.addEventListener("click", () => {
-      selected.textContent = option.textContent;
-      select.classList.remove("open");
-
-      filterCards();
+    items.querySelectorAll("div").forEach(option => {
+      option.addEventListener("click", () => {
+        selected.textContent = option.textContent;
+        select.classList.remove("open");
+        filterCards();
+      });
     });
   });
-});
+}
+bindSelectEvents();
 
 const container = document.getElementById("cardContainer");
 const searchInput = document.querySelector(".searchInput");
@@ -162,12 +168,17 @@ function filterCards() {
   const searchVal = searchInput.value.toLowerCase();
   const countryVal = document.querySelector("#filterCountry .select-selected").textContent;
   const methodVal = document.querySelector("#filterMethod .select-selected").textContent;
+  const flavorVal = document.querySelector("#filterFlavor .select-selected").textContent;
+  const typeVal = document.querySelector("#filterType .select-selected").textContent;
 
   const filtered = foods.filter(food => {
     const matchSearch = food.title.toLowerCase().includes(searchVal);
     const matchCountry = countryVal === "All Countries" || food.country === countryVal;
     const matchMethod = methodVal === "All Methods" || food.method === methodVal;
-    return matchSearch && matchCountry && matchMethod;
+    const matchFlavor = flavorVal === "All Flavors" || food.flavor === flavorVal;
+    const matchType = typeVal === "All Types" || food.type === typeVal;
+
+    return matchSearch && matchCountry && matchMethod && matchFlavor && matchType;
   });
 
   renderCards(filtered);
