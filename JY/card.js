@@ -52,83 +52,85 @@ const foods = [
     }
 ];
 
+function populateCustomSelect(id, items, allLabel) {
+  const container = document.querySelector(`#${id} .select-items`);
+  container.innerHTML = "";
+
+  const allDiv = document.createElement("div");
+  allDiv.textContent = allLabel;
+  allDiv.dataset.value = "";
+  container.appendChild(allDiv);
+
+  items.forEach(item => {
+    const div = document.createElement("div");
+    div.textContent = item;
+    div.dataset.value = item;
+    container.appendChild(div);
+  });
+}
+
+const countries = [...new Set(foods.map(f => f.country))].sort();
+const methods = [...new Set(foods.map(f => f.method))].sort();
+
+populateCustomSelect("filterCountry", countries, "All Countries");
+populateCustomSelect("filterMethod", methods, "All Methods");
+
+document.querySelectorAll(".custom-select").forEach(select => {
+  const selected = select.querySelector(".select-selected");
+  const items = select.querySelector(".select-items");
+
+  select.addEventListener("mouseenter", () => select.classList.add("open"));
+  select.addEventListener("mouseleave", () => select.classList.remove("open"));
+
+  items.querySelectorAll("div").forEach(option => {
+    option.addEventListener("click", () => {
+      selected.textContent = option.textContent;
+      select.classList.remove("open");
+
+      filterCards();
+    });
+  });
+});
+
 const container = document.getElementById("cardContainer");
-const filterCountry = document.getElementById("filterCountry");
-const filterMethod = document.getElementById("filterMethod");
 const searchInput = document.querySelector(".searchInput");
 
-function populateFilters() {
-    const countries = [...new Set(foods.map(f => f.country))].sort();
-    const methods = [...new Set(foods.map(f => f.method))].sort();
-
-    filterCountry.innerHTML = `<option value="">All Countries</option>`;
-    filterMethod.innerHTML = `<option value="">All Methods</option>`;
-
-    countries.forEach(c => {
-        const opt = document.createElement("option");
-        opt.value = c;
-        opt.textContent = c;
-        filterCountry.appendChild(opt);
-    });
-
-    methods.forEach(m => {
-        const opt = document.createElement("option");
-        opt.value = m;
-        opt.textContent = m;
-        filterMethod.appendChild(opt);
-    });
+function renderCards(list) {
+  container.innerHTML = "";
+  list.forEach(food => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.setAttribute("data-country", food.country);
+    card.setAttribute("data-method", food.method);
+    card.innerHTML = `
+      <a href="${food.link}" class="card-link" target="_blank">
+        <img src="${food.img}" alt="${food.title}">
+        <div class="card-content">
+          <div class="card-title">${food.title}</div>
+          <div class="card-time">${food.time}</div>
+          <div class="card-tags">${food.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        </div>
+      </a>
+    `;
+    container.appendChild(card);
+  });
 }
 
-function renderCards() {
-    container.innerHTML = "";
-    foods.forEach(food => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.setAttribute("data-country", food.country);
-        card.setAttribute("data-method", food.method);
-        card.innerHTML = `
-            <a href="${food.link}" class="card-link" target="_blank">
-                <img src="${food.img}" alt="${food.title}">
-                <div class="card-content">
-                    <div class="card-title">${food.title}</div>
-                    <div class="card-time">${food.time}</div>
-                    <div class="card-tags">
-                        ${food.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
-                    </div>
-                </div>
-            </a>
-        `;
-        container.appendChild(card);
-    });
-}
-
-// Search + filter
 function filterCards() {
-    const searchVal = searchInput.value.toLowerCase();
-    const countryVal = filterCountry.value;
-    const methodVal = filterMethod.value;
+  const searchVal = searchInput.value.toLowerCase();
+  const countryVal = document.querySelector("#filterCountry .select-selected").textContent;
+  const methodVal = document.querySelector("#filterMethod .select-selected").textContent;
 
-    const cards = document.querySelectorAll(".card");
-    cards.forEach(card => {
-        const title = card.querySelector(".card-title").textContent.toLowerCase();
-        const country = card.getAttribute("data-country");
-        const method = card.getAttribute("data-method");
+  const filtered = foods.filter(food => {
+    const matchSearch = food.title.toLowerCase().includes(searchVal);
+    const matchCountry = countryVal === "All Countries" || food.country === countryVal;
+    const matchMethod = methodVal === "All Methods" || food.method === methodVal;
+    return matchSearch && matchCountry && matchMethod;
+  });
 
-        const matchSearch = title.includes(searchVal);
-        const matchCountry = countryVal === "" || country === countryVal;
-        const matchMethod = methodVal === "" || method === methodVal;
-
-        if (matchSearch && matchCountry && matchMethod) {
-            card.style.display = "";
-        } else {
-            card.style.display = "none";
-        }
-    });
+  renderCards(filtered);
 }
-
-populateFilters();
-renderCards();
 
 searchInput.addEventListener("input", filterCards);
-filterCountry.addEventListener("change", filterCards);
-filterMethod.addEventListener("change", filterCards);
+
+renderCards(foods);
