@@ -14,15 +14,19 @@
     <!-- Header Import -->
     <div id="header"></div>
 
+    <!--Title and Search-->
     <div class="search-container">
          <h1> Food Recipes</h1>
-        <input type="text" class="searchInput" onkeyup="search()" placeholder="Search recipes">
+        <input type="text" class="searchInput" placeholder="Search recipes">
     </div>
     
-    <div class="card-container" id="cardContainer">
-
+    <!--Filter-->
+    <div class="filter-container">
+    <select id="filterCountry"></select><select id="filterMethod"></select>
     </div>
-
+    
+    <!--Card-->
+    <div class="card-container" id="cardContainer"></div>
     <script src="card.js"></script>
 
     <!-- Footer Import -->
