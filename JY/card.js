@@ -2,12 +2,13 @@ const foods = [
     {
         title: "Nasi Lemak",
         img: "street food/picture/NasiLemak1.webp",
-        time: "Prep: 15mins • Cook: 50mins • Total: 1h 5mins ",
+        time: "Prep: 15mins • Cook: 50mins • Total: 1h 5mins",
         tags: ["Beef", "Grilled"],
         link: "street food/NasiLemak.html",
         country: "Malaysia",
-        type: "rice",
-        method: "Boiling"
+        type: "Rice",
+        method: "Boiling",
+        flavor: "Spicy"
     },
     {
         title: "Xiaolongbao",
@@ -15,8 +16,9 @@ const foods = [
         time: "Prep: 40min • Cook: 10min",
         tags: ["Pork", "Dumpling"],
         country: "China",
-        type: "rice",
-        method: "Boiling"
+        type: "Rice",
+        method: "Boiling",
+        flavor: "Savory"
     },
     {
         title: "Pastel de Nata",
@@ -24,7 +26,8 @@ const foods = [
         time: "Prep: 1h 15min • Cook: 20min",
         tags: ["Dessert", "Egg"],
         country: "Portugal",
-        method: "Baking"
+        method: "Baking",
+        flavor: "Sweet"
     },
     {
         title: "Tteokbokki",
@@ -32,23 +35,62 @@ const foods = [
         time: "Prep: 15min • Cook: 20min",
         tags: ["Korean", "Spicy"],
         country: "Korea",
-        method: "Boiling"
+        method: "Boiling",
+        flavor: "Spicy"
     },
     {
-        title: "Tteokbokki",
-        img: "https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg",
-        time: "Prep: 15min • Cook: 20min",
-        tags: ["Korean", "Spicy"],
-        country: "Korea",
-        method: "Boiling"
+        title: "Banh Mi",
+        img: "https://www.themealdb.com/images/media/meals/7y3txq1560454283.jpg",
+        time: "Prep: 10min • Cook: 5min",
+        tags: ["Vietnamese", "Sandwich"],
+        country: "Vietnam",
+        method: "Grilling",
+        flavor: "Savory"
     },
     {
-        title: "Tteokbokki",
-        img: "https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg",
-        time: "Prep: 15min • Cook: 20min",
-        tags: ["Korean", "Spicy"],
-        country: "Korea",
-        method: "Boiling"
+        title: "Arepas",
+        img: "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg",
+        time: "Prep: 20min • Cook: 15min",
+        tags: ["Cornmeal", "Snack"],
+        country: "Venezuela",
+        method: "Grilling",
+        flavor: "Savory"
+    },
+    {
+        title: "Churros",
+        img: "https://www.themealdb.com/images/media/meals/txsupu1511815755.jpg",
+        time: "Prep: 30min • Cook: 15min",
+        tags: ["Dessert", "Fried"],
+        country: "Spain",
+        method: "Frying",
+        flavor: "Sweet"
+    },
+    {
+        title: "Jerk Chicken",
+        img: "https://www.themealdb.com/images/media/meals/uvuyxu1503067369.jpg",
+        time: "Prep: 20min • Cook: 40min",
+        tags: ["Spicy", "Grilled"],
+        country: "Jamaica",
+        method: "Grilling",
+        flavor: "Spicy"
+    },
+    {
+        title: "Falafel",
+        img: "https://www.themealdb.com/images/media/meals/txruwx1487347049.jpg",
+        time: "Prep: 30min • Cook: 10min",
+        tags: ["Vegetarian", "Fried"],
+        country: "Middle East",
+        method: "Frying",
+        flavor: "Savory"
+    },
+    {
+        title: "Poutine",
+        img: "https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg",
+        time: "Prep: 15min • Cook: 15min",
+        tags: ["Fast Food", "Cheese"],
+        country: "Canada",
+        method: "Frying",
+        flavor: "Savory"
     }
 ];
 
@@ -103,7 +145,7 @@ function renderCards(list) {
     card.setAttribute("data-country", food.country);
     card.setAttribute("data-method", food.method);
     card.innerHTML = `
-      <a href="${food.link}" class="card-link" target="_blank">
+      <a href="${food.link}" class="card-link">
         <img src="${food.img}" alt="${food.title}">
         <div class="card-content">
           <div class="card-title">${food.title}</div>

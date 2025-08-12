@@ -49,7 +49,7 @@ body{
 /*Filter*/
 .filter-container {
     display: flex;
-    gap: 16px;
+    gap: 0;
     max-width: 720px;
     margin: 0 auto 30px;
 }
