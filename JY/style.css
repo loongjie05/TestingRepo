@@ -1,7 +1,7 @@
 body{
     background-color: #ffffff;
     margin: 0;
-    padding-top: 80px;
+    padding-top: 120px;
     display: flex;
     flex-direction: column;
 }
@@ -18,7 +18,7 @@ body{
 
 .search-container > h1{
     font-family: rubik;
-    padding: 5px;
+    padding: 30px;
     font-size: 80px;
     color: #fcf5d2;
     -webkit-text-stroke: 2px  #ffec8e;; 
@@ -42,7 +42,7 @@ body{
 
 .searchInput:focus {
     border-color: #946b19;
-    box-shadow: 0 4px 12px rgba(251, 255, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(251, 255, 0, 0.189);
 }
 
 /*Card*/

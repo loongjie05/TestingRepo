@@ -70,3 +70,17 @@ foods.forEach(food => {
     `;
     container.appendChild(card);
 });
+
+function search() {
+    let input = document.querySelector(".searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        let title = card.querySelector(".card-title").textContent.toLowerCase();
+        if (title.includes(input)) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}

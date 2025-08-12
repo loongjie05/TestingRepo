@@ -85,6 +85,7 @@ header {
 }
 
 .nav-link {
+    text-decoration: none;
     background: transparent;
     border: none;
     font-size: 1.1rem;
@@ -107,7 +108,7 @@ header {
     bottom: -1px;
     left: 0;
     width: 0;
-    height: 2px;
+    height: 5px;
     background-color: #70130b;
     transition: width 0.3s;
     z-index: -1;
