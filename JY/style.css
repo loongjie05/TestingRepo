@@ -21,13 +21,13 @@ body{
     font-family: Tahoma, Geneva, Verdana, sans-serif;
     padding: 30px;
     font-size: 80px;
-    color: #ffe866;
+    color: #ffce1b;
      text-shadow: 
-        1px 1px 0 #ffd84d,
-        2px 2px 0 #ffcc33,
-        3px 3px 0 #ffbf1a,
-        4px 4px 0 #ffb300,
-        5px 5px 5px rgba(0,0,0,0.3);
+        1px 1px 0 #e6b800,
+        2px 2px 0 #cc9f00,
+        3px 3px 0 #b38d00,
+        4px 4px 0 #997a00,
+        5px 5px 5px rgba(0,0,0,0.5);
 }
 
 .search-wrapper {
@@ -114,8 +114,7 @@ body{
 
 .custom-select:hover{
     color: #ff7f50;
-    transition: color 0.3s ease;
-     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: color 0.3s ease
 }
 
 .select-selected {
