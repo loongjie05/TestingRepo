@@ -5,7 +5,8 @@
     }
     
     footer {
-        height: 150px;
+        padding: 20px 5%;
+        height: auto;;
     }
     
     .header-container {
@@ -51,8 +52,35 @@
         padding-top: 120px;
     }
     
+    .header-container {
+        flex-wrap: wrap;
+    }
+
     .logo-text {
         font-size: 1.5rem;
+    }
+
+    .nav-section {
+        flex: 2;
+        order: 2;
+        justify-content: center;
+    }
+
+    .login-section {
+        flex: 1;
+        order: 3;
+        display: flex;
+        justify-content: flex-end;
+        width: auto;
+        padding-right: 10px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -63,7 +91,8 @@
     }
     
     footer {
-        height: 200px;
+        padding: 25px 5%;
+        height: auto;
     }
     
     .header-container {

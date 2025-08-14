@@ -62,16 +62,6 @@
 
     <!-- JavaScript Imports -->
     <script src="../shared/sharedComponent.js"></script>
-    <script>
-        // Load shared components
-        fetch('../shared/header.html')
-            .then(response => response.text())
-            .then(html => document.getElementById('header').innerHTML = html);
-            
-        fetch('../shared/footer.html')
-            .then(response => response.text())
-            .then(html => document.getElementById('footer').innerHTML = html);
-    </script>
     <script src="js/homepage.js"></script>
 </body>
 </html>
