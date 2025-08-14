@@ -6,6 +6,28 @@ body{
     flex-direction: column;
 }
 
+.hero-section {
+    position: relative;
+    background-size: cover;
+    padding: 40px 0;
+     margin-top: -40px;
+    background: url('Picture/cooking2.jpg') center/cover no-repeat;
+}
+
+.hero-section::before {
+    content: "";
+    margin-top: -50px;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35); 
+    z-index: 0;
+}
+
+.hero-section > * {
+    position: relative;
+    z-index: 1;
+}
+
 /*Search*/
 .search-container {
     padding: 20px;
