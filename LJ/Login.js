@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     img.style.transform = 'translateY(0px)';
     img.style.willChange = 'transform, opacity';
 
-    document.body.appendChild(img);
+    document.getElementById('rain-container').appendChild(img);
     animateFoodPicture(img);
   }
 
@@ -65,6 +65,54 @@ document.addEventListener('DOMContentLoaded', () => {
   // Create a new picture every 300 milliseconds
   setInterval(createFoodPicture, 300);
 
+  const passwordInput = document.getElementById('signup-password');
+  const strengthBar = document.getElementById('password-strength-bar');
+  const requirements = {
+    length: document.getElementById('req-length'),
+    special: document.getElementById('req-special'),
+    number: document.getElementById('req-number'),
+    capital: document.getElementById('req-capital')
+  };
+  const passwordRequirements = document.getElementById('password-requirements');
+
+  const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+  const numbers = /[0-9]+/;
+  const capitalLetters = /[A-Z]+/;
+
+  passwordInput.addEventListener('focus', () => {
+    strengthBar.style.display = 'block';
+    passwordRequirements.style.display = 'block';
+  });
+
+  passwordInput.addEventListener('blur', () => {
+    strengthBar.style.display = 'none';
+    passwordRequirements.style.display = 'none';
+  });
+
+  passwordInput.addEventListener('input', () => {
+    const password = passwordInput.value;
+    let strength = 0;
+
+    const lengthValid = password.length >= 8;
+    const specialValid = specialChars.test(password);
+    const numberValid = numbers.test(password);
+    const capitalValid = capitalLetters.test(password);
+
+    if (lengthValid) strength++;
+    if (specialValid) strength++;
+    if (numberValid) strength++;
+    if (capitalValid) strength++;
+
+    const strengthPercentage = (strength / 4) * 100;
+    strengthBar.style.setProperty('--clr', 
+      strength <= 1 ? 'red' : strength <= 3 ? 'orange' : 'green');
+    strengthBar.style.width = `${strengthPercentage}%`;
+
+    requirements.length.classList.toggle('valid', lengthValid);
+    requirements.special.classList.toggle('valid', specialValid);
+    requirements.number.classList.toggle('valid', numberValid);
+    requirements.capital.classList.toggle('valid', capitalValid);
+  });
 });
 
 // You can keep other functions like doFunStuff if they are used elsewhere

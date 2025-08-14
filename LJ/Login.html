@@ -6,9 +6,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Belleza&display=swap" rel="stylesheet">
   <link href="Login.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="/LJ/Login.js"></script>
+  <script src="Login.js"></script>
 </head>
 <body>
+  <div id="rain-container"></div>
 
   
   <input type="checkbox" id="flip-toggle" />
@@ -17,25 +18,25 @@
   <label class="switch" for="flip-toggle">
   </label>
 
-  <div class="scene">
+  <div class="scene" style="width: 420px; margin: auto;">
     <div class="card">
 
       <div class="face front">
-        <img src="/LJ/pictures/cutlery.png" class="logo" width="70" alt="">
+        <img src="pictures/cutlery.png" class="logo" width="70" alt="">
         <h1>Global Street Eats</h1>
         <p class="description">Welcome back! Your next flavor adventure awaits.</p>
         <form>
           <div class="form-group">
             <label>Email</label>
             <div class="input-wrapper">
-              <img src="/LJ/pictures/email.png" class="input-icon" alt="">
+              <img src="pictures/email.png" class="input-icon" alt="">
               <input type="email" class="input" placeholder="you@example.com" required>
             </div>
           </div>
           <div class="form-group">
             <label>Password</label>
             <div class="input-wrapper">
-              <img src="/LJ/pictures/lock.png" class="input-icon" alt="">
+              <img src="pictures/lock.png" class="input-icon" alt="">
               <input type="password" class="input" placeholder="••••••••" required>
             </div>
           </div>
@@ -46,35 +47,45 @@
           <label for="flip-toggle" class="link">Sign Up</label>
         </p>
         <p style="margin-top: 1.5rem;">
-        <a href="/LJ/forgot-password.html" class="link">Forgot password?</a>
+        <a href="forgot-password.html" class="link">Forgot password?</a>
         </p>
       </div>
 
 
       <div class="face back">
-        <img src="/LJ/pictures/cutlery.png" class="logo" width="70" alt="">
+        <img src="pictures/cutlery.png" class="logo" width="70" alt="">
         <h1>Create Account</h1>
         <p class="description">Join us and explore new flavors!</p>
         <form>
           <div class="form-group">
             <label>Name</label>
             <div class="input-wrapper">
-              <img src="/LJ/pictures/user.png" class="input-icon" alt="">
+              <img src="pictures/user.png" class="input-icon" alt="">
               <input type="text" class="input" placeholder="Full Name" required>
             </div>
           </div>
           <div class="form-group">
             <label>Email</label>
             <div class="input-wrapper">
-              <img src="/LJ/pictures/email.png" class="input-icon" alt="">
+              <img src="pictures/email.png" class="input-icon" alt="">
               <input type="email" class="input" placeholder="you@example.com" required>
             </div>
           </div>
           <div class="form-group">
             <label>Password</label>
             <div class="input-wrapper">
-              <img src="/LJ/pictures/lock.png" class="input-icon" alt="">
-              <input type="password" class="input" placeholder="••••••••" required>
+              <img src="pictures/lock.png" class="input-icon" alt="">
+              <input type="password" class="input" id="signup-password" placeholder="••••••••" required>
+            </div>
+            <div id="password-strength-bar"></div>
+            <div id="password-requirements">
+              <p>Password must contain:</p>
+              <ul>
+                <li id="req-length">Minimum 8 characters</li>
+                <li id="req-special">At least 1 special symbol</li>
+                <li id="req-number">At least 1 numeric number</li>
+                <li id="req-capital">At least 1 capital letter</li>
+              </ul>
             </div>
           </div>
           <button class="button">Sign Up</button>
