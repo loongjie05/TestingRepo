@@ -12,7 +12,11 @@
 <body>
     <!-- Header Import -->
     <div id="header"></div>
-    
+    <script>
+    fetch('../shared/header.html')
+    .then(response => response.text())
+    .then(html => document.getElementById('header').innerHTML = html);
+    </script>
     <!-- Main Content -->
     <main class="content">
         <div class="page-title">
