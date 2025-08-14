@@ -1,16 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Keep existing form submission logic if any
-  const form = document.querySelector('form');
-  if (form) {
-    form.addEventListener('submit', (event) => {
-      // This is just for demonstration if you have a form
-      // event.preventDefault();
-      // alert('Form submitted!');
-    });
+  // --- Cookie Helper Functions ---
+  function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    // In a real application, you should add the 'Secure' attribute to cookies.
+    // document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure";
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
   }
 
   // --- Raining Food Animation ---
-
   const foodPictures = [
     'pictures/Burger.png',
     'pictures/NasiLemak.png',
@@ -27,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'pictures/BakKutTeh.png'
   ];
 
-  // The animation function now only handles animation and removal
   function animateFoodPicture(img) {
     const animationDuration = Math.random() * 5 + 8;
     requestAnimationFrame(() => {
@@ -36,19 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
       img.style.opacity = '0';
     });
 
-    // When the animation is over, just remove the element
     img.addEventListener('transitionend', () => {
       img.remove();
     }, { once: true });
   }
 
-  // The picture creation function
   function createFoodPicture() {
     const img = document.createElement('img');
     img.classList.add('food-picture');
     img.src = foodPictures[Math.floor(Math.random() * foodPictures.length)];
     
-    // Set initial styles
     img.style.position = 'absolute';
     img.style.left = `${Math.random() * 100}vw`;
     img.style.top = '-150px';
@@ -61,9 +70,56 @@ document.addEventListener('DOMContentLoaded', () => {
     animateFoodPicture(img);
   }
 
-  // Start the continuous rain effect
-  // Create a new picture every 300 milliseconds
   setInterval(createFoodPicture, 300);
+
+  // --- Sign-up and Login Logic ---
+  const frontForm = document.querySelector('.front form');
+  const backForm = document.querySelector('.back form');
+  const loginError = document.getElementById('login-error');
+
+  // WARNING: Storing passwords in cookies is not secure. This is for demonstration purposes only.
+  backForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = backForm.querySelector('input[type="text"]').value;
+    const email = backForm.querySelector('input[type="email"]').value;
+    const password = backForm.querySelector('input[type="password"]').value;
+
+    const existingUsers = JSON.parse(getCookie('users')) || [];
+    const emailExists = existingUsers.some(user => user.email === email);
+
+    if (emailExists) {
+      alert('Email already exists. Please use a different email.');
+      return;
+    }
+
+    const newUser = {
+      name,
+      email,
+      password
+    };
+
+    existingUsers.push(newUser);
+    setCookie('users', JSON.stringify(existingUsers), 7);
+
+    alert('Sign-up successful! Please log in.');
+    document.getElementById('flip-toggle').checked = false;
+  });
+
+  frontForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const email = frontForm.querySelector('input[type="email"]').value;
+    const password = frontForm.querySelector('input[type="password"]').value;
+
+    const existingUsers = JSON.parse(getCookie('users')) || [];
+    const user = existingUsers.find(user => user.email === email && user.password === password);
+
+    if (user) {
+      window.location.href = '../JH/Homepage.html';
+    } else {
+      loginError.textContent = 'Invalid email or password.';
+      loginError.style.display = 'block';
+    }
+  });
 
   const passwordInput = document.getElementById('signup-password');
   const strengthBar = document.getElementById('password-strength-bar');
@@ -80,8 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const capitalLetters = /[A-Z]+/;
 
   passwordInput.addEventListener('focus', () => {
-    strengthBar.style.display = 'block';
     passwordRequirements.style.display = 'block';
+    if (passwordInput.value.length > 0) {
+      strengthBar.style.display = 'block';
+    }
   });
 
   passwordInput.addEventListener('blur', () => {
@@ -91,6 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   passwordInput.addEventListener('input', () => {
     const password = passwordInput.value;
+    if (password.length > 0) {
+      strengthBar.style.display = 'block';
+    } else {
+      strengthBar.style.display = 'none';
+    }
+
     let strength = 0;
 
     const lengthValid = password.length >= 8;
@@ -114,14 +178,3 @@ document.addEventListener('DOMContentLoaded', () => {
     requirements.capital.classList.toggle('valid', capitalValid);
   });
 });
-
-// You can keep other functions like doFunStuff if they are used elsewhere
-function doFunStuff() {
-    if (typeof confetti === 'function') {
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
-        });
-    }
-}

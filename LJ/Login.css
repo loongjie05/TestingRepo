@@ -196,13 +196,12 @@
 
 #password-strength-bar {
   --clr: red;
-  outline: 5px solid var(--clr);
-  outline-offset: 5px;
   position: relative;
   overflow: hidden;
+  top:5px;
   border-radius: 10rem;
   width: 0;
-  height: 20px;
+  height: 10px;
   display: none;
   transition: width 0.3s ease-in-out;
 }
