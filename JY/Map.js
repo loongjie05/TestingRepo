@@ -86,4 +86,39 @@ fetch('Picture/world.svg')
         const centerY = viewBox.y + viewBox.h / 2;
         zoomAtPoint(1.1, centerX, centerY);
     });
+
+    // --- Countries ---
+    const markers = [
+        {name: "Americas", x: 550, y: 400, link: "#"},
+        {name: "Europe", x: 1050, y: 165, link: "#"},
+        {name: "Africa", x: 1110, y: 450, link: "#"},
+        {name: "Asia", x: 1450, y: 200, link: "#"},
+        {name: "Malaysia", x: 1560, y: 460, link: "#"},
+        {name: "Oceania", x: 1725, y: 650, link: "#"}
+        ];
+
+        markers.forEach(marker => {
+        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        group.setAttribute("class", "marker-group");
+
+        const img = document.createElementNS("http://www.w3.org/2000/svg", "image");
+        img.setAttributeNS(null, "href", "Picture/pointer.png"); 
+        img.setAttribute("x", marker.x - 14); 
+        img.setAttribute("y", marker.y - 14);
+        img.setAttribute("width", 50); 
+        img.setAttribute("height", 50); 
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", marker.x);
+        text.setAttribute("y", marker.y - 20);
+        text.setAttribute("class", "marker-text");
+        text.textContent = marker.name;
+
+        group.appendChild(img);
+        group.appendChild(text);
+
+        group.addEventListener("click", () => window.open(marker.link, "_blank"));
+
+        svg.appendChild(group);
+        });
 });

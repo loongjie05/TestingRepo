@@ -39,31 +39,63 @@ path {
     transition: 100ms;
 }
 
-.zoom-btn {
+.zoom-btn-group {
     position: fixed;
-    left: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    cursor: pointer;
-    padding: 8px 12px;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    left: 20px;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
     z-index: 20;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-.zoom-in { 
-    top: 20%; 
+.zoom-btn {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.85);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, transform 0.2s;
 }
-.zoom-out {
-    top: 26%; 
+
+.zoom-btn + .zoom-btn {
+    border-top: none;
+
 }
 
 .zoom-btn:hover {
+    color: #ffce1b;
     background: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
 }
 
-/*path:hover {
-    fill: #ffd438;
-}*/
+.marker-group {
+    cursor: pointer;
+    transition: transform 0.3s; 
+    transform-box: fill-box;        
+    transform-origin: center center;
+}
+
+.marker-group:hover {
+    transform: scale(1.2); 
+}
+
+.marker-text {
+    fill: #000;          
+    font-size: 30px;     
+    font-weight: bold;
+    text-anchor: middle; 
+    transition: fill 0.3s;
+}
+
+.marker-group:hover .marker-text {
+    fill:#ffce1b;
+    stroke-width: 1px;
+}
+
+
