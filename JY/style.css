@@ -6,11 +6,12 @@ body{
     flex-direction: column;
 }
 
+/*backgroup images*/
 .hero-section {
     position: relative;
     background-size: cover;
     padding: 40px 0;
-     margin-top: -40px;
+    margin-top: -40px;
     background: url('Picture/cooking2.jpg') center/cover no-repeat;
 }
 
@@ -64,7 +65,7 @@ body{
     height: 60px;
     box-sizing: border-box;
     border-radius: 999px; 
-    border: 2px solid #ccc;
+    border: 2px solid white;
     padding: 0 70px 0 40px;
     font-size: 18px;
     outline: none;
@@ -73,8 +74,8 @@ body{
 }
 
 .searchInput:focus {
-    border-color: #946b19;
-    box-shadow: 0 4px 12px rgba(251, 255, 0, 0.189);
+    border-color: white;
+    box-shadow: 0 4px 12px #ffffff91;
 }
 
 .search-icon {

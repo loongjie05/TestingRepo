@@ -1,0 +1,38 @@
+body {
+    font-family: sans-serif;
+    color: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.world-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: max-content;
+    height: max-content;
+    min-height: 30em;
+    background-color: #7cbdff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+svg {
+    width: 100vw;
+    height: 100vh;
+}
+
+path {
+    fill: #f8f9fa;
+    stroke: #5a5a5a;
+    transition: 100ms;
+}
+
+path:hover {
+    fill: #ffd438;
+}
