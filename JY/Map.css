@@ -1,5 +1,7 @@
 body {
     font-family: sans-serif;
+    margin: 0;
+    overflow: hidden;
     color: #fff;
 }
 
@@ -10,11 +12,11 @@ body {
 }
 
 .world-map {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: max-content;
-    height: max-content;
+    width: 100vw;
+    height: 100vh;
     min-height: 30em;
     background-color: #7cbdff;
     display: flex;
@@ -27,8 +29,8 @@ body {
 }
 
 svg {
-    width: 100vw;
-    height: 100vh;
+    width: 150vw;
+    height: 150vh;
 }
 
 path {
@@ -38,9 +40,8 @@ path {
 }
 
 .zoom-btn {
-    position: absolute;
+    position: fixed;
     left: 10px;
-    top: 150px;
     background: rgba(255, 255, 255, 0.9);
     border: none;
     cursor: pointer;
@@ -49,14 +50,14 @@ path {
     font-weight: bold;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    z-index: 9999;
+    z-index: 20;
 }
 
 .zoom-in { 
-    top: 90px; 
+    top: 20%; 
 }
 .zoom-out {
-    top: 120px; 
+    top: 26%; 
 }
 
 .zoom-btn:hover {
