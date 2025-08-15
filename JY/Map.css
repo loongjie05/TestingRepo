@@ -22,6 +22,10 @@ body {
     align-items: center;
 }
 
+.map-container {
+    position: relative;
+}
+
 svg {
     width: 100vw;
     height: 100vh;
@@ -33,6 +37,32 @@ path {
     transition: 100ms;
 }
 
-path:hover {
-    fill: #ffd438;
+.zoom-btn {
+    position: absolute;
+    left: 10px;
+    top: 150px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 9999;
 }
+
+.zoom-in { 
+    top: 90px; 
+}
+.zoom-out {
+    top: 120px; 
+}
+
+.zoom-btn:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+/*path:hover {
+    fill: #ffd438;
+}*/

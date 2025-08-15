@@ -1,7 +1,7 @@
 body{
     background-color: #f8f9fa;
     margin: 0;
-    padding-top: 120px;
+    padding-top: 0 !important;
     display: flex;
     flex-direction: column;
 }
@@ -11,13 +11,11 @@ body{
     position: relative;
     background-size: cover;
     padding: 40px 0;
-    margin-top: -40px;
     background: url('Picture/cooking2.jpg') center/cover no-repeat;
 }
 
 .hero-section::before {
     content: "";
-    margin-top: -50px;
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.35); 

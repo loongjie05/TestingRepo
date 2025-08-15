@@ -78,6 +78,22 @@ document.getElementById('footer').innerHTML = `
     </div>
 </footer>
 `;
+
+(function() {
+    function adjustContentMargin() {
+        const header = document.querySelector("header");
+        if (!header) return;
+
+        const mainContent = document.querySelector(".world-map, main, .main, .content");
+        if (!mainContent) return;
+
+        mainContent.style.marginTop = header.offsetHeight + "px";
+    }
+
+    window.addEventListener("load", adjustContentMargin);
+    window.addEventListener("resize", adjustContentMargin);
+})();
+
 // Navigation functionality
 document.querySelectorAll('.nav-link').forEach(button => {
     button.addEventListener('click', function() {
