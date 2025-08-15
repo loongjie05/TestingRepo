@@ -122,3 +122,14 @@ fetch('Picture/world.svg')
         svg.appendChild(group);
         });
 });
+
+// --- Load Compass ---
+fetch('Picture/compass.svg')
+  .then(res=>res.text())
+  .then(svgContent=>{
+    const compassDiv = document.createElement("div");
+    compassDiv.id = "compass";
+    compassDiv.classList.add("compass");
+    document.body.appendChild(compassDiv);
+    compassDiv.innerHTML = svgContent;
+});
