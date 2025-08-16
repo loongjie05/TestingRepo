@@ -5,7 +5,7 @@ const foods = [
         time: "Prep: 15mins • Cook: 50mins • Total: 1h 5mins",
         tags: ["Beef", "Grilled"],
         link: "street food/NasiLemak.html",
-        continent: "Asia",
+        continent: "Malaysia",
         type: "Rice",
         method: "Boiling",
         flavor: "Spicy"
@@ -144,22 +144,35 @@ const container = document.getElementById("cardContainer");
 const searchInput = document.querySelector(".searchInput");
 
 function renderCards(list) {
+  const container = document.getElementById("cardContainer");
   container.innerHTML = "";
+
   list.forEach(food => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.setAttribute("data-continent", food.continent);
-    card.setAttribute("data-method", food.method);
+    const card = document.createElement("article");
+    card.className = "article-wrapper";
+
     card.innerHTML = `
-      <a href="${food.link}" class="card-link">
-        <img src="${food.img}" alt="${food.title}">
-        <div class="card-content">
-          <div class="card-title">${food.continent} / ${food.title}</div>
-          <div class="card-time">${food.time}</div>
-          <div class="card-tags">${food.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+      <div class="container-project" style="background-image: url('${food.img}');"></div>
+      <div class="project-info">
+        <div class="flex-pr">
+          <div class="project-title text-nowrap">${food.title}</div>
+          <div class="project-hover">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
+              <line y2="12" x2="19" y1="12" x1="5"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
         </div>
-      </a>
+        <div class="types">
+          ${food.tags.map(t => `<span class="project-type">• ${t}</span>`).join('')}
+        </div>
+      </div>
     `;
+    
+    card.addEventListener("click", () => {
+      window.location.href = food.link;
+    });
+
     container.appendChild(card);
   });
 }
@@ -182,6 +195,11 @@ function filterCards() {
   });
 
   renderCards(filtered);
+}
+
+function clearSearch() {
+  searchInput.value = "";
+  filterCards();
 }
 
 searchInput.addEventListener("input", filterCards);

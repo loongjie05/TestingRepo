@@ -18,7 +18,7 @@ fetch('Picture/world.svg')
     let isPanning = false;
     let startPoint = { x: 0, y: 0 };
 
-    // --- Drag Events ---
+    // Drag Events 
     svg.addEventListener("mousedown", e => {
         isPanning = true;
         startPoint = { x: e.clientX, y: e.clientY };
@@ -45,7 +45,7 @@ fetch('Picture/world.svg')
         svg.style.cursor = "grab";
     });
 
-    // --- Zoom Settings ---
+    // Zoom Settings 
     const minZoom = 0.2;
     const maxZoom = 2;
 
@@ -63,7 +63,7 @@ fetch('Picture/world.svg')
         svg.setAttribute("viewBox", `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
     }
 
-    // --- Wheel Zoom ---
+    // Wheel Zoom
     svg.addEventListener("wheel", e => {
         e.preventDefault();
         const rect = svg.getBoundingClientRect();
@@ -74,7 +74,7 @@ fetch('Picture/world.svg')
         zoomAtPoint(factor, mouseX, mouseY);
     });
 
-    // --- Button Zoom ---
+    // Button Zoom
     document.querySelector(".zoom-in").addEventListener("click", () => {
         const centerX = viewBox.x + viewBox.w / 2;
         const centerY = viewBox.y + viewBox.h / 2;
@@ -87,7 +87,7 @@ fetch('Picture/world.svg')
         zoomAtPoint(1.1, centerX, centerY);
     });
 
-    // --- Countries ---
+    // Countries
     const markers = [
         {name: "Americas", x: 550, y: 400, link: "#"},
         {name: "Europe", x: 1050, y: 165, link: "#"},
@@ -123,7 +123,7 @@ fetch('Picture/world.svg')
         });
 });
 
-// --- Load Compass ---
+// Load Compass 
 fetch('Picture/compass.svg')
   .then(res=>res.text())
   .then(svgContent=>{
