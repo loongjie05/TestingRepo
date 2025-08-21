@@ -98,13 +98,18 @@ body {
     stroke-width: 1px;
 }
 
-.compass {
+#compass {
     position: fixed;
     top: 20%;
     left: 12.5px;
     z-index: 30; 
     width: 50px;
-    height: 50px;
+    height: 50px; 
+}
+
+#compass svg {
+  width: 100%;
+  height: 100%;
 }
 
 .pl {

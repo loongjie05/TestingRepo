@@ -1,10 +1,10 @@
 const foods = [
     {
         title: "Nasi Lemak",
-        img: "street food/picture/NasiLemak1.webp",
+        img: "../street food/picture/NasiLemak1.webp",
         time: "Prep: 15mins • Cook: 50mins • Total: 1h 5mins",
-        tags: ["Beef", "Grilled"],
-        link: "street food/NasiLemak.html",
+        tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
+        link: "../street food/NasiLemak.html",
         continent: "Malaysia",
         type: "Rice",
         method: "Boiling",
