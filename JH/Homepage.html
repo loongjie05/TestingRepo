@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jalan Jalan Makan | Food Discovery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../shared/sharedComponent.css">
+    <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
+    <link rel="stylesheet" href="css/homepage.css">
+</head>
+<body>
+    <!-- Header Import -->
+    <div id="header"></div>
+    <script>
+    fetch('../shared/header.html')
+    .then(response => response.text())
+    .then(html => document.getElementById('header').innerHTML = html);
+    </script>
+    <!-- Main Content -->
+    <main class="content">
+        <div class="page-title">
+            <h1>Welcome to Jalan Jalan Makan</h1>
+            <p>Your ultimate food discovery platform - find the best local eats and recipes</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Food Rankings</h3>
+                    <p>Discover top-rated dishes and restaurants based on community reviews.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-utensil-spoon"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Authentic Recipes</h3>
+                    <p>Learn to cook traditional dishes with step-by-step guides.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Food Map</h3>
+                    <p>Find the best eateries near you with our interactive map.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer Import -->
+    <div id="footer"></div>
+
+    <!-- JavaScript Imports -->
+    <script src="../shared/sharedComponent.js"></script>
+    <script src="js/homepage.js"></script>
+</body>
+</html>

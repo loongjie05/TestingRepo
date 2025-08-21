@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jalan Jalan Makan | Top 3 Foods</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="../shared/sharedComponent.css">
+	<link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
+	<link rel="stylesheet" href="Ranking.css">
+</head>
+<body>
+	<div id="header"></div>
+	<main class="content ranking-page">
+		<section class="hero">
+			<div class="hero-inner">
+				<div class="hero-copy">
+					<h1>Discover the Top 3 Local Foods</h1>
+					<p>Select a country to reveal its most beloved dishes, curated with care.</p>
+				</div>
+				<div class="controls">
+					<label for="countrySelect" class="sr-only">Select Country</label>
+					<div class="select-wrap">
+						<i class="fa-solid fa-globe"></i>
+						<select id="countrySelect" aria-label="Select Country">
+							<option value="Malaysia">Malaysia</option>
+							<option value="Japan">Japan</option>
+							<option value="Thailand">Thailand</option>
+							<option value="USA">United States</option>
+							<option value="Italy">Italy</option>
+							<option value="Mexico">Mexico</option>
+							<option value="China">China</option>
+							<option value="India">India</option>
+							<option value="Korea">South Korea</option>
+							<option value="Indonesia">Indonesia</option>
+							<option value="Singapore">Singapore</option>
+							<option value="Vietnam">Vietnam</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="ranking-section">
+			<div class="section-head">
+				<h2 id="sectionTitle"><i class="fa-solid fa-trophy"></i> Top 3 Foods in <span id="countryName">Malaysia</span></h2>
+			</div>
+			<div id="rankingGrid" class="ranking-grid" aria-live="polite"></div>
+		</section>
+	</main>
+	<div id="footer"></div>
+
+	<script src="../shared/sharedComponent.js"></script>
+	<script src="Ranking.js"></script>
+</body>
+</html>
+

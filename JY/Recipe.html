@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../shared/sharedComponent.css">
+    <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
+    <link rel="stylesheet" href="Recipe.css">
+    <title>Recipes</title>
+</head>
+<body>
+
+    <!-- Header Import -->
+    <div id="header"></div>
+
+    <div class="main"></div>
+    <!--Title and Search-->
+    <div class="hero-section">
+        <div class="search-container">
+            <h1>Food Recipes</h1>
+            <div class="search-wrapper">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21.53 20.47l-5.73-5.73a8 8 0 10-1.06 1.06l5.73 5.73a.75.75 0 101.06-1.06zM4 10a6 6 0 1112 0 6 6 0 01-12 0z"/>
+                </svg>
+
+                <!-- search -->
+                <input type="text" id="searchInput" class="searchInput" placeholder="Search recipe">
+
+                <!-- clearn button -->
+                <button type="button" class="reset" onclick="clearSearch()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18.3 5.71a1 1 0 00-1.41 0L12 10.59 7.11 5.7A1 1 0 105.7 7.11L10.59 12l-4.89 4.89a1 1 0 101.41 1.41L12 13.41l4.89 4.89a1 1 0 001.41-1.41L13.41 12l4.89-4.89a1 1 0 000-1.4z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!--Filter-->
+    <div class="filter-container">
+        <div class="custom-select" id="filterContinents">
+            <div class="select-selected">Continents / Country</div>
+            <div class="select-items select-hide"></div>
+        </div>
+        <div class="custom-select" id="filterMethod">
+            <div class="select-selected">Cooking Methods</div>
+            <div class="select-items select-hide"></div>
+        </div>
+        <div id="filterFlavor" class="custom-select">
+            <div class="select-selected">Flavors</div>
+            <div class="select-items"></div>
+        </div>
+
+        <div id="filterType" class="custom-select">
+            <div class="select-selected">Types</div>
+            <div class="select-items"></div>
+        </div>
+    </div>
+    
+    <!--Card-->
+    <div class="card-container" id="cardContainer"></div>
+    <script src="Recipe.js"></script>
+
+    <!-- Footer Import -->
+    <div id="footer"></div>
+
+    <!-- JavaScript Imports -->
+    <script src="../shared/sharedComponent.js"></script>
+</body>
+</html>
