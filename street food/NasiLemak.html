@@ -6,32 +6,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../shared/sharedComponent.css">
     <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
-    <title>Nasi Lemak</title>
     <link rel="stylesheet" href="FoodStyle.css">
+    <title>Nasi Lemak</title>
 </head>
 <body>
     
-     <!-- Header Import -->
+    <!-- Header Import -->
     <div id="header"></div>
 
-    <div class="slider-container">
-        <div class="slider" data-images="picture/NasiLemak1.webp,picture/NasiLemak2.jpg,picture/NasiLemak3.jpg">
-            <button class="nav-button left" onclick="prevSlide()">❮</button>
-            <img id="slideImage" src="" alt="Slider">
-            <button class="nav-button right" onclick="nextSlide()">❯</button>
-        </div>
+    <div id="app"></div>
+    <template id="page-template">
+        <section class="foodName">
+            <div class="name-text">
+                <h1><span class="food-title"></span></h1>
+                <p class="food-text"></p>
+                <a href="#about"><button><span>About</span></button></a>
+                <a href="#recipe"><button><span>Recipe</span></button></a>
+            </div>
+            
+            <div class="food-img">
+                <img class="food-img-src" src="" alt="Food Image">
+            </div>
+        </section>
 
-        <div class="Info">
-            <h1>Nasi Lemak</h1>
-        </div>
-    </div>
+        <section class="about" id="about">
+            <img class="food-img2-src" src="" alt="Food Image">
+            <h2><span class="about-title"></span> <span class="about-highlight"></span></h2>
+            <p class="about-p1"></p>
+            <p class="about-p2"></p>
+        </section>
 
-    <script src="Food.js">
-    </script>
+   </template>
+    
 
     <!-- Footer Import -->
     <div id="footer"></div>
 
      <!-- JavaScript Imports -->
     <script src="../shared/sharedComponent.js"></script>
+    <script src="Food.js"></script>
 </body>

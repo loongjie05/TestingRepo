@@ -4,8 +4,8 @@ const foods = [
         img: "../street food/picture/NasiLemak1.webp",
         time: "Prep: 15mins • Cook: 50mins • Total: 1h 5mins",
         tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
-        link: "../street food/NasiLemak.html",
-        continent: "Malaysia",
+        link: "../street food/NasiLemak.html?page=1",
+        continent: "Asia",
         type: "Rice",
         method: "Boiling",
         flavor: "Spicy"
@@ -15,6 +15,7 @@ const foods = [
         img: "https://www.themealdb.com/images/media/meals/1529444830.jpg",
         time: "Prep: 40min • Cook: 10min",
         tags: ["Pork", "Dumpling"],
+        link: "../street food/NasiLemak.html?page=2",
         continent: "Asia",
         type: "Rice",
         method: "Boiling",
@@ -116,7 +117,7 @@ const methods = [...new Set(foods.map(f => f.method))].sort();
 const flavors = [...new Set(foods.map(f => f.flavor))].sort();
 const types = [...new Set(foods.map(f => f.type))].sort();
 
-populateCustomSelect("filterContinents", continents, "Continents / Country");
+populateCustomSelect("filterContinents", continents, "Continents");
 populateCustomSelect("filterMethod", methods, "Cooking Methods");
 populateCustomSelect("filterFlavor", flavors, "Flavors");
 populateCustomSelect("filterType", types, "Types");
@@ -186,7 +187,7 @@ function filterCards() {
 
   const filtered = foods.filter(food => {
     const matchSearch = food.title.toLowerCase().includes(searchVal);
-    const matchContinent = continentVal === "Continents / Country" || food.continent === continentVal;
+    const matchContinent = continentVal === "Continents" || food.continent === continentVal;
     const matchMethod = methodVal === "Cooking Methods" || food.method === methodVal;
     const matchFlavor = flavorVal === "Flavors" || food.flavor === flavorVal;
     const matchType = typeVal === "Types" || food.type === typeVal;
