@@ -1,0 +1,122 @@
+/* ===== About Us Section ===== */
+.about-section {
+  padding: 80px 10%;
+  background-color: #fffaf0; /* warm food-inspired background */
+}
+
+.about-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #e85c0d; /* spicy orange/red color */
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.about-text .brand {
+  font-weight: bold;
+  color: #d9534f;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.core-values {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.core-values h3 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #e85c0d;
+}
+
+.values-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.value-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  width: 300px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition: 0.3s;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+}
+
+.value-card h4 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #d94e10;
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.core-values {
+  margin-top: 70px;
+  text-align: center;
+}
+
+/* Mission & Vision below Core Values */
+.mission-vision {
+  max-width: 800px;       
+  margin: 50px auto;      
+  padding: 30px 40px;     
+  background-color: #fff8f0; 
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;      
+}
+
+.mission-vision h3 {
+  margin-bottom: 15px;
+  color: #e85c0d;
+  font-size: 1.8rem;
+}
+
+.mission-vision p {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
