@@ -47,7 +47,7 @@ body{
 
 
 
-/* --- Street Food Slideshow Section --- */
+/* ----- Street Food Slideshow Section ----- */
 .streetfood-slideshow {
   display: flex;
   justify-content: space-around;
@@ -69,7 +69,7 @@ body{
   margin-bottom: 20px;
 }
 
-.btn {
+.food-left .btn {
   background: #e63946; /* red */
   color: white;
   border: none;
@@ -126,17 +126,17 @@ body{
 
 
 
-/* --- Category Grid Section --- */
+/* ----- Category Grid Section ----- */
 .category-grid-section {
     padding: 50px 10%;
     text-align: center;
-    background-color: rgba(255, 200, 0, 0.58); /* A light background to separate from other sections */
+    background-color: #FF6B6B; 
 }
 
-.section-title {
+.category-grid-section .section-title {
     font-size: 2.5rem;
     margin-bottom: 40px;
-    color: #333;
+    color: #fff;
     font-weight: 700;
 }
 
@@ -187,4 +187,244 @@ body{
     z-index: 1;
     font-size: 1.8rem;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+
+/* ----- Receipe Section ----- */
+.recipe {
+  padding: 60px 10% ;
+  background-color: rgba(251, 255, 0, 0.189);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+/* Recipe Grid */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+/* Recipe Cards */
+.recipe-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.recipe-card:hover {
+  transform: translateY(-8px);
+}
+
+.recipe-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-content {
+  padding: 20px;
+  text-align: left;
+}
+
+.recipe-content h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #e85c0d;
+}
+
+.recipe-content p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.recipe-content .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #e85c0d;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.recipe-content .btn:hover {
+  background: #c94800;
+}
+
+/* Lear More Buttons */
+a.learn-more, button.learn-more {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.learn-more {
+  width: 15rem;
+  height: auto;
+}
+
+/* Circle background */
+.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #282936; 
+  border-radius: 1.625rem;
+}
+
+/* Icon base */
+.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+
+/* Arrow */
+.learn-more .circle .icon.arrow {
+  left: 0.825rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+
+.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+
+/* Button Text */
+.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 3rem;
+  color: #282936;   
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Hover Effects */
+.learn-more:hover .circle {
+  width: 100%;
+}
+
+.learn-more:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+
+.learn-more:hover .button-text {
+  color: #fff;
+}
+
+/* Remove default underline from any link within the learn-more button */
+.learn-more a {
+  text-decoration: none;
+}
+
+
+/* ----- Signup Section ----- */
+.signup-section {
+  background:#70130b;
+  color:#fff;
+  padding:60px 20px;
+  text-align:center;
+}
+
+.signup-container h2{
+  font-size:2rem;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.signup-container p{
+  font-size:1rem;
+  margin-bottom:30px;
+  color:#bbb;
+}
+
+.signup-form{
+  max-width:600px;
+  margin:0 auto;
+}
+
+.signup-form label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:8px;
+  text-align:left;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+
+.input-box button {
+  background: #00c4cc;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.input-box button:hover {
+  background: #009da3;
+}
+
+.error-message {
+  display: none;
+  color: red;
+  margin-top: 8px;
+  text-align: left;
 }
