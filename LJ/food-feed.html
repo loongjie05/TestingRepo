@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Feed - Global Street Eats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Belleza&display=swap" rel="stylesheet">
+  <!-- Shared component styles -->
+  <link href="../shared/sharedComponent.css" rel="stylesheet">
+  <link href="../shared/sharedComponentResponsive.css" rel="stylesheet">
+  <!-- Page specific styles -->
+  <link href="food-feed.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Placeholder for the shared header -->
+  <div id="header"></div>
+
+  <main class="feed-container">
+    <!-- Section to create a new post -->
+    <section class="create-post-card">
+      <h2>Share a Food Review</h2>
+      <form id="create-post-form">
+        <div class="form-group">
+          <label for="food-name">What did you eat?</label>
+          <input type="text" id="food-name" placeholder="e.g., Nasi Lemak, Tacos al Pastor" required>
+        </div>
+        <div class="form-group">
+          <label for="post-content">Your review:</label>
+          <textarea id="post-content" rows="4" placeholder="It was amazing! The..." required></textarea>
+        </div>
+        <button type="submit" class="button">Post Review</button>
+      </form>
+    </section>
+
+    <!-- Section to display all posts -->
+    <section id="posts-feed">
+      <!-- Posts will be dynamically inserted here by JavaScript -->
+    </section>
+  </main>
+
+  <!-- Placeholder for the shared footer -->
+  <div id="footer"></div>
+
+  <!-- Shared component loader script -->
+  <script src="../shared/sharedComponent.js" defer></script>
+  <!-- Page specific script -->
+  <script src="food-feed.js" defer></script>
+
+</body>
+</html>
