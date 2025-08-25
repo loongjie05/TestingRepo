@@ -63,8 +63,8 @@
     }
     .card {
       width: 100%;
-      width: 500px;
-      height: 680px;
+      width: 550px;
+      height: 630px;
       max-width: 360px;
       background: transparent;
       transform-style: preserve-3d;
@@ -154,10 +154,9 @@
     }
     .button {
       width: 100%;
-      padding: .8rem;
-      margin-top: 1rem;
+      padding: .3rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 100px;
       background: var(--primary-color);
       color: #fff;
       font-weight: bold;
@@ -175,9 +174,28 @@
       text-decoration: none;
       font-weight: bold;
       cursor: pointer;
-      margin-left: .3rem;
+      margin-left: .2rem;
     }
     .link:hover { text-decoration: underline; }
+
+#signup-success-message {
+  color: green;
+  font-size: 1rem;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #e9f7ef;
+  border: 1px solid #5cb85c;
+  text-align: center;
+  animation: fadeInOut 2s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 
 @media screen and (max-width: 768px) {
