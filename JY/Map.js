@@ -85,8 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add markers (custom icons + labels + links)
     const markers = [
-        {name: "North America", x: 430, y: 250, link: "#"},
-        {name: "South America", x: 650, y: 600, link: "#"},
+        {name: "North America", x: 450, y: 250, link: "#"},
+        {name: "South America", x: 670, y: 600, link: "#"},
+        {name: "Europe", x: 1050, y: 170, link: "#"},
         {name: "Africa", x: 1110, y: 450, link: "#"},
         {name: "Asia", x: 1450, y: 200, link: "#"},
         {name: "Malaysia", x: 1560, y: 460, link: "#"},
