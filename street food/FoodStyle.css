@@ -138,19 +138,22 @@ body {
 
 .recipe {
     display: flex;
-    justify-content: center;   
-    align-items: center;       
-    flex-direction: column;    
-    text-align: center;       
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; 
+    text-align: left;
     padding: 60px 10%;
     background: #fff;
+    gap: 60px; 
 }
 
 .recipe-content {
+    flex: 2;
     max-width: 800px;         
 }
 
 .recipe h1 {
+    text-align: center;
     font-size: 40px;
     margin-bottom: 20px;
 }
@@ -168,6 +171,85 @@ body {
     font-weight: bold;
     color: #ff9800;
     margin-right: 6px;
+}
+
+.recipe-side {
+    flex: 1;                 
+    display: flex;
+    align-items: center;       
+    justify-content: center;   
+    min-width: 300px;          
+}
+
+.recipe-side .stack {
+    margin-left: 50px;
+    width: 100%;
+    max-width: 350px;         
+    transition: 0.25s ease;
+}
+
+.recipe-side .stack:hover {
+    transform: rotate(5deg);
+}
+
+.recipe-side .stack:hover .card:before {
+    transform: translateY(-2%) rotate(-4deg);
+}
+
+.recipe-side .stack:hover .card:after {
+    transform: translateY(2%) rotate(4deg);
+}
+
+.card {
+    aspect-ratio: 3 / 2;
+    border: 4px solid;
+    background-color: #fff;
+    position: relative;
+    transition: 0.15s ease;
+    cursor: pointer;
+    padding: 5% 5% 15% 5%;
+}
+
+.card:before,
+.card:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 4px solid;
+    background-color: #fff;
+    transform-origin: center center;
+    z-index: -1;
+    transition: 0.15s ease;
+    top: 0;
+    left: 0;
+}
+
+.card:before { 
+    transform: translateY(-2%) rotate(-6deg);
+} 
+
+.card:after { 
+    transform: translateY(2%) rotate(6deg);
+}
+
+.image {
+    width: 100%;
+    border: 4px solid;
+    background-color: #eee;
+    aspect-ratio: 1 / 1;
+    position: relative;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.browser-warning {
+    margin-bottom: 4rem;
 }
 
 .nav-buttons {
@@ -252,5 +334,11 @@ body {
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+@supports (aspect-ratio: 1 / 1) {
+    .browser-warning {
+        display: none;
     }
 }
