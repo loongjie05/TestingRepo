@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
       expires = "; expires=" + date.toUTCString();
     }
-    // In a real application, you should add the 'Secure' attribute to cookies.
-    // document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure";
+
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   }
 
@@ -54,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createFoodPicture() {
+    const rainContainer = document.getElementById('rain-container');
+    if (!rainContainer) return;
     const img = document.createElement('img');
     img.classList.add('food-picture');
     img.src = foodPictures[Math.floor(Math.random() * foodPictures.length)];
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     img.style.transform = 'translateY(0px)';
     img.style.willChange = 'transform, opacity';
 
-    document.getElementById('rain-container').appendChild(img);
+    rainContainer.appendChild(img);
     animateFoodPicture(img);
   }
 
@@ -101,8 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
     existingUsers.push(newUser);
     setCookie('users', JSON.stringify(existingUsers), 7);
 
-    alert('Sign-up successful! Please log in.');
-    document.getElementById('flip-toggle').checked = false;
+    const successMessage = document.getElementById('signup-success-message');
+    successMessage.style.display = 'block';
+
+    setTimeout(() => {
+      successMessage.style.display = 'none';
+      document.getElementById('flip-toggle').checked = false;
+    }, 2000);
   });
 
   frontForm.addEventListener('submit', (event) => {
@@ -111,7 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = frontForm.querySelector('input[type="password"]').value;
 
     const existingUsers = JSON.parse(getCookie('users')) || [];
-    const user = existingUsers.find(user => user.email === email && user.password === password);
+    // Case-insensitive email check
+    const user = existingUsers.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
 
     if (user) {
       window.location.href = '../JH/Homepage.html';
@@ -151,7 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = passwordInput.value;
     if (password.length > 0) {
       strengthBar.style.display = 'block';
-    } else {
+    }
+    else {
       strengthBar.style.display = 'none';
     }
 
