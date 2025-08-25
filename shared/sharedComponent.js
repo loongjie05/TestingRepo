@@ -74,6 +74,7 @@ function createPlaceholder(id) {
                             <a href="../Ben/Ranking.html" class="nav-link">Ranking</a>
                             <a href="../JY/Recipe.html" class="nav-link">Recipes</a>
                             <a href="../JY/Map.html" class="nav-link">Map</a>
+                            <a href="../LJ/food-feed.html" class="nav-link">Food Feed</a>
                             <a href="../JH/aboutUs.html" class="nav-link">About Us</a>
                         </div>
                     </div>
@@ -140,14 +141,11 @@ function createPlaceholder(id) {
     }
 }
 
-// Load header and footer
-loadHTML("header", "../shared/header.html");
-loadHTML("footer", "../shared/footer.html");
-
 // ---------- Adjust main content margin ----------
 function adjustContentMargin() {
     const header = document.querySelector("header");
-    const mainContent = document.querySelector(".world-map, main, .main, .content");
+    // Added .feed-container to the selector for better targeting of main content in food-feed.html
+    const mainContent = document.querySelector(".world-map, main, .main, .content, .feed-container");
     if(header && mainContent){
         mainContent.style.marginTop = header.offsetHeight + "px";
     }
@@ -165,6 +163,7 @@ function bindHeaderEvents() {
     // Navigation links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e){
+            // No need to prevent default here, as links should navigate
             const pageName = this.textContent.toLowerCase().replace(' ', '-');
             console.log(`Navigating to ${pageName} page`);
         });
@@ -182,84 +181,8 @@ function bindFooterEvents() {
     });
 }
 
-// ---------- Load external HTML (header & footer) ----------
-function loadHTML(id, url) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                document.getElementById(id).innerHTML = xhr.responseText;
-
-                // Call binding + adjust after injection
-                if(id === "header") {
-                    bindHeaderEvents();
-                    adjustContentMargin(); 
-                }
-                if(id === "footer") {
-                    bindFooterEvents();
-                    adjustContentMargin();
-                }
-
-            } else {
-                loadHTMLWithIframe(id, url);
-            }
-        }
-    };
-    xhr.onerror = function() {
-        loadHTMLWithIframe(id, url);
-    };
-    xhr.send();
-}
-
-// ---------- Fallback with iframe ----------
-function loadHTMLWithIframe(id, url) {
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = url;
-
-    iframe.onload = function() {
-        try {
-            const content = iframe.contentDocument.body.innerHTML;
-            document.getElementById(id).innerHTML = content;
-
-            // Call binding + adjust after injection
-            if(id === "header") {
-                bindHeaderEvents();
-                adjustContentMargin(); 
-            }
-            if(id === "footer") {
-                bindFooterEvents();
-                adjustContentMargin();
-            }
-        } catch (e) {
-            console.warn('Could not load ' + url + ' using iframe method');
-            createPlaceholder(id);
-            adjustContentMargin();
-        }
-        document.body.removeChild(iframe);
-    };
-
-    iframe.onerror = function() {
-        console.warn('Iframe failed to load ' + url);
-        createPlaceholder(id);
-        adjustContentMargin();
-        document.body.removeChild(iframe);
-    };
-
-    document.body.appendChild(iframe);
-}
-
-// ---------- Adjust main content margin ----------
-function adjustContentMargin() {
-    const header = document.querySelector("header");
-    const mainContent = document.querySelector(".world-map, main, .main, .content");
-
-    if(header && mainContent){
-        const height = header.offsetHeight;
-        mainContent.style.marginTop = height + "px";
-        console.log("Header height:", height, "=> Applied margin-top to main content");
-    }
-}
-window.addEventListener("resize", adjustContentMargin);
-
+// Ensure header and footer are loaded after the DOM is fully parsed
+document.addEventListener('DOMContentLoaded', () => {
+    loadHTML("header", "../shared/header.html");
+    loadHTML("footer", "../shared/footer.html");
+});
