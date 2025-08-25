@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Cookie Helper Functions (copied from Login.js) ---
+  // --- Cookie Helper Functions (Copied from Login.js) ---
   function setCookie(name, value, days) {
     let expires = "";
     if (days) {
@@ -21,20 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   }
 
-  // --- Raining Food Animation (copied from Login.js) ---
+  // --- Raining Food Animation (Copied from Login.js for consistent background) ---
   const foodPictures = [
-    'pictures/Burger.png',
-    'pictures/NasiLemak.png',
-    'pictures/Ramen.png',
-    'pictures/pasta.png',
-    'pictures/Taco.png',
-    'pictures/Fries.png',
-    'pictures/Satay.png',
-    'pictures/Pancake.png',
-    'pictures/Sushi.png',
-    'pictures/RotiCanai.png',
-    'pictures/mee.png',
-    'pictures/ChickenRice.png',
+    'pictures/Burger.png', 'pictures/NasiLemak.png', 'pictures/Ramen.png',
+    'pictures/pasta.png', 'pictures/Taco.png', 'pictures/Fries.png',
+    'pictures/Satay.png', 'pictures/Pancake.png', 'pictures/Sushi.png',
+    'pictures/RotiCanai.png', 'pictures/mee.png', 'pictures/ChickenRice.png',
     'pictures/BakKutTeh.png'
   ];
 
@@ -45,10 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.style.transform = `translateY(${window.innerHeight + 150}px)`;
       img.style.opacity = '0';
     });
-
-    img.addEventListener('transitionend', () => {
-      img.remove();
-    }, { once: true });
+    img.addEventListener('transitionend', () => img.remove(), { once: true });
   }
 
   function createFoodPicture() {
@@ -57,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const img = document.createElement('img');
     img.classList.add('food-picture');
     img.src = foodPictures[Math.floor(Math.random() * foodPictures.length)];
-    
     img.style.position = 'absolute';
     img.style.left = `${Math.random() * 100}vw`;
     img.style.top = '-150px';
@@ -65,62 +53,116 @@ document.addEventListener('DOMContentLoaded', () => {
     img.style.opacity = '1';
     img.style.transform = 'translateY(0px)';
     img.style.willChange = 'transform, opacity';
-
     rainContainer.appendChild(img);
     animateFoodPicture(img);
   }
 
   setInterval(createFoodPicture, 300);
 
-  // --- Forgot Password Logic ---
-  const emailStep = document.getElementById('email-step');
-  const resetStep = document.getElementById('reset-step');
-  const forgotPasswordForm = document.getElementById('forgot-password-form');
-  const resetPasswordForm = document.getElementById('reset-password-form');
-  const emailInput = document.getElementById('email-input');
-  const newPasswordInput = document.getElementById('new-password-input');
-  const emailError = document.getElementById('email-error');
-  const resetSuccessMessage = document.getElementById('reset-success-message');
+  // --- Password Reset Logic ---
+  const resetForm = document.getElementById('reset-form');
+  const emailInput = document.getElementById('reset-email');
+  const newPasswordInput = document.getElementById('new-password');
+  const confirmPasswordInput = document.getElementById('confirm-password');
+  const messageEl = document.getElementById('reset-message');
 
-  let emailToReset = null;
+  // --- Password Strength Logic (from Login.js) ---
+  const strengthBar = document.getElementById('password-strength-bar');
+  const requirements = {
+    length: document.getElementById('req-length'),
+    special: document.getElementById('req-special'),
+    number: document.getElementById('req-number'),
+    capital: document.getElementById('req-capital')
+  };
+  const passwordRequirements = document.getElementById('password-requirements');
+  const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+  const numbers = /[0-9]+/;
+  const capitalLetters = /[A-Z]+/;
 
-  forgotPasswordForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const email = emailInput.value;
-    const existingUsers = JSON.parse(getCookie('users')) || [];
-    const userExists = existingUsers.some(user => user.email.toLowerCase() === email.toLowerCase());
-
-    if (userExists) {
-      emailToReset = email;
-      emailStep.style.display = 'none';
-      resetStep.style.display = 'block';
-      emailError.style.display = 'none';
-    } else {
-      emailError.textContent = 'No account found with that email address.';
-      emailError.style.display = 'block';
-    }
+  newPasswordInput.addEventListener('focus', () => {
+    passwordRequirements.style.display = 'block';
+    if (newPasswordInput.value.length > 0) strengthBar.style.display = 'block';
   });
 
-  resetPasswordForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const newPassword = newPasswordInput.value;
-    
-    if (!emailToReset) return; // Should not happen in normal flow
+  newPasswordInput.addEventListener('blur', () => {
+    strengthBar.style.display = 'none';
+    passwordRequirements.style.display = 'none';
+  });
 
-    let existingUsers = JSON.parse(getCookie('users')) || [];
-    
-    const userIndex = existingUsers.findIndex(user => user.email.toLowerCase() === emailToReset.toLowerCase());
+  newPasswordInput.addEventListener('input', () => {
+    const password = newPasswordInput.value;
+    strengthBar.style.display = password.length > 0 ? 'block' : 'none';
+
+    let strength = 0;
+    const lengthValid = password.length >= 8;
+    const specialValid = specialChars.test(password);
+    const numberValid = numbers.test(password);
+    const capitalValid = capitalLetters.test(password);
+
+    if (lengthValid) strength++;
+    if (specialValid) strength++;
+    if (numberValid) strength++;
+    if (capitalValid) strength++;
+
+    strengthBar.style.setProperty('--clr', strength <= 1 ? 'red' : strength <= 3 ? 'orange' : 'green');
+    strengthBar.style.width = `${(strength / 4) * 100}%`;
+
+    Object.keys(requirements).forEach(key => requirements[key].classList.remove('valid'));
+    if (lengthValid) requirements.length.classList.add('valid');
+    if (specialValid) requirements.special.classList.add('valid');
+    if (numberValid) requirements.number.classList.add('valid');
+    if (capitalValid) requirements.capital.classList.add('valid');
+  });
+
+  // --- Form Submission Logic ---
+  resetForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const email = emailInput.value;
+    const newPassword = newPasswordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    if (newPassword !== confirmPassword) {
+      messageEl.textContent = 'Passwords do not match.';
+      messageEl.style.color = 'red';
+      messageEl.style.display = 'block';
+      return;
+    }
+
+    const usersCookie = getCookie('users');
+    if (!usersCookie) {
+      messageEl.textContent = 'No user data found.';
+      messageEl.style.color = 'red';
+      messageEl.style.display = 'block';
+      return;
+    }
+
+    const existingUsers = JSON.parse(usersCookie);
+    const userIndex = existingUsers.findIndex(user => {
+      const storedEmail = user.email;
+      const enteredEmail = email;
+      const firstCharMatch = storedEmail.charAt(0).toLowerCase() === enteredEmail.charAt(0).toLowerCase();
+      const restOfEmailMatch = storedEmail.substring(1) === enteredEmail.substring(1);
+      return firstCharMatch && restOfEmailMatch;
+    });
+
     if (userIndex !== -1) {
+      if (existingUsers[userIndex].password === newPassword) {
+        messageEl.textContent = 'New password cannot be the same as the old password.';
+        messageEl.style.color = 'red';
+        messageEl.style.display = 'block';
+        return;
+      }
+
       existingUsers[userIndex].password = newPassword;
       setCookie('users', JSON.stringify(existingUsers), 7);
-
-      resetStep.style.display = 'none';
-      resetSuccessMessage.textContent = 'Password has been reset successfully! Redirecting to login...';
-      resetSuccessMessage.style.display = 'block';
-
-      setTimeout(() => {
-        window.location.href = 'Login.html';
-      }, 3000);
+      messageEl.textContent = 'Password reset successfully! Redirecting to login...';
+      messageEl.style.color = 'green';
+      messageEl.style.display = 'block';
+      setTimeout(() => { window.location.href = 'Login.html'; }, 2000);
+    } else {
+      messageEl.textContent = 'Email not found. Please check and try again.';
+      messageEl.style.color = 'red';
+      messageEl.style.display = 'block';
     }
   });
 });
