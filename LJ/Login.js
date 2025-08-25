@@ -117,8 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = frontForm.querySelector('input[type="password"]').value;
 
     const existingUsers = JSON.parse(getCookie('users')) || [];
-    // Case-insensitive email check
-    const user = existingUsers.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+    const user = existingUsers.find(user => {
+      const storedEmail = user.email;
+      const enteredEmail = email;
+      const firstCharMatch = storedEmail.charAt(0).toLowerCase() === enteredEmail.charAt(0).toLowerCase();
+      const restOfEmailMatch = storedEmail.substring(1) === enteredEmail.substring(1);
+      return firstCharMatch && restOfEmailMatch && user.password === password;
+    });
 
     if (user) {
       window.location.href = '../JH/Homepage.html';
