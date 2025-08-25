@@ -14,15 +14,28 @@ const pages = [
   },
   {
     food: {
-      title: "Char Kway Teow",
-      text: "A popular stir-fried flat rice noodle dish in Malaysia, cooked with prawns, Chinese sausage, bean sprouts, and soy sauce over high heat.",
-      img: "picture/CharKwayTeow.jpg"
+      title: "Mango Sticky Rice",
+      text: "A traditional Southeast Asian and South Asian dessert made with glutinous rice, fresh mango and coconut milk.",
+      img: "picture/MangoRice2.jpg"
     },
     ingredients: {
-      p1: "Flat rice noodles, prawns, Chinese sausage, bean sprouts, egg, garlic, soy sauce, chili paste, oil."
+      p1: "185g sticky rice. 350ml  water. 1 can coconut milk (400ml). 50g brown sugar + 1 tablespoon. ½ teaspoon salt. 1 teaspoon cornstarch. 1-2 large, ripe mangos (sliced or cubed). Sesame seeds (optional)."
     },
     recipe: {
-      p1: "Step 1: Heat wok until very hot, add oil and garlic. Step 2: Stir-fry prawns and Chinese sausage. Step 3: Add noodles, soy sauce, and chili paste. Step 4: Push noodles aside, scramble egg, then mix everything together. Step 5: Add bean sprouts last and toss quickly."
+      p1: "Step 1: Wash the rice, changing the water between mixes until it runs clear. Cover with 350g clean water and soak your rice for 40 minutes, up to a few hours. Step 2: If steaming, drain the water and flatten your rice in a steaming basket. Steam for 30 to 40 minutes. If boiling, transfer your water and rice into a saucepan and bring to a boil. Once boiling, reduce to a simmer and cover with a lid. Simmer for 20-30 minutes, or until the water is absorbed. Step 3: While the rice cooks, reserve 60ml of coconut milk in a bowl and pour the rest into a small saucepan and combine with sugar and salt. Bring to just below boiling and stir until the sugar has dissolved, then remove from the heat. Step 4: Transfer your cooked rice to a bowl and stir in the coconut mixture. Cover and leave for 30 minutes for the liquid to be absorbed. Step 5: While your mixture sits, combine a splash of the remaining coconut milk to your cornstarch and mix into a slurry. Then pour the slurry, 1 tablespoon sugar, a pinch of salt, and the rest of the reserved coconut milk into a small, clean saucepan and heat gently until it thickens. Set it aside. Step 6: Time to put your mango sticky rice together. Use a small bowl to mould a quarter of your rice mixture onto the plate and divide mango amongst the servings. Pour coconut sauce over the top of your rice, sprinkle with sesame seeds if using, and enjoy."
+    }
+  },
+  {
+    food: {
+      title: "Taco",
+      text: "A traditional Mexican dish consisting of a small hand-sized corn- or wheat-based tortilla topped with a filling.",
+      img: "picture/Taco2.jpg"
+    },
+    ingredients: {
+      p1: "8 small corn or flour tortillas. 300g beef, chicken, or pork (sliced or shredded). 1 tbsp vegetable oil. 1 tsp chili powder. 1 tsp cumin. 1 tsp paprika. 1/2 tsp salt. 1/2 tsp black pepper. 1 onion, diced. 2 cloves garlic, minced. 1 tomato, diced. 1/2 cup shredded lettuce. 1/2 cup shredded cheese. 1/4 cup sour cream. Fresh cilantro (for garnish). Lime wedges (for serving)",
+    },
+    recipe: {
+      p1: "Step 1: Preheat the oven to 425 degrees F (220 degrees C). Line a rimmed baking sheet with foil or parchment paper and lightly coat with 1 tablespoon olive oil. Step 2: Combine beef, onion, green chiles, chili powder, cumin, garlic powder, and salt in a medium bowl and mix until well incorporated. Step 3: Wrap tortillas in a damp paper towel and microwave just until softened, about 30 seconds. Step 4: Spread about 3 tablespoons beef mixture over half of a tortilla in a very thin layer that reaches to the edges  Spread about 1 tablespoon beans onto the other half. Sprinkle all over with about 2 tablespoons cheese. Fold tortilla in half to make a taco; place on prepared baking sheet. Repeat with remaining tortillas, meat and cheese. Brush tops of tacos with remaining oil. Step 5: Bake tacos in the preheated oven, flipping halfway through, until lightly browned, toasted, and crisp around the edges, 30 to 35 minutes. Serve with desired toppings."
     }
   },
 ];

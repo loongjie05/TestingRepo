@@ -101,13 +101,14 @@ body {
 .food-img img {
     width: 320px;
     border-radius: 50%;
+    animation: spin 50s linear infinite;
 }
 
 .ingredients {
     display: flex;
     align-items: flex-start;    
     justify-content: space-between;
-    padding: 60px 10%;
+    padding: 60px 15%;
     gap: 40px;     
 }
 
@@ -128,7 +129,7 @@ body {
 }
 
 .ingredients p {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto 20px auto;
     color: #232323;
     margin-bottom: 20px;
@@ -243,4 +244,13 @@ body {
 .next-btn:active {
   transition: 0s;
   box-shadow: 0 0 0 5px rgb(var(--color));
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
