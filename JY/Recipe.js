@@ -2,33 +2,32 @@ const foods = [
     {
         title: "Nasi Lemak",
         img: "../street food/picture/NasiLemak1.webp",
-        time: "Prep: 15mins • Cook: 50mins • Total: 1h 5mins",
         tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
-        link: "../street food/NasiLemak.html?page=1",
+        link: "../street food/Food.html?page=1",
         continent: "Asia",
         type: "Rice",
         method: "Boiling",
         flavor: "Spicy"
     },
     {
-        title: "Xiaolongbao",
-        img: "https://www.themealdb.com/images/media/meals/1529444830.jpg",
-        time: "Prep: 40min • Cook: 10min",
-        tags: ["Pork", "Dumpling"],
-        link: "../street food/NasiLemak.html?page=2",
+        title: "Mango Sticky Rice",
+        img: "../street food/picture/MangoRice1.jpg",
+        tags: ["Time: 1h ", "Sweet", "Thailand"],
+        link: "../street food/Food.html?page=2",
         continent: "Asia",
         type: "Rice",
         method: "Boiling",
-        flavor: "Savory"
+        flavor: "Sweet"
     },
     {
-        title: "Pastel de Nata",
-        img: "https://www.themealdb.com/images/media/meals/wrpwuu1511786491.jpg",
-        time: "Prep: 1h 15min • Cook: 20min",
-        tags: ["Dessert", "Egg"],
-        continent: "Europe",
-        method: "Baking",
-        flavor: "Sweet"
+        title: "Taco",
+        img: "../street food/picture/Taco1.jpg",
+        tags: ["Time: 35min", "Savory", "Mexico"],
+        link: "../street food/Food.html?page=3",
+        continent: "North America",
+        type: "Bread",
+        method: "Grilled",
+        flavor: "Savory"
     },
     {
         title: "Tteokbokki",
