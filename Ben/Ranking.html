@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../shared/sharedComponent.css">
 	<link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
 	<link rel="stylesheet" href="Ranking.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
 <body>
 	<div id="header"></div>
@@ -37,14 +38,14 @@
 			</div>
 		</section>
 
-		<section class="ranking-section">
+		<section class="ranking-section" data-aos="fade-up">
 			<div class="section-head">
 				<h2 id="sectionTitle"><i class="fa-solid fa-trophy"></i> Top 3 Foods in <span id="continentName">Malaysia</span></h2>
 			</div>
 			<div id="rankingGrid" class="ranking-grid" aria-live="polite"></div>
 		</section>
 
-		<section class="more-section">
+		<section class="more-section" data-aos="fade-up" data-aos-delay="100">
 			<div class="section-head">
 				<h2><i class="fa-solid fa-list"></i> More foods from <span id="moreContinentName">Malaysia</span></h2>
 			</div>
@@ -54,6 +55,8 @@
 	<div id="footer"></div>
 
 	<script src="../shared/sharedComponent.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+	<script>try{ AOS.init({ once:true, duration:600, easing:'ease-out' }); }catch(e){}</script>
 	<script src="../shared/data.js"></script>
 	<script src="Ranking.js"></script>
 </body>

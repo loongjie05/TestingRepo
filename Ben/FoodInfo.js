@@ -35,6 +35,8 @@ const tabPanes = document.querySelectorAll('.tab-pane');
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS animations if available
+    try { if (window.AOS && AOS.init) AOS.init({ once: true, duration: 600, easing: 'ease-out' }); } catch(e) {}
     loadFoodGrid();
     // Auto-select food from ?food=
     const params = new URLSearchParams(window.location.search);
@@ -114,15 +116,46 @@ function loadFoodGrid() {
         const foodCard = document.createElement('div');
         foodCard.className = 'food-card';
         foodCard.innerHTML = `
-            <img src="${food.image}" alt="${foodName}" onerror="this.src='../LJ/pictures/cooking.jpg'">
+            <div class="img-wrap">
+                <img src="${food.image}" alt="${foodName}" onerror="this.src='../LJ/pictures/cooking.jpg'">
+                <span class="fav-heart" data-food="${foodName}" title="Toggle favourite" aria-label="Toggle favourite">
+                    <i class="fa-solid fa-heart"></i>
+                </span>
+            </div>
             <h3>${foodName}</h3>
             <div class="country">
                 <i class="fa-solid fa-flag"></i>
                 ${food.country}
             </div>
         `;
-        
-        foodCard.addEventListener('click', () => selectFood(foodName, foodCard));
+
+        // Card click selects food
+        foodCard.addEventListener('click', (e) => {
+            // Avoid triggering select when clicking heart
+            if ((e.target.closest && e.target.closest('.fav-heart'))) return;
+            selectFood(foodName, foodCard);
+        });
+
+        // Heart toggle per card
+        const heart = foodCard.querySelector('.fav-heart');
+        if (heart){
+            const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
+            const setFavs = (arr) => localStorage.setItem('favourites', JSON.stringify(arr));
+            const syncSaved = () => {
+                const favs = getFavs();
+                if (favs.includes(foodName)) heart.classList.add('saved'); else heart.classList.remove('saved');
+            };
+            syncSaved();
+            heart.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const favs = getFavs();
+                const idx = favs.indexOf(foodName);
+                if (idx === -1) favs.push(foodName); else favs.splice(idx, 1);
+                setFavs(favs);
+                syncSaved();
+            });
+        }
+
         foodGrid.appendChild(foodCard);
     });
 }
@@ -168,7 +201,7 @@ function selectFood(foodName, sourceElement) {
     // Set recipe button deep link to specific recipe
     const recipeBtn = document.getElementById('recipeBtn');
     if (recipeBtn) {
-        recipeBtn.setAttribute('href', `../JY/Recipe.html?food=${encodeURIComponent(foodName)}`);
+        recipeBtn.setAttribute('href', `../street food/Food.html?title=${encodeURIComponent(foodName)}`);
     }
 
     // Update history tab

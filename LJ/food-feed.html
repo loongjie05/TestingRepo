@@ -11,15 +11,16 @@
   <link href="../shared/sharedComponentResponsive.css" rel="stylesheet">
   <!-- Page specific styles -->
   <link href="food-feed.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
 <body>
 
   <!-- Placeholder for the shared header -->
   <div id="header"></div>
 
-  <main class="feed-container">
+  <main class="feed-container" data-aos="fade-up">
     <!-- Section to create a new post -->
-    <section class="create-post-card">
+    <section class="create-post-card" data-aos="fade-up" data-aos-delay="100">
       <h2>Share a Food Review</h2>
       <form id="create-post-form">
         <div class="form-group">
@@ -57,7 +58,7 @@
     </section>
 
     <!-- Section to display all posts -->
-    <section id="posts-feed">
+    <section id="posts-feed" data-aos="fade-up" data-aos-delay="150">
       <!-- Posts will be dynamically inserted here by JavaScript -->
     </section>
   </main>
@@ -67,6 +68,8 @@
 
   <!-- Shared component loader script -->
   <script src="../shared/sharedComponent.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>try{ AOS.init({ once:true, duration:600, easing:'ease-out' }); }catch(e){}</script>
   <!-- Page specific script -->
   <script src="food-feed.js" defer></script>
 

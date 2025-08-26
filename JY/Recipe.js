@@ -1,4 +1,4 @@
-const foods = [
+let foods = [
     {
       title: "Nasi Lemak",
       img: "../street food/picture/NasiLemak1.webp",
@@ -201,6 +201,36 @@ const foods = [
     }
 ];
 
+// Merge shared dataset foods to display all items
+(function(){
+  try {
+    const siteFoods = (window.SiteData && Array.isArray(window.SiteData.foods)) ? window.SiteData.foods : [];
+    if (!siteFoods.length) return;
+    const byTitle = new Map(foods.map(f => [f.title, f]));
+    const mapped = siteFoods.map(item => {
+      const existing = byTitle.get(item.title);
+      if (existing) return existing; // keep original with its Food.html link
+      const fallbackLink = `../street food/Food.html?title=${encodeURIComponent(item.title)}`;
+      return {
+        title: item.title,
+        img: (item.images && item.images.cover) || '../LJ/pictures/cooking.jpg',
+        tags: [
+          'Time: 45min',
+          (String(item.description || '').toLowerCase().includes('sweet') ? 'Sweet' : 'Savory'),
+          item.country || item.continent || ''
+        ],
+        link: fallbackLink,
+        continent: item.continent || '',
+        type: item.type || 'Snack',
+        method: 'Various',
+        flavor: (String(item.description || '').toLowerCase().includes('sweet') ? 'Sweet' : 'Savory')
+      };
+    });
+    mapped.forEach(m => { if (!byTitle.has(m.title)) byTitle.set(m.title, m); });
+    foods = Array.from(byTitle.values());
+  } catch(e) { /* ignore */ }
+})();
+
 // If opened with ?food=Name, redirect to the individual street food page
 (function(){
   try {
@@ -209,8 +239,14 @@ const foods = [
     if (foodParam) {
       const match = foods.find(f => (f.title || '').toLowerCase() === foodParam.toLowerCase());
       if (match && match.link) {
-        window.location.replace(match.link);
-        return;
+        const target = document.createElement('a');
+        target.href = match.link;
+        const targetPath = target.pathname.replace(/\\/g,'/');
+        const currentPath = location.pathname.replace(/\\/g,'/');
+        if (targetPath !== currentPath && !/Recipe\.html$/i.test(targetPath)) {
+          window.location.replace(match.link);
+          return;
+        }
       }
     }
   } catch (e) {

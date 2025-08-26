@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../shared/sharedComponent.css">
     <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
     <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
@@ -25,7 +26,7 @@
     </section>
 
 
-   <section class="streetfood-slideshow">
+   <section class="streetfood-slideshow" data-aos="fade-up">
         <div class="food-left">
             <h1>Malaysia Top 5</h1>
             <h1>Street Food</h1>
@@ -60,7 +61,7 @@
    </section>
 
    
-   <section class="category-grid-section">
+   <section class="category-grid-section" data-aos="fade-up" data-aos-delay="100">
     <h2 class="section-title">Explore By Continents</h2>
     <div class="category-grid">
         <a href="../Ben/Ranking.html?continent=Asia" class="category-item" style="background-image: url('pictures/malaysia.png');">
@@ -91,7 +92,7 @@
    </section>
 
 
-   <section class="recipe">
+   <section class="recipe" data-aos="fade-up" data-aos-delay="150">
     <h2 class="section-title">Street Food Recipe</h2>
      <div class="recipe-grid">
         <!-- Recipe Card 1 -->
@@ -160,7 +161,8 @@
         </div>
     </div>
 </section>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>try{ AOS.init({ once:true, duration:600, easing:'ease-out' }); }catch(e){}</script>
 
 
    <section class="signup-section">

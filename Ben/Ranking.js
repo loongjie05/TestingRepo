@@ -9,16 +9,35 @@
 	// Build data from shared dataset
 	const foods = (window.SiteData && window.SiteData.foods) ? window.SiteData.foods : [];
 	const data = foods.reduce((acc, item)=>{
-		const key = item.country === 'Malaysia' ? 'Malaysia' : item.continent;
-		acc[key] = acc[key] || [];
-		acc[key].push({
-			name: item.title,
-			score: item.score || 9.0,
-			image: item.images?.cover || '',
-			desc: item.description || ''
-		});
+		const isMalaysia = item.country === 'Malaysia';
+		const continentKey = item.continent;
+
+		function pushTo(key){
+			if (!key) return;
+			acc[key] = acc[key] || [];
+			acc[key].push({
+				name: item.title,
+				score: item.score || 9.0,
+				image: item.images?.cover || '',
+				desc: item.description || ''
+			});
+		}
+
+		if (isMalaysia){
+			// Include Malaysian foods under both Malaysia and Asia
+			pushTo('Malaysia');
+			pushTo(continentKey);
+		} else {
+			pushTo(continentKey);
+		}
+
 		return acc;
 	}, {});
+
+	// Sort each continent/country list by score (descending)
+	Object.keys(data).forEach(key => {
+		data[key].sort((a, b) => (b.score || 0) - (a.score || 0));
+	});
 
 	// Function to get URL parameters
 	function getUrlParameter(name) {
@@ -52,15 +71,18 @@
 
 		// Render others list
 		if (moreGrid) {
-			moreGrid.innerHTML = others.map(item => `
-				<div class="more-card" role="article" data-food-name="${item.name}">
-					<div class="media" style="background-image:url('${item.image}')"></div>
-					<div class="card-body">
-						<div class="food-name">${item.name}</div>
-						<div class="meta"><i class=\"fa-solid fa-star\" style=\"color:#f59e0b\"></i><span class="score">${item.score.toFixed(1)}</span><span>rating</span></div>
+			moreGrid.innerHTML = others.map((item, idx) => {
+				const rank = 3 + idx + 1;
+				return `
+					<div class="more-card" role="article" data-food-name="${item.name}">
+						<div class="media" style="background-image:url('${item.image}')"></div>
+						<div class="card-body">
+							<div class="food-name">#${rank} ${item.name}</div>
+							<div class="meta"><i class=\"fa-solid fa-star\" style=\"color:#f59e0b\"></i><span class="score">${item.score.toFixed(1)}</span><span>rating</span></div>
+						</div>
 					</div>
-				</div>
-			`).join('');
+				`;
+			}).join('');
 		}
 
 		// Make cards clickable to open Food Info with selected food

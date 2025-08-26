@@ -1,4 +1,4 @@
-const pages = [
+let pages = [
   {
     food: {
       title: "Nasi Lemak",
@@ -281,9 +281,42 @@ const pages = [
   }
 ];
 
+function findPageIndexByTitle(title){
+  const idx = pages.findIndex(p => (p.food && (p.food.title || '')).toLowerCase() === String(title||'').toLowerCase());
+  return idx;
+}
+
+function ensurePageForTitle(title){
+  const idx = findPageIndexByTitle(title);
+  if (idx !== -1) return idx;
+  // If shared dataset exists, derive a basic page from it; otherwise create blank
+  try {
+    const list = (window.SiteData && Array.isArray(window.SiteData.foods)) ? window.SiteData.foods : [];
+    const item = list.find(x => (x.title || '').toLowerCase() === String(title||'').toLowerCase());
+    if (item) {
+      pages.push({
+        food: { title: item.title, text: item.description || "", img: (item.images && item.images.cover) ? item.images.cover.replace("../street food/", "") : "picture/food_patter_icon.png" },
+        ingredients: { p1: (typeof item.ingredients === 'string' ? item.ingredients : '') || '' },
+        recipe: { img: "", p1: "" }
+      });
+    } else {
+      pages.push({ food: { title: title, text: "", img: "picture/food_patter_icon.png" }, ingredients: { p1: "" }, recipe: { img: "", p1: "" } });
+    }
+  } catch(e) {
+    pages.push({ food: { title: title, text: "", img: "picture/food_patter_icon.png" }, ingredients: { p1: "" }, recipe: { img: "", p1: "" } });
+  }
+  return pages.length - 1;
+}
+
 function renderPage() {
   const urlParams = new URLSearchParams(window.location.search);
-  let pageIndex = parseInt(urlParams.get("page") || "1") - 1;
+  const titleParam = urlParams.get("title");
+  let pageIndex;
+  if (titleParam) {
+    pageIndex = ensurePageForTitle(titleParam);
+  } else {
+    pageIndex = parseInt(urlParams.get("page") || "1") - 1;
+  }
 
   if (pageIndex < 0 || pageIndex >= pages.length) {
     document.getElementById("app").innerHTML = "<h2>Page not found</h2>";
@@ -298,6 +331,16 @@ function renderPage() {
   clone.querySelector(".food-title").textContent = page.food.title;
   clone.querySelector(".food-text").textContent = page.food.text;
   clone.querySelector(".food-img-src").src = page.food.img;
+
+  // About button should link to the specific Food Info page
+  const aboutBtn = clone.querySelector('.about-btn');
+  if (aboutBtn) {
+    // Replace default #about anchor with cross-page link
+    aboutBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      window.location.href = `../Ben/FoodInfo.html?food=${encodeURIComponent(page.food.title || '')}`;
+    });
+  }
 
   // Ingredients
   const ingredientsP1Container = clone.querySelector(".ingredients-p1");
@@ -392,4 +435,23 @@ function setPageIndex(index) {
 
 window.addEventListener("popstate", renderPage);
 
-document.addEventListener("DOMContentLoaded", renderPage);
+document.addEventListener("DOMContentLoaded", function(){
+  // If there is a shared dataset, append any missing items as blank pages so navigation covers all
+  try {
+    const list = (window.SiteData && Array.isArray(window.SiteData.foods)) ? window.SiteData.foods : [];
+    const have = new Set(pages.map(p => (p.food && p.food.title) || ''));
+    list.forEach(item => {
+      const title = item.title || '';
+      if (!title || have.has(title)) return;
+      pages.push({
+        food: { title: title, text: item.description || '', img: (item.images && item.images.cover) ? item.images.cover.replace("../street food/", "") : "picture/food_patter_icon.png" },
+        ingredients: { p1: (typeof item.ingredients === 'string' ? item.ingredients : '') || '' },
+        recipe: { img: "", p1: "" }
+      });
+      have.add(title);
+    });
+  } catch(e) {}
+  renderPage();
+});
+// Initialize AOS intro animations if available
+try { if (window.AOS && AOS.init) AOS.init({ once: true, duration: 600, easing: 'ease-out' }); } catch(e) {}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../shared/sharedComponent.css">
     <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
     <link rel="stylesheet" href="Recipe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
     <title>Recipes</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
 
     <div class="main"></div>
     <!--Title and Search-->
-    <div class="hero-section">
+    <div class="hero-section" data-aos="fade-up">
         <div class="search-container">
             <h1>Food Recipes</h1>
             <div class="search-wrapper">
@@ -38,7 +39,7 @@
     </div>
     
     <!--Filter-->
-    <div class="filter-container">
+    <div class="filter-container" data-aos="fade-up" data-aos-delay="100">
         <div class="custom-select" id="filterContinents">
             <div class="select-selected">Continents</div>
             <div class="select-items select-hide"></div>
@@ -59,7 +60,8 @@
     </div>
     
     <!--Card-->
-    <div class="card-container" id="cardContainer"></div>
+    <div class="card-container" id="cardContainer" data-aos="fade-up" data-aos-delay="150"></div>
+    <script src="../shared/data.js"></script>
     <script src="Recipe.js"></script>
 
     <!-- Footer Import -->
@@ -67,5 +69,7 @@
 
     <!-- JavaScript Imports -->
     <script src="../shared/sharedComponent.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>try{ AOS.init({ once:true, duration:600, easing:'ease-out' }); }catch(e){}</script>
 </body>
 </html>
