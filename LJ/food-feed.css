@@ -1,12 +1,12 @@
 /* Inherit variables from shared styles or define them again for standalone use */
 :root {
   --primary-color: #E67E22;
-  --secondary-color: #F5DEB3;
+  --secondary-color: #fffaf0;
   --accent-color: #8B4513;
   --text-color: #333;
   --muted-text-color: #666;
   --background-color: #F8E7C9;
-  --card-bg: #FEFBF3; /* A very light cream, softer than pure white */
+  --card-bg: white; /* A very light cream, softer than pure white */
   --border-color: #ddd;
 
   /* New reaction colors */
@@ -25,7 +25,8 @@ body {
 }
 
 .feed-container {
-  max-width: 800px;
+  max-width: 1050px;
+  width: 1050px;
   margin: 2rem auto;
   padding: 0 1rem;
   display: flex;
@@ -44,6 +45,7 @@ body {
 
 .create-post-card h2 {
   font-family: 'Belleza', sans-serif;
+  font-size: 40px;
   color: var(--primary-color);
   margin-bottom: 1rem;
   text-align: center;

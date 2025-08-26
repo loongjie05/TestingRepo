@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #f8f9fa;
+    background-color: #f6f6f6;
     display: flex;
     justify-content: center;
   
@@ -11,7 +11,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 60px 10%;
-    background: #fff;
+    background: #fffaf0;
 }
 
 .name-text {
@@ -143,7 +143,7 @@ body {
     flex-direction: row; 
     text-align: left;
     padding: 60px 10%;
-    background: #fff;
+    background: #fffaf0;
     gap: 60px; 
 }
 
