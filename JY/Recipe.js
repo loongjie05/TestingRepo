@@ -151,6 +151,23 @@ const foods = [
     }
 ];
 
+// If opened with ?food=Name, redirect to the individual street food page
+(function(){
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const foodParam = params.get('food');
+    if (foodParam) {
+      const match = foods.find(f => (f.title || '').toLowerCase() === foodParam.toLowerCase());
+      if (match && match.link) {
+        window.location.replace(match.link);
+        return;
+      }
+    }
+  } catch (e) {
+    // ignore
+  }
+})();
+
 function populateCustomSelect(id, items, allLabel) {
   const container = document.querySelector(`#${id} .select-items`);
   container.innerHTML = "";
