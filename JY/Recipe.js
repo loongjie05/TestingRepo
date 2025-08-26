@@ -138,6 +138,16 @@ const foods = [
       type: "Pastry",
       method: "Baked",
       flavor: "Savory"
+    },
+    {
+      title: "Char Kway Teow",
+      img: "../street food/picture/CharKwayTeow1.jpg",
+      tags: ["Time: 25min", "Savory", "Malaysia"],
+      link: "../street food/Food.html?page=15",
+      continent: "Asia",
+      type: "Noodles",
+      method: "Stir-fried",
+      flavor: "Savory"
     }
 ];
 

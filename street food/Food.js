@@ -194,7 +194,21 @@ const pages = [
       img: "picture/Empanadas3.jpg",
       p1: "Step 1: Mix flour, butter, salt, water, and egg into a dough. Rest 30 minutes. Step 2: Prepare filling by cooking meat with onion and spices. Step 3: Roll dough thin and cut circles. Step 4: Place filling in center, fold, and seal edges. Step 5: Fry until golden or bake at 200°C for 20–25 minutes. Step 6: Serve hot."
     }
+  },
+  {
+  food: {
+    title: "Char Kway Teow",
+    text: "A popular stir-fried noodle dish made with flat rice noodles, prawns, Chinese sausage, egg, bean sprouts, and soy sauce.",
+    img: "picture/CharKwayTeow2.jpg"
+  },
+  ingredients: {
+    p1: "300g flat rice noodles. 2 eggs. 100g prawns. 1 Chinese sausage, sliced. 1 cup bean sprouts. 2 tbsp soy sauce. 1 tbsp dark soy sauce. 2 cloves garlic, chopped. 1 tbsp chili paste."
+  },
+  recipe: {
+    img: "picture/CharKwayTeow3.jpg",
+    p1: "Step 1: Heat wok with oil, fry garlic until fragrant. Step 2: Add prawns and sausage, stir-fry. Step 3: Push aside, add eggs and scramble. Step 4: Add noodles, soy sauces, and chili paste, stir-fry quickly over high heat. Step 5: Toss in bean sprouts, stir briefly, and serve hot."
   }
+},
 ];
 
 function renderPage() {
