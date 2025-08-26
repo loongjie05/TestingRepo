@@ -98,6 +98,46 @@ const foods = [
       type: "Skewers",
       method: "Grilled",
       flavor: "Savory"
+    },
+    {
+      title: "Poutine",
+      img: "../street food/picture/Poutine1.jpg",
+      tags: ["Time: 30min", "Savory", "Canada"],
+      link: "../street food/Food.html?page=11",
+      continent: "North America",
+      type: "Snack",
+      method: "Fried",
+      flavor: "Savory"
+    },
+    {
+      title: "Jerk Chicken",
+      img: "../street food/picture/JerkChicken1.jpg",
+      tags: ["Time: 1h 30min", "Spicy", "Jamaica"],
+      link: "../street food/Food.html?page=12",
+      continent: "North America",
+      type: "Meat",
+      method: "Grilled",
+      flavor: "Spicy"
+    },
+    {
+      title: "Takoyaki",
+      img: "../street food/picture/Takoyaki1.avif",
+      tags: ["Time: 40min", "Savory", "Japan"],
+      link: "../street food/Food.html?page=13",
+      continent: "Asia",
+      type: "Snack",
+      method: "Fried",
+      flavor: "Savory"
+    },
+    {
+      title: "Empanadas",
+      img: "../street food/picture/Empanadas1.webp",
+      tags: ["Time: 1h", "Savory", "Argentina"],
+      link: "../street food/Food.html?page=14",
+      continent: "South America",
+      type: "Pastry",
+      method: "Baked",
+      flavor: "Savory"
     }
 ];
 
