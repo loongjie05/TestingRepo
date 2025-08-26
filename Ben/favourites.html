@@ -11,7 +11,25 @@
     <style>
     .content { max-width: 1200px; }
     .fav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .fav-card { background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .fav-card { 
+        background: #fff; 
+        border: 4px solid transparent; 
+        border-radius: 12px; 
+        overflow: hidden; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .fav-card:hover {
+        transform: translate(-10px, -10px);
+        box-shadow: 10px 10px 0 #ffce1b, 20px 20px 0 #e6b800;
+        border-color: #ffce1b;
+    }
+    .fav-card:active {
+        transform: translate(0, 0);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        border-color: transparent;
+    }
     .fav-card .media { height: 150px; background-size: cover; background-position: center; }
     .fav-card .body { padding: 12px; }
     .fav-card .name { font-weight: 600; margin-bottom: 6px; }
