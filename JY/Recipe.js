@@ -1,96 +1,103 @@
 const foods = [
     {
-        title: "Nasi Lemak",
-        img: "../street food/picture/NasiLemak1.webp",
-        tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
-        link: "../street food/Food.html?page=1",
-        continent: "Asia",
-        type: "Rice",
-        method: "Boiling",
-        flavor: "Spicy"
+      title: "Nasi Lemak",
+      img: "../street food/picture/NasiLemak1.webp",
+      tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
+      link: "../street food/Food.html?page=1",
+      continent: "Asia",
+      type: "Rice",
+      method: "Boiling",
+      flavor: "Spicy"
     },
     {
-        title: "Mango Sticky Rice",
-        img: "../street food/picture/MangoRice1.jpg",
-        tags: ["Time: 1h ", "Sweet", "Thailand"],
-        link: "../street food/Food.html?page=2",
-        continent: "Asia",
-        type: "Rice",
-        method: "Boiling",
-        flavor: "Sweet"
+      title: "Mango Sticky Rice",
+      img: "../street food/picture/MangoRice1.jpg",
+      tags: ["Time: 1h ", "Sweet", "Thailand"],
+      link: "../street food/Food.html?page=2",
+      continent: "Asia",
+      type: "Rice",
+      method: "Boiling",
+      flavor: "Sweet"
     },
     {
-        title: "Taco",
-        img: "../street food/picture/Taco1.jpg",
-        tags: ["Time: 35min", "Savory", "Mexico"],
-        link: "../street food/Food.html?page=3",
-        continent: "North America",
-        type: "Bread",
-        method: "Grilled",
-        flavor: "Savory"
+      title: "Taco",
+      img: "../street food/picture/Taco1.jpg",
+      tags: ["Time: 35min", "Savory", "Mexico"],
+      link: "../street food/Food.html?page=3",
+      continent: "North America",
+      type: "Bread",
+      method: "Grilled",
+      flavor: "Savory"
     },
     {
-        title: "Tteokbokki",
-        img: "https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg",
-        time: "Prep: 15min • Cook: 20min",
-        tags: ["Korean", "Spicy"],
-        continent: "Asia",
-        method: "Boiling",
-        flavor: "Spicy"
+      title: "Churros",
+      img: "../street food/picture/Churros1.webp",
+      tags: ["Time: 25min", "Sweet", "Spain"],
+      link: "../street food/Food.html?page=4",
+      continent: "Europe",
+      type: "Pastry",
+      method: "Fried",
+      flavor: "Sweet"
     },
     {
-        title: "Banh Mi",
-        img: "https://www.themealdb.com/images/media/meals/7y3txq1560454283.jpg",
-        time: "Prep: 10min • Cook: 5min",
-        tags: ["Vietnamese", "Sandwich"],
-        continent: "Asia",
-        method: "Grilling",
-        flavor: "Savory"
+      title: "Bunny Chow",
+      img: "../street food/picture/BunnyChow1.webp",
+      tags: ["Time: 1h 10min", "Savory", "South Africa"],
+      link: "../street food/Food.html?page=5",
+      continent: "Africa",
+      type: "Bread",
+      method: "Baked",
+      flavor: "Savory"
     },
     {
-        title: "Arepas",
-        img: "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg",
-        time: "Prep: 20min • Cook: 15min",
-        tags: ["Cornmeal", "Snack"],
-        continent: "South America",
-        method: "Grilling",
-        flavor: "Savory"
+      title: "Meat Pie",
+      img: "../street food/picture/MeatPie1.jpg",
+      tags: ["Time: 1h", "Savory", "Australia"],
+      link: "../street food/Food.html?page=6",
+      continent: "Oceania",
+      type: "Pastry",
+      method: "Baked",
+      flavor: "Savory"
     },
     {
-        title: "Churros",
-        img: "https://www.themealdb.com/images/media/meals/txsupu1511815755.jpg",
-        time: "Prep: 30min • Cook: 15min",
-        tags: ["Dessert", "Fried"],
-        continent: "Europe",
-        method: "Frying",
-        flavor: "Sweet"
+      title: "Arepas",
+      img: "../street food/picture/Arepas1.jpg",
+      tags: ["Time: 40min", "Savory", "Venezuela"],
+      link: "../street food/Food.html?page=7",
+      continent: "South America",
+      type: "Bread",
+      method: "Grilled",
+      flavor: "Savory"
     },
     {
-        title: "Jerk Chicken",
-        img: "https://www.themealdb.com/images/media/meals/uvuyxu1503067369.jpg",
-        time: "Prep: 20min • Cook: 40min",
-        tags: ["Spicy", "Grilled"],
-        continent: "North America",
-        method: "Grilling",
-        flavor: "Spicy"
+      title: "Pad Thai",
+      img: "../street food/picture/PadThai1.webp",
+      tags: ["Time: 40min", "Savory", "Thailand"],
+      link: "../street food/Food.html?page=8",
+      continent: "Asia",
+      type: "Noodles",
+      method: "Fried",
+      flavor: "Savory"
     },
     {
-        title: "Falafel",
-        img: "https://www.themealdb.com/images/media/meals/txruwx1487347049.jpg",
-        time: "Prep: 30min • Cook: 10min",
-        tags: ["Vegetarian", "Fried"],
-        continent: "Asia",
-        method: "Frying",
-        flavor: "Savory"
+      title: "Falafel",
+      img: "../street food/picture/Falafel1.jpg",
+      tags: ["Time: 45min", "Savory", "Middle East"],
+      link: "../street food/Food.html?page=9",
+      continent: "Asia",
+      type: "Snack",
+      method: "Fried",
+      flavor: "Savory"
     },
     {
-        title: "Poutine",
-        img: "https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg",
-        time: "Prep: 15min • Cook: 15min",
-        tags: ["Fast Food", "Cheese"],
-        continent: "Americas",
-        method: "Frying",
-        flavor: "Savory"
+      title: "Satay",
+      img: "../street food/picture/Satay1.avif",
+      tags: ["Time: 50min", "Savory", "Malaysia"],
+      link: "../street food/Food.html?page=10",
+      continent: "Asia",
+      type: "Skewers",
+      method: "Grilled",
+      flavor: "Savory"
     }
 ];
 

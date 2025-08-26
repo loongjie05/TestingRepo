@@ -41,6 +41,104 @@ const pages = [
       p1: "Step 1: Preheat the oven to 425 degrees F (220 degrees C). Line a rimmed baking sheet with foil or parchment paper and lightly coat with 1 tablespoon olive oil. Step 2: Combine beef, onion, green chiles, chili powder, cumin, garlic powder, and salt in a medium bowl and mix until well incorporated. Step 3: Wrap tortillas in a damp paper towel and microwave just until softened, about 30 seconds. Step 4: Spread about 3 tablespoons beef mixture over half of a tortilla in a very thin layer that reaches to the edges  Spread about 1 tablespoon beans onto the other half. Sprinkle all over with about 2 tablespoons cheese. Fold tortilla in half to make a taco; place on prepared baking sheet. Repeat with remaining tortillas, meat and cheese. Brush tops of tacos with remaining oil. Step 5: Bake tacos in the preheated oven, flipping halfway through, until lightly browned, toasted, and crisp around the edges, 30 to 35 minutes. Serve with desired toppings."
     }
   },
+  {
+    food: {
+      title: "Churros",
+      text: "A popular Spanish fried-dough pastry, often coated in cinnamon sugar and served with hot chocolate for dipping.",
+      img: "picture/Churros2.jpg"
+    },
+    ingredients: {
+      p1: "1 cup water. 2 1/2 tbsp sugar. 1/2 tsp salt. 2 tbsp vegetable oil. 1 cup all-purpose flour. Oil for frying. 1/2 cup sugar mixed with 1 tsp ground cinnamon (for coating). Chocolate sauce (optional, for dipping)."
+    },
+    recipe: {
+      img: "picture/Churros3.jpg",
+      p1: "Step 1: In a saucepan, bring water, sugar, salt, and vegetable oil to a boil. Remove from heat and stir in flour until mixture forms a ball. Step 2: Heat oil in a deep fryer or pan. Step 3: Transfer dough to a piping bag with a star tip and pipe strips into the hot oil. Fry until golden brown. Step 4: Drain on paper towels, then roll in cinnamon sugar. Step 5: Serve warm with chocolate sauce for dipping."
+    }
+  },
+  {
+    food: {
+      title: "Bunny Chow",
+      text: "A South African street food dish consisting of a hollowed-out loaf of bread filled with spicy curry.",
+      img: "picture/BunnyChow2.jpg"
+    },
+    ingredients: {
+      p1: "1 loaf white bread. 500g chicken, beef, or lamb (cubed). 2 tbsp vegetable oil. 1 onion, diced. 2 cloves garlic, minced. 1 tbsp ginger, grated. 2 tbsp curry powder. 2 tomatoes, chopped. 1 cup potatoes, cubed. 1 cup chicken stock. Salt and pepper to taste. Fresh cilantro for garnish."
+    },
+    recipe: {
+      img: "picture/BunnyChow3.jpg",
+      p1: "Step 1: Heat oil in a pan and sauté onion, garlic, and ginger until fragrant. Step 2: Add curry powder and stir well. Step 3: Add meat and brown on all sides. Step 4: Add tomatoes, potatoes, stock, salt, and pepper. Simmer until meat and potatoes are tender, about 30–40 minutes. Step 5: Hollow out a loaf of bread and fill it with the curry. Garnish with cilantro and serve hot."
+    }
+  },
+  {
+    food: {
+      title: "Meat Pie",
+      text: "An Australian classic pastry filled with minced meat, gravy, and seasonings, enjoyed as a popular street food snack.",
+      img: "picture/MeatPie2.jpg"
+    },
+    ingredients: {
+      p1: "2 tbsp olive oil. 1 onion, finely chopped. 500g ground beef. 2 tbsp flour. 1 cup beef stock. 2 tbsp Worcestershire sauce. Salt and pepper to taste. 2 sheets puff pastry. 1 egg, beaten (for brushing)."
+    },
+    recipe: {
+      img: "picture/MeatPie3.jpeg",
+      p1: "Step 1: Heat oil in a pan and cook onion until soft. Step 2: Add ground beef and cook until browned. Step 3: Stir in flour, stock, Worcestershire sauce, salt, and pepper. Simmer until thickened. Step 4: Preheat oven to 200°C (400°F). Step 5: Line pie tins with puff pastry, fill with meat mixture, and cover with pastry lid. Brush with beaten egg. Step 6: Bake for 25–30 minutes until golden brown. Serve warm."
+    }
+  },
+  {
+    food: {
+      title: "Arepas",
+      text: "A Venezuelan and Colombian staple made from ground maize dough, grilled or fried, and filled with cheese, meats, or vegetables.",
+      img: "picture/Arepas2.png"
+    },
+    ingredients: {
+      p1: "2 cups pre-cooked cornmeal (masarepa). 2 1/2 cups warm water. 1 tsp salt. 1 tbsp vegetable oil. 1 cup shredded cheese (or fillings of choice: chicken, beef, beans, avocado)."
+    },
+    recipe: {
+      img: "picture/Arepas3.jpg",
+      p1: "Step 1: In a bowl, mix cornmeal, salt, and warm water until smooth. Let the dough rest for 5 minutes. Step 2: Divide dough into equal portions and shape into discs. Step 3: Heat oil on a griddle or skillet. Cook arepas for 5–7 minutes on each side until golden brown. Step 4: Slice open and fill with cheese, meat, or vegetables. Serve warm."
+    }
+  },
+  {
+    food: {
+      title: "Pad Thai",
+      text: "A famous Thai stir-fried noodle dish with shrimp or chicken, tofu, eggs, peanuts, and bean sprouts.",
+      img: "picture/PadThai2.jpg"
+    },
+    ingredients: {
+      p1: "200g rice noodles. 2 tbsp vegetable oil. 2 cloves garlic, minced. 150g shrimp or chicken. 2 eggs, beaten. 1/2 cup firm tofu, cubed. 1/4 cup roasted peanuts. 1/2 cup bean sprouts. 2 tbsp fish sauce. 1 tbsp tamarind paste. 1 tsp sugar. Lime wedges and fresh cilantro for garnish."
+    },
+    recipe: {
+      img: "picture/PadThai3.jpg",
+      p1: "Step 1: Soak rice noodles in warm water until soft. Step 2: Heat oil in a wok, sauté garlic until fragrant. Step 3: Add shrimp or chicken and cook until done. Step 4: Push to one side and scramble eggs. Step 5: Add tofu, noodles, fish sauce, tamarind paste, and sugar. Stir-fry until combined. Step 6: Add bean sprouts, toss lightly, and serve garnished with peanuts, lime, and cilantro."
+    }
+  },
+  {
+    food: {
+      title: "Falafel",
+      text: "A deep-fried ball made from ground chickpeas, herbs, and spices, commonly served in pita bread with vegetables and sauces.",
+      img: "picture/Falafel2.jpg"
+    },
+    ingredients: {
+      p1: "1 cup dried chickpeas (soaked overnight). 1 small onion, chopped. 2 cloves garlic. 1/4 cup fresh parsley. 1 tsp cumin. 1/2 tsp coriander. 1/2 tsp salt. 1/4 tsp black pepper. 1/4 tsp baking powder. Oil for frying. Pita bread, lettuce, tomato, and tahini sauce for serving."
+    },
+    recipe: {
+      img: "picture/Falafel3.webp",
+      p1: "Step 1: Drain soaked chickpeas and blend with onion, garlic, parsley, cumin, coriander, salt, and pepper until coarse. Step 2: Stir in baking powder. Step 3: Shape mixture into small balls or patties. Step 4: Heat oil and deep-fry until golden brown. Step 5: Serve in pita bread with lettuce, tomato, and tahini sauce."
+    }
+  },
+  {
+    food: {
+      title: "Satay",
+      text: "Grilled skewers of marinated meat served with a flavorful peanut sauce, popular in Southeast Asia.",
+      img: "picture/Satay2.jpg"
+    },
+    ingredients: {
+      p1: "500g chicken, beef, or lamb, cut into cubes. 2 tbsp soy sauce. 1 tbsp brown sugar. 1 tbsp turmeric powder. 1 tsp coriander powder. 1/2 tsp salt. Bamboo skewers. Peanut sauce: 1/2 cup peanut butter, 2 tbsp soy sauce, 1 tbsp lime juice, 1 tbsp brown sugar, water to thin."
+    },
+    recipe: {
+      img: "picture/Satay3.webp",
+      p1: "Step 1: Mix meat with soy sauce, brown sugar, turmeric, coriander, and salt. Marinate for at least 1 hour. Step 2: Thread meat onto bamboo skewers. Step 3: Grill over medium heat until cooked and slightly charred. Step 4: Mix peanut sauce ingredients until smooth. Step 5: Serve skewers with peanut sauce on the side."
+    }
+  }
 ];
 
 function renderPage() {
