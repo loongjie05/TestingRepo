@@ -1,3 +1,36 @@
+// ---------- Helper to get current user's name (from login cookie) ---
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+  
+  function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  // This function now checks for an *active session* cookie
+  function getCurrentUser() {
+    const activeSessionCookie = getCookie('activeUserSession');
+    if (activeSessionCookie) {
+        console.log(`getCurrentUser: Active session found for user: ${activeSessionCookie}`);
+        return activeSessionCookie; // Return the username from the active session cookie
+    }
+    console.log('getCurrentUser: No active user session found');
+    return null; // No active session
+  }
+
 // ---------- Load external HTML (header & footer) ----------
 function loadHTML(id, url) {
     // Use XMLHttpRequest instead of fetch for better file:// protocol support
@@ -56,6 +89,22 @@ function loadHTMLWithIframe(id, url) {
 // Final fallback: create simple placeholders
 function createPlaceholder(id) {
     if (id === "header") {
+        const userName = getCurrentUser();
+        let loginSectionContent = '';
+        if (userName) {
+            loginSectionContent = `
+                <span class="user-name">${userName}</span>
+                <button class="logout-btn">Logout</button>
+            `;
+        } else {
+            loginSectionContent = `
+                <button class="login-btn" onclick="window.location.href='../LJ/Login.html'">
+                    <i class="fas fa-user"></i>
+                     Login
+                </button>
+            `;
+        }
+
         document.getElementById(id).innerHTML = `
             <header>
                 <div class="header-container">
@@ -80,10 +129,7 @@ function createPlaceholder(id) {
                     </div>
                     
                     <div class="login-section">
-                        <button class="login-btn" onclick="window.location.href='../LJ/Login.html'">
-                            <i class="fas fa-user"></i>
-                             Login
-                        </button>
+                        ${loginSectionContent}
                     </div>
                 </div>
             </header>
@@ -154,10 +200,41 @@ window.addEventListener("resize", adjustContentMargin);
 
 // ---------- Header events ----------
 function bindHeaderEvents() {
-    // Login button
-    const loginBtn = document.querySelector('.login-btn');
-    if(loginBtn){
-        loginBtn.addEventListener('click', () => console.log('Login button clicked'));
+    const loginSection = document.querySelector('.login-section');
+    const userName = getCurrentUser(); // Call getCurrentUser here
+
+    console.log('bindHeaderEvents: Current userName detected:', userName); // Debugging
+    console.log('bindHeaderEvents: document.cookie before update:', document.cookie); // Debugging
+
+    if (loginSection) {
+        if (userName) {
+            loginSection.innerHTML = `
+                <span class="user-name">${userName}</span>
+                <button class="logout-btn">Logout</button>
+            `;
+            const logoutBtn = loginSection.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    console.log('Logout button clicked.'); // Debugging
+                    console.log('document.cookie before clearing activeUserSession:', document.cookie); // Debugging
+                    
+                    // Clear only the activeUserSession cookie
+                    setCookie('activeUserSession', '', -1); // Set expiry to past to delete
+                    
+                    console.log('document.cookie after clearing activeUserSession:', document.cookie); // Debugging
+                    // Redirect to login page after logout
+                    window.location.href = '../LJ/Login.html'; 
+                });
+            }
+        } else {
+            // Ensure login button is there if no user is logged in
+            loginSection.innerHTML = `
+                <button class="login-btn" onclick="window.location.href='../LJ/Login.html'">
+                    <i class="fas fa-user"></i>
+                     Login
+                </button>
+            `;
+        }
     }
 
     // Navigation links

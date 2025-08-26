@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     existingUsers.push(newUser);
-    setCookie('users', JSON.stringify(existingUsers), 7);
+    setCookie('users', JSON.stringify(existingUsers), 365); // Store users for 1 year (persistent)
 
     const successMessage = document.getElementById('signup-success-message');
     successMessage.style.display = 'block';
@@ -120,12 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = existingUsers.find(user => {
       const storedEmail = user.email;
       const enteredEmail = email;
+      // Case-insensitive check for the first character, case-sensitive for the rest
       const firstCharMatch = storedEmail.charAt(0).toLowerCase() === enteredEmail.charAt(0).toLowerCase();
       const restOfEmailMatch = storedEmail.substring(1) === enteredEmail.substring(1);
       return firstCharMatch && restOfEmailMatch && user.password === password;
     });
 
     if (user) {
+      setCookie('activeUserSession', user.name, 1); // Set active session for 1 day
       window.location.href = '../JH/Homepage.html';
     } else {
       loginError.textContent = 'Invalid email or password.';

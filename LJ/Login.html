@@ -99,5 +99,36 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Helper functions (copied from sharedComponent.js for self-containment)
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+    
+    function getCurrentUser() {
+      const usersCookie = getCookie('users');
+      if (usersCookie) {
+          const users = JSON.parse(usersCookie);
+          if (users.length > 0) {
+              return users[0].name;
+          }
+      }
+      return null;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('LoginPage: DOMContentLoaded');
+      console.log('LoginPage: document.cookie on load:', document.cookie);
+      console.log('LoginPage: getCurrentUser() on load:', getCurrentUser());
+    });
+  </script>
 </body>
 </html>

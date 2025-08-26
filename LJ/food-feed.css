@@ -8,6 +8,10 @@
   --background-color: #F8E7C9;
   --card-bg: #FEFBF3; /* A very light cream, softer than pure white */
   --border-color: #ddd;
+
+  /* New reaction colors */
+  --like-color: #1877F2; /* Facebook blue */
+  --love-color: #F73B5B; /* Red for love */
 }
 
 body {
@@ -15,6 +19,9 @@ body {
   background-color: var(--secondary-color);
   color: var(--text-color);
   margin: 0;
+  display: flex; /* Added for full height layout */
+  flex-direction: column; /* Added for full height layout */
+  min-height: 100vh; /* Added for full height layout */
 }
 
 .feed-container {
@@ -22,12 +29,16 @@ body {
   margin: 2rem auto;
   padding: 0 1rem;
   display: flex;
+  align-items: center;
   flex-direction: column;
-  gap: 2rem;
+  gap: 10px; /* Changed from 2rem to 10px */
+  flex-grow: 1; /* Allows feed to take available space */
 }
 
 /* Card styling for posts and create-post form */
 .create-post-card, .post-card {
+  width:1000px;
+  align-items: center;
   background-color: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -121,27 +132,53 @@ body {
   padding-top: 1rem;
 }
 
-.like-button {
+/* Improved Like/Reaction Button */
+.reaction-button {
   background: none;
-  border: 1px solid var(--muted-text-color);
+  border: none; /* No border for a cleaner look */
   color: var(--muted-text-color);
-  padding: 5px 10px;
+  padding: 8px 12px; /* Increased padding for better click area */
   border-radius: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
-  transition: all 0.2s;
+  gap: 6px; /* Slightly more space for text/icon */
+  transition: color 0.2s, background-color 0.2s, transform 0.1s ease-out;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.like-button.liked {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
+.reaction-button:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Subtle hover background */
+  color: var(--text-color); /* Darker text on hover */
+  transform: translateY(-1px); /* Slight lift animation */
 }
 
-.like-button:hover {
-  border-color: var(--primary-color);
+.reaction-button.liked {
+  color: var(--like-color); /* Facebook blue for liked state */
+}
+
+.reaction-button.liked:hover {
+  color: var(--like-color); /* Keep color on hover when liked */
+  background-color: rgba(24, 119, 242, 0.1); /* Lighter blue hover for liked */
+}
+
+.reaction-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor; /* Icon color matches text color */
+  transition: transform 0.2s ease-out;
+}
+
+/* New class to trigger animation only on click */
+.reaction-icon.animate-pulse {
+  animation: pulse 0.3s ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 /* Comments Section */
@@ -151,14 +188,53 @@ body {
   padding-top: 1rem;
 }
 
+.comments-section h4 {
+  margin-bottom: 1rem;
+}
+
+.comments-list {
+  max-height: 150px; /* Limit initial height of comments */
+  overflow: hidden; /* Hide overflowing comments */
+  transition: max-height 0.3s ease-out;
+}
+
+.comments-list.expanded {
+  max-height: 1000px; /* Greatly expand to show all comments */
+  overflow: visible; /* Show all comments */
+}
+
 .comment {
   margin-bottom: 0.75rem;
   font-size: 0.95rem;
+  line-height: 1.4;
+  background-color: rgba(0, 0, 0, 0.03); /* Slightly different background for comments */
+  padding: 8px 12px;
+  border-radius: 15px;
 }
 
 .comment-author {
   font-weight: bold;
   margin-right: 5px;
+  color: var(--accent-color); /* Highlight author name */
+}
+
+.show-more-comments-button {
+  background: none;
+  border: none;
+  color: var(--like-color); /* Use like color for button */
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 5px 0;
+  margin-top: 0.5rem;
+  display: block; /* Make it a block element to take full width */
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.show-more-comments-button:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
 }
 
 .add-comment-form {
@@ -172,6 +248,7 @@ body {
   padding: 8px;
   border: 1px solid var(--border-color);
   border-radius: 20px;
+  font-size: 0.95rem;
 }
 
 .add-comment-form button {
@@ -181,8 +258,10 @@ body {
   border-radius: 20px;
   padding: 0 15px;
   cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
 .add-comment-form button:hover {
   background-color: var(--accent-color);
+  transform: translateY(-1px);
 }

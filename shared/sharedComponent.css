@@ -13,7 +13,6 @@ body {
     display: flex;
     flex-direction: column;
     padding-top: 82px;
-    padding-bottom: 120px;
 }
 
 /* Header Styles */
@@ -124,6 +123,9 @@ header {
     background-color: transparent;
     overflow: visible !important;
     z-index: 1;
+    display: flex; /* Added for alignment of user name and logout button */
+    align-items: center; /* Vertically center items */
+    gap: 15px; /* Space between name and button */
 }
 
 .login-section .login-btn {
@@ -138,13 +140,12 @@ header {
     cursor: pointer !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important; /* Added to center the content horizontally */
     gap: 8px !important;
     transition: all 0.3s ease !important;
     white-space: nowrap !important;
     position: relative !important;
     z-index: 3 !important;
-
-   
 }
 
 .login-section .login-btn:hover {
@@ -163,6 +164,37 @@ header {
     border: 2px solid transparent;
     z-index: -1;
     border-radius: 35px;
+}
+
+/* New styles for logged-in user display */
+.login-section .user-name {
+    font-weight: 600;
+    color: #70130b; /* Matching logo icon color */
+    font-size: 1.1rem;
+    white-space: nowrap;
+    padding: 8px 0; /* Align with nav links padding */
+}
+
+.login-section .logout-btn {
+    background-color: #f8d488; /* A complementary lighter shade */
+    color: #70130b; /* Matching text color */
+    border: none;
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.login-section .logout-btn:hover {
+    background-color: #e6c270; /* Slightly darker on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* Main Content Styles */
@@ -242,10 +274,10 @@ header {
 footer {
     background-color: #f0f0f0;
     padding: 15px 5%;
-    bottom: 0;
     left: 0;
     right: 0;
     border-top: 1px solid #ddd;
+    margin-top: auto;
 }
 
 .footer-container {
