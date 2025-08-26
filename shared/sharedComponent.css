@@ -13,7 +13,6 @@ body {
     display: flex;
     flex-direction: column;
     padding-top: 82px;
-    padding-bottom: 120px;
 }
 
 /* Header Styles */
@@ -246,6 +245,11 @@ footer {
     left: 0;
     right: 0;
     border-top: 1px solid #ddd;
+}
+
+/* Ensure footer sits at the bottom when content is short */
+#footer {
+    margin-top: auto;
 }
 
 .footer-container {

@@ -111,6 +111,50 @@ window.SiteData.foods = [
         description: "Skewered and grilled meat served with peanut sauce.",
         ingredients: "Meat • Spices • Peanut sauce • Cucumber • Onion",
         score: 9.2
+    },
+    {
+        title: "Poutine",
+        images: { cover: "../street food/picture/Poutine1.jpg" },
+        country: "Canada",
+        continent: "North America",
+        type: "Snack",
+        price: "$6 - $12",
+        description: "French fries topped with cheese curds and hot gravy.",
+        ingredients: "Fries • Cheese curds • Gravy",
+        score: 8.2
+    },
+    {
+        title: "Jerk Chicken",
+        images: { cover: "../street food/picture/JerkChicken1.jpg" },
+        country: "Jamaica",
+        continent: "North America",
+        type: "Meat",
+        price: "$8 - $15",
+        description: "Chicken marinated with spicy jerk seasoning and grilled.",
+        ingredients: "Chicken • Scotch bonnet • Allspice • Herbs",
+        score: 8.9
+    },
+    {
+        title: "Takoyaki",
+        images: { cover: "../street food/picture/Takoyaki1.avif" },
+        country: "Japan",
+        continent: "Asia",
+        type: "Snack",
+        price: "¥400 - ¥800",
+        description: "Ball-shaped wheat batter filled with octopus and toppings.",
+        ingredients: "Batter • Octopus • Tempura scraps • Pickled ginger • Scallion",
+        score: 8.5
+    },
+    {
+        title: "Empanadas",
+        images: { cover: "../street food/picture/Empanadas1.webp" },
+        country: "Argentina",
+        continent: "South America",
+        type: "Pastry",
+        price: "$2 - $5",
+        description: "Baked or fried pastry stuffed with savory fillings.",
+        ingredients: "Pastry • Beef • Onion • Spices",
+        score: 8.6
     }
 ];
 
