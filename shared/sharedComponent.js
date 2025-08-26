@@ -71,12 +71,12 @@ function createPlaceholder(id) {
             <header>
                 <div class="header-container">
                     <div class="logo-section">
-                        <div class="logo">
+                        <a href="../JH/Homepage.html" class="logo">
                             <div class="logo-icon">
                                 <i class="fas fa-utensils"></i>
                             </div>
                             <div class="logo-text">Jalan<span>Jalan</span>Makan</div>
-                        </div>
+                        </a>
                     </div>
                     
                     <div class="nav-section">
@@ -118,11 +118,11 @@ function createPlaceholder(id) {
                     <div class="footer-section">
                         <div class="footer-title">Connect</div>
                         <div class="social-links">
-                            <a href="#" class="social-link" data-platform="facebook">
+                            <a href="https://www.facebook.com/profile.php?id=61579960857433" class="social-link" data-platform="facebook" target="_blank" rel="noopener noreferrer">
                                 <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
                                 <span>Facebook</span>
                             </a>
-                            <a href="#" class="social-link" data-platform="instagram">
+                            <a href="https://www.instagram.com/makan.jalanjalan/" class="social-link" data-platform="instagram" target="_blank" rel="noopener noreferrer">
                                 <div class="social-icon"><i class="fab fa-instagram"></i></div>
                                 <span>Instagram</span>
                             </a>
@@ -199,9 +199,9 @@ function bindHeaderEvents() {
 function bindFooterEvents() {
     document.querySelectorAll('.social-link').forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
             const platform = this.dataset.platform;
-            console.log(`Redirecting to our ${platform} page`);
+            console.log(`Navigating to our ${platform} page`);
+            // Allow default behavior for external links
         });
     });
 }

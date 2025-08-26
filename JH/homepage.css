@@ -94,6 +94,14 @@ body{
   flex-shrink: 0;
   scroll-snap-align: center;
   text-align: center;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.food-card:hover {
+  text-decoration: none;
+  color: inherit;
 }
 
 .food-card img {
