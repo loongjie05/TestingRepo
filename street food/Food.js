@@ -857,13 +857,13 @@ let pages = [
     food: {
       title: "Bobotie",
       text: "Spiced minced meat with egg topping.",
-      img: "picture/Bobotie1.jpg"
+      img: "picture/Bobotie2.jpg"
     },
     ingredients: {
       p1: "Minced meat. Egg. Curry powder."
     },
     recipe: {
-      img: "picture/Bobotie2.jpg",
+      img: "picture/Bobotie1.jpg",
       p1: "Step 1: Mix minced meat with curry. Step 2: Bake with egg topping. Step 3: Serve warm."
     }
   },
@@ -871,13 +871,13 @@ let pages = [
     food: {
       title: "Tagine",
       text: "Slow-cooked stew with spices.",
-      img: "picture/Tagine1.jpg"
+      img: "picture/Tagine2.jpg"
     },
     ingredients: {
       p1: "Lamb/Chicken. Preserved lemon. Olives."
     },
     recipe: {
-      img: "picture/Tagine2.jpg",
+      img: "picture/Tagine1.jpeg",
       p1: "Step 1: Place meat, lemon, olives in pot. Step 2: Slow-cook with spices. Step 3: Serve in tagine."
     }
   },
@@ -885,13 +885,13 @@ let pages = [
     food: {
       title: "Injera with Doro Wat",
       text: "Sourdough flatbread with spicy chicken stew.",
-      img: "picture/Injera1.jpg"
+      img: "picture/Injera2.jpeg"
     },
     ingredients: {
       p1: "Teff. Chicken. Berbere."
     },
     recipe: {
-      img: "picture/Injera2.jpg",
+      img: "picture/Injera1.jpg",
       p1: "Step 1: Make injera from teff flour. Step 2: Cook chicken stew with berbere. Step 3: Serve together."
     }
   },
@@ -899,13 +899,13 @@ let pages = [
     food: {
       title: "Koshari",
       text: "Rice, lentils, pasta with tomato sauce.",
-      img: "picture/Koshari1.jpg"
+      img: "picture/Koshari2.jpg"
     },
     ingredients: {
       p1: "Rice. Lentils. Pasta. Tomato sauce."
     },
     recipe: {
-      img: "picture/Koshari2.jpg",
+      img: "picture/Koshari1.jpg",
       p1: "Step 1: Cook rice, lentils, pasta separately. Step 2: Mix and add tomato sauce. Step 3: Serve in bowl."
     }
   },
@@ -927,13 +927,13 @@ let pages = [
     food: {
       title: "Nyama Choma",
       text: "Grilled goat or beef.",
-      img: "picture/NyamaChoma1.jpg"
+      img: "picture/NyamaChoma2.jpg"
     },
     ingredients: {
       p1: "Goat/Beef. Salt."
     },
     recipe: {
-      img: "picture/NyamaChoma2.jpg",
+      img: "picture/NyamaChoma1.png",
       p1: "Step 1: Season meat with salt. Step 2: Grill until cooked. Step 3: Serve hot."
     }
   },
@@ -941,13 +941,13 @@ let pages = [
     food: {
       title: "Shakshuka",
       text: "Eggs poached in spicy tomato sauce.",
-      img: "picture/Shakshuka1.jpg"
+      img: "picture/Shakshuka2.jpg"
     },
     ingredients: {
       p1: "Egg. Tomato. Chili. Paprika."
     },
     recipe: {
-      img: "picture/Shakshuka2.jpg",
+      img: "picture/Shakshuka1.jpg",
       p1: "Step 1: Cook tomato sauce with chili, paprika. Step 2: Poach eggs inside. Step 3: Serve hot."
     }
   },
@@ -961,7 +961,7 @@ let pages = [
       p1: "Sponge cake. Chocolate. Coconut."
     },
     recipe: {
-      img: "picture/Lamingtons3.jpg",
+      img: "picture/Lamingtons1.jpg",
       p1: "Step 1: Cut sponge cake into squares. Step 2: Dip each piece in chocolate coating. Step 3: Roll in desiccated coconut. Step 4: Serve with tea or coffee."
     }
   },
@@ -975,7 +975,7 @@ let pages = [
       p1: "Egg white. Sugar. Cream. Fruit."
     },
     recipe: {
-      img: "picture/Pavlova3.jpg",
+      img: "picture/Pavlova1.jpg",
       p1: "Step 1: Whisk egg whites and sugar to form stiff peaks. Step 2: Bake meringue base. Step 3: Top with whipped cream and fresh fruits. Step 4: Serve chilled."
     }
   },
@@ -989,7 +989,7 @@ let pages = [
       p1: "Sausage. Bread. Onion."
     },
     recipe: {
-      img: "picture/SausageSizzle3.jpg",
+      img: "picture/SausageSizzle1.jpg",
       p1: "Step 1: Grill sausages until browned. Step 2: Place sausage on bread slice. Step 3: Add grilled onions and sauces. Step 4: Serve hot."
     }
   },
@@ -1003,7 +1003,7 @@ let pages = [
       p1: "Pastry. Cabbage. Beef."
     },
     recipe: {
-      img: "picture/ChikoRoll3.jpg",
+      img: "picture/ChikoRoll1.jpg",
       p1: "Step 1: Prepare filling with cabbage, beef, and spices. Step 2: Wrap filling in pastry. Step 3: Deep-fry until golden brown. Step 4: Serve hot."
     }
   },
@@ -1017,7 +1017,7 @@ let pages = [
       p1: "Barramundi. Lemon. Herbs."
     },
     recipe: {
-      img: "picture/Barramundi3.jpg",
+      img: "picture/Barramundi1.webp",
       p1: "Step 1: Season barramundi with salt, lemon, and herbs. Step 2: Grill or pan-fry until cooked. Step 3: Serve with salad or chips."
     }
   },
@@ -1031,7 +1031,7 @@ let pages = [
       p1: "Kangaroo. Pepper. Salt."
     },
     recipe: {
-      img: "picture/KangarooSteak3.jpg",
+      img: "picture/KangarooSteak1.jpg",
       p1: "Step 1: Season kangaroo steak with salt and pepper. Step 2: Grill or pan-sear to medium-rare. Step 3: Rest before slicing and serving."
     }
   },
@@ -1045,7 +1045,7 @@ let pages = [
       p1: "Bread. Butter. Sprinkles."
     },
     recipe: {
-      img: "picture/FairyBread3.jpg",
+      img: "picture/FairyBread1.jpg",
       p1: "Step 1: Spread butter on white bread slices. Step 2: Sprinkle generously with colorful sprinkles. Step 3: Cut into triangles and serve."
     }
   }

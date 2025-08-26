@@ -621,7 +621,7 @@ let foods = [
   },
   {
     title: "Tagine",
-    img: "../street food/picture/Tagine1.jpg",
+    img: "../street food/picture/Tagine1.jpeg",
     tags: ["Time: 2hr", "Savory", "Morocco"],
     link: "../street food/Food.html?page=63",
     continent: "Africa",
@@ -661,7 +661,7 @@ let foods = [
   },
   {
     title: "Nyama Choma",
-    img: "../street food/picture/NyamaChoma1.jpg",
+    img: "../street food/picture/NyamaChoma1.png",
     tags: ["Time: 1hr", "Savory", "Kenya"],
     link: "../street food/Food.html?page=67",
     continent: "Africa",
@@ -681,7 +681,7 @@ let foods = [
   },
   {
     title: "Lamingtons",
-    img: "../street food/picture/Lamingtons1.jpeg",
+    img: "../street food/picture/Lamingtons1.jpg",
     tags: ["Time: 1hr", "Sweet", "Australia"],
     link: "../street food/Food.html?page=69",
     continent: "Oceania",
@@ -691,7 +691,7 @@ let foods = [
   },
   {
     title: "Pavlova",
-    img: "../street food/picture/Pavlova1.jpeg",
+    img: "../street food/picture/Pavlova1.jpg",
     tags: ["Time: 2hr", "Sweet", "New Zealand"],
     link: "../street food/Food.html?page=70",
     continent: "Oceania",
@@ -701,7 +701,7 @@ let foods = [
   },
   {
     title: "Sausage Sizzle",
-    img: "../street food/picture/SausageSizzle1.jpeg",
+    img: "../street food/picture/SausageSizzle1.jpg",
     tags: ["Time: 30min", "Savory", "Australia"],
     link: "../street food/Food.html?page=71",
     continent: "Oceania",
@@ -711,7 +711,7 @@ let foods = [
   },
   {
     title: "Chiko Roll",
-    img: "../street food/picture/ChikoRoll1.jpeg",
+    img: "../street food/picture/ChikoRoll1.jpg",
     tags: ["Time: 1hr", "Savory", "Australia"],
     link: "../street food/Food.html?page=72",
     continent: "Oceania",
@@ -721,7 +721,7 @@ let foods = [
   },
   {
     title: "Barramundi",
-    img: "../street food/picture/Barramundi1.jpeg",
+    img: "../street food/picture/Barramundi1.webp",
     tags: ["Time: 40min", "Savory", "Australia"],
     link: "../street food/Food.html?page=73",
     continent: "Oceania",
@@ -731,7 +731,7 @@ let foods = [
   },
   {
     title: "Kangaroo Steak",
-    img: "../street food/picture/KangarooSteak1.jpeg",
+    img: "../street food/picture/KangarooSteak1.jpg",
     tags: ["Time: 45min", "Savory", "Australia"],
     link: "../street food/Food.html?page=74",
     continent: "Oceania",
@@ -741,7 +741,7 @@ let foods = [
   },
   {
     title: "Fairy Bread",
-    img: "../street food/picture/FairyBread1.jpeg",
+    img: "../street food/picture/FairyBread1.jpg",
     tags: ["Time: 10min", "Sweet", "Australia"],
     link: "../street food/Food.html?page=75",
     continent: "Oceania",
