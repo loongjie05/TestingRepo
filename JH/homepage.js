@@ -4,8 +4,8 @@ const track = document.querySelector('.food-middle'); //  scroll container
 const cards = document.querySelectorAll('.food-card');
 const total = cards.length;
 
-// Auto slide every 2.5s
-let slideInterval = setInterval(nextSlide, 2500);
+// Auto slide every 2s
+let slideInterval = setInterval(nextSlide, 2000);
 
 function nextSlide() {
     index = (index + 1) % total;
