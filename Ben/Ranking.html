@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Jalan Jalan Makan | Top 3 Foods</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="../shared/sharedComponent.css">
 	<link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
@@ -19,22 +20,17 @@
 					<p>Select a country to reveal its most beloved dishes, curated with care.</p>
 				</div>
 				<div class="controls">
-					<label for="countrySelect" class="sr-only">Select Country</label>
+					<label for="continentSelect" class="sr-only">Select Continent</label>
 					<div class="select-wrap">
 						<i class="fa-solid fa-globe"></i>
-						<select id="countrySelect" aria-label="Select Country">
+						<select id="continentSelect" aria-label="Select Continent">
 							<option value="Malaysia">Malaysia</option>
-							<option value="Japan">Japan</option>
-							<option value="Thailand">Thailand</option>
-							<option value="USA">United States</option>
-							<option value="Italy">Italy</option>
-							<option value="Mexico">Mexico</option>
-							<option value="China">China</option>
-							<option value="India">India</option>
-							<option value="Korea">South Korea</option>
-							<option value="Indonesia">Indonesia</option>
-							<option value="Singapore">Singapore</option>
-							<option value="Vietnam">Vietnam</option>
+							<option value="North America">North America</option>
+							<option value="South America">South America</option>
+							<option value="Europe">Europe</option>
+							<option value="Africa">Africa</option>
+							<option value="Asia">Asia</option>
+							<option value="Oceania">Oceania</option>
 						</select>
 					</div>
 				</div>
@@ -43,7 +39,7 @@
 
 		<section class="ranking-section">
 			<div class="section-head">
-				<h2 id="sectionTitle"><i class="fa-solid fa-trophy"></i> Top 3 Foods in <span id="countryName">Malaysia</span></h2>
+				<h2 id="sectionTitle"><i class="fa-solid fa-trophy"></i> Top 3 Foods in <span id="continentName">Malaysia</span></h2>
 			</div>
 			<div id="rankingGrid" class="ranking-grid" aria-live="polite"></div>
 		</section>
@@ -51,6 +47,7 @@
 	<div id="footer"></div>
 
 	<script src="../shared/sharedComponent.js"></script>
+	<script src="../shared/data.js"></script>
 	<script src="Ranking.js"></script>
 </body>
 </html>
