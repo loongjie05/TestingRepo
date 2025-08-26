@@ -283,13 +283,13 @@ let pages = [
     food: {
       title: "Laksa",
       text: "Spicy noodle soup with a coconut or tamarind base, commonly eaten across Malaysia.",
-      img: "picture/Laksa1.jpg"
+      img: "picture/Laksa2.jpg"
     },
     ingredients: {
       p1: "Noodles. Coconut milk. Sambal. Shrimp. Fish cake."
     },
     recipe: {
-      img: "picture/Laksa2.jpg",
+      img: "picture/Laksa1.jpg",
       p1: "Step 1: Boil noodles until tender. Step 2: Prepare laksa broth with coconut milk, sambal, and spices. Step 3: Add shrimp and fish cake, cook briefly. Step 4: Serve noodles in bowl and pour broth on top."
     }
   },
@@ -303,7 +303,7 @@ let pages = [
       p1: "Flour. Ghee. Salt. Water."
     },
     recipe: {
-      img: "picture/RotiCanai3.jpg",
+      img: "picture/RotiCanai1.jpg",
       p1: "Step 1: Mix flour, ghee, salt and water into dough. Step 2: Rest and stretch dough thin. Step 3: Pan-fry until golden and flaky. Step 4: Serve with dhal or curry."
     }
   },
@@ -317,7 +317,7 @@ let pages = [
       p1: "Rice. Curries. Fried chicken. Okra."
     },
     recipe: {
-      img: "picture/NasiKandar3.jpg",
+      img: "picture/NasiKandar1.jpg",
       p1: "Step 1: Cook rice until fluffy. Step 2: Prepare assorted curries. Step 3: Serve rice with curry, fried chicken, and okra on the side."
     }
   },
@@ -331,7 +331,7 @@ let pages = [
       p1: "Yellow noodles. Dark soy. Pork. Cabbage."
     },
     recipe: {
-      img: "picture/HokkienMee3.jpg",
+      img: "picture/HokkienMee1.jpg",
       p1: "Step 1: Boil or blanch noodles. Step 2: Stir-fry pork and cabbage. Step 3: Add noodles and dark soy sauce, stir-fry until combined."
     }
   },
@@ -345,7 +345,7 @@ let pages = [
       p1: "Coconut milk. Palm sugar. Pandan jelly. Beans."
     },
     recipe: {
-      img: "picture/Cendol3.jpg",
+      img: "picture/Cendol1.webp",
       p1: "Step 1: Prepare shaved ice. Step 2: Make coconut milk and palm sugar mixture. Step 3: Assemble in bowl with pandan jelly and beans, pour coconut mixture on top."
     }
   },
@@ -353,13 +353,13 @@ let pages = [
     food: {
       title: "Asam Laksa",
       text: "Tamarind-based fish broth noodle soup, tangy and spicy, a Penang specialty.",
-      img: "picture/AsamLaksa2.jpg"
+      img: "picture/Laksa2.jpg"
     },
     ingredients: {
       p1: "Mackerel. Tamarind. Noodles. Mint."
     },
     recipe: {
-      img: "picture/AsamLaksa3.jpg",
+      img: "picture/Laksa1.jpg",
       p1: "Step 1: Prepare tamarind fish broth. Step 2: Boil noodles. Step 3: Pour broth over noodles and garnish with mint and fish."
     }
   },
@@ -373,7 +373,7 @@ let pages = [
       p1: "Rice. Butterfly pea. Herbs. Fish floss."
     },
     recipe: {
-      img: "picture/NasiKerabu3.jpg",
+      img: "picture/NasiKerabu1.jpg",
       p1: "Step 1: Cook rice with butterfly pea for color. Step 2: Arrange herbs and fish floss on top. Step 3: Serve as a complete dish."
     }
   },
@@ -381,13 +381,13 @@ let pages = [
     food: {
       title: "Rojak",
       text: "Malaysian fruit and vegetable salad tossed with tangy peanut sauce.",
-      img: "picture/Rojak2.jpg"
+      img: "picture/Rojak2.png"
     },
     ingredients: {
       p1: "Pineapple. Cucumber. Jicama. Peanut sauce."
     },
     recipe: {
-      img: "picture/Rojak3.jpg",
+      img: "picture/Rojak1.jpg",
       p1: "Step 1: Chop fruits and vegetables. Step 2: Toss with peanut sauce. Step 3: Serve immediately."
     }
   },
@@ -395,13 +395,13 @@ let pages = [
     food: {
       title: "Sushi",
       text: "Vinegared rice with seafood and vegetables.",
-      img: "picture/Sushi2.jpg"
+      img: "picture/Sushi2.webp"
     },
     ingredients: {
       p1: "Rice. Nori. Fish. Soy sauce. Wasabi."
     },
     recipe: {
-      img: "picture/Sushi3.jpg",
+      img: "picture/Sushi1.webp",
       p1: "Step 1: Prepare sushi rice with vinegar. Step 2: Place rice on nori. Step 3: Add fish and vegetables. Step 4: Roll tightly and slice. Step 5: Serve with soy sauce and wasabi."
     }
   },
@@ -415,7 +415,7 @@ let pages = [
       p1: "Basmati. Spices. Meat. Ghee."
     },
     recipe: {
-      img: "picture/Biryani3.jpg",
+      img: "picture/Biryani1.jpg",
       p1: "Step 1: Marinate meat with spices. Step 2: Cook rice until half done. Step 3: Layer rice and meat in a pot. Step 4: Cook on low heat until fully done. Step 5: Serve hot."
     }
   },
@@ -429,7 +429,7 @@ let pages = [
       p1: "Beef bones. Rice noodles. Herbs."
     },
     recipe: {
-      img: "picture/Pho3.jpg",
+      img: "picture/Pho1.webp",
       p1: "Step 1: Simmer beef bones for broth. Step 2: Cook rice noodles until soft. Step 3: Add noodles and broth into a bowl. Step 4: Top with beef and herbs. Step 5: Serve hot."
     }
   },
@@ -443,7 +443,7 @@ let pages = [
       p1: "Lemongrass. Lime. Chili. Shrimp."
     },
     recipe: {
-      img: "picture/TomYum3.jpg",
+      img: "picture/TomYum1.jpg",
       p1: "Step 1: Boil water with lemongrass. Step 2: Add lime juice and chili. Step 3: Cook shrimp until done. Step 4: Adjust seasoning. Step 5: Serve hot."
     }
   },
@@ -457,7 +457,7 @@ let pages = [
       p1: "Noodles. Broth. Pork. Egg."
     },
     recipe: {
-      img: "picture/Ramen3.jpg",
+      img: "picture/Ramen1.jpg",
       p1: "Step 1: Prepare broth. Step 2: Cook noodles until soft. Step 3: Add noodles to broth. Step 4: Top with pork and egg. Step 5: Serve hot."
     }
   },
@@ -471,7 +471,7 @@ let pages = [
       p1: "Duck. Hoisin. Scallions."
     },
     recipe: {
-      img: "picture/PekingDuck3.jpg",
+      img: "picture/PekingDuck1.jpg",
       p1: "Step 1: Marinate and air-dry duck. Step 2: Roast until crispy. Step 3: Slice thinly. Step 4: Serve with pancakes, hoisin sauce, and scallions."
     }
   },
@@ -485,7 +485,7 @@ let pages = [
       p1: "Fish. Potato. Batter."
     },
     recipe: {
-      img: "picture/FishAndChips3.jpg",
+      img: "picture/FishAndChips1.webp",
       p1: "Step 1: Prepare batter. Step 2: Coat fish. Step 3: Deep fry with chips."
     }
   },
@@ -499,7 +499,7 @@ let pages = [
       p1: "Rice. Saffron. Seafood. Chicken."
     },
     recipe: {
-      img: "picture/Paella3.jpg",
+      img: "picture/Paella1.jpg",
       p1: "Step 1: Sauté meat/seafood. Step 2: Add rice and saffron. Step 3: Simmer until cooked."
     }
   },
@@ -513,7 +513,7 @@ let pages = [
       p1: "Flour. Tomato. Mozzarella. Basil."
     },
     recipe: {
-      img: "picture/PizzaMargherita3.jpg",
+      img: "picture/PizzaMargherita1.webp",
       p1: "Step 1: Make dough. Step 2: Add tomato sauce and cheese. Step 3: Bake and top with basil."
     }
   },
@@ -527,7 +527,7 @@ let pages = [
       p1: "Pita. Pork/Chicken. Tzatziki."
     },
     recipe: {
-      img: "picture/Gyro3.jpg",
+      img: "picture/Gyro1.webp",
       p1: "Step 1: Cook meat. Step 2: Fill pita with meat and tzatziki. Step 3: Serve warm."
     }
   },
@@ -541,7 +541,7 @@ let pages = [
       p1: "Flour. Potato. Cheese."
     },
     recipe: {
-      img: "picture/Pierogi3.jpg",
+      img: "picture/Pierogi1.jpg",
       p1: "Step 1: Make dough. Step 2: Stuff with potato and cheese. Step 3: Boil or fry."
     }
   },
@@ -555,7 +555,7 @@ let pages = [
       p1: "Beef. Paprika. Onion."
     },
     recipe: {
-      img: "picture/Goulash3.jpg",
+      img: "picture/Goulash1.jpg",
       p1: "Step 1: Brown beef. Step 2: Add onion and paprika. Step 3: Simmer until tender."
     }
   },
@@ -569,7 +569,7 @@ let pages = [
       p1: "Pork. Spices. Bun."
     },
     recipe: {
-      img: "picture/Bratwurst3.jpg",
+      img: "picture/Bratwurst1.jpg",
       p1: "Step 1: Season pork. Step 2: Make sausage. Step 3: Grill and serve in bun."
     }
   },
@@ -577,13 +577,13 @@ let pages = [
     food: {
       title: "Crêpes",
       text: "Thin pancakes with various fillings.",
-      img: "picture/Crepes2.jpg"
+      img: "picture/Crêpes2.jpg"
     },
     ingredients: {
       p1: "Flour. Egg. Milk."
     },
     recipe: {
-      img: "picture/Crepes3.jpg",
+      img: "picture/Crêpes1.jpg",
       p1: "Step 1: Mix batter. Step 2: Cook thin pancakes. Step 3: Add filling and fold."
     }
   },
@@ -597,7 +597,7 @@ let pages = [
       p1: "Lamb/Chicken. Flatbread. Salad."
     },
     recipe: {
-      img: "picture/DonerKebab3.jpg",
+      img: "picture/DonerKebab1.jpg",
       p1: "Step 1: Roast meat. Step 2: Slice thinly. Step 3: Serve with flatbread and salad."
     }
   },
@@ -605,13 +605,13 @@ let pages = [
     food: {
       title: "Hamburger",
       text: "Beef patty in a bun with toppings.",
-      img: "picture/Hamburger1.jpg"
+      img: "picture/Hamburger2.avif"
     },
     ingredients: {
       p1: "Beef. Bun. Lettuce. Tomato."
     },
     recipe: {
-      img: "picture/Hamburger2.jpg",
+      img: "picture/Hamburger1.jpg",
       p1: "Step 1: Grill the beef patty. Step 2: Toast the bun. Step 3: Assemble with toppings and serve."
     }
   },
@@ -619,13 +619,13 @@ let pages = [
     food: {
       title: "Hot Dog",
       text: "Sausage in a sliced bun.",
-      img: "picture/HotDog1.jpg"
+      img: "picture/HotDog2.jpg"
     },
     ingredients: {
       p1: "Sausage. Bun. Mustard."
     },
     recipe: {
-      img: "picture/HotDog2.jpg",
+      img: "picture/HotDog1.jpg",
       p1: "Step 1: Grill or boil sausage. Step 2: Place in sliced bun. Step 3: Add mustard and serve."
     }
   },
@@ -633,13 +633,13 @@ let pages = [
     food: {
       title: "Burrito",
       text: "Flour tortilla wrapped around fillings.",
-      img: "picture/Burrito1.jpg"
+      img: "picture/Burrito2.jpg"
     },
     ingredients: {
       p1: "Tortilla. Beans. Rice. Meat."
     },
     recipe: {
-      img: "picture/Burrito2.jpg",
+      img: "picture/Burrito1.jpg",
       p1: "Step 1: Warm the tortilla. Step 2: Add beans, rice, and meat. Step 3: Wrap tightly and serve."
     }
   },
@@ -647,13 +647,13 @@ let pages = [
     food: {
       title: "Nachos",
       text: "Corn chips with cheese and toppings.",
-      img: "picture/Nachos1.jpg"
+      img: "picture/Nachos2.jpg"
     },
     ingredients: {
       p1: "Corn chips. Cheese. Jalapeños."
     },
     recipe: {
-      img: "picture/Nachos2.jpg",
+      img: "picture/Nachos1.jpg",
       p1: "Step 1: Spread corn chips on plate. Step 2: Add cheese and toppings. Step 3: Melt cheese and serve."
     }
   },
@@ -661,13 +661,13 @@ let pages = [
     food: {
       title: "Clam Chowder",
       text: "Creamy soup with clams and potatoes.",
-      img: "picture/ClamChowder1.jpg"
+      img: "picture/ClamChowder2.jpg"
     },
     ingredients: {
       p1: "Clams. Potato. Cream."
     },
     recipe: {
-      img: "picture/ClamChowder2.jpg",
+      img: "picture/ClamChowder1.jpg",
       p1: "Step 1: Sauté onions and clams. Step 2: Add potatoes and cream. Step 3: Simmer and serve hot."
     }
   },
@@ -675,13 +675,13 @@ let pages = [
     food: {
       title: "Gumbo",
       text: "Louisiana stew with roux.",
-      img: "picture/Gumbo1.jpg"
+      img: "picture/Gumbo2.jpeg"
     },
     ingredients: {
       p1: "Roux. Okra. Sausage. Shrimp."
     },
     recipe: {
-      img: "picture/Gumbo2.jpg",
+      img: "picture/Gumbo1.jpg",
       p1: "Step 1: Make roux. Step 2: Add okra, sausage, and shrimp. Step 3: Simmer and serve with rice."
     }
   },
@@ -689,13 +689,13 @@ let pages = [
     food: {
       title: "Buffalo Wings",
       text: "Deep-fried wings in hot sauce.",
-      img: "picture/BuffaloWings1.jpg"
+      img: "picture/BuffaloWings2.jpg"
     },
     ingredients: {
       p1: "Chicken wings. Hot sauce. Butter."
     },
     recipe: {
-      img: "picture/BuffaloWings2.jpg",
+      img: "picture/BuffaloWings1.jpg",
       p1: "Step 1: Deep fry chicken wings. Step 2: Mix hot sauce with butter. Step 3: Toss wings in sauce and serve."
     }
   },
@@ -703,13 +703,13 @@ let pages = [
     food: {
       title: "Bagel with Lox",
       text: "Bagel with cream cheese and smoked salmon.",
-      img: "picture/BagelLox1.jpg"
+      img: "picture/BagelLox2.webp"
     },
     ingredients: {
       p1: "Bagel. Cream cheese. Salmon."
     },
     recipe: {
-      img: "picture/BagelLox2.jpg",
+      img: "picture/BagelLox1.jpg",
       p1: "Step 1: Slice bagel. Step 2: Spread cream cheese. Step 3: Add salmon slices and serve."
     }
   },
@@ -717,13 +717,13 @@ let pages = [
     food: {
       title: "Philly Cheesesteak",
       text: "Beef and cheese in a hoagie roll.",
-      img: "picture/PhillyCheesesteak1.jpg"
+      img: "picture/PhillyCheesesteak2.jpg"
     },
     ingredients: {
       p1: "Beef. Cheese. Roll."
     },
     recipe: {
-      img: "picture/PhillyCheesesteak2.jpg",
+      img: "picture/PhillyCheesesteak1.webp",
       p1: "Step 1: Cook sliced beef. Step 2: Add cheese to melt. Step 3: Place in roll and serve hot."
     }
   },
@@ -731,13 +731,13 @@ let pages = [
     food: {
       title: "Feijoada",
       text: "Black bean stew with pork.",
-      img: "picture/Feijoada1.jpg"
+      img: "picture/Feijoada2.jpg"
     },
     ingredients: {
       p1: "Black beans. Pork. Rice."
     },
     recipe: {
-      img: "picture/Feijoada2.jpg",
+      img: "picture/Feijoada1.jpg",
       p1: "Step 1: Cook black beans until tender. Step 2: Add pork and simmer. Step 3: Serve with rice."
     }
   },
@@ -745,13 +745,13 @@ let pages = [
     food: {
       title: "Asado",
       text: "Argentine barbecue of various meats.",
-      img: "picture/Asado1.jpg"
+      img: "picture/Asado2.jpg"
     },
     ingredients: {
       p1: "Beef. Chimichurri."
     },
     recipe: {
-      img: "picture/Asado2.jpg",
+      img: "picture/Asado1.jpg",
       p1: "Step 1: Grill beef over open flame. Step 2: Serve with chimichurri sauce."
     }
   },
@@ -759,13 +759,13 @@ let pages = [
     food: {
       title: "Ceviche",
       text: "Citrus-cured fish with chili and onion.",
-      img: "picture/Ceviche1.jpg"
+      img: "picture/Ceviche2.webp"
     },
     ingredients: {
       p1: "Fish. Lime. Chili. Onion."
     },
     recipe: {
-      img: "picture/Ceviche2.jpg",
+      img: "picture/Ceviche1.jpg",
       p1: "Step 1: Marinate fish in lime juice. Step 2: Add chili and onion. Step 3: Serve chilled."
     }
   },
@@ -773,13 +773,13 @@ let pages = [
     food: {
       title: "Pão de Queijo",
       text: "Chewy cheese bread balls.",
-      img: "picture/PaoDeQueijo1.jpg"
+      img: "picture/PaoDeQueijo2.jpg"
     },
     ingredients: {
       p1: "Tapioca. Cheese. Egg."
     },
     recipe: {
-      img: "picture/PaoDeQueijo2.jpg",
+      img: "picture/PaoDeQueijo1.jpg",
       p1: "Step 1: Mix tapioca, cheese, and egg. Step 2: Shape into balls. Step 3: Bake until golden."
     }
   },
@@ -787,13 +787,13 @@ let pages = [
     food: {
       title: "Churrasco",
       text: "Grilled beef on skewers.",
-      img: "picture/Churrasco1.jpg"
+      img: "picture/Churrasco2.jpg"
     },
     ingredients: {
       p1: "Beef. Salt."
     },
     recipe: {
-      img: "picture/Churrasco2.jpg",
+      img: "picture/Churrasco1.jpg",
       p1: "Step 1: Skewer beef and season with salt. Step 2: Grill until done. Step 3: Serve hot."
     }
   },
@@ -801,13 +801,13 @@ let pages = [
     food: {
       title: "Choripán",
       text: "Chorizo sandwich with chimichurri.",
-      img: "picture/Choripan1.jpg"
+      img: "picture/Choripan2.jpeg"
     },
     ingredients: {
       p1: "Chorizo. Bread. Chimichurri."
     },
     recipe: {
-      img: "picture/Choripan2.jpg",
+      img: "picture/Choripan1.jpg",
       p1: "Step 1: Grill chorizo. Step 2: Place in bread. Step 3: Top with chimichurri."
     }
   },
@@ -815,13 +815,13 @@ let pages = [
     food: {
       title: "Moqueca",
       text: "Coconut milk seafood stew.",
-      img: "picture/Moqueca1.jpg"
+      img: "picture/Moqueca2.jpg"
     },
     ingredients: {
       p1: "Fish. Coconut milk. Dendê oil."
     },
     recipe: {
-      img: "picture/Moqueca2.jpg",
+      img: "picture/Moqueca1.jpg",
       p1: "Step 1: Cook fish in coconut milk. Step 2: Add dendê oil. Step 3: Simmer and serve."
     }
   },
@@ -829,13 +829,13 @@ let pages = [
     food: {
       title: "Ajiaco",
       text: "Chicken and potato soup with corn.",
-      img: "picture/Ajiaco1.jpg"
+      img: "picture/Ajiaco2.jpg"
     },
     ingredients: {
       p1: "Chicken. Potato. Corn."
     },
     recipe: {
-      img: "picture/Ajiaco2.jpg",
+      img: "picture/Ajiaco1.jpg",
       p1: "Step 1: Boil chicken with potatoes. Step 2: Add corn. Step 3: Simmer until cooked."
     }
   },
@@ -843,13 +843,13 @@ let pages = [
     food: {
       title: "Jollof Rice",
       text: "Tomato-based spiced rice.",
-      img: "picture/JollofRice1.jpg"
+      img: "picture/JollofRice2.jpeg"
     },
     ingredients: {
       p1: "Rice. Tomato. Pepper. Spices."
     },
     recipe: {
-      img: "picture/JollofRice2.jpg",
+      img: "picture/JollofRice1.jpg",
       p1: "Step 1: Cook rice with tomato sauce. Step 2: Add pepper and spices. Step 3: Serve hot."
     }
   },

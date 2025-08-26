@@ -241,7 +241,7 @@ let foods = [
   },
   {
     title: "Cendol",
-    img: "../street food/picture/Cendol1.jpg",
+    img: "../street food/picture/Cendol1.webp",
     tags: ["Time: 10min", "Sweet", "Malaysia"],
     link: "../street food/Food.html?page=25",
     continent: "Asia",
@@ -251,7 +251,7 @@ let foods = [
   },
   {
     title: "Asam Laksa",
-    img: "../street food/picture/AsamLaksa1.jpg",
+    img: "../street food/picture/Laksa1.jpg",
     tags: ["Time: 25-30min", "Sour & Spicy", "Malaysia"],
     link: "../street food/Food.html?page=26",
     continent: "Asia",
@@ -281,7 +281,7 @@ let foods = [
   },
   {
     title: "Sushi",
-    img: "../street food/picture/Sushi1.jpeg",
+    img: "../street food/picture/Sushi1.webp",
     tags: ["Time: 20min", "Savory", "Japan"],
     link: "../street food/Food.html?page=29",
     continent: "Asia",
@@ -291,7 +291,7 @@ let foods = [
   },
   {
     title: "Biryani",
-    img: "../street food/picture/Biryani1.jpeg",
+    img: "../street food/picture/Biryani1.jpg",
     tags: ["Time: 1hr", "Spiced", "India"],
     link: "../street food/Food.html?page=30",
     continent: "Asia",
@@ -301,7 +301,7 @@ let foods = [
   },
   {
     title: "Pho",
-    img: "../street food/picture/Pho1.jpeg",
+    img: "../street food/picture/Pho1.webp",
     tags: ["Time: 2hr", "Savory", "Vietnam"],
     link: "../street food/Food.html?page=31",
     continent: "Asia",
@@ -311,7 +311,7 @@ let foods = [
   },
   {
     title: "Tom Yum",
-    img: "../street food/picture/TomYum1.jpeg",
+    img: "../street food/picture/TomYum1.jpg",
     tags: ["Time: 40min", "Sour", "Thailand"],
     link: "../street food/Food.html?page=32",
     continent: "Asia",
@@ -321,7 +321,7 @@ let foods = [
   },
   {
     title: "Ramen",
-    img: "../street food/picture/Ramen1.jpeg",
+    img: "../street food/picture/Ramen1.jpg",
     tags: ["Time: 45min", "Savory", "Japan"],
     link: "../street food/Food.html?page=33",
     continent: "Asia",
@@ -331,7 +331,7 @@ let foods = [
   },
   {
     title: "Peking Duck",
-    img: "../street food/picture/PekingDuck1.jpeg",
+    img: "../street food/picture/PekingDuck1.jpg",
     tags: ["Time: 2hr", "Savory", "China"],
     link: "../street food/Food.html?page=34",
     continent: "Asia",
@@ -341,7 +341,7 @@ let foods = [
   },
   {
     title: "Fish and Chips",
-    img: "../street food/picture/FishAndChips1.jpeg",
+    img: "../street food/picture/FishAndChips1.webp",
     tags: ["Time: 30min", "Savory", "United Kingdom"],
     link: "../street food/Food.html?page=35",
     continent: "Europe",
@@ -351,7 +351,7 @@ let foods = [
   },
   {
     title: "Paella",
-    img: "../street food/picture/Paella1.jpeg",
+    img: "../street food/picture/Paella1.jpg",
     tags: ["Time: 1hr", "Savory", "Spain"],
     link: "../street food/Food.html?page=36",
     continent: "Europe",
@@ -361,7 +361,7 @@ let foods = [
   },
   {
     title: "Pizza Margherita",
-    img: "../street food/picture/PizzaMargherita1.jpeg",
+    img: "../street food/picture/PizzaMargherita1.webp",
     tags: ["Time: 40min", "Savory", "Italy"],
     link: "../street food/Food.html?page=37",
     continent: "Europe",
@@ -371,7 +371,7 @@ let foods = [
   },
   {
     title: "Gyro",
-    img: "../street food/picture/Gyro1.jpeg",
+    img: "../street food/picture/Gyro1.webp",
     tags: ["Time: 45min", "Savory", "Greece"],
     link: "../street food/Food.html?page=38",
     continent: "Europe",
@@ -381,7 +381,7 @@ let foods = [
   },
   {
     title: "Pierogi",
-    img: "../street food/picture/Pierogi1.jpeg",
+    img: "../street food/picture/Pierogi1.jpg",
     tags: ["Time: 50min", "Savory", "Poland"],
     link: "../street food/Food.html?page=39",
     continent: "Europe",
@@ -391,7 +391,7 @@ let foods = [
   },
   {
     title: "Goulash",
-    img: "../street food/picture/Goulash1.jpeg",
+    img: "../street food/picture/Goulash1.jpg",
     tags: ["Time: 1hr 30min", "Savory", "Hungary"],
     link: "../street food/Food.html?page=40",
     continent: "Europe",
@@ -401,7 +401,7 @@ let foods = [
   },
   {
     title: "Bratwurst",
-    img: "../street food/picture/Bratwurst1.jpeg",
+    img: "../street food/picture/Bratwurst1.jpg",
     tags: ["Time: 30min", "Savory", "Germany"],
     link: "../street food/Food.html?page=41",
     continent: "Europe",
@@ -411,7 +411,7 @@ let foods = [
   },
   {
     title: "Crêpes",
-    img: "../street food/picture/Crepes1.jpeg",
+    img: "../street food/picture/Crêpes1.jpg",
     tags: ["Time: 20min", "Sweet", "France"],
     link: "../street food/Food.html?page=42",
     continent: "Europe",
@@ -421,7 +421,7 @@ let foods = [
   },
   {
     title: "Doner Kebab",
-    img: "../street food/picture/DonerKebab1.jpeg",
+    img: "../street food/picture/DonerKebab1.jpg",
     tags: ["Time: 1hr", "Savory", "Turkey"],
     link: "../street food/Food.html?page=43",
     continent: "Europe",
@@ -511,7 +511,7 @@ let foods = [
   },
   {
     title: "Philly Cheesesteak",
-    img: "../street food/picture/PhillyCheesesteak1.jpg",
+    img: "../street food/picture/PhillyCheesesteak1.webp",
     tags: ["Time: 35 mins", "Savory", "United States"],
     link: "../street food/Food.html?page=52",
     continent: "North America",
@@ -521,7 +521,7 @@ let foods = [
   },
   {
     title: "Feijoada",
-    img: "picture/Feijoada1.jpg",
+    img: "../street food/picture/Feijoada1.jpg",
     tags: ["Time: 2hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=53",
     continent: "South America",
@@ -531,7 +531,7 @@ let foods = [
   },
   {
     title: "Asado",
-    img: "picture/Asado1.jpg",
+    img: "../street food/picture/Asado1.jpg",
     tags: ["Time: 3hr", "Savory", "Argentina"],
     link: "../street food/Food.html?page=54",
     continent: "South America",
@@ -541,7 +541,7 @@ let foods = [
   },
   {
     title: "Ceviche",
-    img: "picture/Ceviche1.jpg",
+    img: "../street food/picture/Ceviche1.jpg",
     tags: ["Time: 1hr", "Tangy", "Peru"],
     link: "../street food/Food.html?page=55",
     continent: "South America",
@@ -551,7 +551,7 @@ let foods = [
   },
   {
     title: "Pão de Queijo",
-    img: "picture/PaoDeQueijo1.jpg",
+    img: "../street food/picture/PaoDeQueijo1.jpg",
     tags: ["Time: 1hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=56",
     continent: "South America",
@@ -561,7 +561,7 @@ let foods = [
   },
   {
     title: "Churrasco",
-    img: "picture/Churrasco1.jpg",
+    img: "../street food/picture/Churrasco1.jpg",
     tags: ["Time: 2hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=57",
     continent: "South America",
@@ -571,7 +571,7 @@ let foods = [
   },
   {
     title: "Choripán",
-    img: "picture/Choripan1.jpg",
+    img: "../street food/picture/Choripan1.jpg",
     tags: ["Time: 30min", "Savory", "Argentina"],
     link: "../street food/Food.html?page=58",
     continent: "South America",
@@ -581,7 +581,7 @@ let foods = [
   },
   {
     title: "Moqueca",
-    img: "picture/Moqueca1.jpg",
+    img: "../street food/picture/Moqueca1.jpg",
     tags: ["Time: 2hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=59",
     continent: "South America",
@@ -591,7 +591,7 @@ let foods = [
   },
   {
     title: "Ajiaco",
-    img: "picture/Ajiaco1.jpg",
+    img: "../street food/picture/Ajiaco1.jpg",
     tags: ["Time: 2hr", "Savory", "Colombia"],
     link: "../street food/Food.html?page=60",
     continent: "South America",
