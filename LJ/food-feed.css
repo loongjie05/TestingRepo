@@ -29,7 +29,6 @@ body {
   margin: 2rem auto;
   padding: 0 1rem;
   display: flex;
-  align-items: center;
   flex-direction: column;
   gap: 10px; /* Changed from 2rem to 10px */
   flex-grow: 1; /* Allows feed to take available space */
@@ -37,8 +36,6 @@ body {
 
 /* Card styling for posts and create-post form */
 .create-post-card, .post-card {
-  width:1000px;
-  align-items: center;
   background-color: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -62,7 +59,7 @@ body {
   font-weight: bold;
 }
 
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group select {
   width: 100%;
   padding: 10px;
   border-radius: 4px;
@@ -72,7 +69,7 @@ body {
   resize: none; /* Prevent users from resizing the textarea */
 }
 
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(230,126,34,.2);
@@ -96,11 +93,30 @@ body {
   transform: scale(1.02);
 }
 
+/* Location input with button */
+.location-input-wrapper {
+  display: flex;
+  gap: 10px; /* Space between input and button */
+  align-items: center;
+}
+
+.location-input-wrapper input {
+  flex-grow: 1;
+}
+
+.small-button {
+  width: auto; /* Override full width */
+  padding: 8px 15px; /* Smaller padding */
+  font-size: 0.9rem; /* Smaller font */
+  border-radius: 20px; /* More rounded */
+}
+
 /* Post Card Specifics */
 .post-header {
   display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
   align-items: center;
-  gap: 10px;
+  gap: 10px; /* General gap between header elements */
   margin-bottom: 1rem;
 }
 
@@ -111,6 +127,13 @@ body {
 .post-date {
   color: var(--muted-text-color);
   font-size: 0.9rem;
+}
+
+.post-feeling, .post-location {
+  color: var(--accent-color); /* Highlight feeling/location */
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .post-body h3 {

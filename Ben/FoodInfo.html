@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Information | Jalan Jalan Makan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../shared/sharedComponent.css">
+    <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
+    <link rel="stylesheet" href="FoodInfo.css">
+</head>
+<body>
+    <!-- Header Import -->
+    <div id="header"></div>
+
+    <main class="content food-info-page">
+        <!-- Hero Section -->
+        <section class="hero-section" data-aos="fade-up">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Discover Food Stories</h1>
+                    <p>Explore the rich history, cultural significance, and fascinating details behind your favorite dishes from around the world.</p>
+                </div>
+                <div class="hero-image">
+                    <img src="pictures/food1.jpg" alt="Cooking" class="hero-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Food Selection Section -->
+        <section class="food-selection" data-aos="fade-up" data-aos-delay="100">
+            <div class="selection-container">
+                <h2><i class="fa-solid fa-utensils"></i> Select a Food to Explore</h2>
+                <div class="food-grid" id="foodGrid">
+                    <!-- Food cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Food Information Section -->
+        <section class="food-details" id="foodDetails" style="display: none;" data-aos="fade-up" data-aos-delay="150">
+            <div class="details-container">
+                <!-- Food Header -->
+                <div class="food-header">
+                    <div class="food-image">
+                        <img id="foodImage" src="" alt="Food Image">
+                    </div>
+                    <div class="food-basic-info">
+                        <h1 id="foodName"></h1>
+                        <div class="food-meta">
+                            <span class="country"><i class="fa-solid fa-flag"></i> <span id="foodCountry"></span></span>
+                            <span class="category"><i class="fa-solid fa-tag"></i> <span id="foodCategory"></span></span>
+                            <span class="price-range"><i class="fa-solid fa-coins"></i> <span id="foodPrice"></span></span>
+                        </div>
+                        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                            <a id="recipeBtn" class="btn primary-btn" href="../JY/Recipe.html" target="_self"><i class="fa-solid fa-book"></i> View Recipe</a>
+                        </div>
+                        <p id="foodDescription" class="food-description"></p>
+                    </div>
+                </div>
+
+                <!-- Food Information Tabs -->
+                <div class="info-tabs">
+                    <button class="tab-btn active" data-tab="history">
+                        <i class="fa-solid fa-book-open"></i> History
+                    </button>
+                    <button class="tab-btn" data-tab="ingredients">
+                        <i class="fa-solid fa-list"></i> Ingredients
+                    </button>
+                    <button class="tab-btn" data-tab="nutrition">
+                        <i class="fa-solid fa-chart-pie"></i> Nutrition
+                    </button>
+                    <button class="tab-btn" data-tab="culture">
+                        <i class="fa-solid fa-globe"></i> Culture
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- History Tab -->
+                    <div class="tab-pane active" id="history">
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-clock"></i> Historical Background</h3>
+                            <p id="historyContent"></p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-calendar"></i> Origin Story</h3>
+                            <p id="originContent"></p>
+                        </div>
+                    </div>
+
+                    <!-- Ingredients Tab -->
+                    <div class="tab-pane" id="ingredients">
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-carrot"></i> Main Ingredients</h3>
+                            <ul id="mainIngredients"></ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-leaf"></i> Spices & Seasonings</h3>
+                            <ul id="spicesIngredients"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Nutrition Tab -->
+                    <div class="tab-pane" id="nutrition">
+                        <div class="nutrition-grid">
+                            <div class="nutrition-card">
+                                <h4>Calories</h4>
+                                <span id="calories"></span>
+                            </div>
+                            <div class="nutrition-card">
+                                <h4>Protein</h4>
+                                <span id="protein"></span>
+                            </div>
+                            <div class="nutrition-card">
+                                <h4>Carbs</h4>
+                                <span id="carbs"></span>
+                            </div>
+                            <div class="nutrition-card">
+                                <h4>Fat</h4>
+                                <span id="fat"></span>
+                            </div>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-heart"></i> Health Benefits</h3>
+                            <p id="healthBenefits"></p>
+                        </div>
+                    </div>
+
+                    <!-- Culture Tab -->
+                    <div class="tab-pane" id="culture">
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-users"></i> Cultural Significance</h3>
+                            <p id="culturalSignificance"></p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-calendar-days"></i> When It's Eaten</h3>
+                            <p id="eatingOccasions"></p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fa-solid fa-map-marker-alt"></i> Best Places to Try</h3>
+                            <p id="bestPlaces"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Import -->
+    <div id="footer"></div>
+
+    <!-- JavaScript Imports -->
+    <script src="../shared/sharedComponent.js"></script>
+    <script src="../shared/data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>document.addEventListener('DOMContentLoaded',function(){ if(window.AOS){ AOS.init({ once:true, duration:700, easing:'ease-out-quad' }); } });</script>
+    <script src="FoodInfo.js"></script>
+</body>
+</html>

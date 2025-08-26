@@ -9,6 +9,9 @@
   <script src="Login.js"></script>
 </head>
 <body>
+  <div id="custom-alert" class="custom-alert-hidden">
+    <span id="custom-alert-message"></span>
+  </div>
 
   <div id="rain-container"></div>
   <input type="checkbox" id="flip-toggle" />
@@ -68,8 +71,9 @@
             <label>Email</label>
             <div class="input-wrapper">
               <img src="pictures/email.png" class="input-icon" alt="">
-              <input type="email" class="input" placeholder="you@example.com" required>
+              <input type="email" class="input" id="signup-email" placeholder="you@example.com" required>
             </div>
+            <div id="signup-email-error" style="color: red; font-size: 1rem; margin-top: 5px; display: none;"></div>
           </div>
           <div class="form-group">
             <label>Password</label>
@@ -87,6 +91,7 @@
                 <li id="req-capital">At least 1 capital letter</li>
               </ul>
             </div>
+            <div id="signup-password-error" style="color: red; font-size: 1rem; margin-top: 5px; display: none;"></div>
           </div>
           <button class="button">Sign Up</button>
           <div id="signup-success-message" style="color: green; font-size: 1rem;  display: none;">Sign-up successful! Please log in.</div>
