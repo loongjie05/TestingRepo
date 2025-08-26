@@ -276,7 +276,11 @@ function renderCards(list) {
     card.className = "article-wrapper";
 
     card.innerHTML = `
-      <div class="container-project" style="background-image: url('${food.img}');"></div>
+      <div class="container-project" style="background-image: url('${food.img}');">
+        <span class="fav-heart" data-title="${food.title.replace(/"/g,'&quot;')}" title="Toggle favourite" aria-label="Toggle favourite">
+          <i class="fa-solid fa-heart"></i>
+        </span>
+      </div>
       <div class="project-info">
         <div class="flex-pr">
           <div class="project-title text-nowrap">${food.title}</div>
@@ -293,8 +297,28 @@ function renderCards(list) {
       </div>
     `;
     
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (e) => {
+      if (e.target.closest('.fav-heart')) return;
       window.location.href = food.link;
+    });
+
+    // Favourite heart toggle
+    const heart = card.querySelector('.container-project .fav-heart');
+    const title = food.title;
+    const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
+    const setFavs = (arr) => localStorage.setItem('favourites', JSON.stringify(arr));
+    const updateUi = () => {
+      const favs = getFavs();
+      if (favs.includes(title)) heart.classList.add('saved'); else heart.classList.remove('saved');
+    };
+    updateUi();
+    heart.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const favs = getFavs();
+      const idx = favs.indexOf(title);
+      if (idx === -1) favs.push(title); else favs.splice(idx, 1);
+      setFavs(favs);
+      updateUi();
     });
 
     container.appendChild(card);

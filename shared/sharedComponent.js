@@ -81,6 +81,9 @@ function createPlaceholder(id) {
                     </div>
                     
                     <div class="login-section">
+                        <a href="../Ben/favourites.html" class="fav-link" title="Favourites" aria-label="Favourites">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
                         <button class="login-btn" onclick="window.location.href='../LJ/Login.html'">
                             <i class="fas fa-user"></i>
                              Login

@@ -54,6 +54,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     setupTabSwitching();
+    // Setup favourite toggle for details view
+    const favEl = document.getElementById('foodFavHeart');
+    if (favEl) {
+        const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
+        const setFavs = (arr) => localStorage.setItem('favourites', JSON.stringify(arr));
+        const updateUi = (title) => {
+            const favs = getFavs();
+            if (title && favs.includes(title)) favEl.classList.add('saved'); else favEl.classList.remove('saved');
+        };
+        favEl.addEventListener('click', () => {
+            const currentTitle = document.getElementById('foodName').textContent;
+            if (!currentTitle) return;
+            const favs = getFavs();
+            const idx = favs.indexOf(currentTitle);
+            if (idx === -1) favs.push(currentTitle); else favs.splice(idx, 1);
+            setFavs(favs);
+            updateUi(currentTitle);
+        });
+        // Initialize once
+        const initTitle = document.getElementById('foodName').textContent;
+        updateUi(initTitle);
+    }
+
+    // Hero image favourite toggle mirrors the main one
+    const heroFav = document.getElementById('foodHeroFavHeart');
+    if (heroFav) {
+        const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
+        const setFavs = (arr) => localStorage.setItem('favourites', JSON.stringify(arr));
+        const updateUi = (title) => {
+            const favs = getFavs();
+            if (title && favs.includes(title)) heroFav.classList.add('saved'); else heroFav.classList.remove('saved');
+        };
+        heroFav.addEventListener('click', () => {
+            const currentTitle = document.getElementById('foodName').textContent;
+            if (!currentTitle) return;
+            const favs = getFavs();
+            const idx = favs.indexOf(currentTitle);
+            if (idx === -1) favs.push(currentTitle); else favs.splice(idx, 1);
+            setFavs(favs);
+            updateUi(currentTitle);
+            // sync the image heart too
+            const imgFav = document.getElementById('foodFavHeart');
+            if (imgFav) {
+                if (favs.includes(currentTitle)) imgFav.classList.add('saved'); else imgFav.classList.remove('saved');
+            }
+        });
+        const initTitle = document.getElementById('foodName').textContent;
+        updateUi(initTitle);
+    }
 });
 
 // Load food grid
@@ -96,13 +145,25 @@ function selectFood(foodName, sourceElement) {
     
     // Update food details
     const imgEl = document.getElementById('foodImage');
+    const heroImgEl = document.getElementById('heroFoodImage');
     imgEl.onerror = function(){ this.src = '../LJ/pictures/cooking.jpg'; };
     imgEl.src = food.image || '../LJ/pictures/cooking.jpg';
+    if (heroImgEl) { heroImgEl.onerror = function(){ this.src = '../LJ/pictures/cooking.jpg'; }; heroImgEl.src = imgEl.src; }
     document.getElementById('foodName').textContent = foodName;
     document.getElementById('foodCountry').textContent = food.country;
     document.getElementById('foodCategory').textContent = food.category;
     document.getElementById('foodPrice').textContent = food.price;
     document.getElementById('foodDescription').textContent = food.description;
+    // Update favourite UI after selecting a food
+    (function(){
+        const favEl = document.getElementById('foodFavHeart');
+        if (!favEl) return;
+        const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
+        const favs = getFavs();
+        if (favs.includes(foodName)) favEl.classList.add('saved'); else favEl.classList.remove('saved');
+        const heroFav = document.getElementById('foodHeroFavHeart');
+        if (heroFav) { if (favs.includes(foodName)) heroFav.classList.add('saved'); else heroFav.classList.remove('saved'); }
+    })();
     
     // Set recipe button deep link to specific recipe
     const recipeBtn = document.getElementById('recipeBtn');

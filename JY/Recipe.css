@@ -209,6 +209,7 @@ body{
     border-radius: 10px;
     background-size: cover;
     background-position: center;
+    position: relative;
 }
 
 .project-info {
@@ -254,6 +255,23 @@ body{
     gap: 5px;
     flex-wrap: wrap;
 }
+
+/* Favourite heart overlay for image */
+.container-project .fav-heart {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: rgba(0,0,0,0.35);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+}
+.container-project .fav-heart.saved { color: #e63946; }
 
 .project-type {
     background: #ffce1b33;
