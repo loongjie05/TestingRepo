@@ -16,7 +16,7 @@
   /* hero background */
   .hero-section {
     position: relative;               /* creates stacking context */
-    z-index: 30000;                   /* HERO at top-level above filters/cards */
+    z-index: 100;                     /* HERO below header but above filters/cards */
     background-size: cover;
     padding: 40px 0;
     background: url('Picture/cooking2.jpg') center/cover no-repeat;
@@ -46,7 +46,7 @@
     box-sizing: border-box;
   
     position: relative;
-    z-index: 31000;                    /* ensure search and its dropdown are in hero stacking context */
+    z-index: 200;                      /* ensure search and its dropdown are in hero stacking context */
   }
   
   .search-container > h1 {
@@ -67,7 +67,7 @@
     display: inline-block;
     width: 100%;
     max-width: 700px;
-    z-index: 32000;                     /* wrapper above siblings inside hero */
+    z-index: 300;                       /* wrapper above siblings inside hero */
   }
   
   /* Autocomplete Search Suggestions */
@@ -87,8 +87,8 @@
     overflow-y: auto;
     overflow-x: hidden;
   
-    /* Display control is left to your JS (display:none / block). z-index needs to be highest */
-    z-index: 40000;                      /* TOPMOST across the page */
+    /* Display control is left to your JS (display:none / block). z-index below header but above other content */
+    z-index: 500;                        /* Below header (1000) but above other content */
     display: none;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   
@@ -174,7 +174,7 @@
      Filter — kept BELOW search, ABOVE cards
      ========================= */
   
-  /* filter-container must be below hero-section but above cards */
+    /* filter-container must be below hero-section but above cards */
   .filter-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -182,9 +182,9 @@
     width: 100%;
     margin: 0 auto 5px;
     padding: 0 30px;
-  
+
     position: relative;
-    z-index: 20000;                    /* FILTER GROUP stacked below HERO, above CARDS */
+    z-index: 50;                       /* FILTER GROUP stacked below HERO, above CARDS */
     overflow: visible;                 /* ensure dropdowns are not clipped */
   }
   
@@ -219,7 +219,7 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border-radius: 0 0 8px 8px;
     transition: max-height 0.28s ease, opacity 0.18s ease, transform 0.18s ease;
-    z-index: 21000;                     /* FILTER DROPDOWN panels — above cards, below search */
+    z-index: 75;                         /* FILTER DROPDOWN panels — above cards, below search */
     opacity: 0;
     transform: translateY(-6px);
     pointer-events: none;
@@ -253,7 +253,7 @@
     padding: 40px;
   
     position: relative;
-    z-index: 10000;                    /* CARDS are lowest of these three layers */
+    z-index: 10;                       /* CARDS are lowest of these three layers */
   }
   
   .article-wrapper {
@@ -325,7 +325,7 @@
      ========================= */
   .category-tabs {
     position: relative;
-    z-index: 10000;                     /* keep tabs at same level as cards */
+    z-index: 10;                        /* keep tabs at same level as cards */
     display: flex;
     gap: 10px;
     margin-top: 15px;
