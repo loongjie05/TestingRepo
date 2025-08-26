@@ -1,4 +1,7 @@
 /* Ranking Page - Premium Look */
+body, .ranking-page {
+    background-color: #fffaf0;
+}
 
 .ranking-page {
 	--ink: #1f2937;
@@ -35,10 +38,13 @@
 }
 
 .hero-inner {
-	display: grid;
-	grid-template-columns: 1.3fr 1fr;
-	gap: 24px;
-	align-items: center;
+	display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center; 
+    gap: 20px; 
+    position: relative;
+    text-align: center; 
 }
 
 .hero-copy h1 {
@@ -55,7 +61,7 @@
 
 .controls {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 }
 
 .select-wrap {
@@ -67,6 +73,8 @@
 	border-radius: 14px;
 	padding: 10px 14px;
 	box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+	margin: 20px auto 0; 
+    display: block;   
 }
 
 .select-wrap i {

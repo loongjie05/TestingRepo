@@ -25,10 +25,17 @@
             <a href="../Ben/favourites.html" class="fav-link" title="Favourites" aria-label="Favourites">
                 <i class="fa-solid fa-heart"></i>
             </a>
-            <button class="login-btn" onclick="window.location.href='../LJ/Login.html'">
+            <button id="login-button" class="login-btn" onclick="window.location.href='../LJ/Login.html'">
                 <i class="fas fa-user"></i>
-                 Login
+                <span>Login</span>
             </button>
+            <div id="user-info" style="display: none;">
+                <span id="username-display"></span>
+                <button id="logout-button" class="login-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
         </div>
     </div>
 </header>

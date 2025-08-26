@@ -1,25 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Cookie Helper Functions ---
-  function setCookie(name, value, days) {
-    let expires = "";
-    if (days) {
-      const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
-    }
-
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  // --- LocalStorage Helper Functions ---
+  function setLocalStorage(name, value) {
+    localStorage.setItem(name, value);
   }
 
-  function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
+  function getLocalStorage(name) {
+    return localStorage.getItem(name);
   }
 
   // --- Raining Food Animation ---
@@ -91,9 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const passwordRequirements = document.getElementById('password-requirements');
 
-  const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-  const numbers = /[0-9]+/;
-  const capitalLetters = /[A-Z]+/;
+  const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/; 
+  const numbers = /[0-9]+/; 
+  const capitalLetters = /[A-Z]+/; 
 
   // --- Password Validation Function ---
   function validatePassword(password) {
@@ -111,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return lengthValid && specialValid && numberValid && capitalValid;
   }
 
-  // WARNING: Storing passwords in cookies is not secure. This is for demonstration purposes only.
+  // WARNING: Storing passwords in local storage is not secure. This is for demonstration purposes only.
   backForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const name = backForm.querySelector('input[type="text"]').value;
@@ -129,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return; // Stop form submission
     }
 
-    const existingUsers = JSON.parse(getCookie('users')) || [];
+    const existingUsers = JSON.parse(getLocalStorage('users')) || [];
     const emailExists = existingUsers.some(user => user.email === email);
 
     if (emailExists) {
@@ -145,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     existingUsers.push(newUser);
-    setCookie('users', JSON.stringify(existingUsers), 365); // Store users for 1 year (persistent)
+    setLocalStorage('users', JSON.stringify(existingUsers)); // Store users in local storage
 
     const successMessage = document.getElementById('signup-success-message');
     successMessage.style.display = 'block';
@@ -161,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = frontForm.querySelector('input[type="email"]').value;
     const password = frontForm.querySelector('input[type="password"]').value;
 
-    const existingUsers = JSON.parse(getCookie('users')) || [];
+    const existingUsers = JSON.parse(getLocalStorage('users')) || [];
     const user = existingUsers.find(user => {
       const storedEmail = user.email;
       const enteredEmail = email;
@@ -172,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (user) {
-      setCookie('activeUserSession', user.name, 1); // Set active session for 1 day
+      setLocalStorage('activeUserSession', user.name); // Set active session
       window.location.href = '../JH/Homepage.html';
     } else {
       loginError.textContent = 'Invalid email or password.';
