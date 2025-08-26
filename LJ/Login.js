@@ -77,19 +77,64 @@ document.addEventListener('DOMContentLoaded', () => {
   const frontForm = document.querySelector('.front form');
   const backForm = document.querySelector('.back form');
   const loginError = document.getElementById('login-error');
+  const signupPasswordError = document.getElementById('signup-password-error');
+  const signupEmailError = document.getElementById('signup-email-error'); // New element
+
+  const passwordInput = document.getElementById('signup-password');
+  const emailInput = document.getElementById('signup-email'); // New element for email input
+  const strengthBar = document.getElementById('password-strength-bar');
+  const requirements = {
+    length: document.getElementById('req-length'),
+    special: document.getElementById('req-special'),
+    number: document.getElementById('req-number'),
+    capital: document.getElementById('req-capital')
+  };
+  const passwordRequirements = document.getElementById('password-requirements');
+
+  const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+  const numbers = /[0-9]+/;
+  const capitalLetters = /[A-Z]+/;
+
+  // --- Password Validation Function ---
+  function validatePassword(password) {
+    const lengthValid = password.length >= 8;
+    const specialValid = specialChars.test(password);
+    const numberValid = numbers.test(password);
+    const capitalValid = capitalLetters.test(password);
+
+    // Update visual feedback for requirements list
+    requirements.length.classList.toggle('valid', lengthValid);
+    requirements.special.classList.toggle('valid', specialValid);
+    requirements.number.classList.toggle('valid', numberValid);
+    requirements.capital.classList.toggle('valid', capitalValid);
+
+    return lengthValid && specialValid && numberValid && capitalValid;
+  }
 
   // WARNING: Storing passwords in cookies is not secure. This is for demonstration purposes only.
   backForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const name = backForm.querySelector('input[type="text"]').value;
-    const email = backForm.querySelector('input[type="email"]').value;
-    const password = backForm.querySelector('input[type="password"]').value;
+    const email = emailInput.value; // Get email from the dedicated input
+    const password = passwordInput.value; // Get password from the dedicated input
+
+    // Clear previous error messages
+    signupEmailError.style.display = 'none';
+    signupPasswordError.style.display = 'none';
+
+    // Validate password strength before proceeding
+    if (!validatePassword(password)) {
+      signupPasswordError.textContent = 'Password does not meet all requirements.';
+      signupPasswordError.style.display = 'block';
+      return; // Stop form submission
+    }
 
     const existingUsers = JSON.parse(getCookie('users')) || [];
     const emailExists = existingUsers.some(user => user.email === email);
 
     if (emailExists) {
-      alert('Email already exists. Please use a different email.');
+      signupEmailError.textContent = 'Email already exists. Please use a different email.';
+      signupEmailError.style.display = 'block';
       return;
     }
 
@@ -107,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       successMessage.style.display = 'none';
-      document.getElementById('flip-toggle').checked = false;
+      document.getElementById('flip-toggle').checked = false; // Flip back to login
     }, 2000);
   });
 
@@ -135,20 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const passwordInput = document.getElementById('signup-password');
-  const strengthBar = document.getElementById('password-strength-bar');
-  const requirements = {
-    length: document.getElementById('req-length'),
-    special: document.getElementById('req-special'),
-    number: document.getElementById('req-number'),
-    capital: document.getElementById('req-capital')
-  };
-  const passwordRequirements = document.getElementById('password-requirements');
-
-  const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-  const numbers = /[0-9]+/;
-  const capitalLetters = /[A-Z]+/;
-
   passwordInput.addEventListener('focus', () => {
     passwordRequirements.style.display = 'block';
     if (passwordInput.value.length > 0) {
@@ -170,6 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
       strengthBar.style.display = 'none';
     }
 
+    validatePassword(password); // Update visual feedback on input
+
     let strength = 0;
 
     const lengthValid = password.length >= 8;
@@ -187,9 +220,11 @@ document.addEventListener('DOMContentLoaded', () => {
       strength <= 1 ? 'red' : strength <= 3 ? 'orange' : 'green');
     strengthBar.style.width = `${strengthPercentage}%`;
 
-    requirements.length.classList.toggle('valid', lengthValid);
-    requirements.special.classList.toggle('valid', specialValid);
-    requirements.number.classList.toggle('valid', numberValid);
-    requirements.capital.classList.toggle('valid', capitalValid);
   });
+
+  // Clear email error when user starts typing in email field
+  emailInput.addEventListener('input', () => {
+    signupEmailError.style.display = 'none';
+  });
+
 });

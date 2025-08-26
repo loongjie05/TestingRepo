@@ -29,6 +29,28 @@
           <label for="post-content">Your review:</label>
           <textarea id="post-content" rows="4" placeholder="It was amazing! The..." required></textarea>
         </div>
+        
+        <div class="form-group">
+          <label for="post-location">Location (Optional):</label>
+          <div class="location-input-wrapper">
+            <input type="text" id="post-location" placeholder="e.g., Kuala Lumpur, Malaysia">
+            <button type="button" id="get-location-btn" class="button small-button">Get My Location</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="post-feeling">Feeling (Optional):</label>
+          <select id="post-feeling" class="input">
+            <option value="">Select a feeling</option>
+            <option value="happy">😊 Happy</option>
+            <option value="excited">🤩 Excited</option>
+            <option value="satisfied">😋 Satisfied</option>
+            <option value="hungry"> craving</option>
+            <option value="adventurous"> intrepid</option>
+            <option value="blessed">😇 Blessed</option>
+          </select>
+        </div>
+
         <button type="submit" class="button">Post Review</button>
       </form>
     </section>

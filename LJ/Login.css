@@ -94,7 +94,7 @@
       backface-visibility: hidden;
       border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0,0,0,.1);
-      padding: 2rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -189,6 +189,43 @@
   text-align: center;
   animation: fadeInOut 2s forwards;
 }
+
+/* Custom Alert Box Styles */
+#custom-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000; /* Ensure it's on top of everything */
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Smooth animation */
+  pointer-events: none; /* Allow clicks to pass through when hidden */
+}
+
+#custom-alert.custom-alert-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0); /* Ensure it appears from top */
+  pointer-events: auto; /* Allow interaction when shown */
+}
+
+#custom-alert.error {
+  background-color: #fce4e4; /* Light red */
+  color: #c44040; /* Darker red text */
+  border: 1px solid #c44040;
+}
+
+#custom-alert.success {
+  background-color: #e6ffe6; /* Light green */
+  color: #388e3c; /* Darker green text */
+  border: 1px solid #388e3c;
+}
+
 
 @keyframes fadeInOut {
   0% { opacity: 0; }
