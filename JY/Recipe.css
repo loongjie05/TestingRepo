@@ -1,33 +1,42 @@
-body{
+/* =========================
+   Recipe.css — Stacking / Dropdown Fixes
+   Stack order:
+   1) search-suggestions (top)
+   2) select-items (filter dropdowns)
+   3) card-container (images/cards)
+   ========================= */
+
+   body {
     background-color: #fffaf0;
     margin: 0;
     display: flex;
     flex-direction: column;
-}
-
-/*backgroup images*/
-.hero-section {
-    position: relative;
+  }
+  
+  /* hero background */
+  .hero-section {
+    position: relative;               /* creates stacking context */
+    z-index: 30000;                   /* HERO at top-level above filters/cards */
     background-size: cover;
     padding: 40px 0;
     background: url('Picture/cooking2.jpg') center/cover no-repeat;
-}
-
-.hero-section::before {
+  }
+  
+  .hero-section::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35); 
+    background: rgba(0, 0, 0, 0.35);
     z-index: 0;
-}
-
-.hero-section > * {
+  }
+  
+  .hero-section > * {
     position: relative;
-    z-index: 1;
-}
-
-/*Search*/
-.search-container {
+    z-index: 1;                       /* child content above the dark overlay */
+  }
+  
+  /* Search */
+  .search-container {
     padding: 20px;
     width: 100%;
     max-width: 1000px;
@@ -35,91 +44,152 @@ body{
     margin-bottom: 30px;
     text-align: center;
     box-sizing: border-box;
-}
-
-.search-container > h1 {
+  
+    position: relative;
+    z-index: 31000;                    /* ensure search and its dropdown are in hero stacking context */
+  }
+  
+  .search-container > h1 {
     font-family: Tahoma, Geneva, Verdana, sans-serif;
     padding: 30px;
     font-size: 80px;
     color: #ffce1b;
-    text-shadow: 
-        1px 1px 0 #e6b800,
-        2px 2px 0 #cc9f00,
-        3px 3px 0 #b38d00,
-        4px 4px 0 #997a00,
-        5px 5px 5px rgba(0,0,0,0.5);
-}
-
-.search-wrapper {
+    text-shadow:
+      1px 1px 0 #e6b800,
+      2px 2px 0 #cc9f00,
+      3px 3px 0 #b38d00,
+      4px 4px 0 #997a00,
+      5px 5px 5px rgba(0,0,0,0.5);
+  }
+  
+  .search-wrapper {
     position: relative;
     display: inline-block;
     width: 100%;
     max-width: 700px;
-}
-
-.searchInput {
+    z-index: 32000;                     /* wrapper above siblings inside hero */
+  }
+  
+  /* Autocomplete Search Suggestions */
+  /* This must sit above filters and cards — so hero-section z-index > filter-container */
+  .search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #ffce1b;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    max-height: 300px;
+  
+    /* NO horizontal scrollbar, only vertical */
+    overflow-y: auto;
+    overflow-x: hidden;
+  
+    /* Display control is left to your JS (display:none / block). z-index needs to be highest */
+    z-index: 40000;                      /* TOPMOST across the page */
+    display: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  
+    /* subtle entry transform for when JS sets display:block (will animate opacity) */
+    opacity: 1;
+    transform-origin: top center;
+  }
+  
+  /* Items inside search dropdown */
+  .search-suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  
+    /* prevent item content from causing horizontal overflow */
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  .search-suggestion-item:last-child { border-bottom: none; }
+  .search-suggestion-item:hover {
+    background: linear-gradient(135deg, #ffce1b 0%, #e6b800 100%);
+    color: white;
+    transform: translateX(8px);
+  }
+  
+  .search-suggestion-item .food-image {
+    width: 40px; height: 40px; border-radius: 8px; object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  .search-suggestion-item .food-info { flex: 1; }
+  .search-suggestion-item .food-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+  .search-suggestion-item .food-meta { font-size: 0.85rem; opacity: 0.8; }
+  .search-suggestion-item .food-country { color: #e85c0d; font-weight: 500; }
+  
+  /* Thin scrollbar (vertical only) for modern browsers */
+  /* Chrome, Edge, Safari */
+  .search-suggestions::-webkit-scrollbar { width: 6px; height: 0; }
+  .search-suggestions::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
+  .search-suggestions::-webkit-scrollbar-thumb { background: #ffce1b; border-radius: 3px; }
+  .search-suggestions::-webkit-scrollbar-thumb:hover { background: #e6b800; }
+  /* Firefox */
+  .search-suggestions { scrollbar-width: thin; scrollbar-color: #ffce1b #f1f1f1; }
+  
+  .searchInput {
     width: 100%;
     height: 60px;
     box-sizing: border-box;
-    border-radius: 999px; 
+    border-radius: 999px;
     border: 2px solid white;
     padding: 0 70px 0 40px;
     font-size: 18px;
     outline: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.185);
     transition: 0.3s;
-}
-
-.searchInput:focus {
-    border-color: white;
-    box-shadow: 0 4px 12px #ffffff91;
-}
-
-.search-icon {
+  }
+  .searchInput:focus { border-color: white; box-shadow: 0 4px 12px #ffffff91; }
+  
+  .search-icon {
     position: absolute;
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    fill: #8b8ba7;
-}
-
-.reset {
+    width: 20px; height: 20px; fill: #8b8ba7;
+  }
+  
+  .reset {
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    border: none;
-    background: none;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    padding: 0;
-}
-
-.reset svg {
-    width: 16px;
-    height: 16px;
-    fill: #8b8ba7;
-}
-
-.searchInput:not(:placeholder-shown) ~ .reset {
-    opacity: 1;
-    visibility: visible;
-}
-
-/*Filter*/
-.filter-container {
+    border: none; background: none; cursor: pointer;
+    opacity: 0; visibility: hidden; padding: 0;
+  }
+  .reset svg { width: 16px; height: 16px; fill: #8b8ba7; }
+  .searchInput:not(:placeholder-shown) ~ .reset { opacity: 1; visibility: visible; }
+  
+  /* =========================
+     Filter — kept BELOW search, ABOVE cards
+     ========================= */
+  
+  /* filter-container must be below hero-section but above cards */
+  .filter-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
     width: 100%;
     margin: 0 auto 5px;
     padding: 0 30px;
-}
-
-.custom-select {
+  
+    position: relative;
+    z-index: 20000;                    /* FILTER GROUP stacked below HERO, above CARDS */
+    overflow: visible;                 /* ensure dropdowns are not clipped */
+  }
+  
+  /* each select creates own dropdown; ensure select-items sits above cards but below search */
+  .custom-select {
     position: relative;
     background: #fffaf0;
     border-bottom: 5px solid #ffce1b;
@@ -130,22 +200,16 @@ body{
     font-size: 20px;
     color: black;
     padding: 18px 25px;
-}
-
-.custom-select:hover{
-    color: #ff7f50;
-    transition: color 0.3s ease
-}
-
-.select-selected {
-    pointer-events: none; 
-}
-
-.select-items {
+    overflow: visible;                 /* allow its select-items to overflow */
+  }
+  .custom-select:hover { color: #ff7f50; transition: color 0.3s ease; }
+  .select-selected { pointer-events: none; }
+  
+  /* the dropdown list of each filter */
+  .select-items {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
+    left: 0; right: 0;
     background: #f8f9fa;
     color:#666;
     font-size: 18px;
@@ -154,34 +218,45 @@ body{
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border-radius: 0 0 8px 8px;
-    transition: max-height 0.3s ease;
-    z-index: 999;
-}
-
-.custom-select.open .select-items {
+    transition: max-height 0.28s ease, opacity 0.18s ease, transform 0.18s ease;
+    z-index: 21000;                     /* FILTER DROPDOWN panels — above cards, below search */
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+  }
+  
+  /* When the dropdown is opened (your JS adds .open on hover), show it */
+  .custom-select.open .select-items {
     max-height: 200px;
     overflow-y: auto;
-}
-
-.select-items div {
-    padding: 10px 12px;
-    cursor: pointer;
-}
-
-.select-items div:hover {
-    background-color: #ffec8e78;
-    color: #ff7f50;
-}
-
-/*Card*/
-.card-container {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  
+  /* individual option styles */
+  .select-items div { padding: 10px 12px; cursor: pointer; }
+  .select-items div:hover { background-color: #ffec8e78; color: #ff7f50; }
+  
+  /* Scrollbar for select-items (thin vertical only) */
+  .select-items::-webkit-scrollbar { width: 6px; height: 0; }
+  .select-items::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+  .select-items::-webkit-scrollbar-thumb { background: #d6a900; border-radius: 4px; }
+  
+  /* =========================
+     Cards — below filters & search
+     ========================= */
+  .card-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     padding: 40px;
-}
-
-.article-wrapper {
+  
+    position: relative;
+    z-index: 10000;                    /* CARDS are lowest of these three layers */
+  }
+  
+  .article-wrapper {
     transition: 0.15s all ease-in-out;
     border-radius: 10px;
     padding: 5px;
@@ -189,91 +264,53 @@ body{
     border: 4px solid transparent;
     cursor: pointer;
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-}
-
-.article-wrapper:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .article-wrapper:hover {
     box-shadow: 10px 10px 0 #ffce1b, 20px 20px 0 #e6b800;
-    border-color: #ffce1b;
-    transform: translate(-20px, -20px);
- }
-
-.article-wrapper:active {
-    box-shadow: none;
-    transform: translate(0, 0);
-}
-
-.container-project {
-    width: 100%;
-    height: 220px;
-    border-radius: 10px;
-    background-size: cover;
-    background-position: center;
+    border-color: #ffce1b; transform: translate(-20px, -20px);
+  }
+  .article-wrapper:active { box-shadow: none; transform: translate(0, 0); }
+  
+  .container-project {
+    width: 100%; height: 220px; border-radius: 10px;
+    background-size: cover; background-position: center;
     position: relative;
-}
-
-.project-info {
+  }
+  
+  .project-info {
     padding: 5px 5px 0 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.flex-pr {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.project-title {
-    font-size: 1.5em;
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #333;
-}
-
-.project-hover {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  
+  .flex-pr { display: flex; justify-content: space-between; align-items: center; }
+  
+  .project-title {
+    font-size: 1.5em; font-weight: 600;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #333;
+  }
+  
+  .project-hover {
+    border-radius: 50%; width: 40px; height: 40px; padding: 8px;
+    display: flex; justify-content: center; align-items: center;
     transition: all 0.3s ease;
-}
-
-.article-wrapper:hover .project-hover {
-    transform: rotate(-45deg);
-    background-color: #ffec8e;
-}
-
-.types {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-/* Favourite heart overlay for image */
-.container-project .fav-heart {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  background: rgba(0,0,0,0.35);
-  width: 41px; /* +20% from 34px */
-  height: 41px; /* +20% from 34px */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  cursor: pointer;
-}
-.container-project .fav-heart.saved { color: #e63946; }
-
-.project-type {
+  }
+  .article-wrapper:hover .project-hover { transform: rotate(-45deg); background-color: #ffec8e; }
+  
+  .types { display: flex; gap: 5px; flex-wrap: wrap; }
+  
+  /* Favourite heart overlay for image */
+  .container-project .fav-heart {
+    position: absolute;
+    right: 10px; bottom: 10px;
+    background: rgba(0,0,0,0.35);
+    width: 41px; height: 41px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; cursor: pointer;
+  }
+  .container-project .fav-heart.saved { color: #e63946; }
+  
+  .project-type {
     background: #ffce1b33;
     color: #b38d00;
     font-weight: bold;
@@ -281,4 +318,29 @@ body{
     border-radius: 15px;
     font-size: 12px;
     letter-spacing: -0.5px;
-}
+  }
+  
+  /* =========================
+     Category Tabs
+     ========================= */
+  .category-tabs {
+    position: relative;
+    z-index: 10000;                     /* keep tabs at same level as cards */
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .category-tab {
+    padding: 8px 15px;
+    background: #eee;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+  
+  .category-tab:hover {
+    background: #ddd;
+  }
+  

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const postLocationInput = document.getElementById('post-location');
   const getLocationBtn = document.getElementById('get-location-btn');
   const postFeelingSelect = document.getElementById('post-feeling');
+  const postFeelingCustom = document.getElementById('post-feeling-custom');
 
   // --- Configuration ---
   const COMMENT_DISPLAY_LIMIT = 2; // Number of comments to show initially
@@ -68,6 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   getLocationBtn.addEventListener('click', getUserLocation);
 
+  // Allow custom feeling text when selecting "custom"
+  postFeelingSelect.addEventListener('change', () => {
+    if (postFeelingSelect.value === 'custom') {
+      postFeelingCustom.style.display = 'block';
+      postFeelingCustom.focus();
+    } else {
+      postFeelingCustom.style.display = 'none';
+    }
+  });
+
   // --- Function to render a single comment ---
   function renderComment(commentListContainer, comment, postId) {
     const commentElement = document.createElement('div');
@@ -89,12 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
           </svg>
           <span class="reaction-count">${comment.likes}</span>
         </button>
+        <button class="reaction-button comment-delete-button" data-action="delete" title="Delete comment">🗑️</button>
       </div>
     `;
 
     commentListContainer.appendChild(commentElement);
 
     commentElement.querySelector('.comment-like-button').addEventListener('click', (event) => handleCommentLikeDislike(event, postId, comment.id));
+    commentElement.querySelector('.comment-delete-button').addEventListener('click', (event) => handleDeleteComment(event, postId, comment.id));
   }
 
   // --- Function to render all comments for a post ---
@@ -202,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </svg>
           <span class="reaction-count">${post.likes}</span>
         </button>
+        <button class="reaction-button post-delete-button" data-action="delete" title="Delete post">🗑️ Delete</button>
       </div>
       <div class="comments-section">
         <!-- Comments will be dynamically inserted here by renderComments function -->
@@ -213,6 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add event listener for the post like button
     postCard.querySelector('.post-like-button').addEventListener('click', handleLikeClick);
+    // Add event listener for delete post
+    postCard.querySelector('.post-delete-button').addEventListener('click', handleDeletePost);
 
     // Render comments for the post
     renderComments(postCard, post.id); 
@@ -255,6 +271,16 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('foodPosts', JSON.stringify(storedPosts));
       likeButton.querySelector('.reaction-count').textContent = post.likes;
     }
+  }
+
+  // --- Handle Delete Post ---
+  function handleDeletePost(event) {
+    const postCard = event.currentTarget.closest('.post-card');
+    const postId = postCard.dataset.postId;
+    const storedPosts = JSON.parse(localStorage.getItem('foodPosts')) || [];
+    const updated = storedPosts.filter(p => p.id != postId);
+    localStorage.setItem('foodPosts', JSON.stringify(updated));
+    postCard.remove();
   }
 
   // --- Handle Add Comment ---
@@ -332,6 +358,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --- Handle Delete Comment ---
+  function handleDeleteComment(event, postId, commentId) {
+    const storedPosts = JSON.parse(localStorage.getItem('foodPosts')) || [];
+    const postIndex = storedPosts.findIndex(p => p.id == postId);
+    if (postIndex === -1) return;
+    storedPosts[postIndex].comments = storedPosts[postIndex].comments.filter(c => c.id != commentId);
+    localStorage.setItem('foodPosts', JSON.stringify(storedPosts));
+    // Re-render comments for this post
+    const postCard = event.currentTarget.closest('.post-card');
+    renderComments(postCard, postId);
+  }
+
   // --- Load existing posts from localStorage on page load ---
   function loadPosts() {
     const storedPosts = JSON.parse(localStorage.getItem('foodPosts')) || [];
@@ -353,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
       likedBy: [], // Track users who liked this post
       comments: [], // Initialize comments array for new posts
       location: postLocationInput.value.trim(), // Get location from input
-      feeling: postFeelingSelect.value // Get selected feeling
+      feeling: (postFeelingSelect.value === 'custom' ? postFeelingCustom.value.trim() : postFeelingSelect.value)
     };
 
     const storedPosts = JSON.parse(localStorage.getItem('foodPosts')) || [];

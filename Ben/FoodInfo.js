@@ -79,32 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateUi(initTitle);
     }
 
-    // Hero image favourite toggle mirrors the main one
-    const heroFav = document.getElementById('foodHeroFavHeart');
-    if (heroFav) {
-        const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
-        const setFavs = (arr) => localStorage.setItem('favourites', JSON.stringify(arr));
-        const updateUi = (title) => {
-            const favs = getFavs();
-            if (title && favs.includes(title)) heroFav.classList.add('saved'); else heroFav.classList.remove('saved');
-        };
-        heroFav.addEventListener('click', () => {
-            const currentTitle = document.getElementById('foodName').textContent;
-            if (!currentTitle) return;
-            const favs = getFavs();
-            const idx = favs.indexOf(currentTitle);
-            if (idx === -1) favs.push(currentTitle); else favs.splice(idx, 1);
-            setFavs(favs);
-            updateUi(currentTitle);
-            // sync the image heart too
-            const imgFav = document.getElementById('foodFavHeart');
-            if (imgFav) {
-                if (favs.includes(currentTitle)) imgFav.classList.add('saved'); else imgFav.classList.remove('saved');
-            }
-        });
-        const initTitle = document.getElementById('foodName').textContent;
-        updateUi(initTitle);
-    }
+    // Removed hero favourite heart
 });
 
 // Load food grid

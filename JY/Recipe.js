@@ -1,207 +1,27 @@
 let foods = [
-    {
-      title: "Nasi Lemak",
-      img: "../street food/picture/NasiLemak1.webp",
-      tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
-      link: "../street food/Food.html?page=1",
-      continent: "Asia",
-      type: "Rice",
-      method: "Boiling",
-      flavor: "Spicy"
-    },
-    {
-      title: "Mango Sticky Rice",
-      img: "../street food/picture/MangoRice1.jpg",
-      tags: ["Time: 1h ", "Sweet", "Thailand"],
-      link: "../street food/Food.html?page=2",
-      continent: "Asia",
-      type: "Rice",
-      method: "Boiling",
-      flavor: "Sweet"
-    },
-    {
-      title: "Taco",
-      img: "../street food/picture/Taco1.jpg",
-      tags: ["Time: 35min", "Savory", "Mexico"],
-      link: "../street food/Food.html?page=3",
-      continent: "North America",
-      type: "Bread",
-      method: "Grilled",
-      flavor: "Savory"
-    },
-    {
-      title: "Churros",
-      img: "../street food/picture/Churros1.webp",
-      tags: ["Time: 25min", "Sweet", "Spain"],
-      link: "../street food/Food.html?page=4",
-      continent: "Europe",
-      type: "Pastry",
-      method: "Fried",
-      flavor: "Sweet"
-    },
-    {
-      title: "Bunny Chow",
-      img: "../street food/picture/BunnyChow1.webp",
-      tags: ["Time: 1h 10min", "Savory", "South Africa"],
-      link: "../street food/Food.html?page=5",
-      continent: "Africa",
-      type: "Bread",
-      method: "Baked",
-      flavor: "Savory"
-    },
-    {
-      title: "Meat Pie",
-      img: "../street food/picture/MeatPie1.jpg",
-      tags: ["Time: 1h", "Savory", "Australia"],
-      link: "../street food/Food.html?page=6",
-      continent: "Oceania",
-      type: "Pastry",
-      method: "Baked",
-      flavor: "Savory"
-    },
-    {
-      title: "Arepas",
-      img: "../street food/picture/Arepas1.jpg",
-      tags: ["Time: 40min", "Savory", "Venezuela"],
-      link: "../street food/Food.html?page=7",
-      continent: "South America",
-      type: "Bread",
-      method: "Grilled",
-      flavor: "Savory"
-    },
-    {
-      title: "Pad Thai",
-      img: "../street food/picture/PadThai1.webp",
-      tags: ["Time: 40min", "Savory", "Thailand"],
-      link: "../street food/Food.html?page=8",
-      continent: "Asia",
-      type: "Noodles",
-      method: "Fried",
-      flavor: "Savory"
-    },
-    {
-      title: "Falafel",
-      img: "../street food/picture/Falafel1.jpg",
-      tags: ["Time: 45min", "Savory", "Middle East"],
-      link: "../street food/Food.html?page=9",
-      continent: "Asia",
-      type: "Snack",
-      method: "Fried",
-      flavor: "Savory"
-    },
-    {
-      title: "Satay",
-      img: "../street food/picture/Satay1.avif",
-      tags: ["Time: 50min", "Savory", "Malaysia"],
-      link: "../street food/Food.html?page=10",
-      continent: "Asia",
-      type: "Skewers",
-      method: "Grilled",
-      flavor: "Savory"
-    },
-    {
-      title: "Poutine",
-      img: "../street food/picture/Poutine1.jpg",
-      tags: ["Time: 30min", "Savory", "Canada"],
-      link: "../street food/Food.html?page=11",
-      continent: "North America",
-      type: "Snack",
-      method: "Fried",
-      flavor: "Savory"
-    },
-    {
-      title: "Jerk Chicken",
-      img: "../street food/picture/JerkChicken1.jpg",
-      tags: ["Time: 1h 30min", "Spicy", "Jamaica"],
-      link: "../street food/Food.html?page=12",
-      continent: "North America",
-      type: "Meat",
-      method: "Grilled",
-      flavor: "Spicy"
-    },
-    {
-      title: "Takoyaki",
-      img: "../street food/picture/Takoyaki1.avif",
-      tags: ["Time: 40min", "Savory", "Japan"],
-      link: "../street food/Food.html?page=13",
-      continent: "Asia",
-      type: "Snack",
-      method: "Fried",
-      flavor: "Savory"
-    },
-    {
-      title: "Empanadas",
-      img: "../street food/picture/Empanadas1.webp",
-      tags: ["Time: 1h", "Savory", "Argentina"],
-      link: "../street food/Food.html?page=14",
-      continent: "South America",
-      type: "Pastry",
-      method: "Baked",
-      flavor: "Savory"
-    },
-    {
-      title: "Char Kway Teow",
-      img: "../street food/picture/CharKwayTeow1.jpg",
-      tags: ["Time: 25min", "Savory", "Malaysia"],
-      link: "../street food/Food.html?page=15",
-      continent: "Asia",
-      type: "Noodles",
-      method: "Stir-fried",
-      flavor: "Savory"
-    },
-    {
-      title: "Dumplings",
-      img: "../street food/picture/Dumplings1.jpg",
-      tags: ["Time: 45min", "Savory", "China"],
-      link: "../street food/Food.html?page=16",
-      continent: "Asia",
-      type: "Dough",
-      method: "Boiled/Fried",
-      flavor: "Savory"
-    },
-    {
-      title: "Baguette Sandwich",
-      img: "../street food/picture/BaguetteSandwich1.jpg",
-      tags: ["Time: 10min", "Savory", "France"],
-      link: "../street food/Food.html?page=17",
-      continent: "Europe",
-      type: "Bread",
-      method: "Fresh",
-      flavor: "Savory"
-    },
-    {
-      title: "Suya",
-      img: "../street food/picture/Suya1.jpg",
-      tags: ["Time: 50min", "Savory", "Nigeria"],
-      link: "../street food/Food.html?page=18",
-      continent: "Africa",
-      type: "Skewers",
-      method: "Grilled",
-      flavor: "Savory"
-    },
-    {
-      title: "Dagwood Dog",
-      img: "../street food/picture/DagwoodDog1.jpg",
-      tags: ["Time: 20min", "Savory", "Australia"],
-      link: "../street food/Food.html?page=19",
-      continent: "Oceania",
-      type: "Snack",
-      method: "Fried",
-      flavor: "Savory"
-    },
-    {
-      title: "Hamdog",
-      img: "../street food/picture/Hamdog1.jpeg",
-      tags: ["Time: 30min", "Savory", "Australia"],
-      link: "../street food/Food.html?page=20",
-      continent: "Oceania",
-      type: "Snack",
-      method: "Grilled",
-      flavor: ["Savory", "Juicy"]
-    }
+  { title: "Nasi Lemak", img: "../street food/picture/NasiLemak1.webp", tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"], link: "../street food/Food.html?page=1", continent: "Asia", type: "Rice", method: "Boiling", flavor: "Spicy" },
+  { title: "Mango Sticky Rice", img: "../street food/picture/MangoRice1.jpg", tags: ["Time: 1h ", "Sweet", "Thailand"], link: "../street food/Food.html?page=2", continent: "Asia", type: "Rice", method: "Boiling", flavor: "Sweet" },
+  { title: "Taco", img: "../street food/picture/Taco1.jpg", tags: ["Time: 35min", "Savory", "Mexico"], link: "../street food/Food.html?page=3", continent: "North America", type: "Bread", method: "Grilled", flavor: "Savory" },
+  { title: "Churros", img: "../street food/picture/Churros1.webp", tags: ["Time: 25min", "Sweet", "Spain"], link: "../street food/Food.html?page=4", continent: "Europe", type: "Pastry", method: "Fried", flavor: "Sweet" },
+  { title: "Bunny Chow", img: "../street food/picture/BunnyChow1.webp", tags: ["Time: 1h 10min", "Savory", "South Africa"], link: "../street food/Food.html?page=5", continent: "Africa", type: "Bread", method: "Baked", flavor: "Savory" },
+  { title: "Meat Pie", img: "../street food/picture/MeatPie1.jpg", tags: ["Time: 1h", "Savory", "Australia"], link: "../street food/Food.html?page=6", continent: "Oceania", type: "Pastry", method: "Baked", flavor: "Savory" },
+  { title: "Arepas", img: "../street food/picture/Arepas1.jpg", tags: ["Time: 40min", "Savory", "Venezuela"], link: "../street food/Food.html?page=7", continent: "South America", type: "Bread", method: "Grilled", flavor: "Savory" },
+  { title: "Pad Thai", img: "../street food/picture/PadThai1.webp", tags: ["Time: 40min", "Savory", "Thailand"], link: "../street food/Food.html?page=8", continent: "Asia", type: "Noodles", method: "Fried", flavor: "Savory" },
+  { title: "Falafel", img: "../street food/picture/Falafel1.jpg", tags: ["Time: 45min", "Savory", "Middle East"], link: "../street food/Food.html?page=9", continent: "Asia", type: "Snack", method: "Fried", flavor: "Savory" },
+  { title: "Satay", img: "../street food/picture/Satay1.avif", tags: ["Time: 50min", "Savory", "Malaysia"], link: "../street food/Food.html?page=10", continent: "Asia", type: "Skewers", method: "Grilled", flavor: "Savory" },
+  { title: "Poutine", img: "../street food/picture/Poutine1.jpg", tags: ["Time: 30min", "Savory", "Canada"], link: "../street food/Food.html?page=11", continent: "North America", type: "Snack", method: "Fried", flavor: "Savory" },
+  { title: "Jerk Chicken", img: "../street food/picture/JerkChicken1.jpg", tags: ["Time: 1h 30min", "Spicy", "Jamaica"], link: "../street food/Food.html?page=12", continent: "North America", type: "Meat", method: "Grilled", flavor: "Spicy" },
+  { title: "Takoyaki", img: "../street food/picture/Takoyaki1.avif", tags: ["Time: 40min", "Savory", "Japan"], link: "../street food/Food.html?page=13", continent: "Asia", type: "Snack", method: "Fried", flavor: "Savory" },
+  { title: "Empanadas", img: "../street food/picture/Empanadas1.webp", tags: ["Time: 1h", "Savory", "Argentina"], link: "../street food/Food.html?page=14", continent: "South America", type: "Pastry", method: "Baked", flavor: "Savory" },
+  { title: "Char Kway Teow", img: "../street food/picture/CharKwayTeow1.jpg", tags: ["Time: 25min", "Savory", "Malaysia"], link: "../street food/Food.html?page=15", continent: "Asia", type: "Noodles", method: "Stir-fried", flavor: "Savory" },
+  { title: "Dumplings", img: "../street food/picture/Dumplings1.jpg", tags: ["Time: 45min", "Savory", "China"], link: "../street food/Food.html?page=16", continent: "Asia", type: "Dough", method: "Boiled/Fried", flavor: "Savory" },
+  { title: "Baguette Sandwich", img: "../street food/picture/BaguetteSandwich1.jpg", tags: ["Time: 10min", "Savory", "France"], link: "../street food/Food.html?page=17", continent: "Europe", type: "Bread", method: "Fresh", flavor: "Savory" },
+  { title: "Suya", img: "../street food/picture/Suya1.jpg", tags: ["Time: 50min", "Savory", "Nigeria"], link: "../street food/Food.html?page=18", continent: "Africa", type: "Skewers", method: "Grilled", flavor: "Savory" },
+  { title: "Dagwood Dog", img: "../street food/picture/DagwoodDog1.jpg", tags: ["Time: 20min", "Savory", "Australia"], link: "../street food/Food.html?page=19", continent: "Oceania", type: "Snack", method: "Fried", flavor: "Savory" },
+  { title: "Hamdog", img: "../street food/picture/Hamdog1.jpeg", tags: ["Time: 30min", "Savory", "Australia"], link: "../street food/Food.html?page=20", continent: "Oceania", type: "Snack", method: "Grilled", flavor: ["Savory", "Juicy"] }
 ];
 
-// Merge shared dataset foods to display all items
+/* Merge shared dataset foods to display all items */
 (function(){
   try {
     const siteFoods = (window.SiteData && Array.isArray(window.SiteData.foods)) ? window.SiteData.foods : [];
@@ -209,7 +29,7 @@ let foods = [
     const byTitle = new Map(foods.map(f => [f.title, f]));
     const mapped = siteFoods.map(item => {
       const existing = byTitle.get(item.title);
-      if (existing) return existing; // keep original with its Food.html link
+      if (existing) return existing;
       const fallbackLink = `../street food/Food.html?title=${encodeURIComponent(item.title)}`;
       return {
         title: item.title,
@@ -231,7 +51,7 @@ let foods = [
   } catch(e) { /* ignore */ }
 })();
 
-// If opened with ?food=Name, redirect to the individual street food page
+/* If opened with ?food=Name, redirect to the individual street food page */
 (function(){
   try {
     const params = new URLSearchParams(window.location.search);
@@ -239,9 +59,9 @@ let foods = [
     if (foodParam) {
       const match = foods.find(f => (f.title || '').toLowerCase() === foodParam.toLowerCase());
       if (match && match.link) {
-        const target = document.createElement('a');
-        target.href = match.link;
-        const targetPath = target.pathname.replace(/\\/g,'/');
+        const a = document.createElement('a');
+        a.href = match.link;
+        const targetPath = a.pathname.replace(/\\/g,'/');
         const currentPath = location.pathname.replace(/\\/g,'/');
         if (targetPath !== currentPath && !/Recipe\.html$/i.test(targetPath)) {
           window.location.replace(match.link);
@@ -249,9 +69,7 @@ let foods = [
         }
       }
     }
-  } catch (e) {
-    // ignore
-  }
+  } catch (e) {}
 })();
 
 function populateCustomSelect(id, items, allLabel) {
@@ -302,6 +120,65 @@ bindSelectEvents();
 
 const container = document.getElementById("cardContainer");
 const searchInput = document.querySelector(".searchInput");
+const searchSuggestions = document.getElementById("searchSuggestions");
+
+/* Autocomplete functionality */
+function showSearchSuggestions(query) {
+  if (!query.trim()) {
+    searchSuggestions.style.display = 'none';
+    return;
+  }
+
+  const suggestions = foods
+    .filter(food => food.title.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 8);
+
+  if (suggestions.length === 0) {
+    searchSuggestions.style.display = 'none';
+    return;
+  }
+
+  searchSuggestions.innerHTML = suggestions.map(food => `
+    <div class="search-suggestion-item" data-title="${food.title}">
+      <img src="${food.img}" alt="${food.title}" class="food-image" onerror="this.src='../LJ/pictures/cooking.jpg'">
+      <div class="food-info">
+        <div class="food-name">${food.title}</div>
+        <div class="food-meta">
+          <span class="food-country">${food.tags[2] || ''}</span> • ${food.type} • ${food.method}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  searchSuggestions.style.display = 'block';
+
+  searchSuggestions.querySelectorAll('.search-suggestion-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const title = item.dataset.title;
+      searchInput.value = title;
+      searchSuggestions.style.display = 'none';
+      filterCards();
+    });
+  });
+}
+
+/* Hide suggestions when clicking outside */
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-wrapper')) {
+    searchSuggestions.style.display = 'none';
+  }
+});
+
+/* Show suggestions on input */
+searchInput.addEventListener('input', (e) => {
+  showSearchSuggestions(e.target.value);
+  filterCards();
+});
+
+/* Show suggestions on focus if there's text */
+searchInput.addEventListener('focus', () => {
+  if (searchInput.value.trim()) showSearchSuggestions(searchInput.value);
+});
 
 function renderCards(list) {
   const container = document.getElementById("cardContainer");
@@ -332,7 +209,7 @@ function renderCards(list) {
         </div>
       </div>
     `;
-    
+
     card.addEventListener("click", (e) => {
       if (e.target.closest('.fav-heart')) return;
       window.location.href = food.link;
@@ -383,9 +260,8 @@ function filterCards() {
 
 function clearSearch() {
   searchInput.value = "";
+  searchSuggestions.style.display = 'none';
   filterCards();
 }
-
-searchInput.addEventListener("input", filterCards);
 
 renderCards(foods);
