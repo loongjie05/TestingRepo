@@ -138,6 +138,62 @@ const pages = [
       img: "picture/Satay3.webp",
       p1: "Step 1: Mix meat with soy sauce, brown sugar, turmeric, coriander, and salt. Marinate for at least 1 hour. Step 2: Thread meat onto bamboo skewers. Step 3: Grill over medium heat until cooked and slightly charred. Step 4: Mix peanut sauce ingredients until smooth. Step 5: Serve skewers with peanut sauce on the side."
     }
+  },
+  {
+    food: {
+      title: "Poutine",
+      text: "A Canadian street food classic made of French fries topped with cheese curds and hot gravy.",
+      img: "picture/Poutine2.jpg"
+    },
+    ingredients: {
+      p1: "4 cups French fries. 1 cup cheese curds. 2 cups beef or chicken gravy. Salt and pepper to taste."
+    },
+    recipe: {
+      img: "picture/Poutine3.avif",
+      p1: "Step 1: Prepare French fries until crispy. Step 2: Warm the gravy in a saucepan. Step 3: Place fries on a plate, sprinkle with cheese curds. Step 4: Pour hot gravy over the fries and curds. Step 5: Serve immediately while cheese begins to melt."
+    }
+  },
+  {
+    food: {
+      title: "Jerk Chicken",
+      text: "A Jamaican dish of chicken marinated in spicy jerk seasoning and grilled to perfection.",
+      img: "picture/JerkChicken2.jpg"
+    },
+    ingredients: {
+      p1: "1 whole chicken (cut into pieces). 2 tbsp jerk seasoning. 2 tbsp soy sauce. 1 tbsp brown sugar. 2 cloves garlic, minced. 1 tbsp lime juice. Salt and pepper to taste."
+    },
+    recipe: {
+      img: "picture/JerkChicken3.jpg",
+      p1: "Step 1: Mix jerk seasoning, soy sauce, sugar, garlic, lime juice, salt, and pepper into a marinade. Step 2: Coat chicken pieces and marinate for at least 4 hours, preferably overnight. Step 3: Preheat grill to medium-high heat. Step 4: Grill chicken for 30–40 minutes, turning occasionally, until charred and fully cooked. Step 5: Serve with rice and peas."
+    }
+  },
+  {
+    food: {
+      title: "Takoyaki",
+      text: "A Japanese snack made of wheat batter filled with diced octopus, tempura scraps, pickled ginger, and green onion, cooked in a special molded pan.",
+      img: "picture/Takoyaki2.jpg"
+    },
+    ingredients: {
+      p1: "1 cup all-purpose flour. 2 eggs. 2 cups dashi stock. 1/2 cup diced octopus. 1/4 cup chopped green onion. 2 tbsp pickled ginger. 1/4 cup tempura scraps. Takoyaki sauce, mayo, bonito flakes for topping."
+    },
+    recipe: {
+      img: "picture/Takoyaki3.jpg",
+      p1: "Step 1: Mix flour, eggs, and dashi stock to make a thin batter. Step 2: Heat a takoyaki pan and oil well. Step 3: Pour batter into molds, add octopus, green onion, ginger, and tempura scraps. Step 4: Cook until edges firm, then flip balls using skewers to form round shapes. Step 5: Continue turning until golden brown. Step 6: Serve with takoyaki sauce, mayo, and bonito flakes."
+    }
+  },
+  {
+    food: {
+      title: "Empanadas",
+      text: "A popular Latin American pastry filled with beef, chicken, or cheese, then baked or fried until golden.",
+      img: "picture/Empanadas2.jpg"
+    },
+    ingredients: {
+      p1: "2 cups flour. 1/2 cup butter. 1/3 cup water. 1 tsp salt. 1 egg (for dough). Filling: 300g ground beef or chicken, 1 onion, diced, 1 tsp paprika, 1 tsp cumin, salt, pepper."
+    },
+    recipe: {
+      img: "picture/Empanadas3.jpg",
+      p1: "Step 1: Mix flour, butter, salt, water, and egg into a dough. Rest 30 minutes. Step 2: Prepare filling by cooking meat with onion and spices. Step 3: Roll dough thin and cut circles. Step 4: Place filling in center, fold, and seal edges. Step 5: Fry until golden or bake at 200°C for 20–25 minutes. Step 6: Serve hot."
+    }
   }
 ];
 

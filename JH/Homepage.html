@@ -33,6 +33,7 @@
             <a href="../Ben/Ranking.html"class="btn View-More-btn">View More</a>
         </div>
         <div class="food-middle">
+            
             <div class="food-card">
                 <img src="pictures/laksa.jpg" alt="Laksa">
                 <p>Laksa</p>
@@ -53,36 +54,39 @@
                 <img src="pictures/roticanai.jpg" alt="Roti Canai">
                 <p>Roti Canai</p>
             </div>
+
+            
+
         </div>  
    </section>
 
    
    <section class="category-grid-section">
-    <h2 class="section-title">Explore By Country</h2>
+    <h2 class="section-title">Explore By Continents</h2>
     <div class="category-grid">
         <a href="#" class="category-item" style="background-image: url('pictures/malaysia.png');">
             <div class="category-overlay"></div>
-            <h3>Malaysia</h3>
+            <h3>Asia</h3>
         </a>
         <a href="#" class="category-item" style="background-image: url('pictures/korea.png');">
             <div class="category-overlay"></div>
-            <h3>Korea</h3>
+            <h3>Europe</h3>
         </a>
         <a href="#" class="category-item" style="background-image: url('pictures/china.png');">
             <div class="category-overlay"></div>
-            <h3>China</h3>
+            <h3>Oceania</h3>
         </a>
         <a href="#" class="category-item" style="background-image: url('pictures/india.png');">
             <div class="category-overlay"></div>
-            <h3>India</h3>
+            <h3>Africa</h3>
         </a>
         <a href="#" class="category-item" style="background-image: url('pictures/fries.png');">
             <div class="category-overlay"></div>
-            <h3>Snacks</h3>
+            <h3>South America</h3>
         </a>
         <a href="#" class="category-item" style="background-image: url('pictures/klipartz.png');">
             <div class="category-overlay"></div>
-            <h3>Local Delights</h3>
+            <h3>North America</h3>
         </a>
     </div>
    </section>
@@ -97,27 +101,27 @@
             <div class="recipe-content">
                 <h3>Nasi Lemak</h3>
                 <p>Fragrant rice cooked in coconut milk, served with sambal, peanuts & egg.</p>
-                <a href="recipes/nasi-lemak.html" class="btn">View Recipe</a>
+                <a href="../street food/Food.html?page=1" class="btn">View Recipe</a>
             </div>
         </div>
 
         <!-- Recipe Card 2 -->
         <div class="recipe-card">
-            <img src="pictures/laksa.jpg" alt="Laksa" class="recipe-img">
+            <img src="pictures/mangostickyrice.jpg" alt="Mango Sticky Rice" class="recipe-img">
             <div class="recipe-content">
-                <h3>Laksa</h3>
-                <p>A spicy noodle soup with coconut milk, chili paste, and seafood or chicken.</p>
-                <a href="recipes/laksa.html" class="btn">View Recipe</a>
+                <h3>Mango Sticky Rice</h3>
+                <p>Popular dessert that is served with rice and slices of fresh mango. </p>
+                <a href="../street food/Food.html?page=2" class="btn">View Recipe</a>
             </div>
         </div>
 
         <!-- Recipe Card 3 -->
         <div class="recipe-card">
-            <img src="pictures/charkwayteow.jpg" alt="Char Kway Teow" class="recipe-img">
+            <img src="pictures/Taco.jpg" alt="Taco" class="recipe-img">
             <div class="recipe-content">
-                <h3>Char Kway Teow</h3>
-                <p>Stir-fried flat rice noodles with prawns, egg, bean sprouts & sausage.</p>
-                <a href="recipes/char-kway-teow.html" class="btn">View Recipe</a>
+                <h3>Taco</h3>
+                <p>Thin, flat griddle-baked tortillas topped with numerous fillings, folded and eaten without any utensils.</p>
+                <a href="../street food/Food.html?page=3" class="btn">View Recipe</a>
             </div>
         </div>
     </div>
@@ -132,9 +136,37 @@
     </section>
 
 
-    <section class="signup-section">
+
+    <section class="about-section">
+    <div class="about-container">
+        <div class="about-text">
+            <h2>About Us</h2>
+            <p>
+                At Jalan Jalan Makan, we are passionate about discovering and sharing the best street foods 
+                from around the world. Our mission is to celebrate food culture and bring you closer 
+                to the tastes and traditions that make each dish special.
+            </p>
+            <a href="aboutUs.html" class="btn about-btn">Learn More</a>
+        </div>
+
+        <!-- Slideshow -->
+        <div class="about-image">
+            <div class="slideshow">
+                <img src="pictures/aboutus.jpg" alt="Street Food" class="slide active">
+                <img src="pictures/aboutus2.jpg" alt="Cooking" class="slide">
+                <img src="pictures/aboutus3.jpg" alt="Market" class="slide">
+                <img src="pictures/aboutus4.jpg" alt="Cuisine" class="slide">
+                <img src="pictures/aboutus5.jpg" alt="Cuisine" class="slide">
+            </div>
+        </div>
+    </div>
+</section>
+   
+
+
+   <section class="signup-section">
         <div class="signup-container">
-            <h2>SIGN UP TO OUR JALANJALANMAKAN WEBSITE</h2>
+            <h2>SUBSCRIBE TO OUR JALANJALANMAKAN WEBSITE</h2>
             <p>For epic events you won't want to miss, never spam!</p>
             <form class="signup-form">
                 <label for="email">Email<span class="required">*</span></label>
@@ -146,7 +178,6 @@
             </form>
         </div>
     </section>
-   
 
 
 
@@ -155,6 +186,6 @@
 
     <!-- JavaScript Imports -->
     <script src="../shared/sharedComponent.js"></script>
-    <script src="js/homepage.js"></script>
+    <script src="homepage.js"></script>
 </body>
 </html>
