@@ -1,3 +1,14 @@
+function updateLoginStatus() {
+    const loginText = document.getElementById('login-text');
+    const activeUser = localStorage.getItem('activeUserSession');
+
+    if (activeUser && loginText) {
+        loginText.textContent = activeUser;
+    } else if (loginText) {
+        loginText.textContent = 'Login';
+    }
+}
+
 // ---------- Load external HTML (header & footer) ----------
 function loadHTML(id, url) {
     // Use XMLHttpRequest instead of fetch for better file:// protocol support
@@ -81,9 +92,12 @@ function createPlaceholder(id) {
                     </div>
                     
                     <div class="login-section">
+                        <a href="../Ben/favourites.html" class="fav-link" title="Favourites" aria-label="Favourites">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
                         <button class="login-btn" onclick="window.location.href='../LJ/Login.html'">
                             <i class="fas fa-user"></i>
-                             Login
+                             <span id="login-text">Login</span>
                         </button>
                     </div>
                 </div>
@@ -155,10 +169,20 @@ window.addEventListener("resize", adjustContentMargin);
 
 // ---------- Header events ----------
 function bindHeaderEvents() {
+    updateLoginStatus();
     // Login button
     const loginBtn = document.querySelector('.login-btn');
     if(loginBtn){
-        loginBtn.addEventListener('click', () => console.log('Login button clicked'));
+        loginBtn.addEventListener('click', () => {
+            const activeUser = localStorage.getItem('activeUserSession');
+            if (activeUser) {
+                // If user is logged in, maybe go to a profile page?
+                // For now, just logs to console.
+                console.log('User profile clicked');
+            } else {
+                window.location.href='../LJ/Login.html'
+            }
+        });
     }
 
     // Navigation links

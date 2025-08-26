@@ -62,6 +62,23 @@
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
+.hero-image { position: relative; display: inline-block; }
+.hero-image .fav-heart {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 41px; /* +20% */
+    height: 41px; /* +20% */
+    border-radius: 50%;
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.hero-image .fav-heart.saved { color: #e63946; }
+
 /* Food Selection Section */
 .food-selection {
     margin-bottom: 40px;
@@ -116,6 +133,24 @@
     margin-bottom: 15px;
 }
 
+/* Wrap to position per-card favourite heart */
+.food-card .img-wrap { position: relative; }
+.food-card .img-wrap .fav-heart {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+}
+.food-card .img-wrap .fav-heart.saved { color: #e63946; }
+
 .food-card h3 {
     font-size: 1.3rem;
     color: var(--ink);
@@ -157,6 +192,23 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
+.food-image { position: relative; }
+.food-image .fav-heart {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 43px; /* +20% */
+    height: 43px; /* +20% */
+    border-radius: 50%;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+}
+.food-image .fav-heart.saved { color: #e63946; }
+
 .food-basic-info h1 {
     font-size: 2.2rem;
     color: var(--ink);
@@ -191,6 +243,91 @@
     color: var(--subtle-ink);
     line-height: 1.6;
     font-size: 1.05rem;
+}
+
+/* Learn-more button animation (match Recipe page) */
+.learn-more {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    width: 15rem;
+    height: auto;
+}
+
+.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #282936;
+    border-radius: 1.625rem;
+}
+
+.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+}
+
+.learn-more .circle .icon.arrow {
+    left: 0.825rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+}
+
+.learn-more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 3rem;
+    color: #282936;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.learn-more:hover .circle {
+    width: 100%;
+}
+
+.learn-more:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+}
+
+.learn-more:hover .button-text {
+    color: #fff;
 }
 
 /* Tabs */

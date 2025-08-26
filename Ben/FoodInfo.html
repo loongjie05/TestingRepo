@@ -24,7 +24,10 @@
                     <p>Explore the rich history, cultural significance, and fascinating details behind your favorite dishes from around the world.</p>
                 </div>
                 <div class="hero-image">
-                    <img src="pictures/food1.jpg" alt="Cooking" class="hero-img">
+                    <img id="heroFoodImage" src="../LJ/pictures/cooking.jpg" alt="Food" class="hero-img">
+                    <span class="fav-heart" id="foodHeroFavHeart" title="Toggle favourite" aria-label="Toggle favourite">
+                        <i class="fa-solid fa-heart"></i>
+                    </span>
                 </div>
             </div>
         </section>
@@ -46,6 +49,9 @@
                 <div class="food-header">
                     <div class="food-image">
                         <img id="foodImage" src="" alt="Food Image">
+                        <span class="fav-heart" id="foodFavHeart" title="Toggle favourite" aria-label="Toggle favourite">
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
                     </div>
                     <div class="food-basic-info">
                         <h1 id="foodName"></h1>
@@ -55,7 +61,12 @@
                             <span class="price-range"><i class="fa-solid fa-coins"></i> <span id="foodPrice"></span></span>
                         </div>
                         <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-                            <a id="recipeBtn" class="btn primary-btn" href="../JY/Recipe.html" target="_self"><i class="fa-solid fa-book"></i> View Recipe</a>
+                            <a id="recipeBtn" class="learn-more" href="../JY/Recipe.html" target="_self">
+                                <span class="circle" aria-hidden="true">
+                                    <span class="icon arrow"></span>
+                                </span>
+                                <span class="button-text">View Recipe</span>
+                            </a>
                         </div>
                         <p id="foodDescription" class="food-description"></p>
                     </div>

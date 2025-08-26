@@ -20,6 +20,7 @@
     }
     
     .nav-section {
+        width: 100px;
         order: 3;
         width: 100%;
         margin-top: 15px;

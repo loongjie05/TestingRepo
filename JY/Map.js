@@ -85,13 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add markers (custom icons + labels + links)
     const markers = [
-        {name: "North America", x: 450, y: 250, link: "#"},
-        {name: "South America", x: 670, y: 600, link: "#"},
-        {name: "Europe", x: 1050, y: 170, link: "#"},
-        {name: "Africa", x: 1110, y: 450, link: "#"},
-        {name: "Asia", x: 1450, y: 200, link: "#"},
-        {name: "Malaysia", x: 1560, y: 460, link: "#"},
-        {name: "Oceania", x: 1725, y: 650, link: "#"}
+        {name: "North America", x: 450, y: 250, link: "../Ben/Ranking.html?continent=North%20America"},
+        {name: "South America", x: 670, y: 600, link: "../Ben/Ranking.html?continent=South%20America"},
+        {name: "Europe", x: 1050, y: 170, link: "../Ben/Ranking.html?continent=Europe"},
+        {name: "Africa", x: 1110, y: 450, link: "../Ben/Ranking.html?continent=Africa"},
+        {name: "Asia", x: 1450, y: 200, link: "../Ben/Ranking.html?continent=Asia"},
+        {name: "Malaysia", x: 1560, y: 460, link: "../Ben/Ranking.html?continent=Malaysia"},
+        {name: "Oceania", x: 1725, y: 650, link: "../Ben/Ranking.html?continent=Oceania"}
     ];
 
     markers.forEach(marker => {
@@ -114,8 +114,8 @@ document.addEventListener("DOMContentLoaded", () => {
         group.appendChild(img);
         group.appendChild(text);
 
-        // Open link when marker is clicked
-        group.addEventListener("click", () => window.open(marker.link, "_blank"));
+        // Open link when marker is clicked (same tab)
+        group.addEventListener("click", () => window.location.href = marker.link);
 
         svg.appendChild(group);
     });

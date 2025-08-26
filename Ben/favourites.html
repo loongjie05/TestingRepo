@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourites | Jalan Jalan Makan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../shared/sharedComponent.css">
+    <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <style>
+    .content { max-width: 1200px; }
+    .fav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .fav-card { background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .fav-card .media { height: 150px; background-size: cover; background-position: center; }
+    .fav-card .body { padding: 12px; }
+    .fav-card .name { font-weight: 600; margin-bottom: 6px; }
+    .fav-card .meta { color: #777; font-size: 0.9rem; display: flex; gap: 10px; align-items: center; }
+    .empty { color: #777; text-align: center; padding: 40px 0; }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <main class="content">
+        <section class="page-title" data-aos="fade-up">
+            <h1><i class="fa-solid fa-heart" style="color:#e63946"></i> Your Favourites</h1>
+            <p>Foods you've marked with the heart icon.</p>
+        </section>
+        <section data-aos="fade-up" data-aos-delay="100">
+            <div id="favGrid" class="fav-grid"></div>
+            <div id="favEmpty" class="empty" style="display:none;">No favourites yet.</div>
+        </section>
+    </main>
+    <div id="footer"></div>
+    <script src="../shared/sharedComponent.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>try{ AOS.init({ once:true, duration:600, easing:'ease-out' }); }catch(e){}</script>
+    <script src="../shared/data.js"></script>
+    <script>
+    (function(){
+        const favs = JSON.parse(localStorage.getItem('favourites') || '[]');
+        const foods = (window.SiteData && window.SiteData.foods) ? window.SiteData.foods : [];
+        const byTitle = new Map(foods.map(f => [f.title, f]));
+        const list = favs.map(t => byTitle.get(t)).filter(Boolean);
+        const grid = document.getElementById('favGrid');
+        const empty = document.getElementById('favEmpty');
+        if(list.length === 0){ empty.style.display = 'block'; return; }
+        grid.innerHTML = list.map(item => `
+            <div class="fav-card">
+                <div class="media" style="background-image:url('${item.images?.cover || ''}')"></div>
+                <div class="body">
+                    <div class="name">${item.title}</div>
+                    <div class="meta"><i class="fa-solid fa-flag"></i> ${item.country || ''} <span style="margin-left:auto"><i class="fa-solid fa-globe"></i> ${item.continent || ''}</span></div>
+                </div>
+            </div>
+        `).join('');
+    })();
+    </script>
+</body>
+</html>
+

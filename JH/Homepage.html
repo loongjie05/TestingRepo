@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../shared/sharedComponent.css">
     <link rel="stylesheet" href="../shared/sharedComponentResponsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
     <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
     <!-- Header Import -->
     <div id="header"></div>
-    
 
     <section class="background">
         <video autoplay muted loop playsinline class="bg-video">
@@ -26,7 +26,7 @@
     </section>
 
 
-   <section class="streetfood-slideshow">
+   <section class="streetfood-slideshow" data-aos="fade-up">
         <div class="food-left">
             <h1>Malaysia Top 5</h1>
             <h1>Street Food</h1>
@@ -61,30 +61,30 @@
    </section>
 
    
-   <section class="category-grid-section">
+   <section class="category-grid-section" data-aos="fade-up" data-aos-delay="100">
     <h2 class="section-title">Explore By Continents</h2>
     <div class="category-grid">
-        <a href="#" class="category-item" style="background-image: url('pictures/malaysia.png');">
+        <a href="../Ben/Ranking.html?continent=Asia" class="category-item" style="background-image: url('pictures/malaysia.png');">
             <div class="category-overlay"></div>
             <h3>Asia</h3>
         </a>
-        <a href="#" class="category-item" style="background-image: url('pictures/korea.png');">
+        <a href="../Ben/Ranking.html?continent=Europe" class="category-item" style="background-image: url('pictures/korea.png');">
             <div class="category-overlay"></div>
             <h3>Europe</h3>
         </a>
-        <a href="#" class="category-item" style="background-image: url('pictures/china.png');">
+        <a href="../Ben/Ranking.html?continent=Oceania" class="category-item" style="background-image: url('pictures/china.png');">
             <div class="category-overlay"></div>
             <h3>Oceania</h3>
         </a>
-        <a href="#" class="category-item" style="background-image: url('pictures/india.png');">
+        <a href="../Ben/Ranking.html?continent=Africa" class="category-item" style="background-image: url('pictures/india.png');">
             <div class="category-overlay"></div>
             <h3>Africa</h3>
         </a>
-        <a href="#" class="category-item" style="background-image: url('pictures/fries.png');">
+        <a href="../Ben/Ranking.html?continent=South America" class="category-item" style="background-image: url('pictures/fries.png');">
             <div class="category-overlay"></div>
             <h3>South America</h3>
         </a>
-        <a href="#" class="category-item" style="background-image: url('pictures/klipartz.png');">
+        <a href="../Ben/Ranking.html?continent=North America" class="category-item" style="background-image: url('pictures/klipartz.png');">
             <div class="category-overlay"></div>
             <h3>North America</h3>
         </a>
@@ -92,7 +92,7 @@
    </section>
 
 
-   <section class="recipe">
+   <section class="recipe" data-aos="fade-up" data-aos-delay="150">
     <h2 class="section-title">Street Food Recipe</h2>
      <div class="recipe-grid">
         <!-- Recipe Card 1 -->
@@ -161,7 +161,8 @@
         </div>
     </div>
 </section>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>try{ AOS.init({ once:true, duration:600, easing:'ease-out' }); }catch(e){}</script>
 
 
    <section class="signup-section">
