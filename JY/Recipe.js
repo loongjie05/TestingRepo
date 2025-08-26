@@ -148,6 +148,56 @@ const foods = [
       type: "Noodles",
       method: "Stir-fried",
       flavor: "Savory"
+    },
+    {
+      title: "Dumplings",
+      img: "../street food/picture/Dumplings1.jpg",
+      tags: ["Time: 45min", "Savory", "China"],
+      link: "../street food/Food.html?page=16",
+      continent: "Asia",
+      type: "Dough",
+      method: "Boiled/Fried",
+      flavor: "Savory"
+    },
+    {
+      title: "Baguette Sandwich",
+      img: "../street food/picture/BaguetteSandwich1.jpg",
+      tags: ["Time: 10min", "Savory", "France"],
+      link: "../street food/Food.html?page=17",
+      continent: "Europe",
+      type: "Bread",
+      method: "Fresh",
+      flavor: "Savory"
+    },
+    {
+      title: "Suya",
+      img: "../street food/picture/Suya1.jpg",
+      tags: ["Time: 50min", "Savory", "Nigeria"],
+      link: "../street food/Food.html?page=18",
+      continent: "Africa",
+      type: "Skewers",
+      method: "Grilled",
+      flavor: "Savory"
+    },
+    {
+      title: "Dagwood Dog",
+      img: "../street food/picture/DagwoodDog1.jpg",
+      tags: ["Time: 20min", "Savory", "Australia"],
+      link: "../street food/Food.html?page=19",
+      continent: "Oceania",
+      type: "Snack",
+      method: "Fried",
+      flavor: "Savory"
+    },
+    {
+      title: "Hamdog",
+      img: "../street food/picture/Hamdog1.jpeg",
+      tags: ["Time: 30min", "Savory", "Australia"],
+      link: "../street food/Food.html?page=20",
+      continent: "Oceania",
+      type: "Snack",
+      method: "Grilled",
+      flavor: ["Savory", "Juicy"]
     }
 ];
 

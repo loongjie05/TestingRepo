@@ -196,19 +196,89 @@ const pages = [
     }
   },
   {
-  food: {
-    title: "Char Kway Teow",
-    text: "A popular stir-fried noodle dish made with flat rice noodles, prawns, Chinese sausage, egg, bean sprouts, and soy sauce.",
-    img: "picture/CharKwayTeow2.jpg"
+    food: {
+      title: "Char Kway Teow",
+      text: "A popular stir-fried noodle dish made with flat rice noodles, prawns, Chinese sausage, egg, bean sprouts, and soy sauce.",
+      img: "picture/CharKwayTeow2.jpg"
+    },
+    ingredients: {
+      p1: "300g flat rice noodles. 2 eggs. 100g prawns. 1 Chinese sausage, sliced. 1 cup bean sprouts. 2 tbsp soy sauce. 1 tbsp dark soy sauce. 2 cloves garlic, chopped. 1 tbsp chili paste."
+    },
+    recipe: {
+      img: "picture/CharKwayTeow3.jpg",
+      p1: "Step 1: Heat wok with oil, fry garlic until fragrant. Step 2: Add prawns and sausage, stir-fry. Step 3: Push aside, add eggs and scramble. Step 4: Add noodles, soy sauces, and chili paste, stir-fry quickly over high heat. Step 5: Toss in bean sprouts, stir briefly, and serve hot."
+    }
   },
-  ingredients: {
-    p1: "300g flat rice noodles. 2 eggs. 100g prawns. 1 Chinese sausage, sliced. 1 cup bean sprouts. 2 tbsp soy sauce. 1 tbsp dark soy sauce. 2 cloves garlic, chopped. 1 tbsp chili paste."
+  {
+    food: {
+      title: "Dumplings",
+      text: "Chinese dumplings filled with meat and vegetables, enjoyed boiled, steamed, or pan-fried.",
+      img: "picture/Dumplings2.jpg"
+    },
+    ingredients: {
+      p1: "Dumpling wrappers. 300g minced pork. 1 cup cabbage, chopped. 2 garlic cloves. 1 tbsp soy sauce. 1 tsp sesame oil. Salt and pepper."
+    },
+    recipe: {
+      img: "picture/Dumplings3.jpg",
+      p1: "Step 1: Mix pork, cabbage, garlic, soy sauce, sesame oil, salt, and pepper. Step 2: Place filling in dumpling wrapper and fold. Step 3: Boil until dumplings float, or pan-fry until golden. Step 4: Serve with dipping sauce."
+    }
   },
-  recipe: {
-    img: "picture/CharKwayTeow3.jpg",
-    p1: "Step 1: Heat wok with oil, fry garlic until fragrant. Step 2: Add prawns and sausage, stir-fry. Step 3: Push aside, add eggs and scramble. Step 4: Add noodles, soy sauces, and chili paste, stir-fry quickly over high heat. Step 5: Toss in bean sprouts, stir briefly, and serve hot."
+  {
+    food: {
+      title: "Baguette Sandwich",
+      text: "French baguette filled with butter, ham, and sometimes cheese – a popular grab-and-go snack in Paris.",
+      img: "picture/BaguetteSandwich2.jpg"
+    },
+    ingredients: {
+      p1: "1 fresh baguette. 100g ham slices. 50g butter. Cheese slices (optional). Lettuce or tomato (optional)."
+    },
+    recipe: {
+      img: "picture/BaguetteSandwich3.png",
+      p1: "Step 1: Slice baguette lengthwise. Step 2: Spread butter generously. Step 3: Layer with ham (and cheese if desired). Step 4: Close baguette and cut into portions. Serve fresh."
+    }
+  },
+  {
+    food: {
+      title: "Suya",
+      text: "Nigerian spicy skewered meat, grilled over open flame, served with onions and spicy peanut powder.",
+      img: "picture/Suya2.jpeg"
+    },
+    ingredients: {
+      p1: "500g beef or chicken, sliced thinly. 2 tbsp ground peanuts. 1 tbsp paprika. 1 tbsp cayenne pepper. 1 tsp garlic powder. Salt, oil. Bamboo skewers."
+    },
+    recipe: {
+      img: "picture/Suya3.jpg",
+      p1: "Step 1: Mix ground peanuts with spices. Step 2: Coat meat slices in spice mixture. Step 3: Thread meat onto skewers. Step 4: Grill over medium heat until cooked. Step 5: Serve hot with sliced onions and extra peanut spice."
+    }
+  },
+  {
+    food: {
+      title: "Dagwood Dog",
+      text: "A popular Australian street food, similar to a corn dog: a sausage coated in a thick batter and deep-fried until golden and crispy.",
+      img: "picture/DagwoodDog2.jpg"
+    },
+    ingredients: {
+      p1: "4 sausages, 1 cup flour, 1/2 cup cornmeal, 1 tbsp sugar, 1 tsp baking powder, 1/4 tsp salt, 1/2 cup milk, 1 egg, oil for frying, skewers."
+    },
+    recipe: {
+      img: "picture/DagwoodDog3.webp",
+      p1: "Step 1: Insert skewers into sausages. Step 2: Mix flour, cornmeal, sugar, baking powder, salt. Step 3: Whisk milk and egg, combine with dry ingredients to form thick batter. Step 4: Heat oil to 180°C. Step 5: Dip sausages in batter, fry until golden brown. Step 6: Drain on paper towels and serve hot with sauces like ketchup or mustard."
+    }
+  },
+  {
+    food: {
+      title: "Hamdog",
+      text: "A creative Australian street food combining a hamburger and a hotdog: a beef patty and a sausage served together in a single bun with toppings.",
+      img: "picture/Hamdog2.jpeg"
+    },
+    ingredients: {
+      p1: "1 hotdog bun. 1 beef patty. 1 sausage. 1 slice cheese, lettuce, tomato, onion, ketchup, mustard, mayonnaise."
+    },
+    recipe: {
+      img: "picture/Hamdog3.webp",
+      p1: "Step 1: Grill the beef patty and sausage until cooked. Step 2: Toast the bun lightly. Step 3: Place the beef patty inside the bun, add the sausage on top. Step 4: Add cheese, lettuce, tomato, onion, and sauces. Step 5: Serve hot as a street food snack."
+    }
   }
-},
 ];
 
 function renderPage() {
