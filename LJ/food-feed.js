@@ -4,25 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const foodNameInput = document.getElementById('food-name');
   const postContentInput = document.getElementById('post-content');
   const postsFeedContainer = document.getElementById('posts-feed');
+  const postLocationInput = document.getElementById('post-location');
+  const getLocationBtn = document.getElementById('get-location-btn');
+  const postFeelingSelect = document.getElementById('post-feeling');
 
   // --- Configuration ---
-  const COMMENT_DISPLAY_LIMIT = 2; // Changed from 3 to 2
+  const COMMENT_DISPLAY_LIMIT = 2; // Number of comments to show initially
 
   // --- Helper to get current user's name (from login cookie) ---
-  function getCurrentUser() {
-    // In a real app, you'd get this from a session or a dedicated 'currentUser' cookie set upon login.
-    // For this demo, we'll just find the first user in your cookie.
-    const usersCookie = getCookie('users');
-    if (usersCookie) {
-        const users = JSON.parse(usersCookie);
-        if (users.length > 0) {
-            return users[0].name; // Using the first user's name as the author
-        }
-    }
-    return "A Food Lover"; // Fallback name if no user is found
-  }
-
-  // --- Cookie Helper (needed for getCurrentUser) ---
   function getCookie(name) {
     const nameEQ = name + "=";
     const ca = document.cookie.split(';');
@@ -33,6 +22,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     return null;
   }
+
+  // This function now checks for an *active session* cookie
+  function getCurrentUser() {
+    const activeSessionCookie = getCookie('activeUserSession');
+    if (activeSessionCookie) {
+        return activeSessionCookie; // Return the username from the active session cookie
+    }
+    return "A Food Lover"; // Fallback name if no active session
+  }
+
+  // --- Geolocation Functions ---
+  async function getUserLocation() {
+    postLocationInput.value = "Fetching location...";
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        try {
+          // Using OpenStreetMap Nominatim for reverse geocoding (rate-limited, no API key)
+          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=0`);
+          const data = await response.json();
+          
+          let locationName = "Location Unknown";
+          if (data.address) {
+            if (data.address.city) locationName = data.address.city; // Prefer city
+            else if (data.address.town) locationName = data.address.town; // Fallback to town
+            else if (data.address.village) locationName = data.address.village; // Fallback to village
+            else if (data.address.country) locationName = data.address.country; // Fallback to country
+          }
+          postLocationInput.value = locationName; // Update input with human-readable location
+
+        } catch (error) {
+          console.error('Error fetching location name:', error);
+          postLocationInput.value = `Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`; // Fallback to coordinates
+        }
+      }, (error) => {
+        console.error('Geolocation error:', error);
+        postLocationInput.value = 'Location access denied or unavailable.';
+      });
+    } else {
+      postLocationInput.value = 'Geolocation not supported by this browser.';
+    }
+  }
+
+  getLocationBtn.addEventListener('click', getUserLocation);
 
   // --- Function to render a single comment ---
   function renderComment(commentListContainer, comment, postId) {
@@ -141,15 +175,21 @@ document.addEventListener('DOMContentLoaded', () => {
       year: 'numeric', month: 'long', day: 'numeric'
     });
 
-    // Determine if the current user has liked the post
     const currentUser = getCurrentUser();
     const hasLiked = post.likedBy && post.likedBy.includes(currentUser);
+
+    // Display feeling if available
+    const feelingDisplay = post.feeling ? `<span class="post-feeling"> &mdash; Feeling: ${post.feeling}</span>` : '';
+    // Display location if available
+    const locationDisplay = post.location ? `<span class="post-location"> &bull; At: ${post.location}</span>` : '';
 
     // This HTML structure matches your food-feed.css styles
     postCard.innerHTML = `
       <div class="post-header">
         <span class="post-author">${post.author}</span>
         <span class="post-date">${postDate}</span>
+        ${feelingDisplay}
+        ${locationDisplay}
       </div>
       <div class="post-body">
         <h3>${post.foodName}</h3>
@@ -175,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     postCard.querySelector('.post-like-button').addEventListener('click', handleLikeClick);
 
     // Render comments for the post
-    renderComments(postCard, post.id); // Updated call to renderComments, removed 'post.comments' argument
+    renderComments(postCard, post.id); 
   }
 
   // --- Handle Like Button Click for posts ---
@@ -241,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Re-render comments for this post to update the list and potentially the "View more" button
         const postCard = event.target.closest('.post-card');
-        renderComments(postCard, postId); // Updated call to renderComments, removed 'comments' argument
+        renderComments(postCard, postId); 
         
         commentInput.value = ''; // Clear the comment input
       }
@@ -300,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Handle form submission ---
-  createPostForm.addEventListener('submit', (event) => {
+  createPostForm.addEventListener('submit', async (event) => {
     event.preventDefault(); // This is crucial - it stops the page from reloading!
 
     const newPost = {
@@ -311,7 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
       timestamp: new Date().toISOString(),
       likes: 0,
       likedBy: [], // Track users who liked this post
-      comments: [] // Initialize comments array for new posts
+      comments: [], // Initialize comments array for new posts
+      location: postLocationInput.value.trim(), // Get location from input
+      feeling: postFeelingSelect.value // Get selected feeling
     };
 
     const storedPosts = JSON.parse(localStorage.getItem('foodPosts')) || [];
@@ -320,6 +362,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderPost(newPost); // Display the new post immediately
     createPostForm.reset(); // Clear the form fields
+    postLocationInput.value = ''; // Clear location input
+    postFeelingSelect.value = ''; // Reset feeling select
   });
 
   loadPosts(); // Initial load of posts when the page is ready
