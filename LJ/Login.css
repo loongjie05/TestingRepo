@@ -34,7 +34,6 @@ body {
 
 /* Main Content */
 .login-main {
-  top:-100px;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -43,13 +42,12 @@ body {
   position: relative;
   overflow: hidden;
   min-height: calc(100vh - 82px);
-  height:3000px;
 }
 
 /* Background Animation */
 #rain-container {
   position: absolute;
-  top: -100px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -70,7 +68,6 @@ body {
 
 /* Login Container */
 .login-container {
-  margin-top:500px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -88,7 +85,6 @@ body {
 }
 
 .card {
-  margin-top:-100px;
   width: 100%;
   background: var(--card-bg);
   border-radius: 20px;
@@ -214,6 +210,33 @@ h1 {
 
 .input:focus ~ .input-icon {
   color: var(--primary-color);
+}
+
+/* Password Toggle Icon */
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted-text-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.password-toggle:hover {
+  color: var(--primary-color);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.password-toggle.active {
+  color: var(--primary-color);
+}
+
+/* Adjust input padding for password fields to accommodate toggle icon */
+.input-wrapper:has(.password-toggle) .input {
+  padding-right: 50px;
 }
 
 /* Button Styles */
