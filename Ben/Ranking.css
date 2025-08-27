@@ -101,16 +101,24 @@ body, .ranking-page {
 	-moz-appearance: none;
 	background: transparent;
 	border: none;
-	outline: none;
+	outline: none !important;
 	font-size: 1rem;
 	font-weight: 600;
 	color: var(--ink);
 	padding: 0;
-	padding-right: 30px;
+	padding-right: 40px;
 	cursor: pointer;
 	width: 100%;
 	font-family: inherit;
 	line-height: 1.4;
+	position: relative;
+	z-index: 2;
+}
+
+.select-wrap select:focus {
+	outline: none !important;
+	box-shadow: none !important;
+	border: none !important;
 }
 
 /* Custom dropdown arrow */
@@ -122,16 +130,21 @@ body, .ranking-page {
 	transform: translateY(-50%);
 	width: 0;
 	height: 0;
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	border-top: 6px solid var(--brand);
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 9px solid var(--brand);
 	pointer-events: none;
-	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, border-top-color 0.3s ease;
 	z-index: 1;
+}
+
+.select-wrap:hover::after {
+	border-top-color: var(--brand-2);
 }
 
 .select-wrap:focus-within::after {
 	transform: translateY(-50%) rotate(180deg);
+	border-top-color: var(--brand-2);
 }
 
 /* Enhanced dropdown options styling */
@@ -200,10 +213,32 @@ body, .ranking-page {
 	color: var(--ink);
 }
 
-/* Focus fallback for older browsers */
+/* Focus fallback for older browsers - removed for cleaner look */
 .select-wrap select:focus {
-	outline: 2px solid var(--brand);
-	outline-offset: 2px;
+	outline: none !important;
+}
+
+/* Remove any browser-specific outlines */
+.select-wrap select::-moz-focus-inner {
+	border: 0;
+	outline: none;
+}
+
+/* Additional fixes for webkit browsers */
+.select-wrap select:focus::-webkit-input-placeholder {
+	color: transparent;
+}
+
+.select-wrap select:focus:-moz-placeholder {
+	color: transparent;
+}
+
+.select-wrap select:focus::-moz-placeholder {
+	color: transparent;
+}
+
+.select-wrap select:focus:-ms-input-placeholder {
+	color: transparent;
 }
 
 /* Responsive adjustments */
