@@ -1,4 +1,8 @@
 /* FoodInfo Page Styles */
+body, .ranking-page {
+    background-color: #fffaf0;
+}
+
 .food-info-page {
     --ink: #1f2937;
     --subtle-ink: #6b7280;
