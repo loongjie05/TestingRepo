@@ -190,13 +190,13 @@
     margin-bottom: 10px;
 }
 
-.social-link {
+.social {
     color: #e4405f;
     font-size: 1.5rem;
     transition: color 0.3s;
 }
 
-.social-link:hover {
+.social:hover {
     color: #c13584;
 }
 
@@ -209,13 +209,13 @@
 }
 
 /* Instagram Icon */
-.social-link {
+.social {
   color: #e4405f;
   font-size: 1.5rem; 
   transition: color 0.3s;
 }
 
-.social-link:hover {
+.social:hover {
   color: #c13584;
 }
 
