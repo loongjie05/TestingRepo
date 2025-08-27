@@ -19,6 +19,7 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
         transition: all 0.3s ease;
         cursor: pointer;
+        position: relative;
     }
     .fav-card:hover {
         transform: translate(-10px, -10px);
@@ -30,11 +31,49 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         border-color: transparent;
     }
-    .fav-card .media { height: 150px; background-size: cover; background-position: center; }
+    .fav-card .media { 
+        height: 150px; 
+        background-size: cover; 
+        background-position: center;
+        position: relative;
+    }
     .fav-card .body { padding: 12px; }
     .fav-card .name { font-weight: 600; margin-bottom: 6px; }
     .fav-card .meta { color: #777; font-size: 0.9rem; display: flex; gap: 10px; align-items: center; }
     .empty { color: #777; text-align: center; padding: 40px 0; }
+    
+    /* Delete button styles */
+    .delete-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: rgba(230, 57, 70, 0.9);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+    .delete-btn:hover {
+        background: rgba(230, 57, 70, 1);
+        transform: scale(1.1);
+    }
+    .delete-btn:active {
+        transform: scale(0.95);
+    }
+    
+    /* Image fallback */
+    .media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     </style>
 </head>
 <body>
@@ -56,22 +95,82 @@
     <script src="../shared/data.js"></script>
     <script>
     (function(){
-        const favs = JSON.parse(localStorage.getItem('favourites') || '[]');
-        const foods = (window.SiteData && window.SiteData.foods) ? window.SiteData.foods : [];
-        const byTitle = new Map(foods.map(f => [f.title, f]));
-        const list = favs.map(t => byTitle.get(t)).filter(Boolean);
-        const grid = document.getElementById('favGrid');
-        const empty = document.getElementById('favEmpty');
-        if(list.length === 0){ empty.style.display = 'block'; return; }
-        grid.innerHTML = list.map(item => `
-            <div class="fav-card">
-                <div class="media" style="background-image:url('${item.images?.cover || ''}')"></div>
-                <div class="body">
-                    <div class="name">${item.title}</div>
-                    <div class="meta"><i class="fa-solid fa-flag"></i> ${item.country || ''} <span style="margin-left:auto"><i class="fa-solid fa-globe"></i> ${item.continent || ''}</span></div>
+        function loadFavourites() {
+            const favs = JSON.parse(localStorage.getItem('favourites') || '[]');
+            const foods = (window.SiteData && window.SiteData.foods) ? window.SiteData.foods : [];
+            const byTitle = new Map(foods.map(f => [f.title, f]));
+            const list = favs.map(t => byTitle.get(t)).filter(Boolean);
+            const grid = document.getElementById('favGrid');
+            const empty = document.getElementById('favEmpty');
+            
+            if(list.length === 0){ 
+                empty.style.display = 'block'; 
+                grid.innerHTML = '';
+                return; 
+            }
+            
+            empty.style.display = 'none';
+            grid.innerHTML = list.map(item => `
+                <div class="fav-card" data-food="${item.title}">
+                    <button class="delete-btn" onclick="removeFavourite('${item.title}')" title="Remove from favourites">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                    <div class="media">
+                        <img src="${item.images?.cover || '../LJ/pictures/cooking.jpg'}" 
+                             alt="${item.title}" 
+                             onerror="this.src='../LJ/pictures/cooking.jpg'">
+                    </div>
+                    <div class="body">
+                        <div class="name">${item.title}</div>
+                        <div class="meta">
+                            <i class="fa-solid fa-flag"></i> ${item.country || ''} 
+                            <span style="margin-left:auto">
+                                <i class="fa-solid fa-globe"></i> ${item.continent || ''}
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `).join('');
+        }
+        
+        // Remove favourite function
+        window.removeFavourite = function(foodTitle) {
+            const favs = JSON.parse(localStorage.getItem('favourites') || '[]');
+            const newFavs = favs.filter(f => f !== foodTitle);
+            localStorage.setItem('favourites', JSON.stringify(newFavs));
+            
+            // Reload the favourites display
+            loadFavourites();
+            
+            // Show feedback
+            const card = document.querySelector(`[data-food="${foodTitle}"]`);
+            if (card) {
+                card.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    loadFavourites();
+                }, 300);
+            }
+        };
+        
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: scale(1); }
+                to { opacity: 0; transform: scale(0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initial load
+        loadFavourites();
+        
+        // Listen for storage changes (if user adds/removes favourites from other pages)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'favourites') {
+                loadFavourites();
+            }
+        });
     })();
     </script>
 </body>

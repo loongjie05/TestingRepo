@@ -1,11 +1,238 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- LocalStorage Helper Functions ---
+  // --- Storage Helper Functions ---
+  
+  // Local Storage Functions
   function setLocalStorage(name, value) {
-    localStorage.setItem(name, value);
+    try {
+      localStorage.setItem(name, value);
+    } catch (e) {
+      console.error('LocalStorage error:', e);
+    }
   }
 
   function getLocalStorage(name) {
-    return localStorage.getItem(name);
+    try {
+      return localStorage.getItem(name);
+    } catch (e) {
+      console.error('LocalStorage error:', e);
+      return null;
+    }
+  }
+
+  function removeLocalStorage(name) {
+    try {
+      localStorage.removeItem(name);
+    } catch (e) {
+      console.error('LocalStorage error:', e);
+    }
+  }
+
+  // Session Storage Functions
+  function setSessionStorage(name, value) {
+    try {
+      sessionStorage.setItem(name, value);
+    } catch (e) {
+      console.error('SessionStorage error:', e);
+    }
+  }
+
+  function getSessionStorage(name) {
+    try {
+      return sessionStorage.getItem(name);
+    } catch (e) {
+      console.error('SessionStorage error:', e);
+      return null;
+    }
+  }
+
+  function removeSessionStorage(name) {
+    try {
+      sessionStorage.removeItem(name);
+    } catch (e) {
+      console.error('SessionStorage error:', e);
+    }
+  }
+
+  // Cookie Functions
+  function setCookie(name, value, days = 30) {
+    try {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
+    } catch (e) {
+      console.error('Cookie error:', e);
+    }
+  }
+
+  function getCookie(name) {
+    try {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    } catch (e) {
+      console.error('Cookie error:', e);
+      return null;
+    }
+  }
+
+  function removeCookie(name) {
+    try {
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+    } catch (e) {
+      console.error('Cookie error:', e);
+    }
+  }
+
+  // --- User Session Management ---
+  function createUserSession(user) {
+    const sessionData = {
+      id: Date.now(),
+      userId: user.email,
+      userName: user.name,
+      loginTime: new Date().toISOString(),
+      lastActivity: new Date().toISOString()
+    };
+
+    // Store in multiple storage types for redundancy
+    setLocalStorage('activeUserSession', JSON.stringify(sessionData));
+    setSessionStorage('currentUser', JSON.stringify(sessionData));
+    setCookie('userSession', JSON.stringify(sessionData), 7); // 7 days
+    
+    // Update global user state
+    window.currentUser = sessionData;
+    
+    // Dispatch custom event for other components
+    window.dispatchEvent(new CustomEvent('userLogin', { detail: sessionData }));
+  }
+
+  function clearUserSession() {
+    removeLocalStorage('activeUserSession');
+    removeSessionStorage('currentUser');
+    removeCookie('userSession');
+    window.currentUser = null;
+    
+    // Dispatch custom event for other components
+    window.dispatchEvent(new CustomEvent('userLogout'));
+  }
+
+  function updateUserActivity() {
+    const user = getCurrentUser();
+    if (user) {
+      user.lastActivity = new Date().toISOString();
+      createUserSession(user);
+    }
+  }
+
+  function getCurrentUser() {
+    // Try to get user from multiple sources
+    let user = null;
+    
+    // Try localStorage first
+    const localUser = getLocalStorage('activeUserSession');
+    if (localUser) {
+      try {
+        user = JSON.parse(localUser);
+      } catch (e) {
+        console.error('Error parsing localStorage user:', e);
+      }
+    }
+    
+    // If no local user, try session storage
+    if (!user) {
+      const sessionUser = getSessionStorage('currentUser');
+      if (sessionUser) {
+        try {
+          user = JSON.parse(sessionUser);
+        } catch (e) {
+          console.error('Error parsing sessionStorage user:', e);
+        }
+      }
+    }
+    
+    // If no session user, try cookies
+    if (!user) {
+      const cookieUser = getCookie('userSession');
+      if (cookieUser) {
+        try {
+          user = JSON.parse(cookieUser);
+        } catch (e) {
+          console.error('Error parsing cookie user:', e);
+        }
+      }
+    }
+    
+    return user;
+  }
+
+  // --- Enhanced Password Validation ---
+  function validatePassword(password) {
+    const requirements = {
+      length: password.length >= 8,
+      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password),
+      number: /[0-9]+/.test(password),
+      capital: /[A-Z]+/.test(password),
+      lowercase: /[a-z]+/.test(password)
+    };
+
+    // Update visual feedback for requirements list
+    if (requirementsElements.length) requirementsElements.length.classList.toggle('valid', requirements.length);
+    if (requirementsElements.special) requirementsElements.special.classList.toggle('valid', requirements.special);
+    if (requirementsElements.number) requirementsElements.number.classList.toggle('valid', requirements.number);
+    if (requirementsElements.capital) requirementsElements.capital.classList.toggle('valid', requirements.capital);
+    if (requirementsElements.lowercase) requirementsElements.lowercase.classList.toggle('valid', requirements.lowercase);
+
+    // All requirements must be met for strongest level
+    return Object.values(requirements).every(req => req === true);
+  }
+
+  function getPasswordStrength(password) {
+    let score = 0;
+    const requirements = {
+      length: password.length >= 8,
+      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password),
+      number: /[0-9]+/.test(password),
+      capital: /[A-Z]+/.test(password),
+      lowercase: /[a-z]+/.test(password)
+    };
+
+    // Calculate score
+    Object.values(requirements).forEach(req => {
+      if (req) score++;
+    });
+
+    // Bonus points for length
+    if (password.length >= 12) score += 0.5;
+    if (password.length >= 16) score += 0.5;
+
+    return {
+      score: score,
+      level: score < 3 ? 'weak' : score < 4 ? 'medium' : score < 5 ? 'strong' : 'very-strong',
+      requirements: requirements
+    };
+  }
+
+  // --- Password Strength Indicator ---
+  function updatePasswordStrength(password) {
+    if (!strengthBar) return;
+    
+    const strength = getPasswordStrength(password);
+    
+    // Remove existing classes
+    strengthBar.classList.remove('weak', 'medium', 'strong', 'very-strong');
+    
+    // Add appropriate class
+    strengthBar.classList.add(strength.level);
+    
+    // Update strength text
+    const strengthText = strengthBar.querySelector('.strength-text');
+    if (strengthText) {
+      strengthText.textContent = strength.level.charAt(0).toUpperCase() + strength.level.slice(1);
+    }
   }
 
   // --- Custom Alert Function ---
@@ -13,13 +240,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const alert = document.getElementById('custom-alert');
     const alertMessage = document.getElementById('custom-alert-message');
     
-    alert.className = `custom-alert-${type}`;
-    alertMessage.textContent = message;
-    alert.classList.add('custom-alert-show');
-    
-    setTimeout(() => {
-      alert.classList.remove('custom-alert-show');
-    }, 3000);
+    if (alert && alertMessage) {
+      alert.className = `custom-alert-${type}`;
+      alertMessage.textContent = message;
+      alert.classList.add('custom-alert-show');
+      
+      setTimeout(() => {
+        alert.classList.remove('custom-alert-show');
+      }, 3000);
+    }
   }
 
   // --- Raining Food Animation ---
@@ -86,63 +315,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordInput = document.getElementById('signup-password');
   const emailInput = document.getElementById('signup-email');
   const strengthBar = document.getElementById('password-strength-bar');
-  const requirements = {
+  const requirementsElements = {
     length: document.getElementById('req-length'),
     special: document.getElementById('req-special'),
     number: document.getElementById('req-number'),
-    capital: document.getElementById('req-capital')
+    capital: document.getElementById('req-capital'),
+    lowercase: document.getElementById('req-lowercase')
   };
   const passwordRequirements = document.getElementById('password-requirements');
-
-  const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/; 
-  const numbers = /[0-9]+/; 
-  const capitalLetters = /[A-Z]+/; 
-
-  // --- Password Validation Function ---
-  function validatePassword(password) {
-    const lengthValid = password.length >= 8;
-    const specialValid = specialChars.test(password);
-    const numberValid = numbers.test(password);
-    const capitalValid = capitalLetters.test(password);
-
-    // Update visual feedback for requirements list
-    if (requirements.length) requirements.length.classList.toggle('valid', lengthValid);
-    if (requirements.special) requirements.special.classList.toggle('valid', specialValid);
-    if (requirements.number) requirements.number.classList.toggle('valid', numberValid);
-    if (requirements.capital) requirements.capital.classList.toggle('valid', capitalValid);
-
-    return lengthValid && specialValid && numberValid && capitalValid;
-  }
-
-  // --- Password Strength Indicator ---
-  function updatePasswordStrength(password) {
-    if (!strengthBar) return;
-    
-    let strength = 0;
-    const lengthValid = password.length >= 8;
-    const specialValid = specialChars.test(password);
-    const numberValid = numbers.test(password);
-    const capitalValid = capitalLetters.test(password);
-
-    if (lengthValid) strength++;
-    if (specialValid) strength++;
-    if (numberValid) strength++;
-    if (capitalValid) strength++;
-
-    // Remove existing classes
-    strengthBar.classList.remove('weak', 'medium', 'strong', 'very-strong');
-    
-    // Add appropriate class
-    if (strength <= 1) {
-      strengthBar.classList.add('weak');
-    } else if (strength <= 2) {
-      strengthBar.classList.add('medium');
-    } else if (strength <= 3) {
-      strengthBar.classList.add('strong');
-    } else {
-      strengthBar.classList.add('very-strong');
-    }
-  }
 
   // --- Sign Up Form Handler ---
   if (signupForm) {
@@ -173,12 +353,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Validate password strength
+      // Validate password strength - must be strongest level
       if (!validatePassword(password)) {
         if (signupPasswordError) {
-          signupPasswordError.textContent = 'Password does not meet all requirements.';
+          signupPasswordError.textContent = 'Password must meet ALL requirements for strongest level.';
           signupPasswordError.style.display = 'block';
         }
+        showAlert('Password not strong enough! Please meet all requirements.', 'error');
         return;
       }
 
@@ -194,12 +375,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Create new user
+      // Create new user with enhanced data
       const newUser = {
-        name,
-        email,
-        password,
-        createdAt: new Date().toISOString()
+        id: Date.now(),
+        name: name,
+        firstName: name.split(' ')[0], // Extract first name
+        email: email,
+        password: password, // In production, this should be hashed
+        createdAt: new Date().toISOString(),
+        lastLogin: null,
+        loginCount: 0
       };
 
       existingUsers.push(newUser);
@@ -210,6 +395,8 @@ document.addEventListener('DOMContentLoaded', () => {
         signupSuccessMessage.textContent = 'Account created successfully! Please log in.';
         signupSuccessMessage.style.display = 'block';
       }
+
+      showAlert('Account created successfully!', 'success');
 
       // Clear form
       signupForm.reset();
@@ -241,12 +428,22 @@ document.addEventListener('DOMContentLoaded', () => {
       );
 
       if (user) {
-        // Set active session
-        setLocalStorage('activeUserSession', user.name);
-        setLocalStorage('userEmail', user.email);
+        // Update user login stats
+        user.lastLogin = new Date().toISOString();
+        user.loginCount = (user.loginCount || 0) + 1;
+        
+        // Update users in storage
+        const userIndex = existingUsers.findIndex(u => u.id === user.id);
+        if (userIndex !== -1) {
+          existingUsers[userIndex] = user;
+          setLocalStorage('users', JSON.stringify(existingUsers));
+        }
+
+        // Create user session
+        createUserSession(user);
         
         // Show success message
-        showAlert(`Welcome back, ${user.name}!`, 'success');
+        showAlert(`Welcome back, ${user.firstName || user.name}!`, 'success');
         
         // Redirect to homepage after a short delay
         setTimeout(() => {
@@ -257,6 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
           loginError.textContent = 'Invalid email or password.';
           loginError.style.display = 'block';
         }
+        showAlert('Invalid email or password.', 'error');
       }
     });
   }
@@ -327,6 +525,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // Reset forms
       if (loginForm) loginForm.reset();
       if (signupForm) signupForm.reset();
+      
+      // Clear password strength indicator
+      if (strengthBar) {
+        strengthBar.classList.remove('weak', 'medium', 'strong', 'very-strong');
+        strengthBar.style.display = 'none';
+      }
+      
+      // Reset requirements
+      Object.values(requirementsElements).forEach(req => {
+        if (req) req.classList.remove('valid');
+      });
     });
   }
 
@@ -376,6 +585,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // --- User Activity Tracking ---
+  let activityTimer;
+  function resetActivityTimer() {
+    clearTimeout(activityTimer);
+    activityTimer = setTimeout(() => {
+      updateUserActivity();
+    }, 300000); // 5 minutes
+  }
+
+  // Track user activity
+  ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'].forEach(event => {
+    document.addEventListener(event, resetActivityTimer, true);
+  });
+
+  // --- Session Management ---
+  function checkSessionValidity() {
+    const user = getCurrentUser();
+    if (user) {
+      const lastActivity = new Date(user.lastActivity);
+      const now = new Date();
+      const timeDiff = now - lastActivity;
+      
+      // Session expires after 30 minutes of inactivity
+      if (timeDiff > 30 * 60 * 1000) {
+        clearUserSession();
+        showAlert('Session expired due to inactivity. Please log in again.', 'error');
+        return false;
+      }
+      
+      // Update activity
+      updateUserActivity();
+      return true;
+    }
+    return false;
+  }
+
+  // Check session validity every minute
+  setInterval(checkSessionValidity, 60000);
+
   // --- Accessibility Improvements ---
   // Add ARIA labels and roles
   const inputs = document.querySelectorAll('input');
@@ -389,5 +637,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Initialize ---
-  console.log('Login page initialized successfully');
+  console.log('Enhanced Login page initialized successfully');
+  
+  // Check if user is already logged in
+  const currentUser = getCurrentUser();
+  if (currentUser) {
+    console.log('User already logged in:', currentUser.userName);
+    // Redirect to homepage if already logged in
+    setTimeout(() => {
+      window.location.href = '../JH/Homepage.html';
+    }, 1000);
+  }
 });

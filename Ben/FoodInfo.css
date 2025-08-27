@@ -79,6 +79,203 @@
 }
 .hero-image .fav-heart.saved { color: #e63946; }
 
+/* Search Section */
+.search-section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 99999;
+}
+
+.search-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-container h2 {
+    font-size: 1.8rem;
+    color: var(--brand);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-container h2 i {
+    color: var(--brand-2);
+}
+
+.search-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 600px;
+    z-index: 99999;
+}
+
+/* Search Input */
+.searchInput {
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+    border-radius: 999px;
+    border: 2px solid var(--surface);
+    padding: 0 70px 0 40px;
+    font-size: 18px;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.185);
+    transition: 0.3s;
+    background: var(--surface);
+}
+
+.searchInput:focus { 
+    border-color: var(--brand-2); 
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3); 
+}
+
+/* Search Icon */
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; 
+    height: 20px; 
+    fill: var(--subtle-ink);
+}
+
+/* Clear Button */
+.reset {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none; 
+    background: none; 
+    cursor: pointer;
+    opacity: 0; 
+    visibility: hidden; 
+    padding: 0;
+    transition: opacity 0.3s ease;
+}
+
+.reset svg { 
+    width: 16px; 
+    height: 16px; 
+    fill: var(--subtle-ink); 
+}
+
+.searchInput:not(:placeholder-shown) ~ .reset { 
+    opacity: 1; 
+    visibility: visible; 
+}
+
+.reset:hover svg {
+    fill: var(--brand-2);
+}
+
+/* Autocomplete Search Suggestions */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 99999;
+    display: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    opacity: 1;
+    transform-origin: top center;
+    margin-top: 5px;
+}
+
+/* Items inside search dropdown */
+.search-suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.search-suggestion-item:last-child { 
+    border-bottom: none; 
+}
+
+.search-suggestion-item:hover {
+    background: linear-gradient(135deg, var(--accent) 0%, #e6b800 100%);
+    color: white;
+    transform: translateX(8px);
+}
+
+.search-suggestion-item .food-image {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 8px; 
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.search-suggestion-item .food-info { 
+    flex: 1; 
+}
+
+.search-suggestion-item .food-name { 
+    font-weight: 600; 
+    font-size: 1rem; 
+    margin-bottom: 4px; 
+}
+
+.search-suggestion-item .food-meta { 
+    font-size: 0.85rem; 
+    opacity: 0.8; 
+}
+
+.search-suggestion-item .food-country { 
+    color: var(--accent); 
+    font-weight: 500; 
+}
+
+/* Thin scrollbar for search suggestions */
+.search-suggestions::-webkit-scrollbar { 
+    width: 6px; 
+    height: 0; 
+}
+
+.search-suggestions::-webkit-scrollbar-track { 
+    background: #f1f1f1; 
+    border-radius: 3px; 
+}
+
+.search-suggestions::-webkit-scrollbar-thumb { 
+    background: var(--accent); 
+    border-radius: 3px; 
+}
+
+.search-suggestions::-webkit-scrollbar-thumb:hover { 
+    background: #e6b800; 
+}
+
+.search-suggestions { 
+    scrollbar-width: thin; 
+    scrollbar-color: var(--accent) #f1f1f1; 
+}
+
 /* Food Selection Section */
 .food-selection {
     margin-bottom: 40px;
@@ -102,6 +299,8 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     margin-top: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .food-card {
@@ -112,6 +311,8 @@
     transition: all 0.3s ease;
     cursor: pointer;
     border: 4px solid transparent;
+    position: relative;
+    z-index: 1;
 }
 
 .food-card:hover {
@@ -478,6 +679,24 @@
         font-size: 2rem;
     }
     
+    .search-section {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .search-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    .search-wrapper {
+        max-width: 100%;
+    }
+    
+    .searchInput {
+        height: 55px;
+        font-size: 16px;
+    }
+    
     .food-header {
         grid-template-columns: 1fr;
         text-align: center;
@@ -503,6 +722,32 @@
     
     .hero-section {
         padding: 30px 20px;
+    }
+    
+    .search-section {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .search-container h2 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .searchInput {
+        height: 50px;
+        font-size: 14px;
+        padding: 0 60px 0 35px;
+    }
+    
+    .search-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .reset svg {
+        width: 14px;
+        height: 14px;
     }
     
     .food-details {

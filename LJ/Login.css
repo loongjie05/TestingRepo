@@ -29,6 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   padding-top: 82px; /* Account for fixed header */
+  box-sizing: border-box;
 }
 
 /* Main Content */
@@ -40,6 +41,7 @@ body {
   padding: 2rem 1rem;
   position: relative;
   overflow: hidden;
+  min-height: calc(100vh - 82px);
 }
 
 /* Background Animation */
@@ -71,6 +73,7 @@ body {
   width: 100%;
   max-width: 450px;
   margin: 0 auto;
+  height: 600px;
 }
 
 /* Hidden Checkbox */
@@ -116,6 +119,8 @@ body {
 /* Card Styles */
 .scene {
   perspective: 1000px;
+  width: 100%;
+  height: 600px;
 }
 
 .card {
@@ -125,6 +130,7 @@ body {
   transform-style: preserve-3d;
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
+  box-sizing: border-box;
 }
 
 #flip-toggle:checked ~ .scene .card {
@@ -143,8 +149,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  justify-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .front {
@@ -158,7 +166,7 @@ body {
 /* Form Header */
 .form-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .logo-container {
@@ -193,11 +201,53 @@ h1 {
 /* Form Styles */
 .login-form, .signup-form {
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
+}
+
+/* Custom scrollbar for webkit browsers */
+.login-form::-webkit-scrollbar,
+.signup-form::-webkit-scrollbar {
+  width: 6px;
+}
+
+.login-form::-webkit-scrollbar-track,
+.signup-form::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.login-form::-webkit-scrollbar-thumb,
+.signup-form::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.login-form::-webkit-scrollbar-thumb:hover,
+.signup-form::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Ensure form elements don't shrink */
+.form-group,
+.input-wrapper,
+.button,
+.form-footer,
+.form-header {
+  flex-shrink: 0;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: left;
 }
 
@@ -268,6 +318,7 @@ h1 {
   font-family: 'Alegreya', serif;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin-top: 1.5rem;
 }
 
 .button:hover {
@@ -283,6 +334,7 @@ h1 {
 .form-footer {
   text-align: center;
   margin-top: auto;
+  padding-top: 1rem;
 }
 
 .text-muted {
@@ -326,7 +378,7 @@ h1 {
   margin-top: 0.5rem;
   display: none;
   padding: 8px 12px;
-  background: rgba(220, 53, 69, 0.1);
+  background: rgba(220, 69, 53, 0.1);
   border-radius: 8px;
   border-left: 3px solid var(--error-color);
 }
@@ -349,10 +401,11 @@ h1 {
   position: relative;
   height: 6px;
   background: #e9ecef;
-  border-radius: 3px;
-  margin-top: 8px;
+  border-radius: 4px;
+  margin-top: 6px;
   overflow: hidden;
   display: none;
+  border: 1px solid #ddd;
 }
 
 #password-strength-bar::after {
@@ -364,21 +417,22 @@ h1 {
   width: 0;
   background: var(--error-color);
   transition: all 0.3s ease;
+  border-radius: 3px;
 }
 
 #password-strength-bar.weak::after {
-  width: 25%;
+  width: 20%;
   background: var(--error-color);
 }
 
 #password-strength-bar.medium::after {
-  width: 50%;
+  width: 40%;
   background: var(--warning-color);
 }
 
 #password-strength-bar.strong::after {
-  width: 75%;
-  background: var(--success-color);
+  width: 60%;
+  background: #17a2b8;
 }
 
 #password-strength-bar.very-strong::after {
@@ -386,14 +440,26 @@ h1 {
   background: var(--success-color);
 }
 
+#password-strength-bar .strength-text {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-transform: capitalize;
+}
+
 /* Password Requirements */
 #password-requirements {
-  font-size: 0.8rem;
-  margin-top: 8px;
+  font-size: 0.75rem;
+  margin-top: 6px;
   display: none;
   background: rgba(0, 0, 0, 0.05);
-  padding: 12px;
-  border-radius: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  max-height: 120px;
+  overflow-y: auto;
 }
 
 #password-requirements p {
@@ -419,15 +485,29 @@ h1 {
   position: absolute;
   left: 0;
   color: var(--error-color);
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
 #password-requirements li.valid {
   color: var(--success-color);
+  font-weight: 600;
 }
 
 #password-requirements li.valid::before {
   content: "✓";
   color: var(--success-color);
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#password-requirements li {
+  transition: all 0.3s ease;
+  transform: translateX(0);
+}
+
+#password-requirements li.valid {
+  transform: translateX(5px);
 }
 
 /* Custom Alert */
@@ -498,6 +578,8 @@ h1 {
   
   .login-container {
     max-width: 100%;
+    height: auto;
+    min-height: 650px;
   }
   
   .face {
@@ -510,7 +592,12 @@ h1 {
   
   .card {
     height: auto;
-    min-height: 550px;
+    min-height: 650px;
+  }
+  
+  .scene {
+    height: auto;
+    min-height: 650px;
   }
   
   body {
@@ -534,6 +621,97 @@ h1 {
   
   .input {
     padding: 12px 12px 12px 45px;
+  }
+  
+  .card {
+    height: auto;
+    min-height: 600px;
+  }
+  
+  .scene {
+    height: auto;
+    min-height: 600px;
+  }
+  
+  .login-container {
+    height: auto;
+    min-height: 600px;
+  }
+  
+  .form-group {
+    margin-bottom: 0.8rem;
+  }
+  
+  .form-header {
+    margin-bottom: 0.8rem;
+  }
+  
+  .form-footer {
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+  }
+  
+  #password-requirements {
+    font-size: 0.7rem;
+    padding: 6px 8px;
+    max-height: 100px;
+  }
+  
+  #password-strength-bar {
+    height: 5px;
+    margin-top: 4px;
+  }
+  
+  .input-icon {
+    font-size: 1rem;
+  }
+  
+  .logo-icon {
+    font-size: 2.5rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+  
+  .form-group label {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .error-message {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+  
+  .success-message {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+  
+  .text-muted {
+    font-size: 0.8rem;
+  }
+  
+  .forgot-link {
+    font-size: 0.8rem;
+    margin-top: 0.8rem;
+  }
+  
+  .link {
+    font-size: 0.8rem;
+  }
+  
+  .switch {
+    padding: 6px 12px;
+  }
+  
+  .switch-label {
+    font-size: 0.8rem;
   }
 }
 

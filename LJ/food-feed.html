@@ -12,6 +12,8 @@
   <!-- Page specific styles -->
   <link href="food-feed.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <!-- Leaflet CSS for map functionality -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
@@ -35,8 +37,39 @@
         <div class="form-group">
           <label for="post-location">Location (Optional):</label>
           <div class="location-input-wrapper">
-            <input type="text" id="post-location" placeholder="e.g., Kuala Lumpur, Malaysia">
-            <button type="button" id="get-location-btn" class="button small-button">Get My Location</button>
+            <input type="text" id="post-location" placeholder="e.g., Kuala Lumpur, Malaysia" readonly>
+            <button type="button" id="get-location-btn" class="button small-button">Choose Location on Map</button>
+          </div>
+        </div>
+
+        <!-- Map Modal for Location Selection -->
+        <div id="map-modal" class="map-modal">
+          <div class="map-modal-content">
+            <div class="map-modal-header">
+              <h3>Choose Your Location</h3>
+              <button type="button" id="close-map-btn" class="close-map-btn">&times;</button>
+            </div>
+            
+            <!-- Address Search Bar -->
+            <div class="map-search-container">
+              <div class="search-input-wrapper">
+                <input type="text" id="address-search-input" placeholder="Search for an address or place..." />
+                <button type="button" id="search-address-btn" class="search-btn">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <div id="search-results" class="search-results"></div>
+            </div>
+            
+            <div id="map-container"></div>
+            <div class="map-instructions">
+              <p>Click anywhere on the map to select your location</p>
+              <p>Selected coordinates: <span id="selected-coordinates">None</span></p>
+            </div>
+            <div class="map-actions">
+              <button type="button" id="confirm-location-btn" class="button">Confirm Location</button>
+              <button type="button" id="cancel-location-btn" class="button secondary-button">Cancel</button>
+            </div>
           </div>
         </div>
 
@@ -75,6 +108,8 @@
   <script src="../shared/sharedComponent.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>try{ AOS.init({ once:true, duration:600, easing:'ease-out' }); }catch(e){}</script>
+  <!-- Leaflet.js for map functionality -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Page specific script -->
   <script src="food-feed.js" defer></script>
 
