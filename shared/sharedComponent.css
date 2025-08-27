@@ -53,6 +53,25 @@ header {
     display: flex;
     align-items: center;
     gap: 10px; /* Adjusted gap */
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+}
+
+.logo:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.logo:visited {
+    color: inherit;
+}
+
+.logo:active {
+    color: inherit;
 }
 
 .logo-icon {

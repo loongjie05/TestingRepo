@@ -241,7 +241,7 @@ let foods = [
   },
   {
     title: "Cendol",
-    img: "../street food/picture/Cendol1.jpg",
+    img: "../street food/picture/Cendol1.webp",
     tags: ["Time: 10min", "Sweet", "Malaysia"],
     link: "../street food/Food.html?page=25",
     continent: "Asia",
@@ -251,7 +251,7 @@ let foods = [
   },
   {
     title: "Asam Laksa",
-    img: "../street food/picture/AsamLaksa1.jpg",
+    img: "../street food/picture/Laksa1.jpg",
     tags: ["Time: 25-30min", "Sour & Spicy", "Malaysia"],
     link: "../street food/Food.html?page=26",
     continent: "Asia",
@@ -281,7 +281,7 @@ let foods = [
   },
   {
     title: "Sushi",
-    img: "../street food/picture/Sushi1.jpeg",
+    img: "../street food/picture/Sushi1.webp",
     tags: ["Time: 20min", "Savory", "Japan"],
     link: "../street food/Food.html?page=29",
     continent: "Asia",
@@ -291,7 +291,7 @@ let foods = [
   },
   {
     title: "Biryani",
-    img: "../street food/picture/Biryani1.jpeg",
+    img: "../street food/picture/Biryani1.jpg",
     tags: ["Time: 1hr", "Spiced", "India"],
     link: "../street food/Food.html?page=30",
     continent: "Asia",
@@ -301,7 +301,7 @@ let foods = [
   },
   {
     title: "Pho",
-    img: "../street food/picture/Pho1.jpeg",
+    img: "../street food/picture/Pho1.webp",
     tags: ["Time: 2hr", "Savory", "Vietnam"],
     link: "../street food/Food.html?page=31",
     continent: "Asia",
@@ -311,7 +311,7 @@ let foods = [
   },
   {
     title: "Tom Yum",
-    img: "../street food/picture/TomYum1.jpeg",
+    img: "../street food/picture/TomYum1.jpg",
     tags: ["Time: 40min", "Sour", "Thailand"],
     link: "../street food/Food.html?page=32",
     continent: "Asia",
@@ -321,7 +321,7 @@ let foods = [
   },
   {
     title: "Ramen",
-    img: "../street food/picture/Ramen1.jpeg",
+    img: "../street food/picture/Ramen1.jpg",
     tags: ["Time: 45min", "Savory", "Japan"],
     link: "../street food/Food.html?page=33",
     continent: "Asia",
@@ -331,7 +331,7 @@ let foods = [
   },
   {
     title: "Peking Duck",
-    img: "../street food/picture/PekingDuck1.jpeg",
+    img: "../street food/picture/PekingDuck1.jpg",
     tags: ["Time: 2hr", "Savory", "China"],
     link: "../street food/Food.html?page=34",
     continent: "Asia",
@@ -341,7 +341,7 @@ let foods = [
   },
   {
     title: "Fish and Chips",
-    img: "../street food/picture/FishAndChips1.jpeg",
+    img: "../street food/picture/FishAndChips1.webp",
     tags: ["Time: 30min", "Savory", "United Kingdom"],
     link: "../street food/Food.html?page=35",
     continent: "Europe",
@@ -351,7 +351,7 @@ let foods = [
   },
   {
     title: "Paella",
-    img: "../street food/picture/Paella1.jpeg",
+    img: "../street food/picture/Paella1.jpg",
     tags: ["Time: 1hr", "Savory", "Spain"],
     link: "../street food/Food.html?page=36",
     continent: "Europe",
@@ -361,7 +361,7 @@ let foods = [
   },
   {
     title: "Pizza Margherita",
-    img: "../street food/picture/PizzaMargherita1.jpeg",
+    img: "../street food/picture/PizzaMargherita1.webp",
     tags: ["Time: 40min", "Savory", "Italy"],
     link: "../street food/Food.html?page=37",
     continent: "Europe",
@@ -371,7 +371,7 @@ let foods = [
   },
   {
     title: "Gyro",
-    img: "../street food/picture/Gyro1.jpeg",
+    img: "../street food/picture/Gyro1.webp",
     tags: ["Time: 45min", "Savory", "Greece"],
     link: "../street food/Food.html?page=38",
     continent: "Europe",
@@ -381,7 +381,7 @@ let foods = [
   },
   {
     title: "Pierogi",
-    img: "../street food/picture/Pierogi1.jpeg",
+    img: "../street food/picture/Pierogi1.jpg",
     tags: ["Time: 50min", "Savory", "Poland"],
     link: "../street food/Food.html?page=39",
     continent: "Europe",
@@ -391,7 +391,7 @@ let foods = [
   },
   {
     title: "Goulash",
-    img: "../street food/picture/Goulash1.jpeg",
+    img: "../street food/picture/Goulash1.jpg",
     tags: ["Time: 1hr 30min", "Savory", "Hungary"],
     link: "../street food/Food.html?page=40",
     continent: "Europe",
@@ -401,7 +401,7 @@ let foods = [
   },
   {
     title: "Bratwurst",
-    img: "../street food/picture/Bratwurst1.jpeg",
+    img: "../street food/picture/Bratwurst1.jpg",
     tags: ["Time: 30min", "Savory", "Germany"],
     link: "../street food/Food.html?page=41",
     continent: "Europe",
@@ -411,7 +411,7 @@ let foods = [
   },
   {
     title: "Crêpes",
-    img: "../street food/picture/Crepes1.jpeg",
+    img: "../street food/picture/Crêpes1.jpg",
     tags: ["Time: 20min", "Sweet", "France"],
     link: "../street food/Food.html?page=42",
     continent: "Europe",
@@ -421,7 +421,7 @@ let foods = [
   },
   {
     title: "Doner Kebab",
-    img: "../street food/picture/DonerKebab1.jpeg",
+    img: "../street food/picture/DonerKebab1.jpg",
     tags: ["Time: 1hr", "Savory", "Turkey"],
     link: "../street food/Food.html?page=43",
     continent: "Europe",
@@ -511,7 +511,7 @@ let foods = [
   },
   {
     title: "Philly Cheesesteak",
-    img: "../street food/picture/PhillyCheesesteak1.jpg",
+    img: "../street food/picture/PhillyCheesesteak1.webp",
     tags: ["Time: 35 mins", "Savory", "United States"],
     link: "../street food/Food.html?page=52",
     continent: "North America",
@@ -521,7 +521,7 @@ let foods = [
   },
   {
     title: "Feijoada",
-    img: "picture/Feijoada1.jpg",
+    img: "../street food/picture/Feijoada1.jpg",
     tags: ["Time: 2hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=53",
     continent: "South America",
@@ -531,7 +531,7 @@ let foods = [
   },
   {
     title: "Asado",
-    img: "picture/Asado1.jpg",
+    img: "../street food/picture/Asado1.jpg",
     tags: ["Time: 3hr", "Savory", "Argentina"],
     link: "../street food/Food.html?page=54",
     continent: "South America",
@@ -541,7 +541,7 @@ let foods = [
   },
   {
     title: "Ceviche",
-    img: "picture/Ceviche1.jpg",
+    img: "../street food/picture/Ceviche1.jpg",
     tags: ["Time: 1hr", "Tangy", "Peru"],
     link: "../street food/Food.html?page=55",
     continent: "South America",
@@ -551,7 +551,7 @@ let foods = [
   },
   {
     title: "Pão de Queijo",
-    img: "picture/PaoDeQueijo1.jpg",
+    img: "../street food/picture/PaoDeQueijo1.jpg",
     tags: ["Time: 1hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=56",
     continent: "South America",
@@ -561,7 +561,7 @@ let foods = [
   },
   {
     title: "Churrasco",
-    img: "picture/Churrasco1.jpg",
+    img: "../street food/picture/Churrasco1.jpg",
     tags: ["Time: 2hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=57",
     continent: "South America",
@@ -571,7 +571,7 @@ let foods = [
   },
   {
     title: "Choripán",
-    img: "picture/Choripan1.jpg",
+    img: "../street food/picture/Choripan1.jpg",
     tags: ["Time: 30min", "Savory", "Argentina"],
     link: "../street food/Food.html?page=58",
     continent: "South America",
@@ -581,7 +581,7 @@ let foods = [
   },
   {
     title: "Moqueca",
-    img: "picture/Moqueca1.jpg",
+    img: "../street food/picture/Moqueca1.jpg",
     tags: ["Time: 2hr", "Savory", "Brazil"],
     link: "../street food/Food.html?page=59",
     continent: "South America",
@@ -591,7 +591,7 @@ let foods = [
   },
   {
     title: "Ajiaco",
-    img: "picture/Ajiaco1.jpg",
+    img: "../street food/picture/Ajiaco1.jpg",
     tags: ["Time: 2hr", "Savory", "Colombia"],
     link: "../street food/Food.html?page=60",
     continent: "South America",
@@ -621,7 +621,7 @@ let foods = [
   },
   {
     title: "Tagine",
-    img: "../street food/picture/Tagine1.jpg",
+    img: "../street food/picture/Tagine1.jpeg",
     tags: ["Time: 2hr", "Savory", "Morocco"],
     link: "../street food/Food.html?page=63",
     continent: "Africa",
@@ -661,7 +661,7 @@ let foods = [
   },
   {
     title: "Nyama Choma",
-    img: "../street food/picture/NyamaChoma1.jpg",
+    img: "../street food/picture/NyamaChoma1.png",
     tags: ["Time: 1hr", "Savory", "Kenya"],
     link: "../street food/Food.html?page=67",
     continent: "Africa",
@@ -681,7 +681,7 @@ let foods = [
   },
   {
     title: "Lamingtons",
-    img: "../street food/picture/Lamingtons1.jpeg",
+    img: "../street food/picture/Lamingtons1.jpg",
     tags: ["Time: 1hr", "Sweet", "Australia"],
     link: "../street food/Food.html?page=69",
     continent: "Oceania",
@@ -691,7 +691,7 @@ let foods = [
   },
   {
     title: "Pavlova",
-    img: "../street food/picture/Pavlova1.jpeg",
+    img: "../street food/picture/Pavlova1.jpg",
     tags: ["Time: 2hr", "Sweet", "New Zealand"],
     link: "../street food/Food.html?page=70",
     continent: "Oceania",
@@ -701,7 +701,7 @@ let foods = [
   },
   {
     title: "Sausage Sizzle",
-    img: "../street food/picture/SausageSizzle1.jpeg",
+    img: "../street food/picture/SausageSizzle1.jpg",
     tags: ["Time: 30min", "Savory", "Australia"],
     link: "../street food/Food.html?page=71",
     continent: "Oceania",
@@ -711,7 +711,7 @@ let foods = [
   },
   {
     title: "Chiko Roll",
-    img: "../street food/picture/ChikoRoll1.jpeg",
+    img: "../street food/picture/ChikoRoll1.jpg",
     tags: ["Time: 1hr", "Savory", "Australia"],
     link: "../street food/Food.html?page=72",
     continent: "Oceania",
@@ -721,7 +721,7 @@ let foods = [
   },
   {
     title: "Barramundi",
-    img: "../street food/picture/Barramundi1.jpeg",
+    img: "../street food/picture/Barramundi1.webp",
     tags: ["Time: 40min", "Savory", "Australia"],
     link: "../street food/Food.html?page=73",
     continent: "Oceania",
@@ -731,7 +731,7 @@ let foods = [
   },
   {
     title: "Kangaroo Steak",
-    img: "../street food/picture/KangarooSteak1.jpeg",
+    img: "../street food/picture/KangarooSteak1.jpg",
     tags: ["Time: 45min", "Savory", "Australia"],
     link: "../street food/Food.html?page=74",
     continent: "Oceania",
@@ -741,7 +741,7 @@ let foods = [
   },
   {
     title: "Fairy Bread",
-    img: "../street food/picture/FairyBread1.jpeg",
+    img: "../street food/picture/FairyBread1.jpg",
     tags: ["Time: 10min", "Sweet", "Australia"],
     link: "../street food/Food.html?page=75",
     continent: "Oceania",
@@ -751,7 +751,7 @@ let foods = [
   }
 ];
 
-// Merge shared dataset foods to display all items
+/* Merge shared dataset foods to display all items */
 (function(){
   try {
     const siteFoods = (window.SiteData && Array.isArray(window.SiteData.foods)) ? window.SiteData.foods : [];
@@ -759,7 +759,7 @@ let foods = [
     const byTitle = new Map(foods.map(f => [f.title, f]));
     const mapped = siteFoods.map(item => {
       const existing = byTitle.get(item.title);
-      if (existing) return existing; // keep original with its Food.html link
+      if (existing) return existing;
       const fallbackLink = `../street food/Food.html?title=${encodeURIComponent(item.title)}`;
       return {
         title: item.title,
@@ -781,7 +781,7 @@ let foods = [
   } catch(e) { /* ignore */ }
 })();
 
-// If opened with ?food=Name, redirect to the individual street food page
+/* If opened with ?food=Name, redirect to the individual street food page */
 (function(){
   try {
     const params = new URLSearchParams(window.location.search);
@@ -789,9 +789,9 @@ let foods = [
     if (foodParam) {
       const match = foods.find(f => (f.title || '').toLowerCase() === foodParam.toLowerCase());
       if (match && match.link) {
-        const target = document.createElement('a');
-        target.href = match.link;
-        const targetPath = target.pathname.replace(/\\/g,'/');
+        const a = document.createElement('a');
+        a.href = match.link;
+        const targetPath = a.pathname.replace(/\\/g,'/');
         const currentPath = location.pathname.replace(/\\/g,'/');
         if (targetPath !== currentPath && !/Recipe\.html$/i.test(targetPath)) {
           window.location.replace(match.link);
@@ -799,9 +799,7 @@ let foods = [
         }
       }
     }
-  } catch (e) {
-    // ignore
-  }
+  } catch (e) {}
 })();
 
 function populateCustomSelect(id, items, allLabel) {
@@ -852,6 +850,65 @@ bindSelectEvents();
 
 const container = document.getElementById("cardContainer");
 const searchInput = document.querySelector(".searchInput");
+const searchSuggestions = document.getElementById("searchSuggestions");
+
+/* Autocomplete functionality */
+function showSearchSuggestions(query) {
+  if (!query.trim()) {
+    searchSuggestions.style.display = 'none';
+    return;
+  }
+
+  const suggestions = foods
+    .filter(food => food.title.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 8);
+
+  if (suggestions.length === 0) {
+    searchSuggestions.style.display = 'none';
+    return;
+  }
+
+  searchSuggestions.innerHTML = suggestions.map(food => `
+    <div class="search-suggestion-item" data-title="${food.title}">
+      <img src="${food.img}" alt="${food.title}" class="food-image" onerror="this.src='../LJ/pictures/cooking.jpg'">
+      <div class="food-info">
+        <div class="food-name">${food.title}</div>
+        <div class="food-meta">
+          <span class="food-country">${food.tags[2] || ''}</span> • ${food.type} • ${food.method}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  searchSuggestions.style.display = 'block';
+
+  searchSuggestions.querySelectorAll('.search-suggestion-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const title = item.dataset.title;
+      searchInput.value = title;
+      searchSuggestions.style.display = 'none';
+      filterCards();
+    });
+  });
+}
+
+/* Hide suggestions when clicking outside */
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-wrapper')) {
+    searchSuggestions.style.display = 'none';
+  }
+});
+
+/* Show suggestions on input */
+searchInput.addEventListener('input', (e) => {
+  showSearchSuggestions(e.target.value);
+  filterCards();
+});
+
+/* Show suggestions on focus if there's text */
+searchInput.addEventListener('focus', () => {
+  if (searchInput.value.trim()) showSearchSuggestions(searchInput.value);
+});
 
 function renderCards(list) {
   const container = document.getElementById("cardContainer");
@@ -882,7 +939,7 @@ function renderCards(list) {
         </div>
       </div>
     `;
-    
+
     card.addEventListener("click", (e) => {
       if (e.target.closest('.fav-heart')) return;
       window.location.href = food.link;
@@ -933,9 +990,8 @@ function filterCards() {
 
 function clearSearch() {
   searchInput.value = "";
+  searchSuggestions.style.display = 'none';
   filterCards();
 }
-
-searchInput.addEventListener("input", filterCards);
 
 renderCards(foods);

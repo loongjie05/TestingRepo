@@ -220,9 +220,28 @@ body {
 }
 
 .comments-list {
-  max-height: 150px; /* Limit initial height of comments */
-  overflow: hidden; /* Hide overflowing comments */
+  max-height: 200px; /* Increased height for better visibility */
+  overflow-y: auto; /* Allow vertical scrolling when needed */
   transition: max-height 0.3s ease-out;
+}
+
+/* Custom scrollbar for comments */
+.comments-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+  background: #ffce1b;
+  border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+  background: #e6b800;
 }
 
 .comments-list.expanded {
