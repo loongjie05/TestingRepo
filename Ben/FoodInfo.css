@@ -776,6 +776,9 @@ body, .ranking-page {
     display: flex;
     gap: 8px;
     z-index: 10;
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
 }
 
 .share-btn {

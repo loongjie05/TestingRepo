@@ -924,12 +924,12 @@ function renderCards(list) {
           <i class="fa-solid fa-heart"></i>
           <span class="heart-text">♥</span>
         </span>
-        <div class="social-share-buttons">
-          <button class="share-btn facebook-share" onclick="event.stopPropagation(); shareToFacebook('${food.title}', '${food.img}', '${food.tags[2] || 'Unknown'}');" title="Share on Facebook">
-            <i class="fab fa-facebook-f"></i>
+        <div class="social-share-buttons" role="group" aria-label="Social media sharing options">
+          <button class="share-btn facebook-share" onclick="event.stopPropagation(); shareToFacebook('${food.title}', '${food.img}', '${food.tags[2] || 'Unknown'}');" title="Share on Facebook" aria-label="Share ${food.title} on Facebook">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
           </button>
-          <button class="share-btn instagram-share" onclick="event.stopPropagation(); shareToInstagram('${food.title}', '${food.img}');" title="Share on Instagram">
-            <i class="fab fa-instagram"></i>
+          <button class="share-btn instagram-share" onclick="event.stopPropagation(); shareToInstagram('${food.title}', '${food.img}');" title="Share on Instagram" aria-label="Share ${food.title} on Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -1121,5 +1121,149 @@ function updateUserFavorites(favoriteFoods) {
         }
     } catch (error) {
         console.error('Error updating user favorites:', error);
+    }
+}
+
+// Social Media Sharing Functions
+function shareToFacebook(foodTitle, imageUrl, country) {
+    try {
+        console.log('Sharing to Facebook:', { foodTitle, imageUrl, country });
+        
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(`Check out this amazing ${foodTitle} from ${country}! 🍽️`)}`;
+        console.log('Facebook share URL:', shareUrl);
+        
+        const popup = window.open(shareUrl, '_blank', 'width=600,height=400,scrollbars=yes,resizable=yes');
+        
+        if (popup) {
+            // Show success notification
+            showShareNotification(`Shared ${foodTitle} on Facebook!`, 'success');
+            
+            // Track sharing analytics
+            trackShareAnalytics('facebook', foodTitle);
+        } else {
+            // Popup was blocked
+            showShareNotification('Popup blocked! Please allow popups and try again.', 'error');
+        }
+        
+    } catch (error) {
+        console.error('Error sharing to Facebook:', error);
+        showShareNotification('Failed to share on Facebook. Please try again.', 'error');
+    }
+}
+
+function shareToInstagram(foodTitle, imageUrl) {
+    try {
+        // Instagram doesn't support direct sharing via URL, so we'll copy the food info to clipboard
+        const shareText = `🍽️ ${foodTitle}\n\nCheck out this amazing dish!\n\nDiscover more at: ${window.location.origin}${window.location.pathname}`;
+        
+        // Try modern clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareText).then(() => {
+                showShareNotification(`Copied ${foodTitle} info to clipboard! Paste it in Instagram.`, 'success');
+                trackShareAnalytics('instagram', foodTitle);
+            }).catch((clipboardError) => {
+                console.warn('Clipboard API failed, trying fallback:', clipboardError);
+                fallbackCopyToClipboard(shareText, foodTitle);
+            });
+        } else {
+            // Fallback for older browsers
+            fallbackCopyToClipboard(shareText, foodTitle);
+        }
+        
+    } catch (error) {
+        console.error('Error sharing to Instagram:', error);
+        showShareNotification('Failed to copy food info. Please try again.', 'error');
+    }
+}
+
+// Fallback clipboard function for older browsers
+function fallbackCopyToClipboard(text, foodTitle) {
+    try {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        if (successful) {
+            showShareNotification(`Copied ${foodTitle} info to clipboard! Paste it in Instagram.`, 'success');
+            trackShareAnalytics('instagram', foodTitle);
+        } else {
+            showShareNotification('Failed to copy to clipboard. Please select and copy manually.', 'error');
+        }
+    } catch (fallbackError) {
+        console.error('Fallback copy failed:', fallbackError);
+        showShareNotification('Failed to copy to clipboard. Please select and copy manually.', 'error');
+    }
+}
+
+// Show share notification
+function showShareNotification(message, type = 'info') {
+    // Remove existing notification if any
+    const existingNotification = document.querySelector('.share-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = `share-notification share-notification-${type}`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOutRight 0.3s ease-out';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 300);
+        }
+    }, 3000);
+}
+
+// Track sharing analytics
+function trackShareAnalytics(platform, foodTitle) {
+    try {
+        // Get current user if logged in
+        const userSession = JSON.parse(localStorage.getItem('activeUserSession') || '{}');
+        const userId = userSession.userId || 'anonymous';
+        
+        // Get existing analytics or create new
+        let analytics = JSON.parse(localStorage.getItem('shareAnalytics') || '{}');
+        
+        // Initialize platform data if not exists
+        if (!analytics[platform]) {
+            analytics[platform] = {
+                totalShares: 0,
+                foodShares: {},
+                lastShare: null
+            };
+        }
+        
+        // Update analytics
+        analytics[platform].totalShares++;
+        analytics[platform].lastShare = new Date().toISOString();
+        
+        if (!analytics[platform].foodShares[foodTitle]) {
+            analytics[platform].foodShares[foodTitle] = 0;
+        }
+        analytics[platform].foodShares[foodTitle]++;
+        
+        // Save analytics
+        localStorage.setItem('shareAnalytics', JSON.stringify(analytics));
+        
+        console.log(`Share tracked: ${platform} - ${foodTitle} by ${userId}`);
+        
+    } catch (error) {
+        console.error('Error tracking share analytics:', error);
     }
 }
