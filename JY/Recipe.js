@@ -968,11 +968,11 @@ function renderCards(list) {
       return;
     }
     
-    const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
-    const setFavs = (arr) => localStorage.setItem('favourites', JSON.stringify(arr));
+    const getFavs = () => { try { return JSON.parse(localStorage.getItem('favoriteFoods') || '[]'); } catch(e){ return []; } };
+    const setFavs = (arr) => localStorage.setItem('favoriteFoods', JSON.stringify(arr));
     const updateUi = () => {
-      const favs = getFavs();
-      if (favs.includes(title)) heart.classList.add('saved'); else heart.classList.remove('saved');
+      let favoriteFoods = JSON.parse(localStorage.getItem('favoriteFoods')) || [];
+      if (favoriteFoods.includes(title)) heart.classList.add('saved'); else heart.classList.remove('saved');
     };
     updateUi();
     
@@ -981,18 +981,27 @@ function renderCards(list) {
     heart.addEventListener('click', (e) => {
       e.stopPropagation();
       console.log('Heart clicked for:', title); // Debug log
-      const favs = getFavs();
-      const idx = favs.indexOf(title);
-      if (idx === -1) {
-        favs.push(title);
-        console.log('Added to favourites:', title); // Debug log
+
+      let favoriteFoods = JSON.parse(localStorage.getItem('favoriteFoods')) || [];
+      const isFavorite = favoriteFoods.includes(title);
+
+      if (isFavorite) {
+        // Remove from favorites
+        favoriteFoods = favoriteFoods.filter(food => food !== title);
+        console.log('Removed from favoriteFoods:', title); // Debug log
       } else {
-        favs.splice(idx, 1);
-        console.log('Removed from favourites:', title); // Debug log
+        // Add to favorites
+        favoriteFoods.push(title);
+        console.log('Added to favoriteFoods:', title); // Debug log
       }
-      setFavs(favs);
+
+      localStorage.setItem('favoriteFoods', JSON.stringify(favoriteFoods));
+      
+      // Update user account data
+      updateUserFavorites(favoriteFoods);
+      
       updateUi();
-      console.log('Current favourites:', favs); // Debug log
+      console.log('Current favoriteFoods:', favoriteFoods); // Debug log
     });
 
     container.appendChild(card);
@@ -1027,11 +1036,23 @@ function clearSearch() {
 
 renderCards(foods);
 
+// Migration: Check for old favorites and migrate them
+(function migrateOldFavorites() {
+  const oldFavorites = JSON.parse(localStorage.getItem('favourites') || '[]');
+  const newFavorites = JSON.parse(localStorage.getItem('favoriteFoods') || '[]');
+  
+  if (oldFavorites.length > 0 && newFavorites.length === 0) {
+    localStorage.setItem('favoriteFoods', JSON.stringify(oldFavorites));
+    updateUserFavorites(oldFavorites);
+    console.log('Migrated old favorites to new system:', oldFavorites);
+  }
+})();
+
 // Debug: Test favourites functionality
 console.log('Recipe.js loaded. Testing favourites...');
 console.log('Current foods count:', foods.length);
 console.log('Foods with "Bagel" in title:', foods.filter(f => f.title.toLowerCase().includes('bagel')));
-console.log('Current localStorage favourites:', JSON.parse(localStorage.getItem('favourites') || '[]'));
+console.log('Current localStorage favoriteFoods:', JSON.parse(localStorage.getItem('favoriteFoods') || '[]'));
 
 // Track recently viewed foods
 function trackRecentlyViewed(foodTitle) {
@@ -1068,5 +1089,37 @@ function trackRecentlyViewed(foodTitle) {
         
     } catch (error) {
         console.error('Error tracking recently viewed:', error);
+    }
+}
+
+// Function to update user's favorite foods in their account data
+function updateUserFavorites(favoriteFoods) {
+    try {
+        // Get current user session
+        const userSession = JSON.parse(localStorage.getItem('activeUserSession') || '{}');
+        if (!userSession.userId) {
+            console.log('No active user session found');
+            return;
+        }
+
+        // Get all users from storage
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        
+        // Find the current user
+        const userIndex = users.findIndex(user => user.email === userSession.userId);
+        
+        if (userIndex !== -1) {
+            // Update the user's favoriteFoods
+            users[userIndex].favoriteFoods = favoriteFoods;
+            
+            // Save back to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            console.log('Updated user favorites for:', userSession.userId, favoriteFoods);
+        } else {
+            console.error('User not found in users array:', userSession.userId);
+        }
+    } catch (error) {
+        console.error('Error updating user favorites:', error);
     }
 }

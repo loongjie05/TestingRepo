@@ -298,7 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
         password: password, // In production, this should be hashed
         createdAt: new Date().toISOString(),
         lastLogin: null,
-        loginCount: 0
+        loginCount: 0,
+        favoriteFoods: [] // Add favoriteFoods array
       };
 
       existingUsers.push(newUser);
