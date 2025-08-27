@@ -11,6 +11,7 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+    padding-top: 0 !important;
   }
   
   /* hero background */
@@ -18,7 +19,7 @@
     position: relative;               /* creates stacking context */
     z-index: 100;                     /* HERO below header but above filters/cards */
     background-size: cover;
-    padding: 40px 0;
+    padding: 82px 0 40px 0;           /* reserve space under fixed header, show image up to header */
     background: url('Picture/cooking2.jpg') center/cover no-repeat;
   }
   
@@ -50,6 +51,7 @@
   }
   
   .search-container > h1 {
+    margin: 0;                         /* prevent margin-collapsing creating top gap */
     font-family: Tahoma, Geneva, Verdana, sans-serif;
     padding: 30px;
     font-size: 80px;
