@@ -91,6 +91,61 @@
           <input type="text" id="post-feeling-custom" class="input" placeholder="Type your own feeling..." style="margin-top:8px; display:none;" />
         </div>
 
+        <!-- Media Upload Section -->
+        <div class="form-group">
+          <label for="media-upload">Add Photos, Videos, or Audio (Optional):</label>
+          <div class="media-upload-container">
+            <!-- File Input (Hidden) -->
+            <input type="file" id="media-upload" multiple accept="image/*,video/*,audio/*" style="display: none;">
+            
+            <!-- Drag and Drop Area -->
+            <div class="media-drop-zone" id="media-drop-zone">
+              <div class="drop-zone-content">
+                <div class="upload-icon">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Drag & Drop Your Media Here</h3>
+                <p>or <span class="browse-link" id="browse-link">click to browse</span></p>
+                <div class="supported-formats">
+                  <div class="format-item">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                  </div>
+                  <div class="format-item">
+                    <i class="fas fa-video"></i>
+                    <span>Videos</span>
+                  </div>
+                  <div class="format-item">
+                    <i class="fas fa-microphone"></i>
+                    <span>Audio</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Media Preview Area -->
+            <div class="media-preview-area" id="media-preview-area" style="display: none;">
+              <div class="preview-header">
+                <h4>Your Media</h4>
+                <button type="button" class="clear-all-btn" id="clear-all-media">
+                  <i class="fas fa-trash-alt"></i> Clear All
+                </button>
+              </div>
+              <div class="media-preview-grid" id="media-preview-grid">
+                <!-- Media previews will be dynamically inserted here -->
+              </div>
+            </div>
+
+            <!-- Upload Progress -->
+            <div class="upload-progress" id="upload-progress" style="display: none;">
+              <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+              <div class="progress-text" id="progress-text">Uploading...</div>
+            </div>
+          </div>
+        </div>
+
         <button type="submit" class="button">Post Review</button>
       </form>
     </section>

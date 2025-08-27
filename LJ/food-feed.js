@@ -8,16 +8,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const getLocationBtn = document.getElementById('get-location-btn');
   const postFeelingSelect = document.getElementById('post-feeling');
   const postFeelingCustom = document.getElementById('post-feeling-custom');
+  
+  // Media upload elements
+  const mediaUploadInput = document.getElementById('media-upload');
+  const mediaDropZone = document.getElementById('media-drop-zone');
+  const browseLink = document.getElementById('browse-link');
+  const mediaPreviewArea = document.getElementById('media-preview-area');
+  const mediaPreviewGrid = document.getElementById('media-preview-grid');
+  const clearAllMediaBtn = document.getElementById('clear-all-media');
+  const uploadProgress = document.getElementById('upload-progress');
+  const progressFill = document.getElementById('progress-fill');
+  const progressText = document.getElementById('progress-text');
 
   // --- Configuration ---
   const COMMENT_DISPLAY_LIMIT = 2; // Number of comments to show initially
   const GEOAPIFY_API_KEY = '3cc1eb78093c4c35bfd3445bb50d8026';
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB max file size
+  const MAX_FILES = 10; // Maximum number of files
 
   // --- Map and Location Variables ---
   let map;
   let selectedMarker;
   let selectedLatLng;
   let searchTimeout;
+
+  // --- Media Upload Variables ---
+  let uploadedFiles = [];
+  let fileCounter = 0;
 
   // --- Helper to get current user's name (from login cookie) ---
   function getCookie(name) {
@@ -39,6 +56,322 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     return "A Food Lover"; // Fallback name if no active session
   }
+
+  // --- Media Upload Functions ---
+  
+  // Format file size for display
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+  
+  // Validate file type and size
+  function validateFile(file) {
+    // Check file size
+    if (file.size > MAX_FILE_SIZE) {
+      alert(`File "${file.name}" is too large. Maximum size is 50MB.`);
+      return false;
+    }
+
+    // Check file type
+    const allowedTypes = [
+      'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp',
+      'video/mp4', 'video/mpeg', 'video/quicktime', 'video/x-msvideo',
+      'audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/m4a'
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+      alert(`File type "${file.type}" is not supported. Please use images, videos, or audio files.`);
+      return false;
+    }
+
+    return true;
+  }
+
+  // Process and add files to upload queue
+  function processFiles(files) {
+    const validFiles = Array.from(files).filter(validateFile);
+    
+    if (uploadedFiles.length + validFiles.length > MAX_FILES) {
+      alert(`You can only upload up to ${MAX_FILES} files.`);
+      return;
+    }
+
+    validFiles.forEach(file => {
+      const fileObj = {
+        id: ++fileCounter,
+        file: file,
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        preview: null
+      };
+
+      uploadedFiles.push(fileObj);
+      generatePreview(fileObj);
+    });
+
+    updatePreviewArea();
+  }
+
+  // Generate preview for different file types
+  function generatePreview(fileObj) {
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      fileObj.preview = e.target.result;
+      updatePreviewDisplay();
+    };
+
+    if (fileObj.type.startsWith('image/')) {
+      reader.readAsDataURL(fileObj.file);
+    } else if (fileObj.type.startsWith('video/')) {
+      reader.readAsDataURL(fileObj.file);
+    } else if (fileObj.type.startsWith('audio/')) {
+      reader.readAsDataURL(fileObj.file);
+    }
+  }
+
+  // Update preview area visibility and content
+  function updatePreviewArea() {
+    if (uploadedFiles.length > 0) {
+      mediaPreviewArea.style.display = 'block';
+      updatePreviewDisplay();
+    } else {
+      mediaPreviewArea.style.display = 'none';
+    }
+  }
+
+  // Update the preview display grid
+  function updatePreviewDisplay() {
+    mediaPreviewGrid.innerHTML = '';
+
+    uploadedFiles.forEach(fileObj => {
+      const previewItem = document.createElement('div');
+      previewItem.className = 'media-preview-item';
+      previewItem.dataset.fileId = fileObj.id;
+
+      let content = '';
+      
+      if (fileObj.type.startsWith('image/')) {
+        content = `
+          <img src="${fileObj.preview || ''}" alt="${fileObj.name}" />
+          <button class="remove-media-btn" onclick="removeFile(${fileObj.id})">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+      } else if (fileObj.type.startsWith('video/')) {
+        content = `
+          <video src="${fileObj.preview || ''}" muted></video>
+          <div class="media-overlay">
+            <i class="fas fa-play"></i>
+          </div>
+          <button class="remove-media-btn" onclick="removeFile(${fileObj.id})">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+      } else if (fileObj.type.startsWith('audio/')) {
+        content = `
+          <div class="audio-preview">
+            <i class="fas fa-music"></i>
+            <div class="filename">${fileObj.name}</div>
+            <div class="file-info">${formatFileSize(fileObj.size)}</div>
+          </div>
+          <button class="remove-media-btn" onclick="removeFile(${fileObj.id})">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+      }
+
+      previewItem.innerHTML = content;
+      mediaPreviewGrid.appendChild(previewItem);
+    });
+  }
+
+  // Remove a file from the upload queue
+  window.removeFile = function(fileId) {
+    uploadedFiles = uploadedFiles.filter(file => file.id !== fileId);
+    updatePreviewArea();
+  };
+
+  // Clear all uploaded files
+  function clearAllFiles() {
+    uploadedFiles = [];
+    updatePreviewArea();
+  }
+
+  // Simulate file upload progress
+  function simulateUpload() {
+    if (uploadedFiles.length === 0) return Promise.resolve();
+
+    return new Promise((resolve) => {
+      uploadProgress.style.display = 'block';
+      progressFill.style.width = '0%';
+      progressText.textContent = 'Uploading files...';
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          
+          progressFill.style.width = '100%';
+          progressText.textContent = 'Upload complete!';
+          
+          setTimeout(() => {
+            uploadProgress.style.display = 'none';
+            resolve();
+          }, 1000);
+        } else {
+          progressFill.style.width = progress + '%';
+          progressText.textContent = `Uploading... ${Math.round(progress)}%`;
+        }
+      }, 100);
+    });
+  }
+
+  // Generate media HTML for posts
+  function generateMediaHTML(mediaFiles) {
+    if (!mediaFiles || mediaFiles.length === 0) return '';
+
+    const mediaCount = mediaFiles.length;
+    let gridClass = 'single';
+    
+    if (mediaCount === 2) gridClass = 'double';
+    else if (mediaCount === 3) gridClass = 'triple';
+    else if (mediaCount === 4) gridClass = 'quad';
+    else if (mediaCount > 4) gridClass = 'many';
+
+    let mediaHTML = `<div class="post-media"><div class="post-media-grid ${gridClass}">`;
+    
+    const displayFiles = mediaCount > 5 ? mediaFiles.slice(0, 5) : mediaFiles;
+    
+    displayFiles.forEach((media, index) => {
+      if (media.type.startsWith('image/')) {
+        mediaHTML += `
+          <div class="media-item" onclick="openMediaViewer('${media.preview}', 'image')">
+            <img src="${media.preview}" alt="Food photo" />
+            <div class="media-overlay">
+              <i class="fas fa-expand"></i>
+            </div>
+          </div>
+        `;
+      } else if (media.type.startsWith('video/')) {
+        mediaHTML += `
+          <div class="media-item" onclick="openMediaViewer('${media.preview}', 'video')">
+            <video src="${media.preview}" muted></video>
+            <div class="media-overlay">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        `;
+      } else if (media.type.startsWith('audio/')) {
+        mediaHTML += `
+          <div class="media-item">
+            <div class="audio-item">
+              <i class="fas fa-music"></i>
+              <div class="audio-filename">${media.name}</div>
+              <audio controls src="${media.preview}" style="margin-top: 0.5rem; width: 100%;"></audio>
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    if (mediaCount > 5) {
+      mediaHTML += `
+        <div class="media-item more-media" onclick="showAllMedia()">
+          <div class="audio-item">
+            <i class="fas fa-plus"></i>
+            <div class="audio-filename">+${mediaCount - 5} more</div>
+          </div>
+        </div>
+      `;
+    }
+
+    mediaHTML += '</div></div>';
+    return mediaHTML;
+  }
+
+  // Open media viewer (placeholder function for future implementation)
+  window.openMediaViewer = function(src, type) {
+    if (type === 'image') {
+      window.open(src, '_blank');
+    } else if (type === 'video') {
+      const video = document.createElement('video');
+      video.src = src;
+      video.controls = true;
+      video.style.maxWidth = '100%';
+      video.style.maxHeight = '80vh';
+      
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); display: flex; align-items: center;
+        justify-content: center; z-index: 10000; cursor: pointer;
+      `;
+      modal.appendChild(video);
+      modal.onclick = () => document.body.removeChild(modal);
+      document.body.appendChild(modal);
+    }
+  };
+
+  // Show all media (placeholder function)
+  window.showAllMedia = function() {
+    alert('Feature coming soon: View all media in gallery');
+  };
+
+  // --- Event Listeners for Media Upload ---
+  
+  // Browse link click
+  browseLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    mediaUploadInput.click();
+  });
+
+  // Drop zone click
+  mediaDropZone.addEventListener('click', (e) => {
+    if (e.target === mediaDropZone || e.target.closest('.drop-zone-content')) {
+      mediaUploadInput.click();
+    }
+  });
+
+  // File input change
+  mediaUploadInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+      processFiles(e.target.files);
+      e.target.value = ''; // Reset input
+    }
+  });
+
+  // Drag and drop events
+  mediaDropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    mediaDropZone.classList.add('drag-over');
+  });
+
+  mediaDropZone.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    if (!mediaDropZone.contains(e.relatedTarget)) {
+      mediaDropZone.classList.remove('drag-over');
+    }
+  });
+
+  mediaDropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    mediaDropZone.classList.remove('drag-over');
+    
+    if (e.dataTransfer.files.length > 0) {
+      processFiles(e.dataTransfer.files);
+    }
+  });
+
+  // Clear all media button
+  clearAllMediaBtn.addEventListener('click', clearAllFiles);
 
   // --- Map and Location Functions ---
   
@@ -443,6 +776,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const feelingDisplay = post.feeling ? `<span class="post-feeling"> &mdash; Feeling: ${post.feeling}</span>` : '';
     // Display location if available
     const locationDisplay = post.location ? `<span class="post-location"> &bull; At: ${post.location}</span>` : '';
+    // Generate media HTML if available
+    const mediaHTML = generateMediaHTML(post.media);
 
     // This HTML structure matches your food-feed.css styles
     postCard.innerHTML = `
@@ -455,6 +790,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="post-body">
         <h3>${post.foodName}</h3>
         <p>${post.content}</p>
+        ${mediaHTML}
       </div>
       <div class="post-actions">
         <button class="reaction-button post-like-button ${hasLiked ? 'liked' : ''}" data-action="like">
@@ -629,6 +965,11 @@ document.addEventListener('DOMContentLoaded', () => {
   createPostForm.addEventListener('submit', async (event) => {
     event.preventDefault(); // This is crucial - it stops the page from reloading!
 
+    // Show upload progress if there are files
+    if (uploadedFiles.length > 0) {
+      await simulateUpload();
+    }
+
     const newPost = {
       id: Date.now(), // Simple unique ID using the current timestamp
       author: getCurrentUser(),
@@ -639,7 +980,14 @@ document.addEventListener('DOMContentLoaded', () => {
       likedBy: [], // Track users who liked this post
       comments: [], // Initialize comments array for new posts
       location: postLocationInput.value.trim(), // Get location from input
-      feeling: (postFeelingSelect.value === 'custom' ? postFeelingCustom.value.trim() : postFeelingSelect.value)
+      feeling: (postFeelingSelect.value === 'custom' ? postFeelingCustom.value.trim() : postFeelingSelect.value),
+      media: uploadedFiles.map(file => ({
+        id: file.id,
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        preview: file.preview
+      })) // Store media files with post
     };
 
     const storedPosts = JSON.parse(localStorage.getItem('foodPosts')) || [];
@@ -647,9 +995,13 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('foodPosts', JSON.stringify(storedPosts));
 
     renderPost(newPost); // Display the new post immediately
+    
+    // Clear the form and media files
     createPostForm.reset(); // Clear the form fields
     postLocationInput.value = ''; // Clear location input
     postFeelingSelect.value = ''; // Reset feeling select
+    postFeelingCustom.style.display = 'none'; // Hide custom feeling input
+    clearAllFiles(); // Clear all uploaded media files
   });
 
   loadPosts(); // Initial load of posts when the page is ready

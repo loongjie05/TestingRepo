@@ -26,6 +26,10 @@
         box-shadow: 10px 10px 0 #ffce1b, 20px 20px 0 #e6b800;
         border-color: #ffce1b;
     }
+    
+    .fav-card:hover .name {
+        color: #e67e22;
+    }
     .fav-card:active {
         transform: translate(0, 0);
         box-shadow: 0 4px 12px rgba(0,0,0,0.06);
@@ -111,8 +115,8 @@
             
             empty.style.display = 'none';
             grid.innerHTML = list.map(item => `
-                <div class="fav-card" data-food="${item.title}">
-                    <button class="delete-btn" onclick="removeFavourite('${item.title}')" title="Remove from favourites">
+                <div class="fav-card" data-food="${item.title}" onclick="navigateToFoodInfo('${item.title.replace(/'/g, "\\'")}')">
+                    <button class="delete-btn" onclick="event.stopPropagation(); removeFavourite('${item.title.replace(/'/g, "\\'")}');" title="Remove from favourites">
                         <i class="fa-solid fa-times"></i>
                     </button>
                     <div class="media">
@@ -128,10 +132,26 @@
                                 <i class="fa-solid fa-globe"></i> ${item.continent || ''}
                             </span>
                         </div>
+                        <div style="margin-top: 8px; text-align: center; color: #777; font-size: 0.8rem;">
+                            <i class="fa-solid fa-hand-pointer"></i> Click to view details
+                        </div>
                     </div>
                 </div>
             `).join('');
         }
+        
+        // Navigate to food info page
+        window.navigateToFoodInfo = function(foodTitle) {
+            // Provide visual feedback
+            const card = event.currentTarget;
+            card.style.transform = 'scale(0.95)';
+            card.style.transition = 'transform 0.1s ease-out';
+            
+            // Navigate to FoodInfo.html with the food parameter after short delay
+            setTimeout(() => {
+                window.location.href = `FoodInfo.html?food=${encodeURIComponent(foodTitle)}`;
+            }, 100);
+        };
         
         // Remove favourite function
         window.removeFavourite = function(foodTitle) {
