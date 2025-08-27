@@ -292,7 +292,7 @@ function getCookie(name) {
                // Update dropdown counts
         function updateDropdownCounts() {
             // Update favourites count - use the correct key that matches the favourites page
-            const favourites = JSON.parse(localStorage.getItem('favourites') || '[]');
+            const favourites = JSON.parse(localStorage.getItem('favoriteFoods') || '[]');
             const favouritesCount = document.getElementById('favourites-count');
             if (favouritesCount) {
                 favouritesCount.textContent = favourites.length;
