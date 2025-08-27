@@ -78,6 +78,12 @@ body{
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none; /* remove underline */
+}
+
+/* Ensure no underline on hover as well */
+.food-left .btn:hover {
+  text-decoration: none;
 }
 
 .food-middle {
