@@ -1,33 +1,33 @@
 let foods = [
     {
-      title: "Nasi Lemak",
-      img: "../street food/picture/NasiLemak1.webp",
-      tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
-      link: "../street food/Food.html?page=1",
-      continent: "Asia",
-      type: "Rice",
-      method: "Boiling",
-      flavor: "Spicy"
+        title: "Nasi Lemak",
+        img: "../street food/picture/NasiLemak1.webp",
+        tags: ["Time: 1h 5 mins", "Spicy", "Malaysia"],
+        link: "../street food/Food.html?page=1",
+        continent: "Asia",
+        type: "Rice",
+        method: "Boiling",
+        flavor: "Spicy"
     },
     {
-      title: "Mango Sticky Rice",
-      img: "../street food/picture/MangoRice1.jpg",
-      tags: ["Time: 1h ", "Sweet", "Thailand"],
-      link: "../street food/Food.html?page=2",
-      continent: "Asia",
-      type: "Rice",
-      method: "Boiling",
-      flavor: "Sweet"
+        title: "Mango Sticky Rice",
+        img: "../street food/picture/MangoRice1.jpg",
+        tags: ["Time: 1h ", "Sweet", "Thailand"],
+        link: "../street food/Food.html?page=2",
+        continent: "Asia",
+        type: "Rice",
+        method: "Boiling",
+        flavor: "Sweet"
     },
     {
-      title: "Taco",
-      img: "../street food/picture/Taco1.jpg",
-      tags: ["Time: 35min", "Savory", "Mexico"],
-      link: "../street food/Food.html?page=3",
-      continent: "North America",
-      type: "Bread",
-      method: "Grilled",
-      flavor: "Savory"
+        title: "Taco",
+        img: "../street food/picture/Taco1.jpg",
+        tags: ["Time: 35min", "Savory", "Mexico"],
+        link: "../street food/Food.html?page=3",
+        continent: "North America",
+        type: "Bread",
+        method: "Grilled",
+        flavor: "Savory"
     },
     {
       title: "Churros",
@@ -94,7 +94,7 @@ let foods = [
       img: "../street food/picture/Satay1.avif",
       tags: ["Time: 50min", "Savory", "Malaysia"],
       link: "../street food/Food.html?page=10",
-      continent: "Asia",
+        continent: "Asia",
       type: "Skewers",
       method: "Grilled",
       flavor: "Savory"
@@ -117,24 +117,24 @@ let foods = [
       continent: "North America",
       type: "Meat",
       method: "Grilled",
-      flavor: "Spicy"
+        flavor: "Spicy"
     },
     {
       title: "Takoyaki",
       img: "../street food/picture/Takoyaki1.avif",
       tags: ["Time: 40min", "Savory", "Japan"],
       link: "../street food/Food.html?page=13",
-      continent: "Asia",
+        continent: "Asia",
       type: "Snack",
       method: "Fried",
-      flavor: "Savory"
+        flavor: "Savory"
     },
     {
       title: "Empanadas",
       img: "../street food/picture/Empanadas1.webp",
       tags: ["Time: 1h", "Savory", "Argentina"],
       link: "../street food/Food.html?page=14",
-      continent: "South America",
+        continent: "South America",
       type: "Pastry",
       method: "Baked",
       flavor: "Savory"
@@ -407,19 +407,19 @@ let foods = [
     continent: "Europe",
     type: "Sausage",
     method: "Grilled",
-    flavor: "Savory"
-  },
-  {
+        flavor: "Savory"
+    },
+    {
     title: "Crêpes",
     img: "../street food/picture/Crêpes1.jpg",
     tags: ["Time: 20min", "Sweet", "France"],
     link: "../street food/Food.html?page=42",
-    continent: "Europe",
+        continent: "Europe",
     type: "Pastry",
     method: "Pan-Fried",
-    flavor: "Sweet"
-  },
-  {
+        flavor: "Sweet"
+    },
+    {
     title: "Doner Kebab",
     img: "../street food/picture/DonerKebab1.jpg",
     tags: ["Time: 1hr", "Savory", "Turkey"],
@@ -514,7 +514,7 @@ let foods = [
     img: "../street food/picture/PhillyCheesesteak1.webp",
     tags: ["Time: 35 mins", "Savory", "United States"],
     link: "../street food/Food.html?page=52",
-    continent: "North America",
+        continent: "North America",
     type: "Sandwich",
     method: "Grilled",
     flavor: "Savory"
@@ -657,9 +657,9 @@ let foods = [
     continent: "Africa",
     type: "Skewers",
     method: "Grilled",
-    flavor: "Spicy"
-  },
-  {
+        flavor: "Spicy"
+    },
+    {
     title: "Nyama Choma",
     img: "../street food/picture/NyamaChoma1.png",
     tags: ["Time: 1hr", "Savory", "Kenya"],
@@ -727,9 +727,9 @@ let foods = [
     continent: "Oceania",
     type: "Fish",
     method: "Grilled",
-    flavor: "Savory"
-  },
-  {
+        flavor: "Savory"
+    },
+    {
     title: "Kangaroo Steak",
     img: "../street food/picture/KangarooSteak1.jpg",
     tags: ["Time: 45min", "Savory", "Australia"],
@@ -737,7 +737,7 @@ let foods = [
     continent: "Oceania",
     type: "Meat",
     method: "Grilled",
-    flavor: "Savory"
+        flavor: "Savory"
   },
   {
     title: "Fairy Bread",
@@ -920,8 +920,9 @@ function renderCards(list) {
 
     card.innerHTML = `
       <div class="container-project" style="background-image: url('${food.img}');">
-        <span class="fav-heart" data-title="${food.title.replace(/"/g,'&quot;')}" title="Toggle favourite" aria-label="Toggle favourite">
+        <span class="fav-heart" data-title="${food.title}" title="Click to add/remove from favourites" aria-label="Toggle favourite">
           <i class="fa-solid fa-heart"></i>
+          <span class="heart-text">♥</span>
         </span>
       </div>
       <div class="project-info">
@@ -939,15 +940,26 @@ function renderCards(list) {
         </div>
       </div>
     `;
-
+    
     card.addEventListener("click", (e) => {
       if (e.target.closest('.fav-heart')) return;
+      
+      // Track recently viewed
+      trackRecentlyViewed(food.title);
+      
       window.location.href = food.link;
     });
 
     // Favourite heart toggle
     const heart = card.querySelector('.container-project .fav-heart');
     const title = food.title;
+    
+    // Debug: Check if heart element exists
+    if (!heart) {
+      console.error('Heart element not found for:', title);
+      return;
+    }
+    
     const getFavs = () => { try { return JSON.parse(localStorage.getItem('favourites') || '[]'); } catch(e){ return []; } };
     const setFavs = (arr) => localStorage.setItem('favourites', JSON.stringify(arr));
     const updateUi = () => {
@@ -955,13 +967,24 @@ function renderCards(list) {
       if (favs.includes(title)) heart.classList.add('saved'); else heart.classList.remove('saved');
     };
     updateUi();
+    
+    // Debug: Log heart element info
+    console.log('Heart element created for:', title, heart);
     heart.addEventListener('click', (e) => {
       e.stopPropagation();
+      console.log('Heart clicked for:', title); // Debug log
       const favs = getFavs();
       const idx = favs.indexOf(title);
-      if (idx === -1) favs.push(title); else favs.splice(idx, 1);
+      if (idx === -1) {
+        favs.push(title);
+        console.log('Added to favourites:', title); // Debug log
+      } else {
+        favs.splice(idx, 1);
+        console.log('Removed from favourites:', title); // Debug log
+      }
       setFavs(favs);
       updateUi();
+      console.log('Current favourites:', favs); // Debug log
     });
 
     container.appendChild(card);
@@ -995,3 +1018,47 @@ function clearSearch() {
 }
 
 renderCards(foods);
+
+// Debug: Test favourites functionality
+console.log('Recipe.js loaded. Testing favourites...');
+console.log('Current foods count:', foods.length);
+console.log('Foods with "Bagel" in title:', foods.filter(f => f.title.toLowerCase().includes('bagel')));
+console.log('Current localStorage favourites:', JSON.parse(localStorage.getItem('favourites') || '[]'));
+
+// Track recently viewed foods
+function trackRecentlyViewed(foodTitle) {
+    try {
+        // Get current recently viewed list
+        let recentlyViewed = JSON.parse(sessionStorage.getItem('recentlyViewed') || '[]');
+        
+        // Remove if already exists (to avoid duplicates)
+        recentlyViewed = recentlyViewed.filter(item => item.title !== foodTitle);
+        
+        // Get food data for additional info
+        const food = foods.find(f => f.title === foodTitle);
+        const foodInfo = {
+            title: foodTitle,
+            country: food?.tags?.[2] || 'Unknown',
+            timestamp: new Date().toISOString()
+        };
+        
+        // Add to beginning of list
+        recentlyViewed.unshift(foodInfo);
+        
+        // Keep only last 10 items
+        if (recentlyViewed.length > 10) {
+            recentlyViewed = recentlyViewed.slice(0, 10);
+        }
+        
+        // Save back to session storage
+        sessionStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+        
+        // Update dropdown count if available
+        if (window.updateDropdownCounts) {
+            window.updateDropdownCounts();
+        }
+        
+    } catch (error) {
+        console.error('Error tracking recently viewed:', error);
+    }
+}

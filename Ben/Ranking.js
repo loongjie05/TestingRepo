@@ -183,6 +183,8 @@
 			card.style.cursor = 'pointer';
 			card.addEventListener('click', () => {
 				const name = card.getAttribute('data-food-name');
+				// Track recently viewed
+				trackRecentlyViewed(name);
 				const url = `../Ben/FoodInfo.html?food=${encodeURIComponent(name)}`;
 				window.location.href = url;
 			});
@@ -193,6 +195,8 @@
 				card.style.cursor = 'pointer';
 				card.addEventListener('click', () => {
 					const name = card.getAttribute('data-food-name');
+					// Track recently viewed
+					trackRecentlyViewed(name);
 					const url = `../Ben/FoodInfo.html?food=${encodeURIComponent(name)}`;
 					window.location.href = url;
 				});
@@ -217,6 +221,44 @@
 	
 	// Render the initial continent
 	render(initialContinent);
+	
+	// Track recently viewed foods
+	function trackRecentlyViewed(foodTitle) {
+		try {
+			// Get current recently viewed list
+			let recentlyViewed = JSON.parse(sessionStorage.getItem('recentlyViewed') || '[]');
+			
+			// Remove if already exists (to avoid duplicates)
+			recentlyViewed = recentlyViewed.filter(item => item.title !== foodTitle);
+			
+			// Get food data for additional info
+			const food = window.SiteData?.foods?.find(f => f.title === foodTitle);
+			const foodInfo = {
+				title: foodTitle,
+				country: food?.country || 'Unknown',
+				timestamp: new Date().toISOString()
+			};
+			
+			// Add to beginning of list
+			recentlyViewed.unshift(foodInfo);
+			
+			// Keep only last 10 items
+			if (recentlyViewed.length > 10) {
+				recentlyViewed = recentlyViewed.slice(0, 10);
+			}
+			
+			// Save back to session storage
+			sessionStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+			
+			// Update dropdown count if available
+			if (window.updateDropdownCounts) {
+				window.updateDropdownCounts();
+			}
+			
+		} catch (error) {
+			console.error('Error tracking recently viewed:', error);
+		}
+	}
 })();
 
 

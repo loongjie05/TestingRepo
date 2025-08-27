@@ -120,7 +120,9 @@
                   <i class="fas fa-lock input-icon"></i>
                   <input type="password" class="input" id="signup-password" placeholder="••••••••" required>
                 </div>
-                <div id="password-strength-bar"></div>
+                <div id="password-strength-bar">
+                  <div class="strength-text">Weak</div>
+                </div>
                 <div id="password-requirements">
                   <p>Password must contain:</p>
                   <ul>
@@ -128,6 +130,7 @@
                     <li id="req-special">At least 1 special symbol</li>
                     <li id="req-number">At least 1 numeric number</li>
                     <li id="req-capital">At least 1 capital letter</li>
+                    <li id="req-lowercase">At least 1 lowercase letter</li>
                   </ul>
                 </div>
                 <div id="signup-password-error" class="error-message"></div>
