@@ -1,4 +1,4 @@
-                       function updateLoginStatus() {
+function updateLoginStatus() {
             console.log('=== updateLoginStatus called ===');
             
             // Check for multiple login buttons (in case there are duplicates)
@@ -536,7 +536,7 @@ function createPlaceholder(id) {
                                    <button id="logout-button" class="login-btn">
                                        <i class="fas fa-sign-out-alt"></i>
                                        <span>Logout</span>
-                                   </button>
+                        </button>
                                </div>
                     </div>
                 </div>
