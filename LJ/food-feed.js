@@ -79,8 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check file type
     const allowedTypes = [
       'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp',
-      'video/mp4', 'video/mpeg', 'video/quicktime', 'video/x-msvideo',
-      'audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/m4a'
+      'video/mp4', 'video/mpeg', 'video/quicktime', 'video/x-msvideo'
     ];
 
     if (!allowedTypes.includes(file.type)) {
@@ -130,8 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
       reader.readAsDataURL(fileObj.file);
     } else if (fileObj.type.startsWith('video/')) {
       reader.readAsDataURL(fileObj.file);
-    } else if (fileObj.type.startsWith('audio/')) {
-      reader.readAsDataURL(fileObj.file);
     }
   }
 
@@ -168,17 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <video src="${fileObj.preview || ''}" muted></video>
           <div class="media-overlay">
             <i class="fas fa-play"></i>
-          </div>
-          <button class="remove-media-btn" onclick="removeFile(${fileObj.id})">
-            <i class="fas fa-times"></i>
-          </button>
-        `;
-      } else if (fileObj.type.startsWith('audio/')) {
-        content = `
-          <div class="audio-preview">
-            <i class="fas fa-music"></i>
-            <div class="filename">${fileObj.name}</div>
-            <div class="file-info">${formatFileSize(fileObj.size)}</div>
           </div>
           <button class="remove-media-btn" onclick="removeFile(${fileObj.id})">
             <i class="fas fa-times"></i>
@@ -269,16 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
         `;
-      } else if (media.type.startsWith('audio/')) {
-        mediaHTML += `
-          <div class="media-item">
-            <div class="audio-item">
-              <i class="fas fa-music"></i>
-              <div class="audio-filename">${media.name}</div>
-              <audio controls src="${media.preview}" style="margin-top: 0.5rem; width: 100%;"></audio>
-            </div>
-          </div>
-        `;
       }
     });
 
@@ -297,10 +273,46 @@ document.addEventListener('DOMContentLoaded', () => {
     return mediaHTML;
   }
 
-  // Open media viewer (placeholder function for future implementation)
+  // Open media viewer with modal overlay
   window.openMediaViewer = function(src, type) {
     if (type === 'image') {
-      window.open(src, '_blank');
+      // Create modal for image fullscreen view
+      const modal = document.createElement('div');
+      modal.className = 'media-modal';
+      modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.9); display: flex; align-items: center;
+        justify-content: center; z-index: 10000; cursor: pointer;
+      `;
+      
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.cssText = `
+        max-width: 95%; max-height: 95%; object-fit: contain;
+        border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+      
+      // Add close button
+      const closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '&times;';
+      closeBtn.style.cssText = `
+        position: absolute; top: 20px; right: 30px; background: rgba(255,255,255,0.2);
+        color: white; border: none; font-size: 30px; cursor: pointer;
+        width: 50px; height: 50px; border-radius: 50%; display: flex;
+        align-items: center; justify-content: center; transition: background 0.3s;
+      `;
+      closeBtn.onmouseover = () => closeBtn.style.background = 'rgba(255,255,255,0.3)';
+      closeBtn.onmouseout = () => closeBtn.style.background = 'rgba(255,255,255,0.2)';
+      closeBtn.onclick = (e) => {
+        e.stopPropagation();
+        document.body.removeChild(modal);
+      };
+      
+      modal.appendChild(img);
+      modal.appendChild(closeBtn);
+      modal.onclick = () => document.body.removeChild(modal);
+      document.body.appendChild(modal);
+      
     } else if (type === 'video') {
       const video = document.createElement('video');
       video.src = src;
