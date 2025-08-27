@@ -169,71 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return user;
   }
 
-  // --- Enhanced Password Validation ---
-  function validatePassword(password) {
-    const requirements = {
-      length: password.length >= 8,
-      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password),
-      number: /[0-9]+/.test(password),
-      capital: /[A-Z]+/.test(password),
-      lowercase: /[a-z]+/.test(password)
-    };
 
-    // Update visual feedback for requirements list
-    if (requirementsElements.length) requirementsElements.length.classList.toggle('valid', requirements.length);
-    if (requirementsElements.special) requirementsElements.special.classList.toggle('valid', requirements.special);
-    if (requirementsElements.number) requirementsElements.number.classList.toggle('valid', requirements.number);
-    if (requirementsElements.capital) requirementsElements.capital.classList.toggle('valid', requirements.capital);
-    if (requirementsElements.lowercase) requirementsElements.lowercase.classList.toggle('valid', requirements.lowercase);
-
-    // All requirements must be met for strongest level
-    return Object.values(requirements).every(req => req === true);
-  }
-
-  function getPasswordStrength(password) {
-    let score = 0;
-    const requirements = {
-      length: password.length >= 8,
-      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password),
-      number: /[0-9]+/.test(password),
-      capital: /[A-Z]+/.test(password),
-      lowercase: /[a-z]+/.test(password)
-    };
-
-    // Calculate score
-    Object.values(requirements).forEach(req => {
-      if (req) score++;
-    });
-
-    // Bonus points for length
-    if (password.length >= 12) score += 0.5;
-    if (password.length >= 16) score += 0.5;
-
-    return {
-      score: score,
-      level: score < 3 ? 'weak' : score < 4 ? 'medium' : score < 5 ? 'strong' : 'very-strong',
-      requirements: requirements
-    };
-  }
-
-  // --- Password Strength Indicator ---
-  function updatePasswordStrength(password) {
-    if (!strengthBar) return;
-    
-    const strength = getPasswordStrength(password);
-    
-    // Remove existing classes
-    strengthBar.classList.remove('weak', 'medium', 'strong', 'very-strong');
-    
-    // Add appropriate class
-    strengthBar.classList.add(strength.level);
-    
-    // Update strength text
-    const strengthText = strengthBar.querySelector('.strength-text');
-    if (strengthText) {
-      strengthText.textContent = strength.level.charAt(0).toUpperCase() + strength.level.slice(1);
-    }
-  }
 
   // --- Custom Alert Function ---
   function showAlert(message, type = 'success') {
@@ -306,108 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Form Elements ---
   const loginForm = document.querySelector('.login-form');
-  const signupForm = document.querySelector('.signup-form');
   const loginError = document.getElementById('login-error');
-  const signupPasswordError = document.getElementById('signup-password-error');
-  const signupEmailError = document.getElementById('signup-email-error');
-  const signupSuccessMessage = document.getElementById('signup-success-message');
 
-  const passwordInput = document.getElementById('signup-password');
-  const emailInput = document.getElementById('signup-email');
-  const strengthBar = document.getElementById('password-strength-bar');
-  const requirementsElements = {
-    length: document.getElementById('req-length'),
-    special: document.getElementById('req-special'),
-    number: document.getElementById('req-number'),
-    capital: document.getElementById('req-capital'),
-    lowercase: document.getElementById('req-lowercase')
-  };
-  const passwordRequirements = document.getElementById('password-requirements');
 
-  // --- Sign Up Form Handler ---
-  if (signupForm) {
-    signupForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      
-      const name = signupForm.querySelector('input[type="text"]').value.trim();
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-
-      // Clear previous error messages
-      if (signupEmailError) signupEmailError.style.display = 'none';
-      if (signupPasswordError) signupPasswordError.style.display = 'none';
-
-      // Basic validation
-      if (!name || !email || !password) {
-        showAlert('Please fill in all fields', 'error');
-        return;
-      }
-
-      // Validate email format
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        if (signupEmailError) {
-          signupEmailError.textContent = 'Please enter a valid email address.';
-          signupEmailError.style.display = 'block';
-        }
-        return;
-      }
-
-      // Validate password strength - must be strongest level
-      if (!validatePassword(password)) {
-        if (signupPasswordError) {
-          signupPasswordError.textContent = 'Password must meet ALL requirements for strongest level.';
-          signupPasswordError.style.display = 'block';
-        }
-        showAlert('Password not strong enough! Please meet all requirements.', 'error');
-        return;
-      }
-
-      // Check if email already exists
-      const existingUsers = JSON.parse(getLocalStorage('users')) || [];
-      const emailExists = existingUsers.some(user => user.email.toLowerCase() === email.toLowerCase());
-
-      if (emailExists) {
-        if (signupEmailError) {
-          signupEmailError.textContent = 'Email already exists. Please use a different email.';
-          signupEmailError.style.display = 'block';
-        }
-        return;
-      }
-
-      // Create new user with enhanced data
-      const newUser = {
-        id: Date.now(),
-        name: name,
-        firstName: name.split(' ')[0], // Extract first name
-        email: email,
-        password: password, // In production, this should be hashed
-        createdAt: new Date().toISOString(),
-        lastLogin: null,
-        loginCount: 0
-      };
-
-      existingUsers.push(newUser);
-      setLocalStorage('users', JSON.stringify(existingUsers));
-
-      // Show success message
-      if (signupSuccessMessage) {
-        signupSuccessMessage.textContent = 'Account created successfully! Please log in.';
-        signupSuccessMessage.style.display = 'block';
-      }
-
-      showAlert('Account created successfully!', 'success');
-
-      // Clear form
-      signupForm.reset();
-      
-      // Flip back to login after 2 seconds
-      setTimeout(() => {
-        if (signupSuccessMessage) signupSuccessMessage.style.display = 'none';
-        document.getElementById('flip-toggle').checked = false;
-      }, 2000);
-    });
-  }
 
   // --- Login Form Handler ---
   if (loginForm) {
@@ -459,42 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Password Input Event Listeners ---
-  if (passwordInput) {
-    passwordInput.addEventListener('focus', () => {
-      if (passwordRequirements) passwordRequirements.style.display = 'block';
-      if (strengthBar && passwordInput.value.length > 0) {
-        strengthBar.style.display = 'block';
-      }
-    });
 
-    passwordInput.addEventListener('blur', () => {
-      if (strengthBar) strengthBar.style.display = 'none';
-      if (passwordRequirements) passwordRequirements.style.display = 'none';
-    });
-
-    passwordInput.addEventListener('input', () => {
-      const password = passwordInput.value;
-      
-      if (strengthBar) {
-        if (password.length > 0) {
-          strengthBar.style.display = 'block';
-        } else {
-          strengthBar.style.display = 'none';
-        }
-      }
-
-      validatePassword(password);
-      updatePasswordStrength(password);
-    });
-  }
-
-  // --- Email Input Event Listeners ---
-  if (emailInput) {
-    emailInput.addEventListener('input', () => {
-      if (signupEmailError) signupEmailError.style.display = 'none';
-    });
-  }
 
   // --- Form Input Event Listeners for Login ---
   const loginEmailInput = loginForm?.querySelector('input[type="email"]');
@@ -512,32 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Card Flip Animation Enhancement ---
-  const flipToggle = document.getElementById('flip-toggle');
-  if (flipToggle) {
-    flipToggle.addEventListener('change', () => {
-      // Clear any error messages when flipping
-      if (loginError) loginError.style.display = 'none';
-      if (signupEmailError) signupEmailError.style.display = 'none';
-      if (signupPasswordError) signupPasswordError.style.display = 'none';
-      if (signupSuccessMessage) signupSuccessMessage.style.display = 'none';
-      
-      // Reset forms
-      if (loginForm) loginForm.reset();
-      if (signupForm) signupForm.reset();
-      
-      // Clear password strength indicator
-      if (strengthBar) {
-        strengthBar.classList.remove('weak', 'medium', 'strong', 'very-strong');
-        strengthBar.style.display = 'none';
-      }
-      
-      // Reset requirements
-      Object.values(requirementsElements).forEach(req => {
-        if (req) req.classList.remove('valid');
-      });
-    });
-  }
+
 
   // --- Loading State for Buttons ---
   function setButtonLoading(button, isLoading) {
@@ -557,16 +334,6 @@ document.addEventListener('DOMContentLoaded', () => {
       loginForm.addEventListener('submit', () => {
         setButtonLoading(loginButton, true);
         setTimeout(() => setButtonLoading(loginButton, false), 2000);
-      });
-    }
-  }
-
-  if (signupForm) {
-    const signupButton = signupForm.querySelector('.button');
-    if (signupButton) {
-      signupForm.addEventListener('submit', () => {
-        setButtonLoading(signupButton, true);
-        setTimeout(() => setButtonLoading(signupButton, false), 2000);
       });
     }
   }

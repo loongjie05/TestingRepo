@@ -73,76 +73,20 @@ body {
   width: 100%;
   max-width: 450px;
   margin: 0 auto;
-  height: 600px;
-}
-
-/* Hidden Checkbox */
-#flip-toggle {
-  display: none;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.switch {
-  position: relative;
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background: var(--card-bg);
-  border-radius: 50px;
-  padding: 8px 16px;
-  box-shadow: 0 4px 15px var(--shadow-color);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid var(--primary-color);
-}
-
-.switch:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px var(--shadow-color);
-}
-
-.switch-label {
-  font-weight: 600;
-  color: var(--primary-color);
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-#flip-toggle:checked ~ .theme-toggle .switch-label {
-  color: var(--accent-color);
 }
 
 /* Card Styles */
 .scene {
   perspective: 1000px;
   width: 100%;
-  height: 600px;
 }
 
 .card {
   width: 100%;
-  height: 600px;
-  background: transparent;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  box-sizing: border-box;
-}
-
-#flip-toggle:checked ~ .scene .card {
-  transform: rotateY(180deg);
-}
-
-.face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
   background: var(--card-bg);
-  backface-visibility: hidden;
   border-radius: 20px;
   box-shadow: 0 20px 40px var(--shadow-color);
   padding: 2.5rem;
@@ -150,23 +94,24 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  overflow-y: auto;
-  overflow-x: hidden;
   box-sizing: border-box;
+  min-height: 500px;
 }
 
-.front {
-  z-index: 2;
-}
-
-.back {
-  transform: rotateY(180deg);
+.face {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
 }
 
 /* Form Header */
 .form-header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .logo-container {
@@ -199,7 +144,7 @@ h1 {
 }
 
 /* Form Styles */
-.login-form, .signup-form {
+.login-form {
   width: 100%;
   margin-bottom: 0;
   flex: 1;
@@ -208,47 +153,12 @@ h1 {
   justify-content: flex-start;
   gap: 0.5rem;
   min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 5px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) transparent;
-}
-
-/* Custom scrollbar for webkit browsers */
-.login-form::-webkit-scrollbar,
-.signup-form::-webkit-scrollbar {
-  width: 6px;
-}
-
-.login-form::-webkit-scrollbar-track,
-.signup-form::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.login-form::-webkit-scrollbar-thumb,
-.signup-form::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 3px;
-}
-
-.login-form::-webkit-scrollbar-thumb:hover,
-.signup-form::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-color);
-}
-
-/* Ensure form elements don't shrink */
-.form-group,
-.input-wrapper,
-.button,
-.form-footer,
-.form-header {
-  flex-shrink: 0;
 }
 
 .form-group {
   margin-bottom: 1rem;
   text-align: left;
+  width: 100%;
 }
 
 .form-group label {
@@ -264,6 +174,7 @@ h1 {
 .input-wrapper {
   position: relative;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .input {
@@ -275,6 +186,7 @@ h1 {
   background: var(--card-bg);
   transition: all 0.3s ease;
   font-family: 'Alegreya', serif;
+  box-sizing: border-box;
 }
 
 .input:focus {
@@ -293,9 +205,10 @@ h1 {
   font-size: 1.1rem;
   transition: color 0.3s ease;
   pointer-events: none;
+  z-index: 2;
 }
 
-.input:focus + .input-icon {
+.input:focus ~ .input-icon {
   color: var(--primary-color);
 }
 
@@ -319,6 +232,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 1.5rem;
+  box-sizing: border-box;
 }
 
 .button:hover {
@@ -335,6 +249,7 @@ h1 {
   text-align: center;
   margin-top: auto;
   padding-top: 1rem;
+  width: 100%;
 }
 
 .text-muted {
@@ -381,6 +296,8 @@ h1 {
   background: rgba(220, 69, 53, 0.1);
   border-radius: 8px;
   border-left: 3px solid var(--error-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .success-message {
@@ -394,120 +311,8 @@ h1 {
   text-align: center;
   display: none;
   animation: fadeInOut 3s forwards;
-}
-
-/* Password Strength Bar */
-#password-strength-bar {
-  position: relative;
-  height: 6px;
-  background: #e9ecef;
-  border-radius: 4px;
-  margin-top: 6px;
-  overflow: hidden;
-  display: none;
-  border: 1px solid #ddd;
-}
-
-#password-strength-bar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  background: var(--error-color);
-  transition: all 0.3s ease;
-  border-radius: 3px;
-}
-
-#password-strength-bar.weak::after {
-  width: 20%;
-  background: var(--error-color);
-}
-
-#password-strength-bar.medium::after {
-  width: 40%;
-  background: var(--warning-color);
-}
-
-#password-strength-bar.strong::after {
-  width: 60%;
-  background: #17a2b8;
-}
-
-#password-strength-bar.very-strong::after {
   width: 100%;
-  background: var(--success-color);
-}
-
-#password-strength-bar .strength-text {
-  position: absolute;
-  top: -20px;
-  right: 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-color);
-  text-transform: capitalize;
-}
-
-/* Password Requirements */
-#password-requirements {
-  font-size: 0.75rem;
-  margin-top: 6px;
-  display: none;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 8px 10px;
-  border-radius: 6px;
-  max-height: 120px;
-  overflow-y: auto;
-}
-
-#password-requirements p {
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--text-color);
-}
-
-#password-requirements ul {
-  list-style: none;
-  padding: 0;
-}
-
-#password-requirements li {
-  color: var(--error-color);
-  margin-bottom: 4px;
-  padding-left: 20px;
-  position: relative;
-}
-
-#password-requirements li::before {
-  content: "✗";
-  position: absolute;
-  left: 0;
-  color: var(--error-color);
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-#password-requirements li.valid {
-  color: var(--success-color);
-  font-weight: 600;
-}
-
-#password-requirements li.valid::before {
-  content: "✓";
-  color: var(--success-color);
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-#password-requirements li {
-  transition: all 0.3s ease;
-  transform: translateX(0);
-}
-
-#password-requirements li.valid {
-  transform: translateX(5px);
+  box-sizing: border-box;
 }
 
 /* Custom Alert */
@@ -570,6 +375,28 @@ h1 {
   animation: slideIn 0.6s ease-out;
 }
 
+/* Loading state */
+.button.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.button.loading::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .login-main {
@@ -578,26 +405,15 @@ h1 {
   
   .login-container {
     max-width: 100%;
-    height: auto;
-    min-height: 650px;
   }
   
-  .face {
+  .card {
     padding: 2rem 1.5rem;
+    min-height: 450px;
   }
   
   h1 {
     font-size: 1.8rem;
-  }
-  
-  .card {
-    height: auto;
-    min-height: 650px;
-  }
-  
-  .scene {
-    height: auto;
-    min-height: 650px;
   }
   
   body {
@@ -606,8 +422,9 @@ h1 {
 }
 
 @media screen and (max-width: 480px) {
-  .face {
+  .card {
     padding: 1.5rem 1rem;
+    min-height: 400px;
   }
   
   h1 {
@@ -623,43 +440,17 @@ h1 {
     padding: 12px 12px 12px 45px;
   }
   
-  .card {
-    height: auto;
-    min-height: 600px;
-  }
-  
-  .scene {
-    height: auto;
-    min-height: 600px;
-  }
-  
-  .login-container {
-    height: auto;
-    min-height: 600px;
-  }
-  
   .form-group {
     margin-bottom: 0.8rem;
   }
   
   .form-header {
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
   }
   
   .form-footer {
     margin-top: 1rem;
     padding-top: 0.5rem;
-  }
-  
-  #password-requirements {
-    font-size: 0.7rem;
-    padding: 6px 8px;
-    max-height: 100px;
-  }
-  
-  #password-strength-bar {
-    height: 5px;
-    margin-top: 4px;
   }
   
   .input-icon {
@@ -668,10 +459,6 @@ h1 {
   
   .logo-icon {
     font-size: 2.5rem;
-  }
-  
-  h1 {
-    font-size: 1.5rem;
   }
   
   .description {
@@ -705,14 +492,6 @@ h1 {
   .link {
     font-size: 0.8rem;
   }
-  
-  .switch {
-    padding: 6px 12px;
-  }
-  
-  .switch-label {
-    font-size: 0.8rem;
-  }
 }
 
 /* Focus states for accessibility */
@@ -721,26 +500,4 @@ h1 {
 .link:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
-}
-
-/* Loading state */
-.button.loading {
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-.button.loading::after {
-  content: "";
-  width: 16px;
-  height: 16px;
-  border: 2px solid transparent;
-  border-top: 2px solid white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-left: 8px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
