@@ -316,6 +316,14 @@ function loadFoodGrid() {
                 <span class="fav-heart" data-food="${foodName}" title="Toggle favourite" aria-label="Toggle favourite">
                     <i class="fa-solid fa-heart"></i>
                 </span>
+                <div class="social-share-buttons">
+                    <button class="share-btn facebook-share" onclick="event.stopPropagation(); shareToFacebook('${foodName}', '${food.image}', '${food.country}');" title="Share on Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button class="share-btn instagram-share" onclick="event.stopPropagation(); shareToInstagram('${foodName}', '${food.image}');" title="Share on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </button>
+                </div>
             </div>
             <h3>${foodName}</h3>
             <div class="country">
