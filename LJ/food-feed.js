@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Configuration ---
   const COMMENT_DISPLAY_LIMIT = 2; // Number of comments to show initially
+  const GEOAPIFY_API_KEY = '3cc1eb78093c4c35bfd3445bb50d8026';
+
+  // --- Map and Location Variables ---
+  let map;
+  let selectedMarker;
+  let selectedLatLng;
+  let searchTimeout;
 
   // --- Helper to get current user's name (from login cookie) ---
   function getCookie(name) {
@@ -33,41 +40,282 @@ document.addEventListener('DOMContentLoaded', () => {
     return "A Food Lover"; // Fallback name if no active session
   }
 
-  // --- Geolocation Functions ---
-  async function getUserLocation() {
-    postLocationInput.value = "Fetching location...";
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        try {
-          // Using OpenStreetMap Nominatim for reverse geocoding (rate-limited, no API key)
-          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=0`);
-          const data = await response.json();
-          
-          let locationName = "Location Unknown";
-          if (data.address) {
-            if (data.address.city) locationName = data.address.city; // Prefer city
-            else if (data.address.town) locationName = data.address.town; // Fallback to town
-            else if (data.address.village) locationName = data.address.village; // Fallback to village
-            else if (data.address.country) locationName = data.address.country; // Fallback to country
-          }
-          postLocationInput.value = locationName; // Update input with human-readable location
-
-        } catch (error) {
-          console.error('Error fetching location name:', error);
-          postLocationInput.value = `Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`; // Fallback to coordinates
+  // --- Map and Location Functions ---
+  
+  // Initialize the map
+  function initMap() {
+    // Create map centered on a default location (Kuala Lumpur)
+    map = L.map('map-container').setView([3.1390, 101.6869], 10);
+    
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Add click event to map
+    map.on('click', onMapClick);
+  }
+  
+  // Handle map click to select location
+  function onMapClick(e) {
+    const lat = e.latlng.lat;
+    const lng = e.latlng.lng;
+    
+    // Remove previous marker if exists
+    if (selectedMarker) {
+      map.removeLayer(selectedMarker);
+    }
+    
+    // Add new marker at clicked location
+    selectedMarker = L.marker([lat, lng]).addTo(map);
+    
+    // Update selected coordinates display
+    document.getElementById('selected-coordinates').textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+    
+    // Store selected coordinates
+    selectedLatLng = { lat, lng };
+    
+    // Enable confirm button
+    document.getElementById('confirm-location-btn').disabled = false;
+  }
+  
+  // Show map modal
+  function showMapModal() {
+    const modal = document.getElementById('map-modal');
+    modal.style.display = 'flex';
+    
+    // Add animation class
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 10);
+    
+    // Initialize map if not already done
+    if (!map) {
+      setTimeout(() => {
+        initMap();
+      }, 100);
+    }
+    
+    // Reset selection
+    selectedLatLng = null;
+    if (selectedMarker) {
+      map.removeLayer(selectedMarker);
+      selectedMarker = null;
+    }
+    document.getElementById('selected-coordinates').textContent = 'None';
+    document.getElementById('confirm-location-btn').disabled = true;
+    
+    // Reset search
+    document.getElementById('address-search-input').value = '';
+    document.getElementById('search-results').style.display = 'none';
+  }
+  
+  // Hide map modal
+  function hideMapModal() {
+    const modal = document.getElementById('map-modal');
+    modal.classList.remove('show');
+    
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300);
+  }
+  
+  // Get address from coordinates using Geoapify reverse geocoding
+  async function getAddressFromCoordinates(lat, lng) {
+    try {
+      const response = await fetch(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=${GEOAPIFY_API_KEY}`
+      );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.features && data.features.length > 0) {
+        const feature = data.features[0];
+        const properties = feature.properties;
+        
+        // Create a readable address
+        let address = '';
+        if (properties.name) {
+          address = properties.name;
+        } else if (properties.street && properties.housenumber) {
+          address = `${properties.street} ${properties.housenumber}`;
+        } else if (properties.street) {
+          address = properties.street;
         }
-      }, (error) => {
-        console.error('Geolocation error:', error);
-        postLocationInput.value = 'Location access denied or unavailable.';
-      });
-    } else {
-      postLocationInput.value = 'Geolocation not supported by this browser.';
+        
+        if (properties.city) {
+          address += address ? `, ${properties.city}` : properties.city;
+        } else if (properties.town) {
+          address += address ? `, ${properties.town}` : properties.town;
+        } else if (properties.village) {
+          address += address ? `, ${properties.village}` : properties.village;
+        }
+        
+        return address || 'Unknown Location';
+      }
+      
+      return 'Unknown Location';
+    } catch (error) {
+      console.error('Error fetching address:', error);
+      return `Coordinates: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
     }
   }
-
-  getLocationBtn.addEventListener('click', getUserLocation);
+  
+  // Search for addresses using Geoapify forward geocoding
+  async function searchAddresses(query) {
+    if (!query.trim()) return [];
+    
+    try {
+      const response = await fetch(
+        `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(query)}&apiKey=${GEOAPIFY_API_KEY}&limit=5`
+      );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.features && data.features.length > 0) {
+        return data.features.map(feature => ({
+          name: feature.properties.formatted,
+          lat: feature.geometry.coordinates[1],
+          lng: feature.geometry.coordinates[0],
+          city: feature.properties.city || feature.properties.town || feature.properties.village,
+          country: feature.properties.country,
+          street: feature.properties.street,
+          housenumber: feature.properties.housenumber
+        }));
+      }
+      
+      return [];
+    } catch (error) {
+      console.error('Error searching addresses:', error);
+      return [];
+    }
+  }
+  
+  // Display search results
+  function displaySearchResults(results) {
+    const searchResultsContainer = document.getElementById('search-results');
+    
+    if (results.length === 0) {
+      searchResultsContainer.innerHTML = '<div class="search-result-item">No results found</div>';
+      searchResultsContainer.style.display = 'block';
+      return;
+    }
+    
+    searchResultsContainer.innerHTML = '';
+    
+    results.forEach(result => {
+      const resultItem = document.createElement('div');
+      resultItem.className = 'search-result-item';
+      
+      // Create display text
+      let displayName = result.name;
+      if (result.street && result.housenumber) {
+        displayName = `${result.street} ${result.housenumber}`;
+        if (result.city) displayName += `, ${result.city}`;
+        if (result.country) displayName += `, ${result.country}`;
+      }
+      
+      resultItem.innerHTML = `
+        <div class="search-result-name">${displayName}</div>
+        <div class="search-result-details">${result.lat.toFixed(4)}, ${result.lng.toFixed(4)}</div>
+      `;
+      
+      resultItem.addEventListener('click', () => {
+        // Move map to selected location
+        map.setView([result.lat, result.lng], 16);
+        
+        // Remove previous marker if exists
+        if (selectedMarker) {
+          map.removeLayer(selectedMarker);
+        }
+        
+        // Add marker at selected location
+        selectedMarker = L.marker([result.lat, result.lng]).addTo(map);
+        
+        // Update selected coordinates
+        selectedLatLng = { lat: result.lat, lng: result.lng };
+        document.getElementById('selected-coordinates').textContent = `${result.lat.toFixed(6)}, ${result.lng.toFixed(6)}`;
+        
+        // Enable confirm button
+        document.getElementById('confirm-location-btn').disabled = false;
+        
+        // Hide search results
+        searchResultsContainer.style.display = 'none';
+        
+        // Clear search input
+        document.getElementById('address-search-input').value = '';
+      });
+      
+      searchResultsContainer.appendChild(resultItem);
+    });
+    
+    searchResultsContainer.style.display = 'block';
+  }
+  
+  // Handle address search input
+  function handleAddressSearch() {
+    const query = document.getElementById('address-search-input').value.trim();
+    const searchResultsContainer = document.getElementById('search-results');
+    
+    // Clear previous timeout
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+    
+    // Hide results if input is empty
+    if (!query) {
+      searchResultsContainer.style.display = 'none';
+      return;
+    }
+    
+    // Debounce search to avoid too many API calls
+    searchTimeout = setTimeout(async () => {
+      const results = await searchAddresses(query);
+      displaySearchResults(results);
+    }, 300);
+  }
+  
+  // Confirm location selection
+  async function confirmLocation() {
+    if (selectedLatLng) {
+      postLocationInput.value = 'Getting address...';
+      
+      const address = await getAddressFromCoordinates(selectedLatLng.lat, selectedLatLng.lng);
+      postLocationInput.value = address;
+      
+      // Store coordinates for potential future use
+      postLocationInput.dataset.lat = selectedLatLng.lat;
+      postLocationInput.dataset.lng = selectedLatLng.lng;
+      
+      hideMapModal();
+    }
+  }
+  
+  // Event listeners for map functionality
+  getLocationBtn.addEventListener('click', showMapModal);
+  postLocationInput.addEventListener('click', showMapModal); // Make input clickable to show map
+  document.getElementById('close-map-btn').addEventListener('click', hideMapModal);
+  document.getElementById('cancel-location-btn').addEventListener('click', hideMapModal);
+  document.getElementById('confirm-location-btn').addEventListener('click', confirmLocation);
+  
+  // Event listeners for address search
+  document.getElementById('address-search-input').addEventListener('input', handleAddressSearch);
+  document.getElementById('search-address-btn').addEventListener('click', handleAddressSearch);
+  
+  // Close modal when clicking outside
+  document.getElementById('map-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'map-modal') {
+      hideMapModal();
+    }
+  });
 
   // Allow custom feeling text when selecting "custom"
   postFeelingSelect.addEventListener('change', () => {

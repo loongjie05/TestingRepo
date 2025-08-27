@@ -302,13 +302,49 @@
   /* Favourite heart overlay for image */
   .container-project .fav-heart {
     position: absolute;
-    right: 10px; bottom: 10px;
-    background: rgba(0,0,0,0.35);
+    top: 10px; right: 10px;
+    background: rgba(255,255,255,0.95);
     width: 41px; height: 41px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    color: #fff; cursor: pointer;
+    color: #666; cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    border: 2px solid rgba(0,0,0,0.1);
   }
-  .container-project .fav-heart.saved { color: #e63946; }
+  .container-project .fav-heart:hover {
+    background: rgba(255,255,255,1);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .container-project .fav-heart.saved { 
+    color: #e63946; 
+    background: rgba(230,57,70,0.1);
+    animation: heartBeat 0.3s ease-in-out;
+  }
+  .container-project .fav-heart.saved:hover {
+    background: rgba(230,57,70,0.2);
+  }
+  
+  .heart-text {
+    display: none;
+    font-size: 20px;
+    color: inherit;
+  }
+  
+  /* Fallback if Font Awesome doesn't load */
+  .container-project .fav-heart .fa-solid {
+    display: inline-block;
+  }
+  .container-project .fav-heart .fa-solid:not(.fa-heart) + .heart-text {
+    display: inline-block;
+  }
+  
+  @keyframes heartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
   
   .project-type {
     background: #ffce1b33;

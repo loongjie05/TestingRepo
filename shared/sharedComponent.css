@@ -19,7 +19,7 @@ body {
 header {
     background-color: #fff9c4d8;
     backdrop-filter: blur(10px);
-    overflow: hidden;
+    overflow: visible;
     border-bottom: 2px solid #fff9c4d8;
     padding: 0 5%; /* Adjusted padding */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.186);
@@ -27,10 +27,11 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 9998;
     height: 82px;
     isolation: isolate;
-    contain: paint;
+    /* Remove contain: paint to prevent clipping */
+    contain: layout style;
 }
 
 .header-container {
@@ -203,6 +204,211 @@ header {
     border: 2px solid transparent;
     z-index: -1;
     border-radius: 35px;
+}
+
+/* User Info Display */
+#user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 15px;
+    border-radius: 25px;
+    border: 2px solid #70130b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 9999;
+    /* Ensure proper stacking context for dropdown */
+    isolation: isolate;
+}
+
+#username-display {
+    font-weight: 600;
+    color: #70130b;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#username-display:hover {
+    background: rgba(112, 19, 11, 0.1);
+    transform: translateY(-1px);
+}
+
+#username-display::after {
+    content: "▼";
+    margin-left: 8px;
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+#username-display.dropdown-open::after {
+    transform: rotate(180deg);
+}
+
+/* User Dropdown Menu */
+#user-dropdown {
+    position: fixed;
+    top: 82px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 2px solid #70130b;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999999;
+    overflow: visible;
+    min-width: 200px;
+    max-width: 300px;
+    /* Ensure it's always visible and clickable */
+    pointer-events: auto;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+#user-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%);
+}
+
+/* Ensure dropdown is always on top */
+#user-dropdown {
+    position: fixed !important;
+    z-index: 999999 !important;
+    pointer-events: auto;
+}
+
+/* Force dropdown to be above everything */
+body {
+    position: relative;
+}
+
+#user-dropdown.show {
+    position: fixed !important;
+    z-index: 999999 !important;
+    /* Ensure visibility */
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Add backdrop when dropdown is open */
+.dropdown-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 999998;
+    display: none;
+    pointer-events: none;
+}
+
+/* CRITICAL: Ensure dropdown is above ALL content */
+#user-dropdown,
+#user-dropdown.show,
+#user-dropdown * {
+    z-index: 999999 !important;
+    position: relative;
+}
+
+/* Ensure dropdown links are always clickable */
+#user-dropdown .dropdown-item {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    z-index: 999999 !important;
+}
+
+/* Force dropdown to be above everything */
+#user-dropdown {
+    position: fixed !important;
+    z-index: 999999 !important;
+    /* Ensure it's not clipped by parent containers */
+    contain: none;
+    overflow: visible;
+}
+
+.dropdown-backdrop.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: rgba(112, 19, 11, 0.1);
+    color: #70130b;
+    transform: translateX(5px);
+}
+
+.dropdown-item i {
+    color: #70130b;
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-item .item-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+.dropdown-item .item-count {
+    background: #70130b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+#logout-button {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 6px 12px !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+}
+
+#logout-button:hover {
+    background-color: #c82333 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3) !important;
 }
 
 /* Main Content Styles */

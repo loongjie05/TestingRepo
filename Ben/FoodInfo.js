@@ -272,6 +272,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!document.getElementById('foodName').textContent) {
             selectFood(foodParam);
         }
+        // Track recently viewed
+        trackRecentlyViewed(foodParam);
     }
     setupTabSwitching();
     // Setup favourite toggle for details view
@@ -327,6 +329,8 @@ function loadFoodGrid() {
             // Avoid triggering select when clicking heart
             if ((e.target.closest && e.target.closest('.fav-heart'))) return;
             selectFood(foodName, foodCard);
+            // Track recently viewed
+            trackRecentlyViewed(foodName);
         });
 
         // Heart toggle per card
@@ -452,4 +456,170 @@ function setupTabSwitching() {
 // Handle image loading errors
 function handleImageError(img) {
     img.src = '../LJ/pictures/cooking.jpg';
+}
+
+// Track recently viewed foods
+function trackRecentlyViewed(foodTitle) {
+    try {
+        // Get current recently viewed list
+        let recentlyViewed = JSON.parse(sessionStorage.getItem('recentlyViewed') || '[]');
+        
+        // Remove if already exists (to avoid duplicates)
+        recentlyViewed = recentlyViewed.filter(item => item.title !== foodTitle);
+        
+        // Get food data for additional info
+        const food = foodData[foodTitle];
+        const foodInfo = {
+            title: foodTitle,
+            country: food?.country || 'Unknown',
+            timestamp: new Date().toISOString()
+        };
+        
+        // Add to beginning of list
+        recentlyViewed.unshift(foodInfo);
+        
+        // Keep only last 10 items
+        if (recentlyViewed.length > 10) {
+            recentlyViewed = recentlyViewed.slice(0, 10);
+        }
+        
+        // Save back to session storage
+        sessionStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+        
+        // Update dropdown count if available
+        if (window.updateDropdownCounts) {
+            window.updateDropdownCounts();
+        }
+        
+    } catch (error) {
+        console.error('Error tracking recently viewed:', error);
+    }
+}
+
+// =========================
+// SEARCH FUNCTIONALITY
+// =========================
+
+// Get DOM elements for search
+const searchInput = document.querySelector("#searchInput");
+const searchSuggestions = document.getElementById("searchSuggestions");
+
+// Autocomplete functionality
+function showSearchSuggestions(query) {
+    if (!query.trim()) {
+        searchSuggestions.style.display = 'none';
+        return;
+    }
+
+    // Get all available foods from the shared data
+    let allFoods = [];
+    if (window.SiteData && window.SiteData.foods) {
+        allFoods = window.SiteData.foods;
+    } else {
+        // Fallback to local food data
+        allFoods = Object.keys(comprehensiveFoodData).map(title => ({
+            title: title,
+            country: comprehensiveFoodData[title]?.country || 'Unknown',
+            type: comprehensiveFoodData[title]?.type || 'Food',
+            images: { cover: foodImageMap[title] || '../LJ/pictures/cooking.jpg' }
+        }));
+    }
+
+    const suggestions = allFoods
+        .filter(food => food.title.toLowerCase().includes(query.toLowerCase()))
+        .slice(0, 8);
+
+    if (suggestions.length === 0) {
+        searchSuggestions.style.display = 'none';
+        return;
+    }
+
+    searchSuggestions.innerHTML = suggestions.map(food => {
+        const imageSrc = food.images?.cover || foodImageMap[food.title] || '../LJ/pictures/cooking.jpg';
+        return `
+            <div class="search-suggestion-item" data-title="${food.title}">
+                <img src="${imageSrc}" alt="${food.title}" class="food-image" onerror="this.src='../LJ/pictures/cooking.jpg'">
+                <div class="food-info">
+                    <div class="food-name">${food.title}</div>
+                    <div class="food-meta">
+                        <span class="food-country">${food.country || 'Unknown'}</span> • ${food.type || 'Food'}
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    searchSuggestions.style.display = 'block';
+
+    // Add click event listeners to suggestions
+    searchSuggestions.querySelectorAll('.search-suggestion-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const title = item.dataset.title;
+            searchInput.value = title;
+            searchSuggestions.style.display = 'none';
+            
+            // Select the food and show details
+            selectFood(title);
+            
+            // Track recently viewed
+            trackRecentlyViewed(title);
+        });
+    });
+}
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-wrapper')) {
+        searchSuggestions.style.display = 'none';
+    }
+});
+
+// Show suggestions on input
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        showSearchSuggestions(e.target.value);
+    });
+
+    // Show suggestions on focus if there's text
+    searchInput.addEventListener('focus', () => {
+        if (searchInput.value.trim()) {
+            showSearchSuggestions(searchInput.value);
+        }
+    });
+}
+
+// Clear search function
+function clearSearch() {
+    if (searchInput) {
+        searchInput.value = '';
+        searchSuggestions.style.display = 'none';
+    }
+}
+
+// Filter food grid based on search
+function filterFoodGrid(searchQuery) {
+    const foodGrid = document.getElementById('foodGrid');
+    if (!foodGrid) return;
+
+    const searchLower = searchQuery.toLowerCase();
+    const foodCards = foodGrid.querySelectorAll('.food-card');
+    
+    foodCards.forEach(card => {
+        const foodTitle = card.querySelector('.food-title').textContent.toLowerCase();
+        const foodCountry = card.querySelector('.food-country')?.textContent.toLowerCase() || '';
+        
+        if (foodTitle.includes(searchLower) || foodCountry.includes(searchLower)) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.3s ease';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Add search input event listener for filtering
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        filterFoodGrid(e.target.value);
+    });
 }

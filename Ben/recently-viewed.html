@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recently Viewed Foods - Jalan Jalan Makan</title>
+    <link rel="stylesheet" href="../shared/sharedComponent.css">
+    <link rel="stylesheet" href="recently-viewed.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fas fa-clock"></i>
+                Recently Viewed Foods
+            </h1>
+            <p class="page-subtitle">Your food exploration journey</p>
+        </div>
+
+        <div class="content-container">
+            <div id="recently-viewed-content">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>No Recently Viewed Foods Yet</h3>
+                <p>Start exploring our delicious food collection!</p>
+                <div class="action-buttons">
+                    <a href="../JY/Recipe.html" class="btn btn-primary">
+                        <i class="fas fa-utensils"></i>
+                        Browse Recipes
+                    </a>
+                    <a href="../Ben/FoodInfo.html" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        Food Information
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="../shared/sharedComponent.js"></script>
+    <script src="../shared/data.js"></script>
+    <script>
+        // Debug: Check if shared data is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 Checking shared data availability...');
+            if (window.SiteData) {
+                console.log('✅ SiteData available:', window.SiteData);
+                console.log('✅ Foods count:', window.SiteData.foods ? window.SiteData.foods.length : 'undefined');
+            } else {
+                console.log('❌ SiteData not available');
+            }
+        });
+    </script>
+    <script src="recently-viewed.js"></script>
+</body>
+</html>
