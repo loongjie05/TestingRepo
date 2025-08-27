@@ -9,14 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const postFeelingSelect = document.getElementById('post-feeling');
   const postFeelingCustom = document.getElementById('post-feeling-custom');
 
-  // --- Geoapify configuration ---
-  const GEOAPIFY_API_KEY = '3cc1eb78093c4c35bfd3445bb50d8026';
-  let geoapifyDropdown;
-  let geoapifyAbortController;
-  let geoapifyDebounceTimer;
-
   // --- Configuration ---
   const COMMENT_DISPLAY_LIMIT = 2; // Number of comments to show initially
+  const GEOAPIFY_API_KEY = '3cc1eb78093c4c35bfd3445bb50d8026';
+
+  // --- Map and Location Variables ---
+  let map;
+  let selectedMarker;
+  let selectedLatLng;
+  let searchTimeout;
 
   // --- Helper to get current user's name (from login cookie) ---
   function getCookie(name) {
@@ -39,139 +40,281 @@ document.addEventListener('DOMContentLoaded', () => {
     return "A Food Lover"; // Fallback name if no active session
   }
 
-  // --- Geolocation Functions (use Geoapify Reverse Geocoding) ---
-  async function getUserLocation() {
-    postLocationInput.value = 'Fetching location...';
-    if (!navigator.geolocation) {
-      postLocationInput.value = 'Geolocation not supported by this browser.';
-      return;
+  // --- Map and Location Functions ---
+  
+  // Initialize the map
+  function initMap() {
+    // Create map centered on a default location (Kuala Lumpur)
+    map = L.map('map-container').setView([3.1390, 101.6869], 10);
+    
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Add click event to map
+    map.on('click', onMapClick);
+  }
+  
+  // Handle map click to select location
+  function onMapClick(e) {
+    const lat = e.latlng.lat;
+    const lng = e.latlng.lng;
+    
+    // Remove previous marker if exists
+    if (selectedMarker) {
+      map.removeLayer(selectedMarker);
     }
-
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      try {
-        const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&apiKey=${GEOAPIFY_API_KEY}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        const feature = data && data.features && data.features[0];
-        const name = feature ? (feature.properties.formatted || feature.properties.city || feature.properties.name) : undefined;
-        postLocationInput.value = name || `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
-        // Save coordinates on the input for later use
-        postLocationInput.dataset.lat = String(lat);
-        postLocationInput.dataset.lon = String(lon);
-      } catch (error) {
-        console.error('Geoapify reverse geocoding error:', error);
-        postLocationInput.value = `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
-        postLocationInput.dataset.lat = String(lat);
-        postLocationInput.dataset.lon = String(lon);
-      }
-    }, (error) => {
-      console.error('Geolocation error:', error);
-      postLocationInput.value = 'Location access denied or unavailable.';
-    });
+    
+    // Add new marker at clicked location
+    selectedMarker = L.marker([lat, lng]).addTo(map);
+    
+    // Update selected coordinates display
+    document.getElementById('selected-coordinates').textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+    
+    // Store selected coordinates
+    selectedLatLng = { lat, lng };
+    
+    // Enable confirm button
+    document.getElementById('confirm-location-btn').disabled = false;
   }
-
-  getLocationBtn.addEventListener('click', getUserLocation);
-
-  // --- Geoapify Autocomplete (simple custom dropdown) ---
-  function ensureDropdown() {
-    if (geoapifyDropdown) return geoapifyDropdown;
-    geoapifyDropdown = document.createElement('div');
-    geoapifyDropdown.style.position = 'absolute';
-    geoapifyDropdown.style.zIndex = '9999';
-    geoapifyDropdown.style.background = '#fff';
-    geoapifyDropdown.style.border = '1px solid #ddd';
-    geoapifyDropdown.style.borderRadius = '6px';
-    geoapifyDropdown.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-    geoapifyDropdown.style.padding = '6px 0';
-    geoapifyDropdown.style.display = 'none';
-    document.body.appendChild(geoapifyDropdown);
-    return geoapifyDropdown;
-  }
-
-  function positionDropdown() {
-    const rect = postLocationInput.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    geoapifyDropdown.style.top = `${rect.bottom + scrollTop + 4}px`;
-    geoapifyDropdown.style.left = `${rect.left + scrollLeft}px`;
-    geoapifyDropdown.style.width = `${rect.width}px`;
-  }
-
-  function hideDropdown() {
-    if (geoapifyDropdown) geoapifyDropdown.style.display = 'none';
-  }
-
-  function showDropdown() {
-    ensureDropdown();
-    positionDropdown();
-    geoapifyDropdown.style.display = 'block';
-  }
-
-  function clearDropdown() {
-    if (!geoapifyDropdown) return;
-    geoapifyDropdown.innerHTML = '';
-  }
-
-  function renderSuggestions(features) {
-    clearDropdown();
-    if (!features || !features.length) {
-      hideDropdown();
-      return;
+  
+  // Show map modal
+  function showMapModal() {
+    const modal = document.getElementById('map-modal');
+    modal.style.display = 'flex';
+    
+    // Add animation class
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 10);
+    
+    // Initialize map if not already done
+    if (!map) {
+      setTimeout(() => {
+        initMap();
+      }, 100);
     }
-    features.forEach((f) => {
-      const item = document.createElement('div');
-      item.textContent = f.properties.formatted || f.properties.name;
-      item.style.padding = '8px 12px';
-      item.style.cursor = 'pointer';
-      item.addEventListener('mouseover', () => item.style.background = '#f5f5f5');
-      item.addEventListener('mouseout', () => item.style.background = 'transparent');
-      item.addEventListener('click', () => {
-        postLocationInput.value = f.properties.formatted || f.properties.name || '';
-        postLocationInput.dataset.lat = String(f.properties.lat);
-        postLocationInput.dataset.lon = String(f.properties.lon);
-        hideDropdown();
-      });
-      geoapifyDropdown.appendChild(item);
-    });
-    showDropdown();
+    
+    // Reset selection
+    selectedLatLng = null;
+    if (selectedMarker) {
+      map.removeLayer(selectedMarker);
+      selectedMarker = null;
+    }
+    document.getElementById('selected-coordinates').textContent = 'None';
+    document.getElementById('confirm-location-btn').disabled = true;
+    
+    // Reset search
+    document.getElementById('address-search-input').value = '';
+    document.getElementById('search-results').style.display = 'none';
   }
-
-  async function fetchGeoapifyAutocomplete(query) {
-    if (geoapifyAbortController) geoapifyAbortController.abort();
-    geoapifyAbortController = new AbortController();
-    const signal = geoapifyAbortController.signal;
-    const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(query)}&limit=6&filter=countrycode:my&format=json&apiKey=${GEOAPIFY_API_KEY}`;
+  
+  // Hide map modal
+  function hideMapModal() {
+    const modal = document.getElementById('map-modal');
+    modal.classList.remove('show');
+    
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300);
+  }
+  
+  // Get address from coordinates using Geoapify reverse geocoding
+  async function getAddressFromCoordinates(lat, lng) {
     try {
-      const res = await fetch(url, { signal });
-      const data = await res.json();
-      // The /autocomplete endpoint returns features[] by default; format=json returns results[]
-      const features = data.features || (data.results ? data.results.map(r => ({ properties: r })) : []);
-      renderSuggestions(features);
-    } catch (e) {
-      if (e.name !== 'AbortError') {
-        console.error('Geoapify autocomplete error:', e);
-        hideDropdown();
+      const response = await fetch(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=${GEOAPIFY_API_KEY}`
+      );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+      
+      const data = await response.json();
+      
+      if (data.features && data.features.length > 0) {
+        const feature = data.features[0];
+        const properties = feature.properties;
+        
+        // Create a readable address
+        let address = '';
+        if (properties.name) {
+          address = properties.name;
+        } else if (properties.street && properties.housenumber) {
+          address = `${properties.street} ${properties.housenumber}`;
+        } else if (properties.street) {
+          address = properties.street;
+        }
+        
+        if (properties.city) {
+          address += address ? `, ${properties.city}` : properties.city;
+        } else if (properties.town) {
+          address += address ? `, ${properties.town}` : properties.town;
+        } else if (properties.village) {
+          address += address ? `, ${properties.village}` : properties.village;
+        }
+        
+        return address || 'Unknown Location';
+      }
+      
+      return 'Unknown Location';
+    } catch (error) {
+      console.error('Error fetching address:', error);
+      return `Coordinates: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
     }
   }
-
-  postLocationInput.setAttribute('autocomplete', 'off');
-  postLocationInput.addEventListener('input', (e) => {
-    const text = e.target.value.trim();
-    if (!text) { hideDropdown(); return; }
-    ensureDropdown();
-    positionDropdown();
-    clearTimeout(geoapifyDebounceTimer);
-    geoapifyDebounceTimer = setTimeout(() => fetchGeoapifyAutocomplete(text), 250);
-  });
-
-  window.addEventListener('resize', () => { if (geoapifyDropdown && geoapifyDropdown.style.display === 'block') positionDropdown(); });
-  window.addEventListener('scroll', () => { if (geoapifyDropdown && geoapifyDropdown.style.display === 'block') positionDropdown(); }, true);
-  document.addEventListener('click', (e) => {
-    if (e.target === postLocationInput || (geoapifyDropdown && geoapifyDropdown.contains(e.target))) return;
-    hideDropdown();
+  
+  // Search for addresses using Geoapify forward geocoding
+  async function searchAddresses(query) {
+    if (!query.trim()) return [];
+    
+    try {
+      const response = await fetch(
+        `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(query)}&apiKey=${GEOAPIFY_API_KEY}&limit=5`
+      );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.features && data.features.length > 0) {
+        return data.features.map(feature => ({
+          name: feature.properties.formatted,
+          lat: feature.geometry.coordinates[1],
+          lng: feature.geometry.coordinates[0],
+          city: feature.properties.city || feature.properties.town || feature.properties.village,
+          country: feature.properties.country,
+          street: feature.properties.street,
+          housenumber: feature.properties.housenumber
+        }));
+      }
+      
+      return [];
+    } catch (error) {
+      console.error('Error searching addresses:', error);
+      return [];
+    }
+  }
+  
+  // Display search results
+  function displaySearchResults(results) {
+    const searchResultsContainer = document.getElementById('search-results');
+    
+    if (results.length === 0) {
+      searchResultsContainer.innerHTML = '<div class="search-result-item">No results found</div>';
+      searchResultsContainer.style.display = 'block';
+      return;
+    }
+    
+    searchResultsContainer.innerHTML = '';
+    
+    results.forEach(result => {
+      const resultItem = document.createElement('div');
+      resultItem.className = 'search-result-item';
+      
+      // Create display text
+      let displayName = result.name;
+      if (result.street && result.housenumber) {
+        displayName = `${result.street} ${result.housenumber}`;
+        if (result.city) displayName += `, ${result.city}`;
+        if (result.country) displayName += `, ${result.country}`;
+      }
+      
+      resultItem.innerHTML = `
+        <div class="search-result-name">${displayName}</div>
+        <div class="search-result-details">${result.lat.toFixed(4)}, ${result.lng.toFixed(4)}</div>
+      `;
+      
+      resultItem.addEventListener('click', () => {
+        // Move map to selected location
+        map.setView([result.lat, result.lng], 16);
+        
+        // Remove previous marker if exists
+        if (selectedMarker) {
+          map.removeLayer(selectedMarker);
+        }
+        
+        // Add marker at selected location
+        selectedMarker = L.marker([result.lat, result.lng]).addTo(map);
+        
+        // Update selected coordinates
+        selectedLatLng = { lat: result.lat, lng: result.lng };
+        document.getElementById('selected-coordinates').textContent = `${result.lat.toFixed(6)}, ${result.lng.toFixed(6)}`;
+        
+        // Enable confirm button
+        document.getElementById('confirm-location-btn').disabled = false;
+        
+        // Hide search results
+        searchResultsContainer.style.display = 'none';
+        
+        // Clear search input
+        document.getElementById('address-search-input').value = '';
+      });
+      
+      searchResultsContainer.appendChild(resultItem);
+    });
+    
+    searchResultsContainer.style.display = 'block';
+  }
+  
+  // Handle address search input
+  function handleAddressSearch() {
+    const query = document.getElementById('address-search-input').value.trim();
+    const searchResultsContainer = document.getElementById('search-results');
+    
+    // Clear previous timeout
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+    
+    // Hide results if input is empty
+    if (!query) {
+      searchResultsContainer.style.display = 'none';
+      return;
+    }
+    
+    // Debounce search to avoid too many API calls
+    searchTimeout = setTimeout(async () => {
+      const results = await searchAddresses(query);
+      displaySearchResults(results);
+    }, 300);
+  }
+  
+  // Confirm location selection
+  async function confirmLocation() {
+    if (selectedLatLng) {
+      postLocationInput.value = 'Getting address...';
+      
+      const address = await getAddressFromCoordinates(selectedLatLng.lat, selectedLatLng.lng);
+      postLocationInput.value = address;
+      
+      // Store coordinates for potential future use
+      postLocationInput.dataset.lat = selectedLatLng.lat;
+      postLocationInput.dataset.lng = selectedLatLng.lng;
+      
+      hideMapModal();
+    }
+  }
+  
+  // Event listeners for map functionality
+  getLocationBtn.addEventListener('click', showMapModal);
+  postLocationInput.addEventListener('click', showMapModal); // Make input clickable to show map
+  document.getElementById('close-map-btn').addEventListener('click', hideMapModal);
+  document.getElementById('cancel-location-btn').addEventListener('click', hideMapModal);
+  document.getElementById('confirm-location-btn').addEventListener('click', confirmLocation);
+  
+  // Event listeners for address search
+  document.getElementById('address-search-input').addEventListener('input', handleAddressSearch);
+  document.getElementById('search-address-btn').addEventListener('click', handleAddressSearch);
+  
+  // Close modal when clicking outside
+  document.getElementById('map-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'map-modal') {
+      hideMapModal();
+    }
   });
 
   // Allow custom feeling text when selecting "custom"
@@ -496,8 +639,6 @@ document.addEventListener('DOMContentLoaded', () => {
       likedBy: [], // Track users who liked this post
       comments: [], // Initialize comments array for new posts
       location: postLocationInput.value.trim(), // Get location from input
-      locationLat: postLocationInput.dataset.lat ? Number(postLocationInput.dataset.lat) : undefined,
-      locationLon: postLocationInput.dataset.lon ? Number(postLocationInput.dataset.lon) : undefined,
       feeling: (postFeelingSelect.value === 'custom' ? postFeelingCustom.value.trim() : postFeelingSelect.value)
     };
 
