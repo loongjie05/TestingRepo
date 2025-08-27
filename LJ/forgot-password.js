@@ -70,6 +70,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const newPasswordInput = document.getElementById('new-password');
   const confirmPasswordInput = document.getElementById('confirm-password');
   const messageEl = document.getElementById('reset-message');
+  
+  // Password toggle functionality
+  const newPasswordToggle = document.getElementById('new-password-toggle');
+  const confirmPasswordToggle = document.getElementById('confirm-password-toggle');
+  
+  // Function to toggle password visibility
+  function setupPasswordToggle(toggleElement, passwordInput) {
+    if (toggleElement && passwordInput) {
+      toggleElement.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        
+        // Toggle icon
+        toggleElement.classList.toggle('active');
+        if (type === 'text') {
+          toggleElement.classList.remove('fa-eye');
+          toggleElement.classList.add('fa-eye-slash');
+        } else {
+          toggleElement.classList.remove('fa-eye-slash');
+          toggleElement.classList.add('fa-eye');
+        }
+      });
+    }
+  }
+  
+  // Setup password toggles
+  setupPasswordToggle(newPasswordToggle, newPasswordInput);
+  setupPasswordToggle(confirmPasswordToggle, confirmPasswordInput);
 
   // --- Password Strength Logic ---
   const strengthBar = document.getElementById('password-strength-bar');
