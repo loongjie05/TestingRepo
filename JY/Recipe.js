@@ -924,6 +924,14 @@ function renderCards(list) {
           <i class="fa-solid fa-heart"></i>
           <span class="heart-text">♥</span>
         </span>
+        <div class="social-share-buttons">
+          <button class="share-btn facebook-share" onclick="event.stopPropagation(); shareToFacebook('${food.title}', '${food.img}', '${food.tags[2] || 'Unknown'}');" title="Share on Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button class="share-btn instagram-share" onclick="event.stopPropagation(); shareToInstagram('${food.title}', '${food.img}');" title="Share on Instagram">
+            <i class="fab fa-instagram"></i>
+          </button>
+        </div>
       </div>
       <div class="project-info">
         <div class="flex-pr">
