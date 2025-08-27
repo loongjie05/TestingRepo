@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Update visual feedback for requirements list
-    if (requirementsElements.length) requirementsElements.length.classList.toggle('valid', requirements.length);
+    if (requirementsElements.lengthReq) requirementsElements.lengthReq.classList.toggle('valid', requirements.length);
     if (requirementsElements.special) requirementsElements.special.classList.toggle('valid', requirements.special);
     if (requirementsElements.number) requirementsElements.number.classList.toggle('valid', requirements.number);
     if (requirementsElements.capital) requirementsElements.capital.classList.toggle('valid', requirements.capital);
@@ -193,18 +193,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailInput = document.getElementById('signup-email');
   const strengthBar = document.getElementById('password-strength-bar');
   const requirementsElements = {
-    length: document.getElementById('req-length'),
+    lengthReq: document.getElementById('req-length'),
     special: document.getElementById('req-special'),
     number: document.getElementById('req-number'),
     capital: document.getElementById('req-capital'),
     lowercase: document.getElementById('req-lowercase')
   };
   const passwordRequirements = document.getElementById('password-requirements');
+  
+  // Password toggle functionality
+  const signupPasswordToggle = document.getElementById('signup-password-toggle');
+  
+  if (signupPasswordToggle && passwordInput) {
+    signupPasswordToggle.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      // Toggle icon
+      signupPasswordToggle.classList.toggle('active');
+      if (type === 'text') {
+        signupPasswordToggle.classList.remove('fa-eye');
+        signupPasswordToggle.classList.add('fa-eye-slash');
+      } else {
+        signupPasswordToggle.classList.remove('fa-eye-slash');
+        signupPasswordToggle.classList.add('fa-eye');
+      }
+    });
+  }
 
   // --- Sign Up Form Handler ---
   if (signupForm) {
     signupForm.addEventListener('submit', (event) => {
       event.preventDefault();
+      
+      const signupButton = signupForm.querySelector('.button');
+      if (signupButton) {
+        setButtonLoading(signupButton, true);
+      }
       
       const name = signupForm.querySelector('input[type="text"]').value.trim();
       const email = emailInput.value.trim();
@@ -217,6 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Basic validation
       if (!name || !email || !password) {
         showAlert('Please fill in all fields', 'error');
+        if (signupButton) {
+          setButtonLoading(signupButton, false);
+        }
         return;
       }
 
@@ -226,6 +254,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (signupEmailError) {
           signupEmailError.textContent = 'Please enter a valid email address.';
           signupEmailError.style.display = 'block';
+        }
+        if (signupButton) {
+          setButtonLoading(signupButton, false);
         }
         return;
       }
@@ -237,6 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
           signupPasswordError.style.display = 'block';
         }
         showAlert('Password not strong enough! Please meet all requirements.', 'error');
+        if (signupButton) {
+          setButtonLoading(signupButton, false);
+        }
         return;
       }
 
@@ -248,6 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (signupEmailError) {
           signupEmailError.textContent = 'Email already exists. Please use a different email.';
           signupEmailError.style.display = 'block';
+        }
+        if (signupButton) {
+          setButtonLoading(signupButton, false);
         }
         return;
       }
@@ -278,6 +315,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Clear form
       signupForm.reset();
+      
+      // Reset loading state
+      if (signupButton) {
+        setButtonLoading(signupButton, false);
+      }
       
       // Redirect to login after 2 seconds
       setTimeout(() => {
@@ -338,10 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (signupForm) {
     const signupButton = signupForm.querySelector('.button');
     if (signupButton) {
-      signupForm.addEventListener('submit', () => {
-        setButtonLoading(signupButton, true);
-        setTimeout(() => setButtonLoading(signupButton, false), 2000);
-      });
+      // Loading state will be handled in the main submit handler
     }
   }
 

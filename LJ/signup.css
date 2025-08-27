@@ -214,6 +214,33 @@ h1 {
   color: var(--primary-color);
 }
 
+/* Password Toggle Icon */
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted-text-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.password-toggle:hover {
+  color: var(--primary-color);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.password-toggle.active {
+  color: var(--primary-color);
+}
+
+/* Adjust input padding for password fields to accommodate toggle icon */
+.input-wrapper:has(.password-toggle) .input {
+  padding-right: 50px;
+}
+
 /* Button Styles */
 .button {
   width: 100%;
