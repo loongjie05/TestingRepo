@@ -100,7 +100,31 @@
     <script>
     (function(){
         function loadFavourites() {
-            const favs = JSON.parse(localStorage.getItem('favourites') || '[]');
+            // Check if user is logged in
+            const currentUser = getCurrentUser();
+            
+            // If no user is logged in, show empty favorites but don't delete user data
+            if (!currentUser) {
+                console.log('No user logged in, showing empty favorites');
+                const grid = document.getElementById('favGrid');
+                const empty = document.getElementById('favEmpty');
+                empty.style.display = 'block';
+                grid.innerHTML = '';
+                return;
+            }
+            
+            // Check for old favorites and migrate them if needed
+            const oldFavorites = JSON.parse(localStorage.getItem('favourites') || '[]');
+            let favs = JSON.parse(localStorage.getItem('favoriteFoods') || '[]');
+            
+            // If we have old favorites but no new ones, migrate them
+            if (oldFavorites.length > 0 && favs.length === 0) {
+                favs = oldFavorites;
+                localStorage.setItem('favoriteFoods', JSON.stringify(favs));
+                // Also update user account data
+                updateUserFavorites(favs);
+                console.log('Migrated old favorites:', favs);
+            }
             const foods = (window.SiteData && window.SiteData.foods) ? window.SiteData.foods : [];
             const byTitle = new Map(foods.map(f => [f.title, f]));
             const list = favs.map(t => byTitle.get(t)).filter(Boolean);
@@ -155,9 +179,12 @@
         
         // Remove favourite function
         window.removeFavourite = function(foodTitle) {
-            const favs = JSON.parse(localStorage.getItem('favourites') || '[]');
+            const favs = JSON.parse(localStorage.getItem('favoriteFoods') || '[]');
             const newFavs = favs.filter(f => f !== foodTitle);
-            localStorage.setItem('favourites', JSON.stringify(newFavs));
+            localStorage.setItem('favoriteFoods', JSON.stringify(newFavs));
+            
+            // Update user account data
+            updateUserFavorites(newFavs);
             
             // Reload the favourites display
             loadFavourites();
@@ -187,12 +214,119 @@
         
         // Listen for storage changes (if user adds/removes favourites from other pages)
         window.addEventListener('storage', function(e) {
-            if (e.key === 'favourites') {
+            if (e.key === 'favoriteFoods') {
                 loadFavourites();
             }
+        });
+
+        // Function to get current user from multiple storage sources
+        function getCurrentUser() {
+            // Try to get user from multiple sources
+            let user = null;
+            
+            // Try localStorage first
+            const localUser = localStorage.getItem('activeUserSession');
+            if (localUser) {
+                try {
+                    user = JSON.parse(localUser);
+                } catch (e) {
+                    console.error('Error parsing localStorage user:', e);
+                }
+            }
+            
+            // If no local user, try session storage
+            if (!user) {
+                const sessionUser = sessionStorage.getItem('currentUser');
+                if (sessionUser) {
+                    try {
+                        user = JSON.parse(sessionUser);
+                    } catch (e) {
+                        console.error('Error parsing sessionStorage user:', e);
+                    }
+                }
+            }
+            
+            // If no session user, try cookies
+            if (!user) {
+                const cookieUser = getCookie('userSession');
+                if (cookieUser) {
+                    try {
+                        user = JSON.parse(cookieUser);
+                    } catch (e) {
+                        console.error('Error parsing cookie user:', e);
+                    }
+                }
+            }
+            
+            return user;
+        }
+
+        // Cookie helper function
+        function getCookie(name) {
+            try {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            } catch (e) {
+                console.error('Cookie error:', e);
+                return null;
+            }
+        }
+
+        // Function to update user's favorite foods in their account data
+        function updateUserFavorites(favoriteFoods) {
+            try {
+                // Get current user session
+                const userSession = getCurrentUser();
+                if (!userSession || !userSession.userId) {
+                    console.log('No active user session found');
+                    return;
+                }
+
+                // Get all users from storage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                
+                // Find the current user
+                const userIndex = users.findIndex(user => user.email === userSession.userId);
+                
+                if (userIndex !== -1) {
+                    // Update the user's favoriteFoods
+                    users[userIndex].favoriteFoods = favoriteFoods;
+                    
+                    // Save back to localStorage
+                    localStorage.setItem('users', JSON.stringify(users));
+                    
+                    console.log('Updated user favorites for:', userSession.userId, favoriteFoods);
+                } else {
+                    console.error('User not found in users array:', userSession.userId);
+                }
+            } catch (error) {
+                console.error('Error updating user favorites:', error);
+            }
+        }
+
+        // Listen for logout events to clear favorites display
+        window.addEventListener('userLogout', function() {
+            console.log('User logout detected, clearing favorites display');
+            // Clear the current session favorites display but don't delete user data
+            localStorage.removeItem('favoriteFoods');
+            loadFavourites(); // This will now show empty since no user is logged in
+        });
+
+        // Listen for login events to reload favorites
+        window.addEventListener('userLogin', function(event) {
+            console.log('User login detected, reloading favorites');
+            // Reload favorites for the newly logged in user
+            setTimeout(() => {
+                loadFavourites();
+            }, 100);
         });
     })();
     </script>
 </body>
 </html>
-

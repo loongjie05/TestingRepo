@@ -278,6 +278,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create user session
         createUserSession(user);
+
+        // Migrate old favorites if they exist and user has no favoriteFoods yet
+        const oldFavorites = JSON.parse(getLocalStorage('favourites') || '[]');
+        if (oldFavorites.length > 0 && (!user.favoriteFoods || user.favoriteFoods.length === 0)) {
+          user.favoriteFoods = oldFavorites;
+          // Update user in storage with migrated favorites
+          const userIndex = existingUsers.findIndex(u => u.id === user.id);
+          if (userIndex !== -1) {
+            existingUsers[userIndex] = user;
+            setLocalStorage('users', JSON.stringify(existingUsers));
+          }
+        }
+
+        // Store favoriteFoods in localStorage
+        setLocalStorage('favoriteFoods', JSON.stringify(user.favoriteFoods || []));
         
         // Show success message
         showAlert(`Welcome back, ${user.firstName || user.name}!`, 'success');

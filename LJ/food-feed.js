@@ -772,7 +772,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // --- Function to render a single post ---
-  function renderPost(post) {
+  function renderPost(post, favoriteFoods) {
     const postCard = document.createElement('div');
     postCard.classList.add('post-card');
     postCard.dataset.postId = post.id; // Use a unique ID for each post
@@ -790,6 +790,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const locationDisplay = post.location ? `<span class="post-location"> &bull; At: ${post.location}</span>` : '';
     // Generate media HTML if available
     const mediaHTML = generateMediaHTML(post.media);
+
+    const isFavorite = favoriteFoods.includes(post.foodName);
+    const favoriteButtonText = isFavorite ? 'Remove from Favorites' : 'Add to Favorites';
 
     // This HTML structure matches your food-feed.css styles
     postCard.innerHTML = `
@@ -812,6 +815,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="reaction-count">${post.likes}</span>
         </button>
         <button class="reaction-button post-delete-button" data-action="delete" title="Delete post">🗑️ Delete</button>
+        <button class="favorite-button" data-action="favorite">${favoriteButtonText}</button>
       </div>
       <div class="comments-section">
         <!-- Comments will be dynamically inserted here by renderComments function -->
@@ -826,8 +830,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add event listener for delete post
     postCard.querySelector('.post-delete-button').addEventListener('click', handleDeletePost);
 
+    // Add event listener for favorite button
+    postCard.querySelector('.favorite-button').addEventListener('click', handleFavoriteClick);
+
     // Render comments for the post
-    renderComments(postCard, post.id); 
+    renderComments(postCard, post.id);
+  }
+
+  // --- Handle Favorite Button Click ---
+  function handleFavoriteClick(event) {
+    const favoriteButton = event.currentTarget;
+    const postCard = favoriteButton.closest('.post-card');
+    const postId = postCard.dataset.postId;
+    const foodName = postCard.querySelector('h3').textContent;
+
+    let favoriteFoods = JSON.parse(localStorage.getItem('favoriteFoods')) || [];
+    const isFavorite = favoriteFoods.includes(foodName);
+
+    if (isFavorite) {
+      // Remove from favorites
+      favoriteFoods = favoriteFoods.filter(food => food !== foodName);
+      favoriteButton.textContent = 'Add to Favorites';
+    } else {
+      // Add to favorites
+      favoriteFoods.push(foodName);
+      favoriteButton.textContent = 'Remove from Favorites';
+    }
+
+    localStorage.setItem('favoriteFoods', JSON.stringify(favoriteFoods));
+    
+    // Update user account data
+    updateUserFavorites(favoriteFoods);
   }
 
   // --- Handle Like Button Click for posts ---
@@ -969,8 +1002,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Load existing posts from localStorage on page load ---
   function loadPosts() {
     const storedPosts = JSON.parse(localStorage.getItem('foodPosts')) || [];
+    const favoriteFoods = JSON.parse(localStorage.getItem('favoriteFoods')) || [];
     postsFeedContainer.innerHTML = ''; // Clear the feed before loading
-    storedPosts.slice().reverse().forEach(post => renderPost(post)); // Show newest first
+    storedPosts.slice().reverse().forEach(post => renderPost(post, favoriteFoods)); // Show newest first
   }
 
   // --- Handle form submission ---
@@ -1006,8 +1040,8 @@ document.addEventListener('DOMContentLoaded', () => {
     storedPosts.push(newPost);
     localStorage.setItem('foodPosts', JSON.stringify(storedPosts));
 
-    renderPost(newPost); // Display the new post immediately
-    
+    renderPost(newPost, JSON.parse(localStorage.getItem('favoriteFoods')) || []); // Display the new post immediately
+
     // Clear the form and media files
     createPostForm.reset(); // Clear the form fields
     postLocationInput.value = ''; // Clear location input
@@ -1017,4 +1051,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   loadPosts(); // Initial load of posts when the page is ready
+
+  // Function to update user's favorite foods in their account data
+  function updateUserFavorites(favoriteFoods) {
+    try {
+        // Get current user session
+        const userSession = JSON.parse(localStorage.getItem('activeUserSession') || '{}');
+        if (!userSession.userId) {
+            console.log('No active user session found');
+            return;
+        }
+
+        // Get all users from storage
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        
+        // Find the current user
+        const userIndex = users.findIndex(user => user.email === userSession.userId);
+        
+        if (userIndex !== -1) {
+            // Update the user's favoriteFoods
+            users[userIndex].favoriteFoods = favoriteFoods;
+            
+            // Save back to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            console.log('Updated user favorites for:', userSession.userId, favoriteFoods);
+        } else {
+            console.error('User not found in users array:', userSession.userId);
+        }
+    } catch (error) {
+        console.error('Error updating user favorites:', error);
+    }
+  }
 });
