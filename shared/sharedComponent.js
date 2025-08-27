@@ -680,8 +680,19 @@ window.addEventListener('userLogout', () => {
 // Ensure header and footer are loaded after the DOM is fully parsed
 document.addEventListener('DOMContentLoaded', () => {
     console.log('=== DOM Content Loaded ===');
-    loadHTML("header", "../shared/header.html");
-    loadHTML("footer", "../shared/footer.html");
+    
+    // Detect if we're in the root directory or a subdirectory
+    const isRootPage = window.location.pathname.endsWith('/index.html') || 
+                       window.location.pathname.endsWith('/') ||
+                       !window.location.pathname.includes('/');
+    
+    const headerPath = isRootPage ? "shared/header.html" : "../shared/header.html";
+    const footerPath = isRootPage ? "shared/footer.html" : "../shared/footer.html";
+    
+    console.log('Page detection:', { isRootPage, headerPath, footerPath });
+    
+    loadHTML("header", headerPath);
+    loadHTML("footer", footerPath);
     
     // Update login status after a longer delay to ensure header is fully loaded
     setTimeout(() => {
